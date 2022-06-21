@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 
-
 module.exports = (sequelize) => {
   sequelize.define("publicacion", {
     id: {
@@ -51,7 +50,7 @@ module.exports = (sequelize) => {
     },
 
     memoria_ram: {
-      type: DataTypes.ENUM("4Gb", "6Gb", "8Gb", "12GB"),
+      type: DataTypes.ENUM("4Gb", "6Gb", "8Gb", "12Gb"),
       allowNull: true,
     },
 

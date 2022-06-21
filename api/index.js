@@ -1,31 +1,28 @@
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 require('dotenv').config();
 const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
-const axios = require('axios');
+const datos = require("./src/data/databaseFake.js");
+const { conn, Publicacion } = require('./src/db.js');
+// const cargaDeDatosFicticia = require('./src/utils/cargaDeDatosFicticia');
 
-// Syncing all the models at once.
+const cargaDeDatosFicticia = async () => {
+
+  try {
+    
+    await Publicacion.bulkCreate(datos);
+
+  } catch (error) {
+
+    console.log(error);
+    
+  }
+
+}
+
 conn.sync({ force: true }).then(() => {
 
+  cargaDeDatosFicticia();
+
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log('%s listening at 3001'); 
   });
 });

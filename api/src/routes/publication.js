@@ -5,20 +5,20 @@ const { Op, where } = require('sequelize');
 const router = Router()
 
 router.get('/', async (req, res, next) => {
-  const { modelo } = req.query;
+  const { model } = req.query;
 
   try {
-    if (modelo) {
-      const findByName = await Publication.findAll({
+    if (model) {
+      const findByModel = await Publication.findAll({
         where: {
-          modelo: {
-            [Op.iLike]: "%" + modelo + "%",
+          model: {
+            [Op.iLike]: "%" + model + "%",
           },
         },
       });
 
-      findByName.length
-        ? res.status(201).send(findByName)
+      findByModel.length
+        ? res.status(201).send(findByModel)
         : res.status(400).send("no se encontro por ese nombre")
     }
     else {

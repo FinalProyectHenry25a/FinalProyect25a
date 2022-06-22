@@ -1,7 +1,16 @@
 .flex {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: auto;
+    background-color: #1429a0;
+    flex-direction: column;
+    align-items: center;
+}
+.carrito{
+    display: flex;
+    flex-direction: row;
+}
+.btn{
+    height: 30px;
+    width: 75px;
+    margin-top: 17px;
 }

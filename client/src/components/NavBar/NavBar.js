@@ -5,9 +5,15 @@ import style from './../NavBar/NavBar.module.css'
 const NavBar = () => {
     return(
         <div className={style.flex}>
-            <h1>Logo</h1>
+            <div>
+             <h1>Logo</h1>
+            </div>
             <SearchBar/>
-            <button>Login</button>
+            <div className={style.carrito}>
+                <button className={style.btn}>Login</button>
+     
+                <h2>CARRITO</h2>
+            </div>
         </div>
     )
 }

@@ -1,10 +1,11 @@
 import React from "react";
+import style from './../SearchBar/SearchBar.module.css'
 
 const SearchBar = () => {
     return(
         <div>
-            <input type="text" placeholder="Busca tu proximo celular"></input>
-            <button>Buscar</button>
+            <input className={style.Search} type="text" placeholder="Busca tu proximo celular"></input>
+            
         </div>
     )
 }

@@ -5,6 +5,7 @@ const { preCargarBase } = require('./src/controllers/publicationControl.js');
 
 conn.sync({ force: true }).then(() => {
 
+  //carga db
   preCargarBase();
 
   server.listen(3001, () => {

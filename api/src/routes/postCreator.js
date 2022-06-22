@@ -1,52 +1,14 @@
 const Router = require("express");
 const { Publication } = require("../db.js");
 
-
 //const { Publication } = require("../db.js");
 const router = Router();
 
 router.post("/", async (req, res) => {
-
   try {
+    const newPost = Publication.create(req.body);
 
-   /*  let {
-      brand,
-      releaseDate,
-      model,
-      price,
-      rating,
-      images,
-      color,
-      processor,
-      ram,
-      rom,
-      network,
-      batery,
-      frontal_cam,
-      main_cam,
-      inches,
-      screen,
-      resolution,
-      stock,
-    } = req.body; */
-
-    //validaciones
-
-    /* if (
-      typeof brand === STRING &&
-      typeof releaseDate === STRING &&
-      typeof model === STRING &&
-      typeof images === STRING &&
-      typeof color === STRING &&
-      typeof processor === STRING &&
-      typeof screen === STRING &&
-      typeof resolution === STRING
-    )      console.log(hola); */
-
-    const newPost = Publication.create (req.body)
-    
-    res.send ('Producto agregado exitosamente')
-    
+    res.send("Producto agregado exitosamente");
   } catch (error) {
     res.status(404).send(error);
   }
@@ -55,7 +17,7 @@ router.post("/", async (req, res) => {
 module.exports = router;
 
 /*
-para probar
+para probar y como ejemplo del body:
 {
     "brand": "santi",
     "releaseDate": "alguna fecha",

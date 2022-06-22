@@ -1,28 +1,14 @@
 require('dotenv').config();
 const server = require('./src/app.js');
-const datos = require("./src/data/databaseFake.js");
-const { conn, Publicacion } = require('./src/db.js');
-// const cargaDeDatosFicticia = require('./src/utils/cargaDeDatosFicticia');
-
-const cargaDeDatosFicticia = async () => {
-
-  try {
-    
-    await Publicacion.bulkCreate(datos);
-
-  } catch (error) {
-
-    console.log(error);
-    
-  }
-
-}
+const { conn } = require('./src/db.js');
+const { preCargarBase } = require('./src/controllers/publicationControl.js');
 
 conn.sync({ force: true }).then(() => {
 
-  cargaDeDatosFicticia();
+  preCargarBase();
 
   server.listen(3001, () => {
     console.log('%s listening at 3001'); 
   });
+
 });

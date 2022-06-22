@@ -2,11 +2,12 @@ import React from "react";
 import Card from '../card/Card'
 import Carrousel from "../carrousel/Carrousel";
 import style from './../home/Home.module.css'
+import NavBar from "../NavBar/NavBar";
 
 const Home = () => {
     return(
         <div>
-            <h1>HOME</h1>
+            <NavBar/>
             <Carrousel/>
             <div className={style.flex}>
                 <Card

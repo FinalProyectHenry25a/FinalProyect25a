@@ -1,9 +1,9 @@
-const {Publicacion} = require("../db.js");
+const {Publication} = require("../db.js");
 const data = require('../data/databaseFake.js');
 
-const preCargarBase = async () => {
+const preCharge = async () => {
     try {
-        await Publicacion.bulkCreate(data)
+        await Publication.bulkCreate(data)
         console.log("exito")
     } catch (error) {
         console.log(error)
@@ -12,5 +12,5 @@ const preCargarBase = async () => {
 }
 
 module.exports = {
-    preCargarBase
+    preCharge
 } 

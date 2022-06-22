@@ -1,11 +1,11 @@
 require('dotenv').config();
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { preCargarBase } = require('./src/controllers/publicationControl.js');
+const { preCharge } = require('./src/controllers/publicationControl.js');
 
 conn.sync({ force: true }).then(() => {
 
-  preCargarBase();
+  preCharge();
 
   server.listen(3001, () => {
     console.log('%s listening at 3001'); 

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define("publicacion", {
+  sequelize.define("publication", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -9,22 +9,22 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
 
-    marca: {
+    brand: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    fecha_de_lanzamiento: {
+    releaseDate: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    modelo: {
+    model: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    precio: {
+    price: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
 
-    imagenes: {
+    images: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -44,52 +44,52 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
 
-    procesador: {
+    processor: {
       type: DataTypes.STRING,
       allowNull: true,
     },
 
-    memoria_ram: {
+    ram: {
       type: DataTypes.ENUM("4Gb", "6Gb", "8Gb", "12Gb"),
       allowNull: true,
     },
 
-    memoria_rom: {
+    rom: {
       type: DataTypes.ENUM("32Gb", "64Gb", "128Gb", "256Gb"),
       allowNull: true,
     },
 
-    conectividad: {
+    network: {
       type: DataTypes.ENUM("3G", "4G", "5G"),
       allowNull: true,
     },
 
-    bateria: {
+    batery: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
 
-    camara_frontal: {
+    frontal_cam: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    camara_principal: {
+    main_cam: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    pulgadas: {
+    inches: {
       type: DataTypes.FLOAT,
       allowNull: true,
     },
 
-    pantalla: {
+    screen: {
       type: DataTypes.STRING,
       allowNull: true,
     },
 
-    resolucion: {
+    resolution: {
       type: DataTypes.STRING,
       allowNull: true,
     },

@@ -1,5 +1,11 @@
 .Search{
-    height: 30px;
-    width: 322px;
+    height: 22px;
+    width: 200px;
     margin-bottom: 10px;
+    
 }
+.nav {
+    display: flex;
+    flex-direction: row;
+  }
+  

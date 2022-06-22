@@ -1,5 +1,6 @@
 const initialState = {
     phones : [],
+    
 }
 
 function rootReducer (state = initialState, action){
@@ -8,6 +9,11 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 phones: action.payload,
+            }
+        case 'GET_PHONES_BY_NAME':
+            return{
+                ...state,
+                phones: action.payload
             }
             default:
                 return state;

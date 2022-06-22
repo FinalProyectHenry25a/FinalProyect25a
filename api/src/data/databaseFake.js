@@ -16,7 +16,8 @@ module.exports = [
     "main_cam": 64,
     "inches": 6.2,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Samsung",
@@ -35,7 +36,8 @@ module.exports = [
     "main_cam": 64,
     "inches": 6.7,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Samsung",
@@ -54,7 +56,8 @@ module.exports = [
     "main_cam": 48,
     "inches": 6.5,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Samsung",
@@ -73,7 +76,8 @@ module.exports = [
     "main_cam": 108,
     "inches": 6.7,
     "screen": "AMOLED",
-    "resolution": "1080 x 2408"
+    "resolution": "1080 x 2408",
+    "stock": 100
   },
   {
     "brand": "Motorola",
@@ -92,7 +96,8 @@ module.exports = [
     "main_cam": 50,
     "inches": 6.6,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Motorola",
@@ -111,7 +116,8 @@ module.exports = [
     "main_cam": 19,
     "inches": 6.4,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Apple",
@@ -130,7 +136,8 @@ module.exports = [
     "main_cam": 12,
     "inches": 5.8,
     "screen": "OLED",
-    "resolution": "1125 x 2436"
+    "resolution": "1125 x 2436",
+    "stock": 100
   },
   {
     "brand": "Apple",
@@ -149,7 +156,8 @@ module.exports = [
     "main_cam": 12,
     "inches": 6.5,
     "screen": "OLED",
-    "resolution": "1242 x 2688"
+    "resolution": "1242 x 2688",
+    "stock": 100
   },
   {
     "brand": "Iphone",
@@ -168,7 +176,8 @@ module.exports = [
     "main_cam": 12,
     "inches": 6.1,
     "screen": "OLED",
-    "resolution": "1170 x 2532"
+    "resolution": "1170 x 2532",
+    "stock": 100
   },
   {
     "brand": "Apple",
@@ -187,7 +196,8 @@ module.exports = [
     "main_cam": 12,
     "inches": 6.7,
     "screen": "OLED",
-    "resolution": "1284 x 2778"
+    "resolution": "1284 x 2778",
+    "stock": 100
   },
   {
     "brand": "Xiaomi",
@@ -206,7 +216,8 @@ module.exports = [
     "main_cam": 64,
     "inches": 6.7,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Xiaomi",
@@ -225,7 +236,8 @@ module.exports = [
     "main_cam": 48,
     "inches": 6.67,
     "screen": "LCD IPS",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Xiaomi",
@@ -244,7 +256,8 @@ module.exports = [
     "main_cam": 64,
     "inches": 6.5,
     "screen": "LCD IPS",
-    "resolution": "1080 x 2340"
+    "resolution": "1080 x 2340",
+    "stock": 100
   },
   {
     "brand": "Xiaomi",
@@ -263,7 +276,8 @@ module.exports = [
     "main_cam": 48,
     "inches": 6.5,
     "screen": "LCD IPS",
-    "resolution": "1080 x 2340"
+    "resolution": "1080 x 2340",
+    "stock": 100
   },
   {
     "brand": "Motorola",
@@ -282,7 +296,8 @@ module.exports = [
     "main_cam": 50,
     "inches": 6.5,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Motorola",
@@ -301,7 +316,8 @@ module.exports = [
     "main_cam": 50,
     "inches": 6.4,
     "screen": "OLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Huawei",
@@ -320,7 +336,8 @@ module.exports = [
     "main_cam": 48,
     "inches": 6.4,
     "screen": "LCD IPS",
-    "resolution": "1080 x 2310"
+    "resolution": "1080 x 2310",
+    "stock": 100
   },
   {
     "brand": "Huawei",
@@ -339,7 +356,8 @@ module.exports = [
     "main_cam": 108,
     "inches": 6.8,
     "screen": "LCD IPS",
-    "resolution": "1080 x 2388"
+    "resolution": "1080 x 2388",
+    "stock": 100
   },
   {
     "brand": "Oppo",
@@ -358,7 +376,8 @@ module.exports = [
     "main_cam": 64,
     "inches": 6.6,
     "screen": "AMOLED",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   },
   {
     "brand": "Oppo",
@@ -377,6 +396,7 @@ module.exports = [
     "main_cam": 48,
     "inches": 6.5,
     "screen": "LCD IPS",
-    "resolution": "1080 x 2400"
+    "resolution": "1080 x 2400",
+    "stock": 100
   }
 ]

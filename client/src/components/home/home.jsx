@@ -6,6 +6,7 @@ import Carrousel from "../carrousel/Carrousel";
 import style from './../home/Home.module.css'
 import NavBar from "../NavBar/NavBar";
 import { getPhones } from "../../Actions/index";
+import {Link} from 'react-router-dom'
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Home = () => {
             {allPhones ? (
             allPhones?.map(e => {
               return (
+                <Link to={'/home/'+e.id} >
                 <div key={e.id}>
                     <Card
                       brand={e.brand}
@@ -34,6 +36,7 @@ const Home = () => {
                       price={e.price}
                       />
                 </div>
+                      </Link>
               );
             })
             ) 

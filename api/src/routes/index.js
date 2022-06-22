@@ -3,6 +3,7 @@ const publication = require('./publication.js');
 const filtersAndOrders  = require ('./filtersAndOrders');
 const postCreator = require ('./postCreator');
 const userCreator = require ('./userCreator');
+const deletePosts = require('./deletePost');
 
 
 const router = Router();
@@ -21,6 +22,9 @@ router.use('/userCreator', userCreator)
 
 //filtrados
 router.use('/filtersAndOrders', filtersAndOrders)
+
+//elimina un posteo
+router.use('/delete', deletePosts)
 
 //get de usuarios
 //router.use('/users', users)

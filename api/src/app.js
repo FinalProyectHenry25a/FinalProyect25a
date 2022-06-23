@@ -1,7 +1,11 @@
+require("dotenv").config()
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const flash = require("express-flash")
+const session = require("express-session")
+
 
 require('./db.js');
 
@@ -9,6 +13,14 @@ const server = express();
 
 server.name = 'API';
 
+// server.use(flash())
+// server.use(session({
+//   secret: procces.env.SESION_SECRET,
+//   resave: false,
+//   saveUninitialized: false
+// }))
+// server.use(passport.initialize())
+// server.use(session.initialize())
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));
 server.use(cookieParser());

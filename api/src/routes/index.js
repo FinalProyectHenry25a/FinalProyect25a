@@ -4,12 +4,19 @@ const filtersAndOrders  = require ('./filtersAndOrders');
 const postCreator = require ('./postCreator');
 const userCreator = require ('./userCreator');
 const deletePosts = require('./deletePost');
+const { route } = require('./publication.js');
+const  register  = require("./register")
+const  login  = require("./login")
+const users = require("./users");
 
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use("/login", login)
+
+router.use("/register", register)
 
 //trae todas la publicaciones o por query por modelo
 router.use('/home', publication)
@@ -27,7 +34,7 @@ router.use('/filtersAndOrders', filtersAndOrders)
 router.use('/delete', deletePosts)
 
 //get de usuarios
-//router.use('/users', users)
+router.use('/users', users)
 
 
 module.exports = router;

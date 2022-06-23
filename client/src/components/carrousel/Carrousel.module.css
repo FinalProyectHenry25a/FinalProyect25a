@@ -44,11 +44,10 @@
 }
     
 .slide {
-    min-width: 100%;
-    overflow: hidden;
-    transition: .3s ease all;
-    z-index: 9;
-    position: relative;
+    min-width: 200%;
+    
+    max-height: 16rem;
+    border-radius: 10px;
 }
 
 .controlers{

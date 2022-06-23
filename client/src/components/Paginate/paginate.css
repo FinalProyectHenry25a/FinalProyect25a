@@ -1,0 +1,15 @@
+.paginado {
+    font-family:Arial;
+    font-weight:bold;
+    font-size:13px;
+  }
+  
+  .li {
+    display:inline;
+       padding-left:3px;
+       padding-right:3px;
+  }
+
+  .nav{
+    margin-top: 20px;
+  }

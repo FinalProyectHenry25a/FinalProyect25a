@@ -35,6 +35,7 @@ const Home = () => {
   
   return(
         <div>
+          <Link to='/agregado'><button>Agregar Phone</button></Link>
             <NavBar/>
             <Carrousel/>
 
@@ -49,12 +50,14 @@ const Home = () => {
               currentPhones?.map(e => {
                 return (
                   <div key={e.id}>
+                    <Link to={"/home/" + e.id}>
                     <Card
                       brand={e.brand}
                       model={e.model}
                       images={e.images}
                       price={e.price}
                       />
+                      </Link>
                 </div>
               );
             })

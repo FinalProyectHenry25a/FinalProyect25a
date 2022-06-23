@@ -10,3 +10,12 @@ export function getPhones(){
         })
     }
 }
+export function getPhonesByModel(model){
+    return async function(dispatch){
+        var json = await axios.get(`http://localhost:3001/home?model=${model}`);
+        return dispatch({
+            type: 'GET_PHONES_BY_NAME',
+            payload: json.data
+        })
+    }
+}

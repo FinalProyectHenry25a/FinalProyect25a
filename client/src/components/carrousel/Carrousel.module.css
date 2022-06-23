@@ -1,6 +1,6 @@
 .mainContainer{
     max-width: 100%;
-    border: 1px solid #000;
+
 	overflow: hidden;
 }
 
@@ -11,7 +11,7 @@
 .slideContainer {
     display: flex;
     flex-wrap: nowrap;
-    height: 500px;
+    height: 350px;
 }
 
 .textSlide {

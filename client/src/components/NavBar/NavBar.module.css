@@ -9,8 +9,47 @@
     display: flex;
     flex-direction: row;
 }
-.btn{
+/* .btn{
     height: 30px;
     width: 75px;
     margin-top: 17px;
-}
+} */
+
+.btn {
+    font-family: "Zen Antique", serif;
+    display: inline-block;
+    color: white;
+    border: 1px solid #ccc;
+    background: black;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    vertical-align: middle;
+    max-width: 150px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .btn:hover {
+    color: black;
+    background-color: whitesmoke;
+  
+    /* -webkit-transition: all 0.5s ease-in-out; */
+    transition: all 0.5s ease-in-out;
+  }
+
+  .btn {
+    font-family: "Zen Antique", serif;
+    display: block;
+    margin:0 auto;
+    color: white;
+    border: 1px solid #ccc;
+    background: black;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    width:80%;
+    text-align:center;
+    /* //vertical-align: middle; */
+    /* max-width: 150px; */
+    /* padding: 10px; */
+    /* //text-align: center; */
+  }

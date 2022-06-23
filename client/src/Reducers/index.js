@@ -1,5 +1,6 @@
 const initialState = {
     phones : [],
+    phonesId : [],
     
 }
 
@@ -14,6 +15,11 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 phones: action.payload
+            }
+        case 'GET_DETAILS':
+            return{
+                ...state,
+                phonesId: action.payload
             }
             default:
                 return state;

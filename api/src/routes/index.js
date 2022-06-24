@@ -4,10 +4,12 @@ const filtersAndOrders  = require ('./filtersAndOrders');
 const postCreator = require ('./postCreator');
 const userCreator = require ('./userCreator');
 const deletePosts = require('./deletePost');
-const  register  = require("./register")
-const  login  = require("./login")
+const register  = require("./register")
+const login  = require("./login")
 const users = require("./users");
 const addCart = require('./addCart');
+const favourites = require("./favourites");
+const cart = require("./addCart");
 
 const router = Router();
 
@@ -37,6 +39,10 @@ router.use('/addCart', addCart);
 
 //get de usuarios
 router.use('/users', users)
+
+router.use("/favourites", favourites);
+
+router.use("/cart", cart);
 
 
 module.exports = router;

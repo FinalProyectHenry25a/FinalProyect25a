@@ -32,3 +32,19 @@ export function getDetails(id){
         }
      }
     }
+    export function filterByBrand(payload){
+        return ({
+            type: "FILTER_BY_BRAND",
+            payload,
+        })
+    
+        }
+        
+        export function filterByRam(payload){
+            return ({
+                type: "FILTER_BY_RAM",
+                payload,
+            })
+        
+            }
+            

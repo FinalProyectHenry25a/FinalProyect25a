@@ -33,7 +33,22 @@ module.exports = (sequelize) => {
     lastname: {
       type: DataTypes.STRING,
       allowNull:false
-    },  
+    }, 
+    
+    favourites: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true
+    },
+
+    cart: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true
+    },
+
+    shopping: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true
+    }
     
   });
 

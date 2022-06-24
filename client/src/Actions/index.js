@@ -33,9 +33,28 @@ export function getDetails(id){
      }
     }
 
+    export function filterByBrand(payload){
+        return ({
+            type: "FILTER_BY_BRAND",
+            payload,
+        })
+    
+        }
+        
+        export function filterByRam(payload){
+            return ({
+                type: "FILTER_BY_RAM",
+                payload,
+            })
+        
+            }
+            
+
+
     export function postPhone(payload){
         return async function () {
             const json = await axios.post('http://localhost:3001/postCreator',payload);
             return json;
         }
     }
+

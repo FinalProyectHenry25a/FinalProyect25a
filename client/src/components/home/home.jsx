@@ -5,7 +5,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import Carrousel from "../carrousel/Carrousel";
 import style from './../home/Home.module.css'
 import NavBar from "../NavBar/NavBar";
-import { filterByBrand, filterByRam, filterOrder, getPhones } from "../../Actions/index";
+import { filterByBrand, filterByRam, getPhones } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import { Link } from "react-router-dom";
 

@@ -4,13 +4,18 @@ const filtersAndOrders  = require ('./filtersAndOrders');
 const postCreator = require ('./postCreator');
 const userCreator = require ('./userCreator');
 const deletePosts = require('./deletePost');
-const cart = require('./cart');
-const favourites = require('./favourites');
+const  register  = require("./register")
+const  login  = require("./login")
+const users = require("./users");
+const addCart = require('./addCart');
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use("/login", login)
+
+router.use("/register", register)
 
 //trae todas la publicaciones o por query por modelo
 router.use('/home', publication)
@@ -28,13 +33,10 @@ router.use('/filtersAndOrders', filtersAndOrders)
 router.use('/delete', deletePosts)
 
 //agregar al carrito
-router.use('/cart', cart);
-
-//favoritos
-router.use('/favourites', favourites);
+router.use('/addCart', addCart);
 
 //get de usuarios
-//router.use('/users', users)
+router.use('/users', users)
 
 
 module.exports = router;

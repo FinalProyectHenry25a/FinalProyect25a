@@ -28,7 +28,6 @@ router.use('/filtersAndOrders', filtersAndOrders)
 router.use('/delete', deletePosts)
 
 //get de usuarios
-router.use('/users', users)
 
 router.use("/favourites", favourites);
 

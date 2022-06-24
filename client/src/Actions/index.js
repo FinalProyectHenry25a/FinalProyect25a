@@ -3,7 +3,6 @@ import axios from 'axios';
 export function getPhones(){
     return async function(dispatch){
         var json = await axios.get("http://localhost:3001/home");
-        console.log(json.data)
         return dispatch({
             type: 'GET_PHONES',
             payload: json.data
@@ -33,23 +32,18 @@ export function getDetails(id){
      }
     }
 
-    export function filterByBrand(payload){
-        return ({
-            type: "FILTER_BY_BRAND",
-            payload,
-        })
-    
-        }
-        
-        export function filterByRam(payload){
-            return ({
-                type: "FILTER_BY_RAM",
-                payload,
-            })
-        
-            }
-            
+    export const filters = (setters) => (dispatch) => {
 
+        
+        return axios.post ('http://localhost:3001/filtersAndOrders', setters)
+          .then((response) =>{
+            dispatch({
+              type: "FILTERS",
+              payload: response.data,
+            })}
+          )
+          .catch((error) => console.log(error));
+      };
 
     export function postPhone(payload){
         return async function () {

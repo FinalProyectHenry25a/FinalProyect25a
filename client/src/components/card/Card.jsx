@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./../card/Card.module.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../firebase/firebase-config';
+import axios from "axios";
 
 
 export default function Card(props) {
@@ -19,8 +20,15 @@ export default function Card(props) {
     });
   };
 
-  function addToFavourites(){
-    console.log('agregado a fav');
+  const addToFavourites = async() => {
+    try {
+      let add = (await axios.put(`http://localhost:3001/favourites/${user.email}/${props.id}`)).data
+      alert ('Artículo agregado a favoritos.')
+      
+    } catch (error) {
+      alert("No se pudo agregar la publicacion a favoritos.");
+      console.log(error);
+    }
   }
 
   return (

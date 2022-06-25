@@ -21,7 +21,7 @@ const firebaseConfig = {
 
 };
 
-console.log(firebaseConfig.apiKey);
+
 
 
 // Initialize Firebase

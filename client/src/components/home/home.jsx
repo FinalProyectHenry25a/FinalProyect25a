@@ -101,7 +101,7 @@ const Home = () => {
 
       dispatch(filters(filtered));
 
-      console.log("log->",currentPhones);
+      
     };
   
     const logout = async () => {
@@ -110,7 +110,7 @@ const Home = () => {
     
 
   }
-  console.log('acaa', loggedUser);
+  
   return(
         <div>
           <button onClick={logout}>desloguear</button>
@@ -202,6 +202,7 @@ const Home = () => {
                       model={e.model}
                       images={e.images}
                       price={e.price}
+                      id={e.id}
                       />
                     <Link to={"/home/" + e.id}>Detalle</Link>
                 </div>

@@ -2,8 +2,13 @@ import React from 'react'
 import style from './../register/Register.module.css'
 import axios from "axios";
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../firebase/firebase-config';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
+
+  const history = useHistory();
 
   const [input, setInput] = useState({
 
@@ -16,15 +21,35 @@ const Register = () => {
 
   });
 
-  const handleSubmit = async (e) => {
+  const register = async () => {
 
-    e.preventDefault();
+    try {
 
-    await axios.post("http://localhost:3001/register", input);
+        await createUserWithEmailAndPassword(auth, input.email, input.password);
+        await axios.post("http://localhost:3001/userCreator", input);
+        console.log(input);
+        setInput({
 
-    alert('User created successfully');
+          email: "",
+          password: "",
+          username: "",
+          firstname: "",
+          lastname: "",
+          address: ""
 
-  }
+        });
+
+        alert('User created successfully');
+
+        history.push('/home');
+        
+    } catch (error) {
+        
+        console.log(error.message);
+
+    } 
+
+}
 
   const handleChange = (e) => {
 
@@ -46,7 +71,6 @@ const Register = () => {
 
   return (
     <div className={style.login}>
-      <form onSubmit={handleSubmit}>
       <div className={style.container}>
         <div className={style.image}>
           <h1>REGISTER</h1>
@@ -73,17 +97,16 @@ const Register = () => {
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
         </div> */}
         <div className={style.register}>
-          <button type='submit' className={style.btn}>Registrarse</button>
+          <button onClick={register} type='submit' className={style.btn}>Registrarse</button>
         </div>
-        <div className={style.register}>
+        {/* <div className={style.register}>
           <button className={style.btn}>Ingresar con Google</button>
         </div>
         <div>
           <button className={style.btn}>Ingresar con Github</button>
-        </div>
+        </div> */}
 
       </div>
-      </form>
     </div>
   );
 }

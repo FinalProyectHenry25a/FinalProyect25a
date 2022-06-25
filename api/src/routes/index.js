@@ -6,32 +6,33 @@ const userCreator = require ('./userCreator');
 const deletePosts = require('./deletePost');
 const favourites = require("./favourites");
 const cart = require("./cart");
+const admin = require("./admin");
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-//trae todas la publicaciones o por query por modelo
+//TRAE TODAS LAS PUBLICACIONES O POR QUERY O POR MODELOS
 router.use('/home', publication)
 
-//crea una publicacion
+//CREAR PUBLICACIONES
 router.use('/postCreator', postCreator)
 
-//crea un usuario 
+//CREAR USUARIOS
 router.use('/userCreator', userCreator)
 
-//filtrados
+//FILTRADOS
 router.use('/filtersAndOrders', filtersAndOrders)
 
 //elimina un posteo
 router.use('/delete', deletePosts)
 
-//get de usuarios
-
 router.use("/favourites", favourites);
 
 router.use("/cart", cart);
 
+// RUTA EXCLUSIVA ADMINS
+router.use('/admin', admin)
 
 module.exports = router;

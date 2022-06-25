@@ -8,6 +8,8 @@ import NavBar from "../NavBar/NavBar";
 import { filters, getPhones } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import { Link } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../firebase/firebase-config';
 
 
 const Home = () => {
@@ -74,10 +76,16 @@ const Home = () => {
       console.log("log->",currentPhones);
     };
   
-
+    const DiceSiEstaEnSesion = () => {
+      onAuthStateChanged(auth, (currentUser) => {
+        if (currentUser) console.log("Sesion abierta", currentUser.email);
+        else console.log("Sesion cerrada");
+      });
+    };
 
   return(
         <div>
+          <button onClick={DiceSiEstaEnSesion}> tengo sesion abierta? </button>
           <Link to='/agregado'><button>Agregar Phone</button></Link>
             <NavBar/>
             <Carrousel/>

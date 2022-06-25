@@ -6,6 +6,7 @@ import { auth } from '../../firebase/firebase-config';
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useHistory } from 'react-router-dom';
 
+
 const Login = () => {
 
   const history = useHistory();
@@ -25,7 +26,7 @@ const Login = () => {
 
     try {
 
-      const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       setLoginEmail("");
       setLoginPassword("");
       history.push('/home');
@@ -43,6 +44,13 @@ const Login = () => {
     await signOut(auth);
 
 }
+
+  const DiceSiEstaEnSesion = () => {
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) console.log("Sesion abierta");
+      else console.log("Sesion cerrada");
+    });
+  };
 
   return (
 
@@ -82,6 +90,8 @@ const Login = () => {
           <h4> User Logged In: </h4>
             {user?.email}
           <button onClick={logout}> Sign Out </button>
+          <button onClick={DiceSiEstaEnSesion}> tengo sesion abierta? </button>
+
         </div>
     </div>
 

@@ -25,7 +25,7 @@ const Register = () => {
 
     try {
 
-        const user = await createUserWithEmailAndPassword(auth, input.email, input.password);
+        await createUserWithEmailAndPassword(auth, input.email, input.password);
         await axios.post("http://localhost:3001/userCreator", input);
         console.log(input);
         setInput({
@@ -50,16 +50,6 @@ const Register = () => {
     } 
 
 }
-
-  // const register = async (e) => {
-
-  //   e.preventDefault();
-
-  //   await axios.post("http://localhost:3001/register", input);
-
-  //   alert('User created successfully');
-
-  // }
 
   const handleChange = (e) => {
 

@@ -1,13 +1,14 @@
-//import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Home from './components/home/home';
 import Detail from './components/Detail/detail';
-import Created from './components/Created/created'
+import Created from './components/Created/created';
 // import { collection, getDocs } from "firebase/firestore";
 // import db from "./firebase/firebase-config";
 // import Auth from './Auth';
+
 
 
 function App() {

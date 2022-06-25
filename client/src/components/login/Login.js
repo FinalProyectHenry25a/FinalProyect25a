@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./../login/Login.module.css";
 import { auth } from '../../firebase/firebase-config';
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useHistory } from 'react-router-dom';
 
 const Login = () => {
@@ -25,7 +25,7 @@ const Login = () => {
 
     try {
 
-      const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       setLoginEmail("");
       setLoginPassword("");
       history.push('/home');
@@ -38,16 +38,10 @@ const Login = () => {
 
   }
 
-  const logout = async () => {
-
-    await signOut(auth);
-
-}
-
   return (
 
     <div className={style.login}>
-        <div className={style.container}>
+        {user ? <p>Ya estas logueado weon</p> : <div className={style.container}>
           <div className={style.image}>
             <h1>LOGIN</h1>
           </div>
@@ -77,12 +71,8 @@ const Login = () => {
             <Link to="register">
               <p>Registrarse</p>
             </Link>
-            {/* <p>Olvide mi contraseña</p> */}
           </div>
-          <h4> User Logged In: </h4>
-            {user?.email}
-          <button onClick={logout}> Sign Out </button>
-        </div>
+        </div>}
     </div>
 
   );

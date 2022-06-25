@@ -51,16 +51,6 @@ const Register = () => {
 
 }
 
-  // const register = async (e) => {
-
-  //   e.preventDefault();
-
-  //   await axios.post("http://localhost:3001/register", input);
-
-  //   alert('User created successfully');
-
-  // }
-
   const handleChange = (e) => {
 
       setInput((prevState) => {

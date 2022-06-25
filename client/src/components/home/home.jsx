@@ -8,13 +8,40 @@ import NavBar from "../NavBar/NavBar";
 import { filters, getPhones } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import { Link } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../../firebase/firebase-config';
+import UserNavBar from "../UserNavBar/UserNavBar";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../firebase/firebase-config";
+import axios from "axios";
 
 
 const Home = () => {
+
+  const [ loggedUser, setLoggedUser ] = useState();
+
+  useEffect(() => {
+        
+    verificarQueHayaUsuarioLogueado();
+
+  },[])
+
   const dispatch = useDispatch();
+
   const allPhones = useSelector(state => state.phones)
+
+  const verificarQueHayaUsuarioLogueado = () => {
+
+    onAuthStateChanged(auth, async (currentUser) => {
+  
+      if (currentUser) {
+      
+          let user = await axios.get(`http://localhost:3001/userCreator/${currentUser.email}`)
+          setLoggedUser(user.data);
+
+        }
+  
+    });
+  
+  }
 
   const [filtered, setFiltered] = useState ({
      byRom: null,
@@ -71,23 +98,25 @@ const Home = () => {
     }
     
     const send = async () => {
+
       dispatch(filters(filtered));
 
       console.log("log->",currentPhones);
     };
   
-    const DiceSiEstaEnSesion = () => {
-      onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) console.log("Sesion abierta", currentUser.email);
-        else console.log("Sesion cerrada");
-      });
-    };
+    const logout = async () => {
 
+      await signOut(auth);
+    
+
+  }
+  console.log('acaa', loggedUser);
   return(
         <div>
-          <button onClick={DiceSiEstaEnSesion}> tengo sesion abierta? </button>
+          <button onClick={logout}>desloguear</button>
+
           <Link to='/agregado'><button>Agregar Phone</button></Link>
-            <NavBar/>
+          {loggedUser ? <UserNavBar /> : <NavBar />}
             <Carrousel/>
 
               <Paginado

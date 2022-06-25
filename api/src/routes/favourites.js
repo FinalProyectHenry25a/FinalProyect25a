@@ -4,13 +4,31 @@ const { User, Publication } = require("../db");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  try {
-    let usuarios = await User.findAll();
 
-    res.send(usuarios);
+  try {
+
+    // const { email } = req.params;
+
+    // if(email) {
+
+    //   let user = User.findByPk(email);
+
+    //   res.json(user);
+
+    // } else {
+
+       let users = await User.findAll();
+
+       res.json(users);
+
+    // }
+
   } catch (error) {
+
     console.log(error);
+
   }
+
 });
 
 router.put("/:email/:id", async (req, res) => {

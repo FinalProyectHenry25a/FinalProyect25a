@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import samsung from '../../images/samsung.jpg'
 import huawei from '../../images/huawei.jpg'
 import lg from '../../images/lg.jpg'
@@ -9,9 +9,11 @@ import IconLeft from '../icons/IconsLeft'
 import IconRight from '../icons/IconsRight'
 
 const Carrousel = () => {
-  const slideShow = useRef(null)
+
+  const slideShow = { current: null }
+  // const slideShow = useRef(null)
   const next = () => {
-    if (slideShow.current.children.length > 0) {
+    if (slideShow.current?.children?.length > 0) {
       const firstElement = slideShow.current?.children[0]
       slideShow.current.style.transition = '300ms ease-out all'
       const sizeSlide = slideShow?.current?.children[0].offsetWidth
@@ -41,11 +43,11 @@ const Carrousel = () => {
       }, 30)
     }
   }
-  useEffect(() => {
-    setInterval(() => {
-      next()
-    }, 5000)
-  }, [])
+  // useEffect(() => {
+  //   setInterval(() => {
+  //      next()
+  //   }, 5000)
+  // }, [])
   return (
     <main className={styles.mainContainer}>
       <div className={styles.principalContainer}>

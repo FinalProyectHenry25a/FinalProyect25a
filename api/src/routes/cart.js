@@ -29,4 +29,22 @@ router.put("/:email/:id", async (req, res) => {
   }
 });
 
+router.put("/delete/:email/:id", async (req, res) => {
+  const { email, id } = req.params;
+
+  try {
+    let usuario = await User.findByPk(email);
+
+    let destroy = usuario.cart.filter((f) => f.id != id)
+
+    if(usuario.cart){
+      await User.update({ cart: destroy}, {where:{email: email}})
+    }
+    res.send("se saco del carrito")
+  } catch (error) {
+    console.log(error)
+  }
+
+});
+
 module.exports = router;

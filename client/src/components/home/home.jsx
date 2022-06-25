@@ -168,14 +168,13 @@ const Home = () => {
               currentPhones?.map(e => {
                 return (
                   <div key={e.id}>
-                    <Link to={"/home/" + e.id}>
                     <Card
                       brand={e.brand}
                       model={e.model}
                       images={e.images}
                       price={e.price}
                       />
-                      </Link>
+                    <Link to={"/home/" + e.id}>Detalle</Link>
                 </div>
               );
             })

@@ -16,7 +16,7 @@ const SearchBar = () => {
     dispatch(getPhonesByModel(model));
   }
   return (
-    <form lassName="d-flex" role="search">
+    <form className="d-flex" role="search">
       <input className="form-control me-2" type="search" placeholder="Busca tu proximo celular" aria-label="Search" onChange={(e) => handleSearch(e)}/>
       <button className="btn btn-outline-success" type="submit" onClick={(e) => handleSubmit(e)}> Search </button>
     </form>

@@ -121,54 +121,53 @@ const Home = () => {
       {loggedUser ? <UserNavBar /> : <NavBar />}
       <Carrousel />
 
-      {/* filtrado************************************ */}
-      {/* por marca-------------------------------------------- */}
+        {/* por Ram--------------------------------------------------- */}
 
-      <select id="brand" onChange={(e) => filtersSetters(e)}>
-        <option value="null">Todas</option>
-        <option value="Samsung">Samsung</option>
-        <option value="Apple">Apple</option>
-        <option value="Motorola">Motorola</option>
-        <option value="Xiaomi">Xiaomi</option>
-        <option value="Huawei">Huawei</option>
-      </select>
+        <select id='ram' onChange={e => filtersSetters(e)}>
+          <option value='null'>Ram</option>
+          <option value="4Gb">4Gb</option>
+          <option value="6Gb">6Gb</option>
+          <option value="8Gb">8Gb</option>
+          <option value="12Gb">12Gb</option>
+        </select>
 
-      {/* por Ram--------------------------------------------------- */}
+        {/* por network----------------------------------------------- */}
 
-      <select id="ram" onChange={(e) => filtersSetters(e)}>
-        <option value="null">Ram</option>
-        <option value="4Gb">4Gb</option>
-        <option value="6Gb">6Gb</option>
-        <option value="8Gb">8Gb</option>
-        <option value="12Gb">12Gb</option>
-      </select>
+        <select id='network' onChange={e => filtersSetters(e)}>
+          <option value='null'>Network</option>
+          <option value="4G">4G</option>
+          <option value="5G">5G</option>
+        </select>
 
-      {/* por network----------------------------------------------- */}
+        {/* por Rom--------------------------------------------------- */}
+        <select id='rom' onChange={e => filtersSetters(e)}>
+          <option value='null'>Rom</option>
+          <option value="64Gb">64Gb</option>
+          <option value="128Gb">128Gb</option>
+          <option value="256Gb">256Gb</option>
+        </select>
 
-      <select id="network" onChange={(e) => filtersSetters(e)}>
-        <option value="null">Network</option>
-        <option value="4G">4G</option>
-        <option value="5G">5G</option>
-      </select>
+        {/* por orden--------------------------------------------------- */}
 
-      {/* por Rom--------------------------------------------------- */}
-      <select id="rom" onChange={(e) => filtersSetters(e)}>
-        <option value="null">Rom</option>
-        <option value="64Gb">64Gb</option>
-        <option value="128Gb">128Gb</option>
-        <option value="256Gb">256Gb</option>
-      </select>
+        <select id='order' onChange={e => filtersSetters(e)}>
+          <option value='null'>Por defecto</option>
+          <option value='rating'>Por puntuación</option>
+          <option value='ascendingPrice'>Orden ascendiente</option>
+          <option value="descendingPrice">Orden descendiente</option>
+        </select>
 
-      {/* por orden--------------------------------------------------- */}
+        {/* por precio--------------------------------------------------- */}
 
-      <select id="order" onChange={(e) => filtersSetters(e)}>
-        <option value="null">Por defecto</option>
-        <option value="rating">Por puntuación</option>
-        <option value="ascendingPrice">Orden ascendiente</option>
-        <option value="descendingPrice">Orden descendiente</option>
-      </select>
+        <select id='price' onChange={e => filtersSetters(e)}>
+          <option value='null'>precio</option>
+          <option value={[0, 500]}>de u$ 0 a u$ 500</option>
+          <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
+          <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
+        </select>
 
-      {/* por precio--------------------------------------------------- */}
+        {/* por processor--------------------------------------------------- */}
+        <input id='processor' onChange={e => filtersSetters(e)}></input>
+        <label>buscar por procesador</label>
 
       <select id="price" onChange={(e) => filtersSetters(e)}>
         <option value="null">precio</option>

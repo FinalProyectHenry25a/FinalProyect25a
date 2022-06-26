@@ -89,24 +89,24 @@ const Carrousel = () => {
       <div className={styles.principalContainer}>
         <div className={styles.slideContainer} ref={slideShow}>
           <div className={styles.slide}>
-            <img src={huawei} alt="huawei" />
+            <img className={style.image} src={huawei} alt="huawei" />
             
           </div>
 
           <div className={styles.slide}>
-            <img src={samsung} alt="samsung" />
+            <img className={style.image} src={samsung} alt="samsung" />
             
           </div>
           <div className={styles.slide}>
-            <img src={iphone} alt="iphone" />
+            <img className={style.image} src={iphone} alt="iphone" />
             
           </div>
           <div className={styles.slide}>
-            <img src={lg} alt="lg" />
+            <img className={style.image} src={lg} alt="lg" />
             
           </div>
           <div className={styles.slide}>
-            <img src={moto} alt="moto" />
+            <img className={style.image} src={moto} alt="moto" />
             
           </div>
         </div>

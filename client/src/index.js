@@ -1,20 +1,18 @@
-import React, {Suspense} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-//import App from './App';
+import App from './App';
 //import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import {store} from './Store/index';
-const App = React.lazy(() => import('./App'));
+//const App = React.lazy(() => import('./App'));
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-      <Suspense fallback={"Cargando..."}>
         <App />
-        </Suspense>
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,

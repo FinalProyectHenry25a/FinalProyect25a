@@ -5,6 +5,10 @@ import Register from './components/register/Register';
 import Home from './components/home/home';
 import Detail from './components/Detail/detail';
 import Created from './components/Created/created';
+import Admin from './components/Admin/Admin';
+import PostsDelete from './components/Admin/PostsDelete';
+import StockEdit from './components/Admin/StockEdit';
+import UsersControl from './components/Admin/UsersControl';
 // import { collection, getDocs } from "firebase/firestore";
 // import db from "./firebase/firebase-config";
 // import Auth from './Auth';
@@ -37,7 +41,11 @@ function App() {
           <Route path="/home/:id" component={Detail}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
-          <Route path="/agregado" component={Created}/>
+          <Route path="/admin" component={Admin}/>
+            <Route path="/agregado" component={Created}/>
+            <Route path="/eliminar-publicacion" component={PostsDelete}/>
+            <Route path="/editar-stock" component={StockEdit}/>
+            <Route path="/control-de-usuarios" component={UsersControl}/>
         </Switch>
       </BrowserRouter>
 

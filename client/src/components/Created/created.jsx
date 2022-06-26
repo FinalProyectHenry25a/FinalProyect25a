@@ -88,7 +88,7 @@ export default function PhoneCreate(){
 
 return(
     <div>
-        <Link to='/home'><button>◀ Back</button></Link>
+        <Link to='/admin'><button>◀ Back</button></Link>
         <form onSubmit={(e) => handleSubmit(e)}>
                 <h3> Model :  
                 <input type="text"

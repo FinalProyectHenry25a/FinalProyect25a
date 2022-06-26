@@ -1,76 +1,112 @@
-import React from 'react'
-import samsung from '../../images/samsung.jpg'
-import huawei from '../../images/huawei.jpg'
-import lg from '../../images/lg.jpg'
-import iphone from '../../images/iphone.jpg'
-import moto from '../../images/moto.jpg'
-import styles from '../carrousel/Carrousel.module.css'
-import IconLeft from '../icons/IconsLeft'
-import IconRight from '../icons/IconsRight'
+import React from "react";
+import samsung from "../../images/samsung.jpg";
+import huawei from "../../images/huawei.jpg";
+//import lg from "../../images/lg.jpg";
+import iphone from "../../images/iphone.jpg";
+import moto from "../../images/moto.jpg";
+//import styles from "../carrousel/Carrousel.module.css";
+//import IconLeft from "../icons/IconsLeft";
+//import IconRight from "../icons/IconsRight";
 
 const Carrousel = () => {
-
-  const slideShow = { current: null }
+ //const slideShow = { current: null };
   // const slideShow = useRef(null)
-  const next = () => {
+  /* const next = () => {
     if (slideShow.current?.children?.length > 0) {
-      const firstElement = slideShow.current?.children[0]
-      slideShow.current.style.transition = '300ms ease-out all'
-      const sizeSlide = slideShow?.current?.children[0].offsetWidth
-      slideShow.current.style.transform = `translateX(-${sizeSlide}px)`
+      const firstElement = slideShow.current?.children[0];
+      slideShow.current.style.transition = "300ms ease-out all";
+      const sizeSlide = slideShow?.current?.children[0].offsetWidth;
+      slideShow.current.style.transform = `translateX(-${sizeSlide}px)`;
 
       const transicion = () => {
-        slideShow.current.style.transition = 'none'
-        slideShow.current.style.transform = 'translateX(0)'
-        slideShow.current.appendChild(firstElement)
-        slideShow.current.removeEventListener('transitionend', transicion)
-      }
-      slideShow.current?.addEventListener('transitionend', transicion)
+        slideShow.current.style.transition = "none";
+        slideShow.current.style.transform = "translateX(0)";
+        slideShow.current.appendChild(firstElement);
+        slideShow.current.removeEventListener("transitionend", transicion);
+      };
+      slideShow.current?.addEventListener("transitionend", transicion);
     }
-  }
+  };
   const previous = () => {
     if (slideShow.current.children.length > 0) {
-      const index = slideShow.current.children.length
-      const lastElement = slideShow.current.children[index - 1]
-      slideShow.current.insertBefore(lastElement, slideShow.current.firstChild)
-      slideShow.current.style.transition = 'none'
-      const sizeSlide = slideShow.current.children[0].offsetWidth
-      slideShow.current.style.transform = `translateX(-${sizeSlide}px)`
+      const index = slideShow.current.children.length;
+      const lastElement = slideShow.current.children[index - 1];
+      slideShow.current.insertBefore(lastElement, slideShow.current.firstChild);
+      slideShow.current.style.transition = "none";
+      const sizeSlide = slideShow.current.children[0].offsetWidth;
+      slideShow.current.style.transform = `translateX(-${sizeSlide}px)`;
 
       setTimeout(() => {
-        slideShow.current.style.transition = '300ms ease-out all'
-        slideShow.current.style.transform = 'translateX(0)'
-      }, 30)
+        slideShow.current.style.transition = "300ms ease-out all";
+        slideShow.current.style.transform = "translateX(0)";
+      }, 30);
     }
-  }
+  }; */
   // useEffect(() => {
   //   setInterval(() => {
   //      next()
   //   }, 5000)
   // }, [])
   return (
-    <main className={styles.mainContainer}>
+    <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+      <div className="carousel-inner">
+        <div className="carousel-item active" data-bs-intervalmoto="2000">
+          <img src={huawei} className="d-block w-100 h-16" alt="..." />
+        </div>
+        <div className="carousel-item" data-bs-interval="2000">
+          <img src={samsung} className="d-block w-100 h-16" alt="..." />
+        </div>
+        <div className="carousel-item" data-bs-interval="2000">
+          <img src={iphone} className="d-block w-100 h-16" alt="..." />
+        </div>
+        <div className="carousel-item">
+          <img src={moto} className="d-block w-100 h-16" alt="..." />
+        </div>
+      </div>
+      <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide="prev"
+      >
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
+    </div>
+  );
+};
+{
+  /*     <main className={styles.mainContainer}>
       <div className={styles.principalContainer}>
         <div className={styles.slideContainer} ref={slideShow}>
           <div className={styles.slide}>
-            <img src={huawei} alt="huawei" />
+            <img className={style.image} src={huawei} alt="huawei" />
             
           </div>
 
           <div className={styles.slide}>
-            <img src={samsung} alt="samsung" />
+            <img className={style.image} src={samsung} alt="samsung" />
             
           </div>
           <div className={styles.slide}>
-            <img src={iphone} alt="iphone" />
+            <img className={style.image} src={iphone} alt="iphone" />
             
           </div>
           <div className={styles.slide}>
-            <img src={lg} alt="lg" />
+            <img className={style.image} src={lg} alt="lg" />
             
           </div>
           <div className={styles.slide}>
-            <img src={moto} alt="moto" />
+            <img className={style.image} src={moto} alt="moto" />
             
           </div>
         </div>
@@ -79,8 +115,7 @@ const Carrousel = () => {
           <button onClick={next} className={styles.btnRight}><IconRight /></button>
         </div>
       </div>
-    </main>
-  )
+    </main> */
 }
 
-export default Carrousel
+export default Carrousel;

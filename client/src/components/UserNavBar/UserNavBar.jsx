@@ -1,36 +1,78 @@
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '../../firebase/firebase-config';
-import { useHistory } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
+import { BsFillCartFill } from "react-icons/bs";
+import { BsPersonCircle } from "react-icons/bs";
+import axios from 'axios';
+import "./UserNavBar.css"
+import SearchBar from '../SearchBar/Searchbar';
 
 const UserNavBar = () => {
 
-    const [ user, setUser ] = useState(true);
 
-    onAuthStateChanged(auth, (currentUser) => {
+  const [user, setUser] = useState();
 
-        setUser(currentUser)
+  useEffect(() => {
 
-    })
+    verificarQueHayaUsuarioLogueado();
 
-    const history = useHistory();
+  }, [])
 
-    const logout = async () => {
 
-        await signOut(auth);
-        history.push('/home');
-        setUser(false);
+  const verificarQueHayaUsuarioLogueado = () => {
 
-    }
+    onAuthStateChanged(auth, async (currentUser) => {
+
+      if (currentUser) {
+
+        let user = await axios.get(`http://localhost:3001/userCreator/${currentUser.email}`)
+        setUser(user.data);
+
+      }
+
+    });
+
+  }
+
+
+  const logout = async () => {
+
+    await signOut(auth);
+    console.log("estoy saliendo");
+    setUser(false)
+
+  }
 
   return (
 
-    <div>
 
-        {user ? <><h1>Estoy logueado wey</h1><button onClick={logout}>Cerrar sesion</button></> : <NavBar />}
+    <nav >
+     
+        {user ? <nav className='userNavBarContainer'>
+        <div><SearchBar /></div>
+          <div className='container'>
+            <div className='listContainer'>
+              <ul className="lista">
+                <div className='avatar'>
+                  <BsPersonCircle />   {user.username}
+                </div>
+                <div className='misCompras'>
+                  <p>Mis Compras</p>
+                </div>
+                <div className='favoritos'>
+                  <p>Favoritos</p>
+                </div>
+                <div className='carrito'>
+                  <BsFillCartFill />
+                </div>
+                <button className="logout" href="home" onClick={logout}>Cerrar sesion</button>
+              </ul>
+            </div>
+          </div>
+        </nav> : <NavBar />}
 
-    </div>
+    </nav>
 
   )
 

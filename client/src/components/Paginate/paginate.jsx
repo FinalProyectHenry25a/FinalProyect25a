@@ -1,16 +1,29 @@
 import React from "react";
-import "./paginate.css"
+import "./paginate.css";
 
-export default function Paginado ({phonesPerPage, allPhones, paginado}){
+export default function Paginado({ phonesPerPage, allPhones, paginado }) {
+  const pageNumbers = [];
 
-    const pageNumbers = []
+  for (let i = 0; i < Math.ceil(allPhones / phonesPerPage); i++) {
+    pageNumbers.push(i + 1);
+  }
 
-    for (let i=0; i<Math.ceil(allPhones/phonesPerPage); i++){
-        pageNumbers.push(i+1)
-    }
-
-    return(
-        <nav className="nav">
+  return (
+    <nav aria-label="...">
+      <ul className="pagination justify-content-center">
+        {pageNumbers &&
+          pageNumbers.map((number) => (
+            <li className="page-item active" key={number}>
+              <button className="page-link" onClick={() => paginado(number)}>
+                {number}
+              </button>
+            </li>
+          ))}
+      </ul>
+    </nav>
+  );
+}
+/*   <nav className="nav">
             <ul className="paginado">
                 {pageNumbers &&
                 pageNumbers.map(number => (
@@ -19,6 +32,4 @@ export default function Paginado ({phonesPerPage, allPhones, paginado}){
                     </li>
                 ))}
             </ul>
-        </nav>
-    )
-    }
+        </nav> */

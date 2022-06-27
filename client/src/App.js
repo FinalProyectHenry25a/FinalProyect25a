@@ -41,11 +41,12 @@ function App() {
           <Route path="/home/:id" component={Detail}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
-          <Route path="/admin" component={Admin}/>
-            <Route path="/agregado" component={Created}/>
-            <Route path="/eliminar-publicacion" component={PostsDelete}/>
-            <Route path="/editar-stock" component={StockEdit}/>
-            <Route path="/control-de-usuarios" component={UsersControl}/>
+
+            <Route path="/admin/agregar-publicacion" component={Created}/>
+            <Route path="/admin/eliminar-publicacion" component={PostsDelete}/>
+            <Route path="/admin/editar-stock" component={StockEdit}/>
+            <Route path="/admin/control-de-usuarios" component={UsersControl}/>
+            <Route path="/admin" component={Admin}/>
         </Switch>
       </BrowserRouter>
 

@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'; //s
 //import Button from 'react-bootstrap/Button';  //s traigo solo el componente
-import { Button, Alert, Card, Form, Container, Row, Col } from 'react-bootstrap';   //s traigo toda la librería
+import { Button, Alert, Card, Form, Container, Row, Col, Navs } from 'react-bootstrap';   //s traigo toda la librería
 
 
 export default function PostsDelete (){
     return (
+
         <div>
+
             <button className = 'btn btn-primary btn-lg' variant='primary'>Boton bootstrap</button>
             <Button variant='secondary'>Boton bootstrap</Button>
             <Button variant='success'>Boton bootstrap</Button>

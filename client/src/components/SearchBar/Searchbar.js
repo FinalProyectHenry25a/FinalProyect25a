@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getPhonesByModel } from "../../Actions";
-import style from "./../SearchBar/SearchBar.module.css";
+//import style from "./../SearchBar/SearchBar.module.css";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {

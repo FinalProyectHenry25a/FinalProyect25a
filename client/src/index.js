@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import {store} from './Store/index';
 //const App = React.lazy(() => import('./App'));
-import * as bootstrap from 'bootstrap';
+//import * as bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(

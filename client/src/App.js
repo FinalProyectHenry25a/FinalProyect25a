@@ -42,11 +42,11 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
 
-            <Route path="/admin/agregar-publicacion" component={Created}/>
-            <Route path="/admin/eliminar-publicacion" component={PostsDelete}/>
-            <Route path="/admin/editar-stock" component={StockEdit}/>
-            <Route path="/admin/control-de-usuarios" component={UsersControl}/>
-            <Route path="/admin" component={Admin}/>
+          <Route path="/admin/agregar-publicacion" component={Created}/>
+          <Route path="/admin/eliminar-publicacion" component={PostsDelete}/>
+          <Route path="/admin/editar-stock" component={StockEdit}/>
+          <Route path="/admin/control-de-usuarios" component={UsersControl}/>
+          <Route path="/admin" component={Admin}/>
         </Switch>
       </BrowserRouter>
 

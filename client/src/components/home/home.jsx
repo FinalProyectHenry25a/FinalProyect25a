@@ -12,6 +12,7 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
+import { right } from "@popperjs/core";
 
 const Home = () => {
   const [loggedUser, setLoggedUser] = useState();
@@ -121,68 +122,53 @@ const Home = () => {
       {loggedUser ? <UserNavBar /> : <NavBar />}
       <Carrousel />
 
-        {/* por Ram--------------------------------------------------- */}
+      {/* por Ram--------------------------------------------------- */}
+      <select id="ram" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 15 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">Ram</option>
+        <option value="4Gb">4Gb</option>
+        <option value="6Gb">6Gb</option>
+        <option value="8Gb">8Gb</option>
+        <option value="12Gb">12Gb</option>
+      </select>
+      {/* por network----------------------------------------------- */}
 
-        <select id='ram' onChange={e => filtersSetters(e)}>
-          <option value='null'>Ram</option>
-          <option value="4Gb">4Gb</option>
-          <option value="6Gb">6Gb</option>
-          <option value="8Gb">8Gb</option>
-          <option value="12Gb">12Gb</option>
-        </select>
+      <select id="network" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 15 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">Network</option>
+        <option value="4G">4G</option>
+        <option value="5G">5G</option>
+      </select>
 
-        {/* por network----------------------------------------------- */}
+      {/* por Rom--------------------------------------------------- */}
+      <select id="rom" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 15 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">Rom</option>
+        <option value="64Gb">64Gb</option>
+        <option value="128Gb">128Gb</option>
+        <option value="256Gb">256Gb</option>
+      </select>
 
-        <select id='network' onChange={e => filtersSetters(e)}>
-          <option value='null'>Network</option>
-          <option value="4G">4G</option>
-          <option value="5G">5G</option>
-        </select>
+      {/* por orden--------------------------------------------------- */}
 
-        {/* por Rom--------------------------------------------------- */}
-        <select id='rom' onChange={e => filtersSetters(e)}>
-          <option value='null'>Rom</option>
-          <option value="64Gb">64Gb</option>
-          <option value="128Gb">128Gb</option>
-          <option value="256Gb">256Gb</option>
-        </select>
+      <select id="order" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 15 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">Por defecto</option>
+        <option value="rating">Por puntuación</option>
+        <option value="ascendingPrice">Orden ascendiente</option>
+        <option value="descendingPrice">Orden descendiente</option>
+      </select>
 
-        {/* por orden--------------------------------------------------- */}
+      {/* por precio--------------------------------------------------- */}
 
-        <select id='order' onChange={e => filtersSetters(e)}>
-          <option value='null'>Por defecto</option>
-          <option value='rating'>Por puntuación</option>
-          <option value='ascendingPrice'>Orden ascendiente</option>
-          <option value="descendingPrice">Orden descendiente</option>
-        </select>
-
-        {/* por precio--------------------------------------------------- */}
-
-        <select id='price' onChange={e => filtersSetters(e)}>
-          <option value='null'>precio</option>
-          <option value={[0, 500]}>de u$ 0 a u$ 500</option>
-          <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
-          <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
-        </select>
-
-        {/* por processor--------------------------------------------------- */}
-        <input id='processor' onChange={e => filtersSetters(e)}></input>
-        <label>buscar por procesador</label>
-
-      <select id="price" onChange={(e) => filtersSetters(e)}>
-        <option value="null">precio</option>
+      <select id="price" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 15 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">precio</option>
         <option value={[0, 500]}>de u$ 0 a u$ 500</option>
         <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
         <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
       </select>
 
       {/* por processor--------------------------------------------------- */}
-      <input id="processor" onChange={(e) => filtersSetters(e)}></input>
-      <label>buscar por procesador</label>
-
-      <br />
-      <button onClick={() => send()}>Buscar</button>
-
+      <form style={{display: "inline-flex", margin: 3 + "px"}}>
+        <input id="processor" className="form-control me-3" placeholder="busca por procesador" type="search" style={{width: 100 + "%"}} onChange={(e) => filtersSetters(e)}></input>
+        <button className="btn btn-outline-dark" type="submit" onClick={() => send()}>Buscar</button>
+      </form>
       {/* filtrado************************************ */}
       <div className={style.flex}>
         {currentPhones && allPhones.length ? (
@@ -196,7 +182,6 @@ const Home = () => {
                   price={e.price}
                   id={e.id}
                 />
-                <Link to={"/home/" + e.id}>Detalle</Link>
               </div>
             );
           })
@@ -204,8 +189,9 @@ const Home = () => {
           <div>
             <h1>No se encontraron artículos con esas características</h1>
           </div>
-        )}
+        )}      
       </div>
+      <br/>
       <Paginado
         phonesPerPage={phonesPerPage}
         allPhones={allPhones.length}

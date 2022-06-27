@@ -18,7 +18,7 @@ const SearchBar = () => {
   return (
     <form className="d-flex" role="search">
       <input className="form-control me-2" type="search" placeholder="Busca tu proximo celular" aria-label="Search" onChange={(e) => handleSearch(e)}/>
-      <button className="btn btn-outline-success" type="submit" onClick={(e) => handleSubmit(e)}> Search </button>
+      <button className="btn btn-outline-dark" type="submit" onClick={(e) => handleSubmit(e)}> Search </button>
     </form>
   );
 };

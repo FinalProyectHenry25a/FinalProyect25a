@@ -13,7 +13,7 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       <ul className="pagination justify-content-center">
         {pageNumbers &&
           pageNumbers.map((number) => (
-            <li className="page-item active" key={number}>
+            <li className="page-item" key={number}>
               <button className="page-link" onClick={() => paginado(number)}>
                 {number}
               </button>

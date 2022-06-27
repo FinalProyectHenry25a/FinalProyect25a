@@ -32,21 +32,24 @@ export default function Card(props) {
   };
 
   return (
-    <div className="card" style={{width: 18 + 'rem'}} >
+    <div className="card" style={{width: 18 + 'rem', display: "inline-flex", flexFlow: "row wrap", justifyContent: "center"}} >
       <Link to={`/home/${props.id}`}>
-      <img src={props.images} className="card-img-top" alt="..." />
+      <img src={props.images} style={{height: 300 + "px" }} alt="..." />
       </Link>
       <div className="card-body">
         <h3 className="card-title">{props.brand}</h3>
         <h3>{props.model}</h3>
         <div className="card-text">
-          <h4>${props.price}</h4>
+          <h4>US${props.price}</h4>
           {user ? <button onClick={addToFavourites}>❤️</button> : null}
           <br />
         </div>
-        <Link to="#" className="btn btn-primary">
-          <button type="submit">Agregar al carrito</button>
+        <Link to="#">
+          <button className="btn btn-outline-dark, w-100" type="submit">Agregar al carrito</button>
         </Link>
+        <br/>
+        <br/>
+        <Link className="btn btn-outline-dark, w-100" to={"/home/" + props.id}>Detalle</Link>
       </div>
     </div>
   );

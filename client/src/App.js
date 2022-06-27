@@ -5,7 +5,7 @@ import Register from './components/register/Register';
 import Home from './components/home/home';
 import Detail from './components/Detail/detail';
 import Created from './components/Created/created'
-
+import Carrito from './components/Carrito/Carrito'
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/agregado" component={Created}/>
+          <Route path="/miCarrito" component={Carrito}/>
           </Switch>
       </BrowserRouter>
   );

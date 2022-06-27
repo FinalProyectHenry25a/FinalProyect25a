@@ -52,3 +52,9 @@ export function getDetails(id){
         }
     }
 
+    export function addCart(payload){
+        return{
+            type:"CART",
+            payload
+        }
+    }

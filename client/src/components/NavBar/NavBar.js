@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
 import style from './../NavBar/NavBar.module.css'
 
+
+
 const NavBar = () => {
+
+
+
     return(
         <div className={style.flex}>
             <div>
@@ -14,8 +19,9 @@ const NavBar = () => {
                 <Link to="/login">
                 <button className={style.btn}>Login</button>
                 </Link>
-     
-                <h2>CARRITO</h2>
+                <Link to="/miCarrito">
+                <button>CARRITO</button>
+                </Link>
             </div>
         </div>
     )

@@ -76,10 +76,32 @@ const Home = () => {
   
 
 
+    
+  //   const [carritoCompleto, setCarritoCompleto]= useState([])
+  //   function addToCart(){
+    
+  //     setCarritoCompleto(
+    
+  //     [...carritoCompleto, carritoCompleto.push(currentPhones)]
+  //     )
+  // console.log(carritoCompleto.model)
+  //   }
+
+  //   function carritoooooo(){
+  //     dispatch(addCart(carritoCompleto))
+  //     console.log(carritoCompleto.brand)
+  // }
+
+
+
+
+
+
   return(
         <div>
           <Link to='/agregado'><button>Agregar Phone</button></Link>
             <NavBar/>
+            {/* <button onClick={carritoooooo} >CARRITO</button> */}
             <Carrousel/>
 
               <Paginado
@@ -160,14 +182,18 @@ const Home = () => {
               currentPhones?.map(e => {
                 return (
                   <div key={e.id}>
-                    <Link to={"/home/" + e.id}>
+                    {/* <Link to={"/home/" + e.id}> */}
                     <Card
                       brand={e.brand}
                       model={e.model}
                       images={e.images}
                       price={e.price}
+                      id={e.id}
+                      
                       />
-                      </Link>
+                      
+                      {/* <button onClick={addToCart} type="submit">Agregar al carrito</button> */}
+                      {/* </Link> */}
                 </div>
               );
             })

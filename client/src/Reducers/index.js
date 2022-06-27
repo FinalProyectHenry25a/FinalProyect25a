@@ -1,6 +1,7 @@
 const initialState = {
     phones : [],
     phonesId : [],
+    cartPhones:[],
 }
 
 function rootReducer (state = initialState, action){
@@ -26,6 +27,11 @@ function rootReducer (state = initialState, action){
                 ...state,
                 phones: action.payload
             }
+            case 'CART':
+                return{
+                    ...state,
+                    cartPhones:action.payload
+                }
                 
             default:
                 return state;

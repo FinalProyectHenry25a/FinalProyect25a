@@ -28,6 +28,11 @@ const NavBar = () => {
                 Login
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/agregado">
+                Agregar Celular
+              </Link>
+            </li>
           </ul>
           <SearchBar />
         </div>

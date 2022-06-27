@@ -1,9 +1,11 @@
 import React from "react";
-import samsung from "../../images/samsung.jpg";
-import huawei from "../../images/huawei.jpg";
-//import lg from "../../images/lg.jpg";
+import samsung from "../../images/samsung.png";
+import iphone2 from "../../images/iphone2.webp";
+import huawei from "../../images/huawei.png";
 import iphone from "../../images/iphone.jpg";
-import moto from "../../images/moto.jpg";
+import moto from "../../images/motoedge30.png";
+import note from "../../images/galaxy.jpg"
+import { BsLock } from "react-icons/bs";
 //import styles from "../carrousel/Carrousel.module.css";
 //import IconLeft from "../icons/IconsLeft";
 //import IconRight from "../icons/IconsRight";
@@ -48,40 +50,40 @@ const Carrousel = () => {
   //   }, 5000)
   // }, [])
   return (
-    <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-      <div className="carousel-inner">
-        <div className="carousel-item active" data-bs-intervalmoto="2000">
-          <img src={huawei} className="d-block w-100 h-16" alt="..." />
-        </div>
-        <div className="carousel-item" data-bs-interval="2000">
-          <img src={samsung} className="d-block w-100 h-16" alt="..." />
-        </div>
-        <div className="carousel-item" data-bs-interval="2000">
-          <img src={iphone} className="d-block w-100 h-16" alt="..." />
-        </div>
-        <div className="carousel-item">
-          <img src={moto} className="d-block w-100 h-16" alt="..." />
-        </div>
-      </div>
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
+    <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="true">
+  <div className="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+  </div>
+  <div className="carousel-inner">
+    <div className="carousel-item active"  data-bs-interval="4000">
+      <img src={iphone2} style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
     </div>
+    <div className="carousel-item"  data-bs-interval="4000">
+      <img src={moto} style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
+    </div>
+    <div className="carousel-item"  data-bs-interval="4000">
+      <img src={samsung} style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
+    </div>
+    <div className="carousel-item" data-bs-interval="4000">
+      <img src={note} style={{display: "block", width: 100 + "%", height: 500 + "px"}}alt="..."/>
+    </div>
+    <div className="carousel-item">
+      <img src={huawei} style={{display: "block", width: 100 + "%", height: 500 + "px"}}alt="..."/>
+    </div>
+  </div>
+  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Previous</span>
+  </button>
+  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Next</span>
+  </button>
+</div>
   );
 };
 {

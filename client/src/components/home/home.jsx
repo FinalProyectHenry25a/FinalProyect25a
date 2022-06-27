@@ -101,11 +101,12 @@ const Home = () => {
           : document.getElementById("processor").value,
     }));
 
-    setCurrentPage(1);
+   
   }
 
-  const send = async () => {
+  const send = async (e) => {
     dispatch(filters(filtered));
+    setCurrentPage(1);
   };
 
   const logout = async () => {
@@ -122,7 +123,7 @@ const Home = () => {
       {loggedUser ? <UserNavBar /> : <NavBar />}
       <Carrousel />
 
-      <select id = 'brand' className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 13 + "%", display: "inline-block", margin: 3 + "px"}} onChange={e=>filtersSetters(e)}>
+      <select id='brand' className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">Todas</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>
@@ -132,24 +133,24 @@ const Home = () => {
       </select>
 
       {/* por Ram--------------------------------------------------- */}
-      <select id="ram" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 13 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
+      <select id="ram" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
         <option value="null">Ram</option>
-        <option value="4Gb">4Gb</option>
+        <option selected value="4Gb">4Gb</option>
         <option value="6Gb">6Gb</option>
         <option value="8Gb">8Gb</option>
         <option value="12Gb">12Gb</option>
       </select>
       {/* por network----------------------------------------------- */}
 
-      <select id="network" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 13 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
-        <option value="null">Network</option>
+      <select id="network" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">Network</option>
         <option value="4G">4G</option>
         <option value="5G">5G</option>
       </select>
 
       {/* por Rom--------------------------------------------------- */}
-      <select id="rom" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 13 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
-        <option value="null">Rom</option>
+      <select id="rom" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">Rom</option>
         <option value="64Gb">64Gb</option>
         <option value="128Gb">128Gb</option>
         <option value="256Gb">256Gb</option>
@@ -157,8 +158,8 @@ const Home = () => {
 
       {/* por orden--------------------------------------------------- */}
 
-      <select id="order" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 13 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
-        <option value="null">Por defecto</option>
+      <select id="order" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">Por defecto</option>
         <option value="rating">Por puntuación</option>
         <option value="ascendingPrice">Orden ascendiente</option>
         <option value="descendingPrice">Orden descendiente</option>
@@ -166,16 +167,18 @@ const Home = () => {
 
       {/* por precio--------------------------------------------------- */}
 
-      <select id="price" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{width: 13 + "%", display: "inline-block", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}>
-        <option value="null">precio</option>
+      <select id="price" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+        <option selected value="null">precio</option>
         <option value={[0, 500]}>de u$ 0 a u$ 500</option>
         <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
         <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
       </select>
 
       {/* por processor--------------------------------------------------- */}
-        <input id="processor" className="form-control me-3" placeholder="busca por procesador" style={{display: "inline-flex", width: 13 + "%", margin: 3 + "px"}} onChange={(e) => filtersSetters(e)}></input>
+      <div style={{ display: "inline-flex", margin: 3 + "px" }}>
+        <input id="processor" className="form-control me-3" placeholder="busca por procesador" type="search" style={{ width: 100 + "%" }} onChange={(e) => filtersSetters(e)}></input>
         <button className="btn btn-outline-dark" onClick={() => send()}>Buscar</button>
+      </div>
       {/* filtrado************************************ */}
       <div className={style.flex}>
         {currentPhones && allPhones.length ? (
@@ -198,7 +201,7 @@ const Home = () => {
           </div>
         )}      
       </div>
-      <br/>
+      <br />
       <Paginado
         phonesPerPage={phonesPerPage}
         allPhones={allPhones.length}

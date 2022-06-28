@@ -1,0 +1,33 @@
+.card{
+    margin-left: 20px;
+    margin-top: 25px;
+    width: 310px;
+    background-color:rgb(95, 86, 86);
+    backdrop-filter: blur(6px);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: 1px solid black;
+    text-align: center;
+}
+.card:hover {
+    background: rgb(134, 97, 81);
+    background: linear-gradient(
+      63deg,
+      rgba(255, 79, 5, 1) 4%,
+      rgba(254, 85, 7, 1) 9%,
+      rgb(35, 192, 29) 86%,
+      rgba(116, 105, 100, 1) 98%
+    );
+    cursor: pointer;
+  }
+
+.image {
+    max-height: 16rem;
+    border-radius: 10px;
+}
+
+
+.card2 {
+    text-align: center;
+}

@@ -1,0 +1,19 @@
+.flex {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: auto;
+    background-color:#F5F7F6;
+
+}
+
+.navBar {
+
+  width: 100vw;
+  height: 15vh;
+
+}
+
+
+  

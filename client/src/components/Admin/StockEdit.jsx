@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 
 export default function StockEdit(props) {
-
   const [user, setUser] = useState(auth.currentUser);
   const history = useHistory();
 
@@ -16,7 +15,7 @@ export default function StockEdit(props) {
     await onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser || currentUser.email !== props.userRole) {
         history.push("/home");
-      } else console.log("entre aca");
+      }
     });
   };
 

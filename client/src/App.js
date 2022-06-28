@@ -24,7 +24,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/mi-perfil" component={MiPerfil} />
 
-        <Route path="/admin/agregar-publicacion" component={Created} />
+        <Route path="/admin/agregar-publicacion" render={ () => <Created userRole={adminEmail}/> } />
         <Route path="/admin/eliminar-publicacion" render={ () => <PostsDelete userRole={adminEmail}/> } />
         <Route path="/admin/editar-stock" render={ () => <StockEdit userRole={adminEmail}/> } />
         <Route path="/admin/control-de-usuarios" render={ () => <UsersControl userRole={adminEmail}/> } />

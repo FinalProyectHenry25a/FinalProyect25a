@@ -21,7 +21,7 @@ export default function PostsDelete(props) {
     await onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser || currentUser.email !== props.userRole) {
         history.push("/home");
-      } else console.log("entre aca");
+      }
     });
   };
 

@@ -52,3 +52,46 @@ export function getDetails(id){
         }
     }
 
+
+
+    export const addToCart = (itemID) => {
+      return async function(dispatch){
+        return dispatch({
+        type: 'ADD_TO_CART',
+        payload: {
+          id: itemID,
+        },
+      })
+      };
+    };
+    
+    export const removeFromCart = (itemID) => {
+      return async function(dispatch){
+        return dispatch({
+        type: 'REMOVE_FROM_CART',
+        payload: {
+          id: itemID,
+        },
+      })
+      };
+    };
+    
+    export const adjustItemQty = (itemID, qty) => {
+      return async function(dispatch){
+        return dispatch({
+        type: 'ADJUST_ITEM_QTY',
+        payload: {
+          id: itemID,
+          qty,
+        },
+      })
+      };
+    };
+    
+    export const loadCurrentItem = (item) => {
+      return {
+        type: 'LOAD_CURRENT_ITEM',
+        payload: item,
+      };
+    };
+    

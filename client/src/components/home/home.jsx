@@ -25,6 +25,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
+  console.log(allPhones)
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {

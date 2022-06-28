@@ -3,7 +3,6 @@ const initialState = {
     phonesId : [],
     cart: [],
     currentItem: null,
-    products: []
 }
 
 function rootReducer (state = initialState, action){
@@ -31,7 +30,7 @@ function rootReducer (state = initialState, action){
             }
             case 'ADD_TO_CART':
                 // Great Item data from products array
-                const item = state.products.find(
+                const item = state.phones.find(
                   (product) => product.id === action.payload.id
                 );
                 // Check if Item is in cart already

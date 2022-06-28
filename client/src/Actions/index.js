@@ -53,6 +53,7 @@ export function getDetails(id){
     }
 
 
+
     export const addToCart = (itemID) => {
       return async function(dispatch){
         return dispatch({

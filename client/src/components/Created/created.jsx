@@ -88,7 +88,7 @@ export default function PhoneCreate(){
 
 return(
     <div>
-        <Link to='/home'><button>◀ Back</button></Link>
+        <Link to='/admin'><button>◀ Back</button></Link>
                 <div class="border border-sky-500 w-50 center">
         <form class="w-full max-w-lg" onSubmit={(e) => handleSubmit(e)}>
             <div class="flex flex-wrap-mx-3 mb-6">

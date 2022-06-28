@@ -115,6 +115,7 @@ const Home = () => {
 
   return (
     <div>
+       <a href="http://localhost/pasarela/index.php">Metodo De Pago</a>
       {/* <button onClick={logout}>desloguear</button> */}
 
       {/* <Link to="/agregado">

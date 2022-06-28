@@ -10,6 +10,7 @@ import PostsDelete from './components/Admin/PostsDelete';
 import StockEdit from './components/Admin/StockEdit';
 import UsersControl from './components/Admin/UsersControl';
 import MiPerfil from './components/User/MiPerfil';
+import Cart from './components/cart/Cart';
 // import { collection, getDocs } from "firebase/firestore";
 // import db from "./firebase/firebase-config";
 // import Auth from './Auth';
@@ -49,6 +50,8 @@ function App() {
           <Route path="/admin/editar-stock" component={StockEdit}/>
           <Route path="/admin/control-de-usuarios" component={UsersControl}/>
           <Route path="/admin" component={Admin}/>
+          <Route path="/cart" component={Cart} />
+
         </Switch>
       </BrowserRouter>
 

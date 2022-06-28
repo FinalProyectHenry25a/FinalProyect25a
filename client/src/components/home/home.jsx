@@ -16,6 +16,7 @@ import { right } from "@popperjs/core";
 
 const Home = () => {
   const [loggedUser, setLoggedUser] = useState();
+  
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -113,6 +114,8 @@ const Home = () => {
     await signOut(auth);
   };
 
+ 
+
   return (
     <div>
       <button onClick={logout}>desloguear</button>
@@ -191,7 +194,8 @@ const Home = () => {
                   images={e.images}
                   price={e.price}
                   id={e.id}
-                />
+                  />
+                  {console.log(e.id)}
               </div>
             );
           })

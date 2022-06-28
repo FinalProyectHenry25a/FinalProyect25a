@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 //import style from "./../card/Card.module.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../Actions";
 
 export default function Card(props) {
+  console.log(props.id)
   const [user, setUser] = useState(auth.currentUser);
   useEffect(() => {
     userVerificate();
@@ -16,7 +19,7 @@ export default function Card(props) {
       setUser(currentUser);
     });
   };
-
+  const dispatch = useDispatch();
   const addToFavourites = async () => {
     try {
       let add = (
@@ -30,6 +33,7 @@ export default function Card(props) {
       console.log(error);
     }
   };
+   
 
   return (
     <div className="card" style={{width: 18 + 'rem', display: "inline-flex", flexFlow: "row wrap", justifyContent: "center"}} >
@@ -45,7 +49,7 @@ export default function Card(props) {
           <br />
         </div>
         <Link to="#">
-          <button className="btn btn-outline-dark, w-100" type="submit">Agregar al carrito</button>
+          <button className="btn btn-outline-dark, w-100" type="submit"  onClick={e => dispatch(addToCart(props.id))}>Agregar al carrito</button>
         </Link>
         <br/>
         <br/>

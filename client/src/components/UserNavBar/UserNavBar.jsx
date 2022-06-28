@@ -27,7 +27,7 @@ const UserNavBar = () => {
 
       if (currentUser) {
 
-        let user = await axios.get(`http://localhost:3001/userCreator/${currentUser.email}`)
+        let user = await axios.get(`http://localhost:3001/user/${currentUser.email}`)
         setUser(user.data);
 
       }

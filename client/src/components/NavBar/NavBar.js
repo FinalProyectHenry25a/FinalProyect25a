@@ -40,6 +40,11 @@ const NavBar = ({cart}) => {
               </Link>
               <div>cart {cartCount}</div>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/agregado">
+                Agregar Celular
+              </Link>
+            </li>
           </ul>
           <SearchBar />
         </div>

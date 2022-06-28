@@ -37,9 +37,7 @@ export default function Card(props) {
 
   return (
     <div className="card" style={{width: 18 + 'rem', display: "inline-flex", flexFlow: "row wrap", justifyContent: "center"}} >
-      <Link to={`/home/${props.id}`}>
       <img src={props.images} style={{height: 300 + "px" }} alt="..." />
-      </Link>
       <div className="card-body">
         <h3 className="card-title">{props.brand}</h3>
         <h3>{props.model}</h3>

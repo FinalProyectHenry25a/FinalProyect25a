@@ -7,6 +7,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import axios from 'axios';
 import "./UserNavBar.css"
 import SearchBar from '../SearchBar/Searchbar';
+import { Link } from 'react-router-dom';
 
 const UserNavBar = () => {
 
@@ -55,7 +56,9 @@ const UserNavBar = () => {
             <div className='listContainer'>
               <ul className="lista">
                 <div className='avatar'>
+                  <Link to="/mi-perfil/">
                   <BsPersonCircle />   {user.username}
+                  </Link>
                 </div>
                 <div className='misCompras'>
                   <p>Mis Compras</p>

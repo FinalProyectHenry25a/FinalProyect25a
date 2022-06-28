@@ -118,15 +118,16 @@ const Home = () => {
 
   return (
     <div>
-      <button onClick={logout}>desloguear</button>
+      {/* <button onClick={logout}>desloguear</button> */}
 
-      <Link to="/agregado">
+      {/* <Link to="/agregado">
         <button>Agregar Phone</button>
-      </Link>
+      </Link> */}
+
       {loggedUser ? <UserNavBar /> : <NavBar />}
       <Carrousel />
 
-      <select id='brand' className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+      <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">Todas</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>
@@ -136,7 +137,7 @@ const Home = () => {
       </select>
 
       {/* por Ram--------------------------------------------------- */}
-      <select id="ram" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
         <option value="null">Ram</option>
         <option selected value="4Gb">4Gb</option>
         <option value="6Gb">6Gb</option>
@@ -145,14 +146,14 @@ const Home = () => {
       </select>
       {/* por network----------------------------------------------- */}
 
-      <select id="network" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
         <option selected value="null">Network</option>
         <option value="4G">4G</option>
         <option value="5G">5G</option>
       </select>
 
       {/* por Rom--------------------------------------------------- */}
-      <select id="rom" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <select id="rom" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
         <option selected value="null">Rom</option>
         <option value="64Gb">64Gb</option>
         <option value="128Gb">128Gb</option>
@@ -161,7 +162,7 @@ const Home = () => {
 
       {/* por orden--------------------------------------------------- */}
 
-      <select id="order" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
         <option selected value="null">Por defecto</option>
         <option value="rating">Por puntuación</option>
         <option value="ascendingPrice">Orden ascendiente</option>
@@ -170,7 +171,7 @@ const Home = () => {
 
       {/* por precio--------------------------------------------------- */}
 
-      <select id="price" className="form-select form-select-m mb-3" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
         <option selected value="null">precio</option>
         <option value={[0, 500]}>de u$ 0 a u$ 500</option>
         <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
@@ -203,7 +204,7 @@ const Home = () => {
           <div>
             <h1>No se encontraron artículos con esas características</h1>
           </div>
-        )}
+        )}      
       </div>
       <br />
       <Paginado

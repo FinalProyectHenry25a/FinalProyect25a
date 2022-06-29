@@ -67,6 +67,7 @@ const Login = () => {
                 className={style.input}
                 onChange={(e) => setLoginPassword(e.target.value) }/>
           </div>
+          <a href="/identify">¿Olvidaste tu contraseña?</a>
           <div className={style.register}>
             <button onClick={login} type="submit" className={style.btn}>Iniciar Sesion</button>
             <Link to="register">

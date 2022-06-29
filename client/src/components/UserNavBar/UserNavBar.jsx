@@ -40,7 +40,6 @@ const UserNavBar = () => {
   const logout = async () => {
 
     await signOut(auth);
-    console.log("estoy saliendo");
     setUser(false)
 
   }

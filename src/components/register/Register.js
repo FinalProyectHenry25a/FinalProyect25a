@@ -26,7 +26,7 @@ const Register = () => {
     try {
 
         await createUserWithEmailAndPassword(auth, input.email, input.password);
-        await axios.post("http://localhost:3001/userCreator", input);
+        await axios.post("http://localhost:3001/user", input);
         console.log(input);
         setInput({
 

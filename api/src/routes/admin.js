@@ -69,6 +69,31 @@ router.post("/post", async (req, res) => {
     res.status(404).send(error);
   }
 });
+
+//RUTA PARA MODIFICAR STOCK     trabajando acaaa!
+router.post("/modifica-stock", async (req, res) => {
+  try {
+     //  http://localhost:3001/admin/modifica-stock
+
+  /*    {
+      "do": "remove",
+      "amount": 5,
+      "id" :  "8f246ee5-5a16-440e-b61e-4d774667998d"
+  } */
+
+    await Publication.update(
+      { stock: stock.dataValues.stock + req.body.amount },
+      { where: { id: req.body.id } }
+    );
+    
+
+    res.send(req.body);
+
+  } catch (error) {
+    res.status(404).send(error);
+  }
+});
+
 /*
 para probar y como ejemplo del body:
 {

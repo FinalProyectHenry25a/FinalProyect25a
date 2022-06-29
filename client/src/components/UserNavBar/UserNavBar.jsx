@@ -8,10 +8,12 @@ import axios from 'axios';
 import "./UserNavBar.css"
 import SearchBar from '../SearchBar/Searchbar';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const UserNavBar = () => {
 
-
+  const [cartCount, setCartCount] = useState(0);
+  const cart = useSelector(state => state.cart)
   const [user, setUser] = useState();
 
   useEffect(() => {
@@ -19,7 +21,14 @@ const UserNavBar = () => {
     verificarQueHayaUsuarioLogueado();
 
   }, [])
+  useEffect(() => {
+    let count = 0;
+   cart.forEach((item) => {
+    count += item.qty;
+   });
 
+   setCartCount(count);
+  }, [cart, cartCount]);
 
   const verificarQueHayaUsuarioLogueado = () => {
 
@@ -50,31 +59,31 @@ const UserNavBar = () => {
     <nav >
      
         {user ? <nav className='userNavBarContainer'>
-        <div><SearchBar /></div>
+        {/* <div><SearchBar /></div> */}
           <div className='container'>
             <div className='listContainer'>
-              <ul className="lista">
-                <div className='avatar'>
+              <ul className="lista row">
+                <div className='avatar col-3 justify-content-center align-items-center'>
                   <Link to="/mi-perfil/">
                   <BsPersonCircle />   {user.username}
                   </Link>
                 </div>
-                <div className='misCompras'>
+                <div className='misCompras col-2 '>
                 <Link to="/mis-compras">
                   <p>Mis Compras</p>
                   </Link>
                 </div>
-                <div className='favoritos'>
+                <div className='favoritos col-2'>
                   <Link to="/favoritos">
                   <p>Favoritos</p>
                   </Link>
                 </div>
-                <div className='carrito'>
+                <div className='carrito col-2'>
                   <Link to="cart">
-                  <BsFillCartFill />
+                  <BsFillCartFill /> {cartCount}
                   </Link>
                 </div>
-                <button className="logout" href="home" onClick={logout}>Cerrar sesion</button>
+                <button className="logout col-2 btn" href="home" onClick={logout}>Cerrar sesion</button>
               </ul>
             </div>
           </div>

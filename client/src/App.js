@@ -11,6 +11,8 @@ import StockEdit from './components/Admin/StockEdit';
 import UsersControl from './components/Admin/UsersControl';
 import MiPerfil from './components/User/MiPerfil';
 import Cart from './components/cart/Cart';
+import Favourites from './components/User/Favourites';
+import MisCompras from './components/User/MisCompras';
 
 
 
@@ -25,6 +27,9 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/mi-perfil" component={MiPerfil} />
+        <Route path="/favoritos" component={Favourites} />
+        <Route path="/mis-compras" component={MisCompras} />
+        <Route path="/cart" component={Cart} />
 
         <Route path="/admin/agregar-publicacion" render={ () => <Created userRole={adminEmail}/> } />
         <Route path="/admin/eliminar-publicacion" render={ () => <PostsDelete userRole={adminEmail}/> } />

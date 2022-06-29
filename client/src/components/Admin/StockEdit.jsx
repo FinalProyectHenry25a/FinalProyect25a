@@ -14,13 +14,21 @@ export default function StockEdit(props) {
   useEffect(async() => {
     userVerificate();
     const post = (await axios("http://localhost:3001/admin/posts")).data;
+  
     loadPosts();
-  }, [user]);
+  }, [user, change]);
 
   async function loadPosts() {
     try {
-      const post = (await axios("http://localhost:3001/admin/posts")).data;
-      setPostsState(post);
+        let post = (await axios("http://localhost:3001/admin/posts")).data;
+
+        post = post.sort(function (a, b) {
+          if (a.model.toLowerCase() > b.model.toLowerCase()) return 1;
+          if (a.model.toLowerCase() < b.model.toLowerCase()) return -1;
+          return 0;
+        });
+
+        setPostsState(post);
     } catch (error) {
       console.log(error);
     }
@@ -43,11 +51,33 @@ export default function StockEdit(props) {
 
     }
     
-    function editStock(id){
-        
-    console.log("seteo" , change);
-    
-  }
+    async function editStock(id) {
+
+      try {
+        let stockInitial = postsState.find((el) => el.id === id).stock;
+        let stockToChange = parseInt(document.getElementById(id).value);
+        let actionToDo = document.getElementById("do").value;
+
+        if (
+          stockToChange === "NaN" || (actionToDo === "remove" && stockToChange > stockInitial) || stockToChange < 0
+        ) {
+          alert(
+            "No se puede realizar la operacion debido. Revise stock actual  y valores unicamente positivos"
+          );
+        } else {
+          let bod = { ...change, id: id };
+
+          let add = (
+            await axios.put("http://localhost:3001/admin/modifica-stock", bod)
+          ).data;
+
+          setChange({ ...change, amount: 0 });
+          document.getElementById(id).value = null;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
   return (
     <div>
@@ -61,12 +91,12 @@ export default function StockEdit(props) {
         <div key={el.id}>
           <h6> {el.brand} - {el.model} - {el.stock} unidades </h6>
           
-          <select  name='do' onChange={settings}>
+          <select  id = 'do' name='do' onChange={settings}>
             <option value="add">Agregar stock</option>
             <option value="remove">Quitar stock</option>
           </select>
 
-          <input name='amount' onChange={settings} />
+          <input id={el.id} name='amount' onChange={settings} />
           <label>unidades</label>
 
 

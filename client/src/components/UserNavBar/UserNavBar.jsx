@@ -83,7 +83,9 @@ const UserNavBar = () => {
                   <BsFillCartFill /> {cartCount}
                   </Link>
                 </div>
-                <button className="logout col-2 btn" href="home" onClick={logout}>Cerrar sesion</button>
+                <Link to="/home">
+                <button className="logout col-2 btn" onClick={logout}>Cerrar sesion</button>
+                </Link>
               </ul>
             </div>
           </div>

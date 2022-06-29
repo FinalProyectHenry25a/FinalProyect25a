@@ -70,25 +70,24 @@ router.post("/post", async (req, res) => {
   }
 });
 
-//RUTA PARA MODIFICAR STOCK     trabajando acaaa!
+//RUTA PARA MODIFICAR STOCK     
 router.post("/modifica-stock", async (req, res) => {
   try {
-     //  http://localhost:3001/admin/modifica-stock
+    let post = await Publication.findByPk(req.body.id);
 
-  /*    {
-      "do": "remove",
-      "amount": 5,
-      "id" :  "8f246ee5-5a16-440e-b61e-4d774667998d"
-  } */
+    if (req.body.do === "add") {
+      await Publication.update(
+        { stock: post.dataValues.stock + req.body.amount },
+        { where: { id: req.body.id } }
+      );
+    } else if (req.body.do === "remove") {
+      await Publication.update(
+        { stock: post.dataValues.stock - req.body.amount },
+        { where: { id: req.body.id } }
+      );
+    }
 
-    await Publication.update(
-      { stock: stock.dataValues.stock + req.body.amount },
-      { where: { id: req.body.id } }
-    );
-    
-
-    res.send(req.body);
-
+    res.send("Modificacion exitosa");
   } catch (error) {
     res.status(404).send(error);
   }

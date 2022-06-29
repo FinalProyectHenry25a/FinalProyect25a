@@ -104,9 +104,12 @@ const Login = () => {
             className={style.input}
             onChange={(e) => setLoginPassword(e.target.value)} />
         </div>
+        <a href="/identify">¿Olvidaste tu contraseña?</a>
         <div className={style.register}>
           <button onClick={login} type="submit" className={style.btn}>Iniciar Sesion</button>
+          <br/><br/>
           <button onClick={loginWithGoogle} type="submit" className={style.btn}>Iniciar Sesion con Google</button>
+          <br/><br/>
           <Link to="register">
             <p>Registrarse</p>
           </Link>

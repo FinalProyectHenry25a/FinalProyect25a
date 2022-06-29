@@ -67,6 +67,10 @@ function rootReducer (state = initialState, action){
                   ...state,
                   currentItem: action.payload,
                 };
+              case 'CHANGE_PASSWORD':
+                return {
+                  ...state
+                }  
                 
             default:
                 return state;

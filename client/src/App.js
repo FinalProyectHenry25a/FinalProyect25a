@@ -13,7 +13,9 @@ import MiPerfil from './components/User/MiPerfil';
 import Cart from './components/cart/Cart';
 import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
-import mp from './components/MP/mp'
+import mp from './components/MP/mp';
+import ChangePassword from './components/login/changePassword';
+import Identify from './components/login/indentify';
 
 
 
@@ -26,6 +28,8 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route path="/home/:id" component={Detail} />
         <Route path="/login" component={Login} />
+        <Route path="/identify" component={Identify} />
+        <Route path="/changePassword" component={ChangePassword}/>
         <Route path="/register" component={Register} />
         <Route path="/mi-perfil" component={MiPerfil} />
         <Route path="/favoritos" component={Favourites} />

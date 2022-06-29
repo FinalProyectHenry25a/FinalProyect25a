@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import SearchBar from "../SearchBar/Searchbar";
-import { useDispatch, useSelector } from "react-redux";
+import SearchBar from "../SearchBar/Searchbar";
+import { useSelector, useDispatch } from "react-redux";
+import { BsFillCartFill } from "react-icons/bs";
+import  {getLocalCart} from '../../Actions'
+
 
 //import style from "./../NavBar/NavBar.module.css";
 
 const NavBar = () => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+  // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
+  useEffect(() => {
+    console.log("Entrando al effect")
+    dispatch(getLocalCart())
+  }, [])
+
 
    useEffect(() => {
      let count = 0;
-    cart.forEach((item) => {
+     cart.forEach((item) => {
      count += item.qty;
     });
 
@@ -42,7 +52,8 @@ const NavBar = () => {
                 Login
               </Link>
               <Link className="nav-link active" to="/cart">
-                cart {cartCount}
+              <BsFillCartFill />
+               {cartCount}
               </Link>
             </li>
             <li className="nav-item">

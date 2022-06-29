@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './Cart.module.css'
 import CartItem from '../cart/cartItem/CartItem'
+import {getLocalCart} from '../../Actions/index'
 import { Link } from "react-router-dom";
 import mercadopago from "../../images/mercadopago.png"
 
 
 const Cart = () => {
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [totalItems, setTotalItems] = useState(0);
-    const cart = useSelector(state => state.cart)
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log("Entrando al effect")
+    dispatch(getLocalCart())
+  }, [])
 
   useEffect(() => {
     let items = 0;
@@ -22,8 +29,10 @@ const Cart = () => {
 
     setTotalItems(items);
     setTotalPrice(price);
+    
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
-
+  
+  
   return (
     <div className={styles.cart}>
       <div className={styles.cartItems}>
@@ -31,7 +40,7 @@ const Cart = () => {
           <CartItem key={item.id} item={item} />
         ))}
       </div>
-      <div className={styles.cart__summary}>
+      <div className={styles.cartSummary}>
         <h4 className={styles.summary__title}>Total</h4>
         <div className={styles.summary__price}>
           <span>TOTAL: ({totalItems} productos)</span>

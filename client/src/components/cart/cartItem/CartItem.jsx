@@ -21,8 +21,8 @@ const CartItem = (props) => {
   const dispatch = useDispatch()
   return (
     <div className={styles.cartItem}>
-      <div className={styles.cartItemDetails}>
       <img src={props.item.images} alt={props.item.model} width={200}/>
+      <div className={styles.cartItemDetails}>
         <p className={styles.detailsTitle}>{props.item.brand}</p>
         <p className={styles.detailsTitle}>{props.item.model}</p>
         <p className={styles.detailsDesc}>{props.item.resolution}</p>
@@ -37,6 +37,7 @@ const CartItem = (props) => {
             type="number"
             id="qty"
             name="qty"
+            className={styles.input}
             value={input}
             onChange={onChangeHandler}
           />

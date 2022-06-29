@@ -12,10 +12,22 @@ import { useSelector } from 'react-redux';
 
 const UserNavBar = () => {
 
+ 
+  const [user, setUser] = useState();
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector(state => state.cart)
-  const [user, setUser] = useState();
 
+   useEffect(() => {
+     let count = 0;
+    cart.forEach((item) => {
+     count += item.qty;
+    });
+
+    setCartCount(count);
+   }, [cart, cartCount]);
+
+
+  
   useEffect(() => {
 
     verificarQueHayaUsuarioLogueado();

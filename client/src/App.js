@@ -14,7 +14,7 @@ import Cart from './components/cart/Cart';
 
 
 
-const adminEmail = 'santi@santi.santi';
+const adminEmail = 'admin@admin.admin';
 
 function App() {
   return (

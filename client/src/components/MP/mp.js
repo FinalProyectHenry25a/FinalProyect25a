@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import Comprar from '../Comprar/Comprar'
 import axios from 'axios'
+import {getLocalCart} from '../../Actions'
 
 function App() {
   const [datos, setDatos] = useState("")
+  const cart = useSelector(state => state.cart)
+  console.log(cart)
+  
 
   useEffect(()=>{
     axios
@@ -11,20 +16,14 @@ function App() {
     .then((data)=>{
       setDatos(data.data)
       console.info('Contenido de data:', data)
-    }).catch(err => console.error(err)) 
+    }).catch(err => console.error(err))
   },[])
 
-
-  const productos = [
-    {title: "Producto 1", quantity: 5, price: 10.52},
-    {title: "Producto 2", quantity: 15, price: 100.52},
-    {title: "Producto 3", quantity: 6, price: 200}
-  ]
   return (
     <div className="App">
       { !datos
         ? <p>Aguarde un momento....</p> 
-        : <Comprar productos={productos} data={datos}/>
+        : <Comprar productos={cart} data={datos}/>
       }
     </div>
   );

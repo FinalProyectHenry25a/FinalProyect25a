@@ -79,38 +79,38 @@ const Carrousel = () => {
 </div>
   );
 };
-{
-  /*     <main classNameName={styles.mainContainer}>
-      <div classNameName={styles.principalContainer}>
-        <div classNameName={styles.slideContainer} ref={slideShow}>
-          <div classNameName={styles.slide}>
-            <img classNameName={style.image} src={huawei} alt="huawei" />
+// {
+//   /*     <main classNameName={styles.mainContainer}>
+//       <div classNameName={styles.principalContainer}>
+//         <div classNameName={styles.slideContainer} ref={slideShow}>
+//           <div classNameName={styles.slide}>
+//             <img classNameName={style.image} src={huawei} alt="huawei" />
             
-          </div>
+//           </div>
 
-          <div classNameName={styles.slide}>
-            <img classNameName={style.image} src={samsung} alt="samsung" />
+//           <div classNameName={styles.slide}>
+//             <img classNameName={style.image} src={samsung} alt="samsung" />
             
-          </div>
-          <div classNameName={styles.slide}>
-            <img classNameName={style.image} src={iphone} alt="iphone" />
+//           </div>
+//           <div classNameName={styles.slide}>
+//             <img classNameName={style.image} src={iphone} alt="iphone" />
             
-          </div>
-          <div classNameName={styles.slide}>
-            <img classNameName={style.image} src={lg} alt="lg" />
+//           </div>
+//           <div classNameName={styles.slide}>
+//             <img classNameName={style.image} src={lg} alt="lg" />
             
-          </div>
-          <div classNameName={styles.slide}>
-            <img classNameName={style.image} src={moto} alt="moto" />
+//           </div>
+//           <div classNameName={styles.slide}>
+//             <img classNameName={style.image} src={moto} alt="moto" />
             
-          </div>
-        </div>
-        <div classNameName={styles.controlers}>
-          <button onClick={previous} classNameName={styles.btnLeft} ><IconLeft /></button>
-          <button onClick={next} classNameName={styles.btnRight}><IconRight /></button>
-        </div>
-      </div>
-    </main> */
-}
+//           </div>
+//         </div>
+//         <div classNameName={styles.controlers}>
+//           <button onClick={previous} classNameName={styles.btnLeft} ><IconLeft /></button>
+//           <button onClick={next} classNameName={styles.btnRight}><IconRight /></button>
+//         </div>
+//       </div>
+//     </main> */
+// }
 
 export default Carrousel;

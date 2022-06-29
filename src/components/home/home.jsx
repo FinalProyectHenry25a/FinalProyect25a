@@ -7,12 +7,10 @@ import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
 import { filters, getPhones } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
-import { Link } from "react-router-dom";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
-import { right } from "@popperjs/core";
 
 const Home = () => {
   const [loggedUser, setLoggedUser] = useState();

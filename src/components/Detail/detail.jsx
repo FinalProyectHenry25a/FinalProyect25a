@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails } from "../../Actions/index";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function Detail() {
   const dispatch = useDispatch();
@@ -142,7 +142,7 @@ export default function Detail() {
             </h3>
 
             <div className="mt-4">
-              <ul role="list" className="pl-4 list-disc text-sm space-y-2">
+              <ul className="pl-4 list-disc text-sm space-y-2">
                 <li className="text-gray-400">
                   <span className="text-gray-600">{PID.ram}</span>
                 </li>

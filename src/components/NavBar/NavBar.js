@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 //import style from "./../NavBar/NavBar.module.css";
 
@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="home">
           Henry Store
         </a>
         <button
@@ -57,26 +57,26 @@ const NavBar = () => {
     </nav>
   );
 };
-{
-  /* <div className={style.flex}>
+// {
+//   /* <div className={style.flex}>
 
-      <div>
+//       <div>
 
-        <h1>Logo</h1>
+//         <h1>Logo</h1>
 
-      </div><div className={style.carrito}>
+//       </div><div className={style.carrito}>
 
-          <Link to="/login">
+//           <Link to="/login">
 
-            <button className={style.btn}>Login</button>
+//             <button className={style.btn}>Login</button>
 
-          </Link>
+//           </Link>
 
-          <h2>CARRITO</h2>
+//           <h2>CARRITO</h2>
 
-        </div>
+//         </div>
 
-    </div> */
-}
+//     </div> */
+// }
 
 export default NavBar;

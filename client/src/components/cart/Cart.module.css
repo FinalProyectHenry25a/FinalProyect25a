@@ -1,0 +1,7 @@
+.cart {
+    border: 1px solid red;
+    margin-left: 100px;
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}

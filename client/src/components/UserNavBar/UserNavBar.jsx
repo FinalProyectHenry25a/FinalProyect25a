@@ -27,7 +27,7 @@ const UserNavBar = () => {
 
       if (currentUser) {
 
-        let user = await axios.get(`http://localhost:3001/userCreator/${currentUser.email}`)
+        let user = await axios.get(`http://localhost:3001/user/${currentUser.email}`)
         setUser(user.data);
 
       }
@@ -61,13 +61,19 @@ const UserNavBar = () => {
                   </Link>
                 </div>
                 <div className='misCompras'>
+                <Link to="/mis-compras">
                   <p>Mis Compras</p>
+                  </Link>
                 </div>
                 <div className='favoritos'>
+                  <Link to="/favoritos">
                   <p>Favoritos</p>
+                  </Link>
                 </div>
                 <div className='carrito'>
+                  <Link to="cart">
                   <BsFillCartFill />
+                  </Link>
                 </div>
                 <button className="logout" href="home" onClick={logout}>Cerrar sesion</button>
               </ul>

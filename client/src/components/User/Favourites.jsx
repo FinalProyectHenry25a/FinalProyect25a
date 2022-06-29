@@ -4,10 +4,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 
 import axios from "axios";
+import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
 
-export default function MiPerfil() {
+export default function Favourites() {
   const [user, setUser] = useState();
+  
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -20,7 +22,7 @@ export default function MiPerfil() {
           `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
-   
+     
       }
     });
   };
@@ -29,32 +31,26 @@ export default function MiPerfil() {
         <UserNavBar/>
       {user ? (
         <div>
-          <h2>mis datos</h2>
-          <div>
-          <p>Usuario</p>
-          <p>{user.username}</p>
-          </div>
-          <div>
-          <p>E-mail</p>
-          <p>{user.email}</p>
-          </div>
-          <div>
-          <p>cambiar cotraseña</p>
-          <button>Cambiar contraseña</button>
-          </div>
-          <div>
-          <p>direccion</p>
-          <p>{user.address}</p>
-          <p>cambiar direccion de entrga</p>
-          <input type="text" placeholder="nueva dirección" />
-          <button>aceptar</button>
-          </div>
-
-         
+          <h2>mis favoritos</h2>
+          {user.favourites?.map((e) => {
+            return (
+              <div key={e.id}>
+                <Card
+                  brand={e.brand}
+                  model={e.model}
+                  images={e.images}
+                  price={e.price}
+                  id={e.id}
+                  />
+                  
+              </div>
+            );
+          }
+          )}
 
         </div>
       ) : (
-        <h1>no estas logeado</h1>
+        <h1>no tienes favoritos</h1>
       )}
     </div>
   );

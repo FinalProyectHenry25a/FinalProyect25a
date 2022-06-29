@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
+import { useDispatch, useSelector } from "react-redux";
+
 //import style from "./../NavBar/NavBar.module.css";
 
 const NavBar = () => {
+  const [cartCount, setCartCount] = useState(0);
+  const cart = useSelector(state => state.cart)
+
+   useEffect(() => {
+     let count = 0;
+    cart.forEach((item) => {
+     count += item.qty;
+    });
+
+    setCartCount(count);
+   }, [cart, cartCount]);
+
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
@@ -26,6 +40,9 @@ const NavBar = () => {
             <li className="nav-item">
               <Link className="nav-link active" to="/login">
                 Login
+              </Link>
+              <Link className="nav-link active" to="/cart">
+                cart {cartCount}
               </Link>
             </li>
             <li className="nav-item">

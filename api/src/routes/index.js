@@ -5,6 +5,9 @@ const user = require ('./user');
 const favourites = require("./favourites");
 const cart = require("./cart");
 const admin = require("./admin");
+const mercadopago = require('./mercadopago');
+const order = require('./order');
+
 
 const router = Router();
 
@@ -28,5 +31,9 @@ router.use("/cart", cart);
 
 //RUTA EXCLUSIVA ADMINS
 router.use('/admin', admin)
+
+//RUTA MERCADOPAGO
+router.use('/mercadopago', mercadopago);
+router.use('/order', order);
 
 module.exports = router;

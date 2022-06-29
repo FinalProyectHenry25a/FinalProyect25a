@@ -30,7 +30,7 @@ export default function Card(props) {
         )
       ).data;
       alert("Artículo agregado a favoritos.");
-      console.log(user.favourites)
+      console.log(user)
     } catch (error) {
       alert("No se pudo agregar la publicacion a favoritos.");
       console.log(error);

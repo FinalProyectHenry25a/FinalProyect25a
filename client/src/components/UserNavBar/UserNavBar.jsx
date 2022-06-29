@@ -40,7 +40,6 @@ const UserNavBar = () => {
   const logout = async () => {
 
     await signOut(auth);
-    console.log("estoy saliendo");
     setUser(false)
 
   }
@@ -61,13 +60,19 @@ const UserNavBar = () => {
                   </Link>
                 </div>
                 <div className='misCompras'>
+                <Link to="/mis-compras">
                   <p>Mis Compras</p>
+                  </Link>
                 </div>
                 <div className='favoritos'>
+                  <Link to="/favoritos">
                   <p>Favoritos</p>
+                  </Link>
                 </div>
                 <div className='carrito'>
+                  <Link to="cart">
                   <BsFillCartFill />
+                  </Link>
                 </div>
                 <button className="logout" href="home" onClick={logout}>Cerrar sesion</button>
               </ul>

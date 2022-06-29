@@ -6,6 +6,7 @@ import { onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, Google
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
+
 const Login = () => {
 
   const history = useHistory();
@@ -48,7 +49,6 @@ const Login = () => {
       const createdUser = {
 
         email: response.user.email,
-        password: response.user.uid,
         username: response.user.displayName,
         address: "Sin especificar",
         firstname: name[0],
@@ -112,6 +112,9 @@ const Login = () => {
           <br/><br/>
           <Link to="register">
             <p>Registrarse</p>
+          </Link>
+          <Link to="home">
+            <p>Home</p>
           </Link>
         </div>
       </div>}

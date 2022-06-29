@@ -26,8 +26,14 @@ const Register = () => {
     try {
 
         await createUserWithEmailAndPassword(auth, input.email, input.password);
-        await axios.post("http://localhost:3001/user", input);
-        console.log(input);
+        const newUser = {
+          email: input.email,
+          username: input.username,
+          firstname: input.firstname,
+          lastname: input.lastname,
+          address: input.address
+        }
+        await axios.post("http://localhost:3001/user", newUser);
         setInput({
 
           email: "",

@@ -13,6 +13,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import { right } from "@popperjs/core";
+import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
@@ -27,13 +28,13 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
-  console.log(allPhones)
+  
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:3001/userCreator/${currentUser.email}`
+          `http://localhost:3001/user/${currentUser.email}`
         );
         setLoggedUser(user.data);
       }
@@ -126,6 +127,7 @@ const Home = () => {
 
   return (
     <div>
+       
       <button onClick={logout}>desloguear</button>
 
       {/* <Link to="/agregado">
@@ -133,6 +135,7 @@ const Home = () => {
       </Link> */}
 
       {loggedUser ? <UserNavBar /> : <NavBar />}
+      <SearchBar/>
       <Carrousel />
 
       <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
@@ -147,7 +150,7 @@ const Home = () => {
       {/* por Ram--------------------------------------------------- */}
       <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
         <option value="null">Ram</option>
-        <option selected value="4Gb">4Gb</option>
+        <option  value="4Gb">4Gb</option>
         <option value="6Gb">6Gb</option>
         <option value="8Gb">8Gb</option>
         <option value="12Gb">12Gb</option>
@@ -155,14 +158,14 @@ const Home = () => {
       {/* por network----------------------------------------------- */}
 
       <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option selected value="null">Network</option>
+        <option  value="null">Network</option>
         <option value="4G">4G</option>
         <option value="5G">5G</option>
       </select>
 
       {/* por Rom--------------------------------------------------- */}
       <select id="rom" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option selected value="null">Rom</option>
+        <option  value="null">Rom</option>
         <option value="64Gb">64Gb</option>
         <option value="128Gb">128Gb</option>
         <option value="256Gb">256Gb</option>
@@ -171,7 +174,7 @@ const Home = () => {
       {/* por orden--------------------------------------------------- */}
 
       <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option selected value="null">Por defecto</option>
+        <option  value="null">Por defecto</option>
         <option value="rating">Por puntuación</option>
         <option value="ascendingPrice">Orden ascendiente</option>
         <option value="descendingPrice">Orden descendiente</option>
@@ -180,7 +183,7 @@ const Home = () => {
       {/* por precio--------------------------------------------------- */}
 
       <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option selected value="null">precio</option>
+        <option  value="null">precio</option>
         <option value={[0, 500]}>de u$ 0 a u$ 500</option>
         <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
         <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
@@ -204,7 +207,7 @@ const Home = () => {
                   price={e.price}
                   id={e.id}
                   />
-                  {console.log(e.id)}
+                  
               </div>
             );
           })

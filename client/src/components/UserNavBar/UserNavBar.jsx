@@ -8,11 +8,11 @@ import axios from 'axios';
 import "./UserNavBar.css"
 import SearchBar from '../SearchBar/Searchbar';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 const UserNavBar = () => {
 
-
+ 
   const [user, setUser] = useState();
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector(state => state.cart)
@@ -33,6 +33,14 @@ const UserNavBar = () => {
     verificarQueHayaUsuarioLogueado();
 
   }, [])
+  useEffect(() => {
+    let count = 0;
+   cart.forEach((item) => {
+    count += item.qty;
+   });
+
+   setCartCount(count);
+  }, [cart, cartCount]);
 
   const verificarQueHayaUsuarioLogueado = () => {
 
@@ -40,7 +48,7 @@ const UserNavBar = () => {
 
       if (currentUser) {
 
-        let user = await axios.get(`http://localhost:3001/userCreator/${currentUser.email}`)
+        let user = await axios.get(`http://localhost:3001/user/${currentUser.email}`)
         setUser(user.data);
 
       }
@@ -53,7 +61,6 @@ const UserNavBar = () => {
   const logout = async () => {
 
     await signOut(auth);
-    console.log("estoy saliendo");
     setUser(false)
 
   }
@@ -64,28 +71,33 @@ const UserNavBar = () => {
     <nav >
      
         {user ? <nav className='userNavBarContainer'>
-        <div><SearchBar /></div>
+        {/* <div><SearchBar /></div> */}
           <div className='container'>
             <div className='listContainer'>
-              <ul className="lista">
-                <div className='avatar'>
+              <ul className="lista row">
+                <div className='avatar col-3 justify-content-center align-items-center'>
                   <Link to="/mi-perfil/">
                   <BsPersonCircle />   {user.username}
                   </Link>
                 </div>
-                <div className='misCompras'>
+                <div className='misCompras col-2 '>
+                <Link to="/mis-compras">
                   <p>Mis Compras</p>
+                  </Link>
                 </div>
-                <div className='favoritos'>
+                <div className='favoritos col-2'>
+                  <Link to="/favoritos">
                   <p>Favoritos</p>
+                  </Link>
                 </div>
-                
-                <Link className="carrito" to="/cart">
-                <BsFillCartFill />
-                {cartCount}
-              </Link>
-                
-                <button className="logout" href="home" onClick={logout}>Cerrar sesion</button>
+                <div className='carrito col-2'>
+                  <Link to="cart">
+                  <BsFillCartFill /> {cartCount}
+                  </Link>
+                </div>
+                <Link to="/home">
+                <button className="logout col-2 btn" onClick={logout}>Cerrar sesion</button>
+                </Link>
               </ul>
             </div>
           </div>

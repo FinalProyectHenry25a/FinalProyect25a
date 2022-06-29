@@ -1,10 +1,13 @@
 const { Router } = require('express');
 const publication = require('./publication.js');
 const filtersAndOrders  = require ('./filtersAndOrders');
-const userCreator = require ('./userCreator');
+const user = require ('./user');
 const favourites = require("./favourites");
 const cart = require("./cart");
 const admin = require("./admin");
+const mercadopago = require('./mercadopago');
+const order = require('./order');
+
 
 const router = Router();
 
@@ -15,7 +18,7 @@ const router = Router();
 router.use('/home', publication)
 
 //CREAR USUARIOS
-router.use('/userCreator', userCreator)
+router.use('/user', user)
 
 //FILTRADOS
 router.use('/filtersAndOrders', filtersAndOrders)
@@ -28,5 +31,9 @@ router.use("/cart", cart);
 
 //RUTA EXCLUSIVA ADMINS
 router.use('/admin', admin)
+
+//RUTA MERCADOPAGO
+router.use('/mercadopago', mercadopago);
+router.use('/order', order);
 
 module.exports = router;

@@ -14,6 +14,8 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import { right } from "@popperjs/core";
 
+// const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
+
 const Home = () => {
   const [loggedUser, setLoggedUser] = useState();
   
@@ -52,6 +54,8 @@ const Home = () => {
   const [phonesPerPage] = useState(4);
   const indexOfLastPhones = currentPage * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
+  const cart = useSelector(state => state.cart)
+
 
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
 
@@ -105,6 +109,9 @@ const Home = () => {
 
    
   }
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart])
 
   const send = async (e) => {
     dispatch(filters(filtered));
@@ -115,11 +122,11 @@ const Home = () => {
     await signOut(auth);
   };
 
- 
+  console.log(loggedUser)
 
   return (
     <div>
-      {/* <button onClick={logout}>desloguear</button> */}
+      <button onClick={logout}>desloguear</button>
 
       {/* <Link to="/agregado">
         <button>Agregar Phone</button>

@@ -1,7 +1,12 @@
 .cart {
-    border: 1px solid red;
+    border-radius: 10px;
     margin-left: 100px;
     display: flex;
     flex-direction: row;
     gap: 100px;
+}
+
+.cartSummary {
+    margin-top: 20%;
+    border-radius: 10px;
 }

@@ -21,6 +21,8 @@ const Login = () => {
     setUser(currentUser)
 
   })
+  console.log(user)
+  
 
   const login = async () => {
 

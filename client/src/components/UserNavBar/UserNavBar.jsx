@@ -8,18 +8,31 @@ import axios from 'axios';
 import "./UserNavBar.css"
 import SearchBar from '../SearchBar/Searchbar';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const UserNavBar = () => {
 
 
   const [user, setUser] = useState();
+  const [cartCount, setCartCount] = useState(0);
+  const cart = useSelector(state => state.cart)
 
+   useEffect(() => {
+     let count = 0;
+    cart.forEach((item) => {
+     count += item.qty;
+    });
+
+    setCartCount(count);
+   }, [cart, cartCount]);
+
+
+  
   useEffect(() => {
 
     verificarQueHayaUsuarioLogueado();
 
   }, [])
-
 
   const verificarQueHayaUsuarioLogueado = () => {
 
@@ -66,9 +79,12 @@ const UserNavBar = () => {
                 <div className='favoritos'>
                   <p>Favoritos</p>
                 </div>
-                <div className='carrito'>
-                  <BsFillCartFill />
-                </div>
+                
+                <Link className="carrito" to="/cart">
+                <BsFillCartFill />
+                {cartCount}
+              </Link>
+                
                 <button className="logout" href="home" onClick={logout}>Cerrar sesion</button>
               </ul>
             </div>

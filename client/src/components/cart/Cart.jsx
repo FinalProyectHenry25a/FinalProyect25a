@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './Cart.module.css'
 import CartItem from '../cart/cartItem/CartItem'
+import { Link } from "react-router-dom";
+import mercadopago from "../../images/mercadopago.png"
 
 
 const Cart = () => {
@@ -35,9 +37,11 @@ const Cart = () => {
           <span>TOTAL: ({totalItems} productos)</span>
           <span>$ {totalPrice}</span>
         </div>
+        <Link to="/mercadopago">
         <button className={styles.summary__checkoutBtn}>
-          Pagar
+        Confirmar Pedido <img src={mercadopago} />
         </button>
+        </Link>
       </div>
     </div>
   )

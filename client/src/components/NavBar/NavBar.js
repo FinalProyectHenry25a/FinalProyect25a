@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/home">
           Henry Store
         </a>
         <button

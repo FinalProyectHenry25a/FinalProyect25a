@@ -71,23 +71,24 @@ router.post("/post", async (req, res) => {
 });
 
 //RUTA PARA MODIFICAR STOCK     
-router.post("/modifica-stock", async (req, res) => {
+router.put("/modifica-stock", async (req, res) => {
   try {
     let post = await Publication.findByPk(req.body.id);
 
     if (req.body.do === "add") {
       await Publication.update(
-        { stock: post.dataValues.stock + req.body.amount },
+        { stock: post.dataValues.stock + parseInt(req.body.amount) },
         { where: { id: req.body.id } }
       );
     } else if (req.body.do === "remove") {
       await Publication.update(
-        { stock: post.dataValues.stock - req.body.amount },
+        { stock: post.dataValues.stock - parseInt(req.body.amount) },
         { where: { id: req.body.id } }
       );
     }
 
-    res.send("Modificacion exitosa");
+    console.log(req.body);
+    res.send(post)
   } catch (error) {
     res.status(404).send(error);
   }

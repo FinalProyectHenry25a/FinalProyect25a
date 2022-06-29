@@ -5,7 +5,8 @@ const userCreator = require ('./userCreator');
 const favourites = require("./favourites");
 const cart = require("./cart");
 const admin = require("./admin");
-
+const mercadopago = require('./mercadopago');
+const order = require('./order');
 const router = Router();
 
 // Configurar los routers
@@ -13,6 +14,12 @@ const router = Router();
 
 //TRAE TODAS LAS PUBLICACIONES O POR QUERY O POR MODELOS
 router.use('/home', publication)
+
+//
+router.use('/mercadopago', mercadopago);
+
+//
+router.use('/order', order);
 
 //CREAR USUARIOS
 router.use('/userCreator', userCreator)

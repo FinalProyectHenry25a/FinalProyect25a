@@ -11,6 +11,7 @@ import StockEdit from './components/Admin/StockEdit';
 import UsersControl from './components/Admin/UsersControl';
 import MiPerfil from './components/User/MiPerfil';
 import Cart from './components/cart/Cart';
+import MP from './MP'
 // import { collection, getDocs } from "firebase/firestore";
 // import db from "./firebase/firebase-config";
 // import Auth from './Auth';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/mi-perfil" component={MiPerfil}/>
+          <Route path="/mercadopago" component={MP}/>
 
           <Route path="/admin/agregar-publicacion" component={Created}/>
           <Route path="/admin/eliminar-publicacion" component={PostsDelete}/>
@@ -51,7 +53,6 @@ function App() {
           <Route path="/admin/control-de-usuarios" component={UsersControl}/>
           <Route path="/admin" component={Admin}/>
           <Route path="/cart" component={Cart} />
-
         </Switch>
       </BrowserRouter>
 

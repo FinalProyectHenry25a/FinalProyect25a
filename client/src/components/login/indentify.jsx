@@ -38,7 +38,7 @@ export default function Identify() {
             <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico"></input>
             <br /><br />
             <Link to="/login"><button type="submit">Volver atras</button></Link>
-            <button onClick={resetPassword} type="submit">Buscar</button>
+            <button onClick={resetPassword} type="submit">Enviar mail de recuperacion</button>
 
         </div>
 

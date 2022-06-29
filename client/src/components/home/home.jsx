@@ -13,6 +13,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import { right } from "@popperjs/core";
+import SearchBar from "../SearchBar/Searchbar";
 
 const Home = () => {
   const [loggedUser, setLoggedUser] = useState();
@@ -120,13 +121,14 @@ const Home = () => {
   return (
     <div>
        
-      {/* <button onClick={logout}>desloguear</button> */}
+      <button onClick={logout}>desloguear</button>
 
       {/* <Link to="/agregado">
         <button>Agregar Phone</button>
       </Link> */}
 
       {loggedUser ? <UserNavBar /> : <NavBar />}
+      <SearchBar/>
       <Carrousel />
 
       <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>

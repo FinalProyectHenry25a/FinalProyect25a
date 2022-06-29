@@ -62,13 +62,36 @@ router.put("/:email/edit", async (req, res) => {
       },
     });
 
-
-    if(usuario){
-      await User.update({username, address, firstname, lastname}, {where:{email: email}})
+    if (usuario) {
+      await User.update(
+        { username, address, firstname, lastname },
+        { where: { email: email } }
+      );
     }
-    res.status(200).send("los cambios se dieron con exito")
+    res.status(200).send("los cambios se dieron con exito");
   } catch (error) {
-    console.log(error)
+    console.log(error);
+  }
+});
+
+router.put("/changePassword", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    let usuario = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (usuario.password) {
+      await User.update({ hashedPassword }, { where: { email: email } });
+    }
+    res.status(200).send("se cambio la contraseña con exito");
+  } catch (error) {
+    console.log(error);
   }
 });
 

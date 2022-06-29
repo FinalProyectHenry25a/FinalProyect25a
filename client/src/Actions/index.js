@@ -95,3 +95,13 @@ export function getDetails(id){
       };
     };
     
+    export const changePassword = (payload) => {
+      return async function(dispatch) {
+        var json = await axios.put(`http://localhost:3001/user/changePassword`, payload)
+        console.log(json.data)
+        return dispatch({
+          type: "CHANGE_PASSWORD",
+          payload: json.data
+        })
+      } 
+    }

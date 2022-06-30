@@ -28,6 +28,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
+  const filtrados = useSelector((state) => state.filtered)
 
  
   
@@ -74,7 +75,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getPhones());
+    (!filtrados.length?
+    dispatch(getPhones()):console.log("casi"));
   }, [dispatch]);
 
   function filtersSetters(e) {

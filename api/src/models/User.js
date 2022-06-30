@@ -1,9 +1,9 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  
+
   sequelize.define('user', {
-    
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -12,24 +12,24 @@ module.exports = (sequelize) => {
 
     username: {
       type: DataTypes.STRING,
-      allowNull:false
+      allowNull: false
     },
 
     address: {
       type: DataTypes.STRING,
-      allowNull:false
-    },  
+      allowNull: false
+    },
 
     firstname: {
       type: DataTypes.STRING,
-      allowNull:false
-    },  
+      allowNull: false
+    },
 
     lastname: {
       type: DataTypes.STRING,
-      allowNull:false
-    }, 
-    
+      allowNull: false
+    },
+
     favourites: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: true
@@ -43,8 +43,13 @@ module.exports = (sequelize) => {
     shopping: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: true
+    },
+
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
-    
+
   });
 
 };

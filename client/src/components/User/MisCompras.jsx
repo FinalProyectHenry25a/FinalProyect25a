@@ -33,7 +33,7 @@ export default function MisCompras() {
          
      
          {user.shopping?(
-            <div>     <h2>mis favoritos</h2>
+            <div>     <h2>mis Compras</h2>
             {user.favourites?.map((e) => {
               return (
                 <div key={e.id}>

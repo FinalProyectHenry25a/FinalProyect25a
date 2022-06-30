@@ -11,7 +11,6 @@ export function getPhones(){
 }
 export function getLocalCart(){
   return async function(dispatch){
-    console.log("entrando al action")
       return dispatch({
           type: 'GET_LOCAL_CART'
       })

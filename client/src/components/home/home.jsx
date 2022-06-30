@@ -28,6 +28,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
+
+ 
   
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -36,10 +38,17 @@ const Home = () => {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        if(currentUser.emailVerified){
+
+          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+
+        }
         setLoggedUser(user.data);
       }
     });
   };
+
+  console.log(loggedUser);
 
   const [filtered, setFiltered] = useState({
     byRom: null,
@@ -123,8 +132,6 @@ const Home = () => {
     await signOut(auth);
   };
 
-  console.log(loggedUser)
-
   return (
     <div>
        
@@ -134,8 +141,7 @@ const Home = () => {
         <button>Agregar Phone</button>
       </Link> */}
 
-      {loggedUser ? <UserNavBar /> : <NavBar />}
-      <SearchBar/>
+      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
       <Carrousel />
 
       <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
@@ -206,6 +212,7 @@ const Home = () => {
                   images={e.images}
                   price={e.price}
                   id={e.id}
+                  stock={e.stock}
                   />
                   
               </div>

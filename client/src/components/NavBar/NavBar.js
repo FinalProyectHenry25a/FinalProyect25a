@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
-import  {getLocalCart} from '../../Actions'
-
 
 //import style from "./../NavBar/NavBar.module.css";
 
-const NavBar = () => {
+const NavBar = ({setCurrentPage}) => {
   const [cartCount, setCartCount] = useState(0);
-  const cart = useSelector(state => state.cart)
-  const dispatch = useDispatch()
-  // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
+  const cart = useSelector((state) => state.cart);
+
   useEffect(() => {
-    console.log("Entrando al effect")
-    dispatch(getLocalCart())
-  }, [])
-
-
-   useEffect(() => {
-     let count = 0;
-     cart.forEach((item) => {
-     count += item.qty;
+    let count = 0;
+    cart.forEach((item) => {
+      count += item.qty;
     });
 
     setCartCount(count);
-   }, [cart, cartCount]);
+  }, [cart, cartCount]);
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -51,43 +42,15 @@ const NavBar = () => {
               <Link className="nav-link active" to="/login">
                 Login
               </Link>
-              <Link className="nav-link active" to="/cart">
-              <BsFillCartFill />
-               {cartCount}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link active" to="/agregado">
-                Agregar Celular
-              </Link>
             </li>
           </ul>
-          {/* <SearchBar /> */}
+          <Link className="nav-link active m-4" to="/cart">
+           <BsFillCartFill/> {cartCount}
+          </Link>
+          <SearchBar setCurrentPage={setCurrentPage}/>
         </div>
       </div>
     </nav>
   );
 };
-{
-  /* <div className={style.flex}>
-
-      <div>
-
-        <h1>Logo</h1>
-
-      </div><div className={style.carrito}>
-
-          <Link to="/login">
-
-            <button className={style.btn}>Login</button>
-
-          </Link>
-
-          <h2>CARRITO</h2>
-
-        </div>
-
-    </div> */
-}
-
 export default NavBar;

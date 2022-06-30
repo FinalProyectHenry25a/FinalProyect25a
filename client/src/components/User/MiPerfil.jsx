@@ -12,7 +12,7 @@ export default function MiPerfil() {
 
   const verification = async () => {
 
-    console.log("verifiacion enviada");
+    alert("Correo de verifiacion enviado");
 
     var users = auth.currentUser;
 

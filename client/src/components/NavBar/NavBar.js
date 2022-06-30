@@ -14,7 +14,6 @@ const NavBar = () => {
   const dispatch = useDispatch()
   // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
   useEffect(() => {
-    console.log("Entrando al effect")
     dispatch(getLocalCart())
   }, [])
 

@@ -4,10 +4,11 @@ import styles from './Cart.module.css'
 import CartItem from '../cart/cartItem/CartItem'
 import {getLocalCart} from '../../Actions/index'
 import { Link } from "react-router-dom";
-import mercadopago from "../../images/mercadopago.png"
-
+import mercadopago from "../../images/mercadopago.png";
+import { auth } from "../../firebase/firebase-config";
 
 const Cart = () => {
+
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const cart = useSelector(state => state.cart)
@@ -46,11 +47,11 @@ const Cart = () => {
           <span>TOTAL: ({totalItems} productos)</span>
           <span>$ {totalPrice}</span>
         </div>
-        <Link to="/mercadopago">
+{auth.currentUser.emailVerified ? <Link to="/mercadopago">
         <button className={styles.summary__checkoutBtn}>
         Confirmar Pedido <img src={mercadopago} />
         </button>
-        </Link>
+        </Link> : <span>Debes tener una cuenta con mail verificado para comprar</span>}
       </div>
     </div>
   )

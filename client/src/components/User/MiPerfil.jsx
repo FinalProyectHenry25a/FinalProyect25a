@@ -1,13 +1,26 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 
 import axios from "axios";
 import UserNavBar from "../UserNavBar/UserNavBar";
 
 export default function MiPerfil() {
+
   const [user, setUser] = useState();
+
+  const verification = async () => {
+
+    console.log("verifiacion enviada");
+
+    var users = auth.currentUser;
+
+    await sendEmailVerification(users)
+
+  }
+
+  
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -20,6 +33,7 @@ export default function MiPerfil() {
           `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
+        console.log(currentUser.emailVerified);
    
       }
     });
@@ -40,6 +54,7 @@ export default function MiPerfil() {
           </div>
           <div>
           <p>cambiar cotraseña</p>
+          {auth.currentUser.emailVerified ? <p>Mail ya verificado</p> :<button onClick={verification}>verificar email</button>}
           <button>Cambiar contraseña</button>
           </div>
           <div>

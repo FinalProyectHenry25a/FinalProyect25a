@@ -28,6 +28,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
+
+ 
   
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -36,10 +38,17 @@ const Home = () => {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        if(currentUser.emailVerified){
+
+          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+
+        }
         setLoggedUser(user.data);
       }
     });
   };
+
+  console.log(loggedUser);
 
   const [filtered, setFiltered] = useState({
     byRom: null,
@@ -122,8 +131,6 @@ const Home = () => {
   const logout = async () => {
     await signOut(auth);
   };
-
-  console.log(loggedUser)
 
   return (
     <div>

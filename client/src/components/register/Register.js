@@ -21,10 +21,19 @@ const Register = () => {
 
   });
 
+  const [error,setError] = useState({}) 
+
   const register = async () => {
 
-    try {
-
+    if (
+      error.email ||
+      error.password ||
+      error.username ||
+      error.firstname ||
+      error.lastname ||
+      error.address 
+   ){alert ("No se puedo logear el usuario, revisa los campos")
+  } else {
         await createUserWithEmailAndPassword(auth, input.email, input.password);
         const newUser = {
           email: input.email,
@@ -48,13 +57,19 @@ const Register = () => {
         alert('User created successfully');
 
         history.push('/home');
-        
-    } catch (error) {
-        
-        console.log(error.message);
+      }
 
-    } 
+}
 
+function validation (input){
+  let error = {}
+  if (!input.email) error.email = "Ingresa el modelo de celular"
+  if (!input.password) error.password = "Ingresa el modelo de celular"
+  if (!input.username) error.username = "Ingresa el modelo de celular"
+  if (!input.firstname) error.firstname = "Ingresa el modelo de celular"
+  if (!input.lastname) error.lastname = "Ingresa el modelo de celular"
+  if (!input.address) error.address = "Ingresa el modelo de celular"
+  return error
 }
 
   const handleChange = (e) => {
@@ -67,12 +82,18 @@ const Register = () => {
           [e.target.name]: e.target.value
 
         };
+        setError(validation({
+          ...prevState,
+          [e.target.name]: e.target.value
+       }))
 
         return newState;
 
       });
 
     }
+
+
 
 
   return (

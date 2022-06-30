@@ -31,9 +31,9 @@ const Login = () => {
       setLoginPassword("");
       history.push('/home');
 
-    } catch (error) {
+    } catch {
 
-      console.log(error.message);
+      alert ('❌ mail o contraseña incorrecta❗❗❗');
 
     }
 

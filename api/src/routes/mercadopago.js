@@ -97,7 +97,7 @@ server.get("/pagos", (req, res)=>{
     .then((_) => {
       console.info('redirect success')
       
-      return res.redirect("http://localhost:3000")
+      return res.redirect("http://localhost:3000/home")
     }).catch((err) =>{
       console.error('error al salvar', err)
       return res.redirect(`http://localhost:3000/?error=${err}&where=al+salvar`)

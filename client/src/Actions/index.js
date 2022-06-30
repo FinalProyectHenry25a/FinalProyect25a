@@ -9,6 +9,13 @@ export function getPhones(){
         })
     }
 }
+export function getLocalCart(){
+  return async function(dispatch){
+      return dispatch({
+          type: 'GET_LOCAL_CART'
+      })
+  }
+}
 export function getPhonesByModel(model){
     return async function(dispatch){
         var json = await axios.get(`http://localhost:3001/home?model=${model}`);

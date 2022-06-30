@@ -14,7 +14,6 @@ export default function Card(props) {
   useEffect(() => {
     userVerificate();
   }, []);
-  const allPhones = useSelector((state) => state.products);
   
 
   const userVerificate = async () => {

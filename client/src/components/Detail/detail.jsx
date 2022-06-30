@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails } from "../../Actions/index";
+import { getDetails, addToCart } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
 
 export default function Detail() {
@@ -110,7 +110,7 @@ export default function Detail() {
             </div>
           </div>
           <form>
-            <button type="submit" className="btn btn-outline-dark">
+            <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
               Agregar al Carrito
             </button>
           </form>

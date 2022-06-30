@@ -15,6 +15,8 @@ import axios from "axios";
 import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
 
+// const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
+
 const Home = () => {
   const [loggedUser, setLoggedUser] = useState();
   
@@ -26,6 +28,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
+
+ 
   
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -34,10 +38,17 @@ const Home = () => {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        if(currentUser.emailVerified){
+
+          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+
+        }
         setLoggedUser(user.data);
       }
     });
   };
+
+  console.log(loggedUser);
 
   const [filtered, setFiltered] = useState({
     byRom: null,
@@ -53,6 +64,8 @@ const Home = () => {
   const [phonesPerPage] = useState(4);
   const indexOfLastPhones = currentPage * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
+  const cart = useSelector(state => state.cart)
+
 
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
 
@@ -106,6 +119,9 @@ const Home = () => {
 
    
   }
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart])
 
   const send = async (e) => {
     dispatch(filters(filtered));
@@ -141,8 +157,6 @@ const Home = () => {
   const logout = async () => {
     await signOut(auth);
   };
-
- 
 
   return (
     <div>

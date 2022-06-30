@@ -3,6 +3,7 @@ const initialState = {
     phonesId : [],
     cart: [],
     currentItem: null,
+    filtered:[]
 }
 
 function rootReducer (state = initialState, action){
@@ -30,7 +31,8 @@ function rootReducer (state = initialState, action){
                case 'FILTERS':
             return{
                 ...state,
-                phones: action.payload
+                phones: action.payload,
+                filtered:action.payload
             }
             case 'ADD_TO_CART':
                 // Great Item data from products array

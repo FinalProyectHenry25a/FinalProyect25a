@@ -67,7 +67,6 @@ function rootReducer (state = initialState, action){
                   ...state,
                   currentItem: action.payload,
                 };
-                
             default:
                 return state;
         }      

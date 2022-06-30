@@ -15,10 +15,11 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
+import EditPosts from './components/Admin/postsEdit';
 
 
 
-const adminEmail = 'admin@admin.admin';
+const adminEmail = 'fran21@gmail.com';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/admin/agregar-publicacion" render={ () => <Created userRole={adminEmail}/> } />
         <Route path="/admin/eliminar-publicacion" render={ () => <PostsDelete userRole={adminEmail}/> } />
         <Route path="/admin/editar-stock" render={ () => <StockEdit userRole={adminEmail}/> } />
+        <Route path="/admin/edit-post" component={EditPosts}/>
         <Route path="/admin/control-de-usuarios" render={ () => <UsersControl userRole={adminEmail}/> } />
         <Route path="/admin" render={ () => <Admin userRole={adminEmail}/> } />      
       </Switch>

@@ -94,6 +94,67 @@ router.put("/modifica-stock", async (req, res) => {
   }
 });
 
+router.put("/edit-post", async (req, res) => {
+  const {
+    id,
+    brand,
+    releaseDate,
+    model,
+    price,
+    rating,
+    images,
+    color,
+    processor,
+    ram,
+    rom,
+    network,
+    batery,
+    frontal_cam,
+    main_cam,
+    inches,
+    screen,
+    resolution,
+  } = req.body;
+
+  try {
+    let publicacion = await Publication.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    if (publicacion) {
+      await Publication.update(
+        {
+          id,
+          brand,
+          releaseDate,
+          model,
+          price,
+          rating,
+          images,
+          color,
+          processor,
+          ram,
+          rom,
+          network,
+          batery,
+          frontal_cam,
+          main_cam,
+          inches,
+          screen,
+          resolution,
+        },
+        { where: { id: id } }
+      );
+    }
+
+    res.status(200).send("se edito con exito");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 /*
 para probar y como ejemplo del body:
 {

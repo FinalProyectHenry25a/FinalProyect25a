@@ -94,6 +94,28 @@ router.put("/modifica-stock", async (req, res) => {
   }
 });
 
+router.put("/:email", async (req, res) => {
+
+  const { email } = req.params;
+
+  try {
+
+    await User.update( 
+      
+      { isAdmin: true } ,
+      { where: { email: email } }
+       
+       );
+
+    res.status(200).json("Conversion a Admin satisfactoria!");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
 /*
 para probar y como ejemplo del body:
 {

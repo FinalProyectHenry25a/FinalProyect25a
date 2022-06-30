@@ -2,14 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
-
 import axios from "axios";
 import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
+import { Link } from "react-router-dom";
+import { BsFillCartFill } from "react-icons/bs";
+import { BsPersonCircle } from "react-icons/bs";
 
 export default function Favourites() {
   const [user, setUser] = useState();
-  
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -26,9 +27,10 @@ export default function Favourites() {
       }
     });
   };
+
   return (
     <div>
-        <UserNavBar/>
+      <UserNavBar />
       {user ? (
         <div>
           <h2>mis favoritos</h2>

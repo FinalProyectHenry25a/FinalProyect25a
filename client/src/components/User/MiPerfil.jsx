@@ -1,12 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth"; //s
+import { getAuth, updatePassword,onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import UserNavBar from "../UserNavBar/UserNavBar";
 
 export default function MiPerfil() {
+
   const [user, setUser] = useState();
+
+  const verification = async () => {
+
+    alert("Correo de verifiacion enviado");
+
+    var users = auth.currentUser;
+
+    await sendEmailVerification(users)
+
+  }
+
+  
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -82,7 +95,7 @@ export default function MiPerfil() {
     }
 
     document.getElementById("userAddress").value = "";
-    verificarQueHayaUsuarioLogueado()
+    verificarQueHayaUsuarioLogueado();
   }
 
   return (
@@ -96,7 +109,18 @@ export default function MiPerfil() {
           <div>
             <h5>E-mail:</h5>
             <p>{user.email}</p>
-            <br />
+          {auth.currentUser.emailVerified ? <p>Mail ya verificado</p> :<button onClick={verification}>verificar email</button>}
+            <br/><br/>
+          </div>
+        
+          <div>
+          
+          
+          </div>
+          <div>
+          
+          
+         
           </div>
 
           <div>

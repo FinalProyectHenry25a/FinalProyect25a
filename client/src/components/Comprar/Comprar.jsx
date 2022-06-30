@@ -1,7 +1,13 @@
-import { useEffect} from 'react'
+import React, { useState, useEffect } from "react";
+
+import { useSelector } from "react-redux";
+
 //import axios from 'axios'
 
 export default function Comprar({ productos, data }){
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const cart = useSelector(state => state.cart)
  useEffect(()=>{
   const script = document.createElement('script');
   const attr_data_preference = document.createAttribute('data-preference-id')
@@ -18,6 +24,19 @@ console.log(data)
     document.getElementById('form1').removeChild(script);
   }
  },[])
+ useEffect(() => {
+  let items = 0;
+  let price = 0;
+
+  cart.forEach((item) => {
+    items += item.qty;
+    price += item.qty * item.price;
+  });
+
+  setTotalItems(items);
+  setTotalPrice(price);
+  
+}, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
     return(
         <div>
 
@@ -27,12 +46,13 @@ console.log(data)
         <ul>
         {productos.map((producto, i) => {
             return(
-              
-                <li key={i}>{producto.title} - {producto.price} - {producto.quantity}</li>   
-                  
+              <>
+                <li key={i}>{producto.brand} - {producto.price} - {producto.qty}</li>
+                </>
             )
-        })} </ul>  
+          })} </ul>  
         
+          <p>Total: {totalPrice}</p>  
       </form>
 
      </div>

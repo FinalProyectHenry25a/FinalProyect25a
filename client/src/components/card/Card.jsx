@@ -13,7 +13,6 @@ export default function Card(props) {
   useEffect(() => {
     userVerificate();
   }, []);
-  const allPhones = useSelector((state) => state.products);
   
 
   const userVerificate = async () => {
@@ -49,9 +48,11 @@ export default function Card(props) {
           {user ? <button onClick={addToFavourites}>❤️</button> : null}
           <br />
         </div>
+        {props.stock>0?(
         <Link to="#">
           <button className="btn btn-outline-dark, w-100" type="submit"  onClick={e => dispatch(addToCart(props.id))}>Agregar al carrito</button>
         </Link>
+        ):<p>AGOTADO</p>}
         <br/>
         <br/>
         <Link className="btn btn-outline-dark, w-100" to={"/home/" + props.id}>Detalle</Link>

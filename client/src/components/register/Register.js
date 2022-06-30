@@ -2,7 +2,7 @@ import React from 'react'
 import style from './../register/Register.module.css'
 import axios from "axios";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from '../../firebase/firebase-config';
 import { useHistory } from 'react-router-dom';
 
@@ -25,54 +25,54 @@ const Register = () => {
 
     try {
 
-        await createUserWithEmailAndPassword(auth, input.email, input.password);
-        const newUser = {
-          email: input.email,
-          username: input.username,
-          firstname: input.firstname,
-          lastname: input.lastname,
-          address: input.address
-        }
-        await axios.post("http://localhost:3001/user", newUser);
-        setInput({
+      await createUserWithEmailAndPassword(auth, input.email, input.password);
+      const newUser = {
+        email: input.email,
+        username: input.username,
+        firstname: input.firstname,
+        lastname: input.lastname,
+        address: input.address
+      }
+      await axios.post("http://localhost:3001/user", newUser);
+      setInput({
 
-          email: "",
-          password: "",
-          username: "",
-          firstname: "",
-          lastname: "",
-          address: ""
-
-        });
-
-        alert('User created successfully');
-
-        history.push('/home');
-        
-    } catch (error) {
-        
-        console.log(error.message);
-
-    } 
-
-}
-
-  const handleChange = (e) => {
-
-      setInput((prevState) => {
-
-        const newState = {
-
-          ...prevState,
-          [e.target.name]: e.target.value
-
-        };
-
-        return newState;
+        email: "",
+        password: "",
+        username: "",
+        firstname: "",
+        lastname: "",
+        address: ""
 
       });
 
+      alert('User created successfully');
+
+      history.push('/home');
+
+    } catch (error) {
+
+      console.log(error.message);
+
     }
+
+  }
+
+  const handleChange = (e) => {
+
+    setInput((prevState) => {
+
+      const newState = {
+
+        ...prevState,
+        [e.target.name]: e.target.value
+
+      };
+
+      return newState;
+
+    });
+
+  }
 
 
   return (

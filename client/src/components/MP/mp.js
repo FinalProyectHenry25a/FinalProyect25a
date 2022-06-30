@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector} from 'react-redux'
 import Comprar from '../Comprar/Comprar'
 import axios from 'axios'
-import {getLocalCart} from '../../Actions'
+
 
 function App() {
   const [datos, setDatos] = useState("")
@@ -12,7 +12,7 @@ function App() {
 
   useEffect(()=>{
     axios
-    .get("http://localhost:3001/mercadopago")
+    .post("http://localhost:3001/mercadopago/")
     .then((data)=>{
       setDatos(data.data)
       console.info('Contenido de data:', data)

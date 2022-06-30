@@ -47,6 +47,8 @@ router.post("/", async (req, res) => {
   res.status(200).send("successfully created");
 });
 
+//EDITA DATOS DEL USUARIO
+
 router.put("/:email/edit", async (req, res) => {
   const { email } = req.params;
   const { username, address, firstname, lastname } = req.body;

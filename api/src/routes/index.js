@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const publication = require('./publication.js');
+const verification = require('./verification.js');
 const filtersAndOrders  = require ('./filtersAndOrders');
 const user = require ('./user');
 const favourites = require("./favourites");
@@ -8,7 +9,6 @@ const admin = require("./admin");
 const mercadopago = require('./mercadopago');
 const order = require('./order');
 
-
 const router = Router();
 
 // Configurar los routers
@@ -16,6 +16,8 @@ const router = Router();
 
 //TRAE TODAS LAS PUBLICACIONES O POR QUERY O POR MODELOS
 router.use('/home', publication)
+
+router.use('/verification', verification)
 
 //CREAR USUARIOS
 router.use('/user', user)

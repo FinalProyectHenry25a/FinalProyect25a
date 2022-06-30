@@ -198,6 +198,7 @@ const Home = () => {
                   images={e.images}
                   price={e.price}
                   id={e.id}
+                  stock={e.stock}
                   />
                   
               </div>

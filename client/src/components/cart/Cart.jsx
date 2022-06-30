@@ -4,6 +4,8 @@ import styles from './Cart.module.css'
 import CartItem from '../cart/cartItem/CartItem'
 import { Link } from "react-router-dom";
 import mercadopago from "../../images/mercadopago.png"
+import SearchBar from "../SearchBar/Searchbar";
+import UserNavBar from "../UserNavBar/UserNavBar";
 
 
 const Cart = () => {
@@ -26,6 +28,7 @@ const Cart = () => {
 
   return (
     <div className={styles.cart}>
+      <UserNavBar/>
       <div className={styles.cartItems}>
         {cart.map((item) => (
           <CartItem key={item.id} item={item} />

@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
-<<<<<<< HEAD
-import { useSelector, useDispatch } from "react-redux";
-import { BsFillCartFill } from "react-icons/bs";
-import  {getLocalCart} from '../../Actions'
-
-=======
 import { useSelector } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
->>>>>>> f993135ca556afef8b07c0d3e1b8deb976faf902
 
 //import style from "./../NavBar/NavBar.module.css";
 
@@ -49,18 +42,6 @@ const NavBar = ({setCurrentPage}) => {
               <Link className="nav-link active" to="/login">
                 Login
               </Link>
-<<<<<<< HEAD
-              <Link className="nav-link active" to="/cart">
-              <BsFillCartFill />
-               {cartCount}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link active" to="/agregado">
-                Agregar Celular
-              </Link>
-=======
->>>>>>> f993135ca556afef8b07c0d3e1b8deb976faf902
             </li>
           </ul>
           <Link className="nav-link active m-4" to="/cart">

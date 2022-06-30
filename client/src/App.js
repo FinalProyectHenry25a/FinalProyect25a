@@ -18,7 +18,7 @@ import Identify from './components/login/indentify';
 
 
 
-const adminEmail = 'santi@santi.santi';
+const adminEmail = 'admin@admin.admin';
 
 function App() {
   return (

@@ -43,6 +43,7 @@ export default function Favourites() {
                   images={e.images}
                   price={e.price}
                   id={e.id}
+                  stock={e.stock}
                   />
                   
               </div>

@@ -141,8 +141,7 @@ const Home = () => {
         <button>Agregar Phone</button>
       </Link> */}
 
-      {loggedUser ? <UserNavBar /> : <NavBar />}
-      <SearchBar/>
+      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
       <Carrousel />
 
       <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
@@ -213,6 +212,7 @@ const Home = () => {
                   images={e.images}
                   price={e.price}
                   id={e.id}
+                  stock={e.stock}
                   />
                   
               </div>

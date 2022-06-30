@@ -4,8 +4,15 @@ import styles from './Cart.module.css'
 import CartItem from '../cart/cartItem/CartItem'
 import {getLocalCart} from '../../Actions/index'
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import mercadopago from "../../images/mercadopago.png";
 import { auth } from "../../firebase/firebase-config";
+=======
+import mercadopago from "../../images/mercadopago.png"
+import SearchBar from "../SearchBar/Searchbar";
+import UserNavBar from "../UserNavBar/UserNavBar";
+
+>>>>>>> f993135ca556afef8b07c0d3e1b8deb976faf902
 
 const Cart = () => {
 
@@ -36,6 +43,7 @@ const Cart = () => {
   
   return (
     <div className={styles.cart}>
+      <UserNavBar/>
       <div className={styles.cartItems}>
         {cart.map((item) => (
           <CartItem key={item.id} item={item} />

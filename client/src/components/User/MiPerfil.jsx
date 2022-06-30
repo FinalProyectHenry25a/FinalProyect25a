@@ -94,7 +94,7 @@ export default function MiPerfil() {
       alert("No se pudieron actualidar los datos");
     }
 
-    document.getElementById("userAddress").value = "";
+    document.getElementById("userAddress").value = ""
     verificarQueHayaUsuarioLogueado();
   }
 

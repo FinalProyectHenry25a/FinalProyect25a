@@ -70,7 +70,7 @@ router.post("/post", async (req, res) => {
   }
 });
 
-//RUTA PARA MODIFICAR STOCK     
+//RUTA PARA MODIFICAR STOCK
 router.put("/modifica-stock", async (req, res) => {
   try {
     let post = await Publication.findByPk(req.body.id);
@@ -88,15 +88,16 @@ router.put("/modifica-stock", async (req, res) => {
     }
 
     console.log(req.body);
-    res.send(post)
+    res.send(post);
   } catch (error) {
     res.status(404).send(error);
   }
 });
 
-router.put("/edit-post", async (req, res) => {
+router.put("/posts/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log(id)
   const {
-    id,
     brand,
     releaseDate,
     model,
@@ -116,17 +117,17 @@ router.put("/edit-post", async (req, res) => {
     resolution,
   } = req.body;
 
+  console.log(brand)
   try {
     let publicacion = await Publication.findOne({
       where: {
         id: id,
       },
     });
-
+    console.log(publicacion)
     if (publicacion) {
       await Publication.update(
         {
-          id,
           brand,
           releaseDate,
           model,
@@ -147,6 +148,32 @@ router.put("/edit-post", async (req, res) => {
         },
         { where: { id: id } }
       );
+      
+    }
+    else {
+      await Publication.update(
+        {
+          brand,
+          releaseDate,
+          model,
+          price,
+          rating,
+          images,
+          color,
+          processor,
+          ram,
+          rom,
+          network,
+          batery,
+          frontal_cam,
+          main_cam,
+          inches,
+          screen,
+          resolution,
+        },
+        { where: { id: id } }
+      );
+
     }
 
     res.status(200).send("se edito con exito");

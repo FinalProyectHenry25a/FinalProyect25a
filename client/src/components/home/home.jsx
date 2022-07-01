@@ -49,8 +49,6 @@ const Home = () => {
     });
   };
 
-  console.log(loggedUser);
-
   const [filtered, setFiltered] = useState({
     byRom: null,
     byRam: null,

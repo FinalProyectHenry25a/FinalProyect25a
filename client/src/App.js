@@ -15,12 +15,35 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
-
-
-
-const adminEmail = 'admin@admin.admin';
+import { auth } from './firebase/firebase-config';
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from './Actions';
+import { onAuthStateChanged } from 'firebase/auth';
+import axios from 'axios';
 
 function App() {
+
+  const [ admin, setAdmin ] = useState();
+
+  const verificarQueHayaUsuarioLogueado = () => {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        let user = await axios.get(
+          `http://localhost:3001/user/${currentUser.email}`
+        );
+        if(user.data.isAdmin){
+          setAdmin(user.data.email)
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+
+    verificarQueHayaUsuarioLogueado()
+    
+  }, [])
+
   return (
     <BrowserRouter>
       <Switch>
@@ -34,11 +57,11 @@ function App() {
         <Route path="/mis-compras" component={MisCompras} />
         <Route path="/cart" component={Cart} />
         <Route path="/mercadopago" component={mp}/>
-        <Route path="/admin/agregar-publicacion" render={ () => <Created userRole={adminEmail}/> } />
-        <Route path="/admin/eliminar-publicacion" render={ () => <PostsDelete userRole={adminEmail}/> } />
-        <Route path="/admin/editar-stock" render={ () => <StockEdit userRole={adminEmail}/> } />
-        <Route path="/admin/control-de-usuarios" render={ () => <UsersControl userRole={adminEmail}/> } />
-        <Route path="/admin" render={ () => <Admin userRole={adminEmail}/> } />      
+        <Route path="/admin/agregar-publicacion" component={Created} />
+        <Route path="/admin/eliminar-publicacion" component={PostsDelete} />
+        <Route path="/admin/editar-stock" component={StockEdit}/>
+        <Route path="/admin/control-de-usuarios" component={UsersControl}/>
+        <Route path="/admin" component={Admin} />      
       </Switch>
     </BrowserRouter>
   );

@@ -101,4 +101,34 @@ export function getDetails(id){
         payload: item,
       };
     };
+
+    export function getAllUsers(){
+      return async function(dispatch){
+          var json = await axios.get("http://localhost:3001/user");
+          return dispatch({
+              type: 'GET_USERS',
+              payload: json.data
+          })
+      }
+  };
+
+  export function becomeAdmin(email){
+    return async function () {
+        const json = await axios.put(`http://localhost:3001/admin/${email}`);
+        return json;
+    }
+}
+
+export function getUser(email){
+  return async function(dispatch){
+      var json = await axios.get(`http://localhost:3001/user/${email}`);
+      return dispatch({
+          type: 'GET_USER',
+          payload: json.data
+      })
+  }
+};
+
+
+
     

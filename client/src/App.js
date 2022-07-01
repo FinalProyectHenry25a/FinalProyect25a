@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Home from './components/home/home';
@@ -15,34 +15,8 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
-import { auth } from './firebase/firebase-config';
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from './Actions';
-import { onAuthStateChanged } from 'firebase/auth';
-import axios from 'axios';
 
 function App() {
-
-  const [ admin, setAdmin ] = useState();
-
-  const verificarQueHayaUsuarioLogueado = () => {
-    onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
-        );
-        if(user.data.isAdmin){
-          setAdmin(user.data.email)
-        }
-      }
-    });
-  };
-
-  useEffect(() => {
-
-    verificarQueHayaUsuarioLogueado()
-    
-  }, [])
 
   return (
     <BrowserRouter>

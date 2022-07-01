@@ -12,6 +12,9 @@ const comprarealizada = require ('./compra-realizadas')
 
 const router = Router();
 
+
+
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 

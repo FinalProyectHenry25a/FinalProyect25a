@@ -21,7 +21,6 @@ function rootReducer (state = initialState, action){
                 users: action.payload
             }
         case 'GET_USER':
-
               return{
                 ...state,
                 user: action.payload

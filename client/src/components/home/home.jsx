@@ -5,24 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getPhones } from "../../Actions/index";
+import { filters, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
-import { Link } from "react-router-dom";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { onAuthStateChanged, reload, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
-import { right } from "@popperjs/core";
-import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
 const Home = () => {
+
   const [loggedUser, setLoggedUser] = useState();
   
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
+       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const dispatch = useDispatch();
@@ -36,15 +35,15 @@ const Home = () => {
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
-        );
+     
+        let info = await dispatch(getUser(currentUser.email))
+
         if(currentUser.emailVerified){
 
           await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
 
         }
-        setLoggedUser(user.data);
+        setLoggedUser(info.payload);
       }
     });
   };
@@ -75,6 +74,7 @@ const Home = () => {
   useEffect(() => {
     (!filtrados.length?
     dispatch(getPhones()):console.log("casi"));
+       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   function filtersSetters(e) {

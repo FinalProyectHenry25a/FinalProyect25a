@@ -1,13 +1,12 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 import { getAllUsers, becomeAdmin, getUser } from "../../Actions/index";
 
 export default function UsersControl() {
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const allUsers = useSelector((state) => state.users);
@@ -16,6 +15,7 @@ export default function UsersControl() {
   useEffect(() => {
     userVerificate();
     dispatch(getAllUsers());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const userVerificate = async () => {
@@ -24,8 +24,13 @@ export default function UsersControl() {
 
       try {
 
-        dispatch(getUser(currentUser.email))
+        let info = await dispatch(getUser(currentUser.email))
 
+        if(!info.payload.isAdmin){
+
+          return <Redirect to="/home" />
+
+        }
     
       } catch (error) {
 
@@ -35,12 +40,6 @@ export default function UsersControl() {
 
     });
   };
-
-  if(!user.isAdmin) {
-
-    history.push("/admin");
-
-  }
 
   const clickAdmin = (e) => {
 

@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./paginate.css";
 
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
   const [currentPage, setCurrentPage] = useState(1)
   const pageNumbers = [];
+
+  useEffect(() =>{
+
+    setCurrentPage(1)
+
+  }, [allPhones])
 
 
   for (let i = 0; i < Math.ceil(allPhones / phonesPerPage); i++) {
@@ -46,6 +52,7 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
       <ul className="pagination justify-content-center">
         <button className="page-link" onClick={()=>previousPage()}>Anterior</button>
+        {console.log(allPhones)}
         <label className="alert alert-light">{currentPage}/{Math.ceil(allPhones / phonesPerPage)}</label>
         <button className="page-link" onClick={()=>nextPage()}>Siguiente</button>
       </ul>        

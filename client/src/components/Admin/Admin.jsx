@@ -38,6 +38,9 @@ export default function Admin(props) {
       <Link to="/admin/control-de-usuarios">
         <button>Administrar usuarios</button>
       </Link>
+      <Link to={`/admin/posts`}>
+        <button>Productos</button>
+      </Link>
 
       <h3>Ventas realizadas:</h3>
     </div>

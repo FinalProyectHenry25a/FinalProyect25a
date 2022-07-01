@@ -2,7 +2,7 @@ module.exports = [
   {
     "brand": "Samsung",
     "releaseDate": "7/22/2021",
-    "model": "Galaxy S21",
+    "model": "Galaxy S21+",
     "price": 1000,
     "rating": 5,
     "images": "https://images.samsung.com/is/image/samsung/assets/au/2201/galaxy-s21-5g/models/images/galaxy-s21-plus-5g_models_colors_phantom-violet.png?$ORIGIN_PNG$",

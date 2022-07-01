@@ -84,7 +84,13 @@ function rootReducer (state = initialState, action){
                 return {
                   ...state,
                   phones: action.payload
-                }  
+                }
+              case "EDIT_POSTS": 
+              return {
+                ...state,
+                phones: action.payload,
+                phonesId: action.payload 
+              }  
             default:
                 return state;
         }      

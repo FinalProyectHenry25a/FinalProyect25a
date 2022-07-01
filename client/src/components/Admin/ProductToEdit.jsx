@@ -6,14 +6,14 @@ import { getDetails, editPost } from "../../Actions";
 export default function ProductToEdit() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { id } = useParams();  
-  
+  const { id } = useParams();
+
   useEffect(() => {
     dispatch(getDetails(id));
   }, [dispatch, id]);
 
   const PID = useSelector((state) => state.phonesId);
-  
+
   const [state, setState] = useState({
     brand: PID.brand,
     releaseDate: PID.releaseDate,
@@ -34,10 +34,7 @@ export default function ProductToEdit() {
     resolution: PID.resolution,
   });
 
-
-
   const handleChange = (e) => {
-    e.preventDefault();
     setState({
       ...state,
       [e.target.name]: e.target.value,
@@ -65,7 +62,7 @@ export default function ProductToEdit() {
     });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(state);
     dispatch(editPost(id, state));
@@ -89,7 +86,9 @@ export default function ProductToEdit() {
       screen: "",
       resolution: "",
     });
-    history.push("/admin/posts");
+    history.push("/admin")
+    window.location.reload()
+    
   };
 
   /* function handlerBrand(e) {
@@ -99,13 +98,13 @@ export default function ProductToEdit() {
 
   return (
     <div>
-      <form>
         <div>
           <label>brand</label>
           <input
             placeholder="Brand..."
             type="text"
             name="brand"
+            id="brand"
             value={state.brand}
             required
             onChange={(e) => handleChange(e)}
@@ -286,10 +285,9 @@ export default function ProductToEdit() {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <button type="submit" onClick={handleSubmit}>
+        <button onClick={handleSubmit}>
           Aceptar
         </button>
-      </form>
     </div>
   );
 }

@@ -8,6 +8,7 @@ const cart = require("./cart");
 const admin = require("./admin");
 const mercadopago = require('./mercadopago');
 const order = require('./order');
+const comprarealizada = require('./compra-realizada');
 
 const router = Router();
 
@@ -15,6 +16,10 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 //TRAE TODAS LAS PUBLICACIONES O POR QUERY O POR MODELOS
+
+router.use('/compra-realizada', comprarealizada)
+
+
 router.use('/home', publication)
 
 router.use('/verification', verification)

@@ -12,6 +12,7 @@ export default function MisCompras() {
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
+    console.log(user)
   }, []);
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -34,7 +35,7 @@ export default function MisCompras() {
      
          {user.shopping?(
             <div>     <h2>mis Compras</h2>
-            {user.favourites?.map((e) => {
+            {user.shopping?.map((e) => {
               return (
                 <div key={e.id}>
                   <Card
@@ -43,6 +44,7 @@ export default function MisCompras() {
                     images={e.images}
                     price={e.price}
                     id={e.id}
+                    stock={e.stock}
                     />
                     
                 </div>

@@ -9,7 +9,7 @@ import { filters, getPhones } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import { Link } from "react-router-dom";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import { right } from "@popperjs/core";
@@ -28,6 +28,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
+  const filtrados = useSelector((state) => state.filtered)
 
  
   
@@ -74,7 +75,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getPhones());
+    (!filtrados.length?
+    dispatch(getPhones()):console.log("casi"));
   }, [dispatch]);
 
   function filtersSetters(e) {
@@ -112,7 +114,7 @@ const Home = () => {
           : document.getElementById("order").value,
       byPrice: price,
       byProcessor:
-        document.getElementById("processor").value === ""
+        document.getElementById("processor").value === "null"
           ? null
           : document.getElementById("processor").value,
     }));
@@ -126,6 +128,32 @@ const Home = () => {
   const send = async (e) => {
     dispatch(filters(filtered));
     setCurrentPage(1);
+    console.log(filtered)
+  };
+
+  const clearFilter =(e) => {
+
+    document.getElementById("brand").value = "null"
+    document.getElementById("rom").value = "null"
+    document.getElementById("price").value = "null"
+    document.getElementById("ram").value = "null"
+    document.getElementById("network").value = "null"
+    document.getElementById("order").value = "null"
+    document.getElementById("processor").value = "null"
+
+    let clear={
+      byBrand:null,
+      byRom: null,
+      byRam:null,
+      byNetwork:null,
+      byOrder: null,
+      byPrice: null,
+      byProcessor:null,
+    }
+
+    dispatch(filters(clear));
+    setCurrentPage(1);
+    
   };
 
   const logout = async () => {
@@ -143,7 +171,7 @@ const Home = () => {
 
       {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
       <Carrousel />
-
+      <div id="filtros">
       <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">Todas</option>
         <option value="Samsung">Samsung</option>
@@ -196,10 +224,21 @@ const Home = () => {
       </select>
 
       {/* por processor--------------------------------------------------- */}
-      <div style={{ display: "inline-flex", margin: 3 + "px" }}>
-        <input id="processor" className="form-control me-3" placeholder="busca por procesador" type="search" style={{ width: 100 + "%" }} onChange={(e) => filtersSetters(e)}></input>
+      {/* <div style={{ display: "inline-flex", margin: 3 + "px" }}> */}
+        <select id="processor" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+        <option  value= "null" >Procesador</option>
+        <option value="Snapdragon">Snapdragon</option>
+        <option value="Exynos">Exynos</option>
+        <option value="Mediatek">Mediatek</option>
+        <option value="Kirin">Kirin</option>
+        <option value="Apple">Apple</option>
+        </select>
+
+
         <button className="btn btn-outline-dark" onClick={() => send()}>Buscar</button>
-      </div>
+        <button className="btn btn-outline-dark" onClick={() => clearFilter()}>Limpiar filtros</button>
+        </div>
+      {/* </div> */}
       {/* filtrado************************************ */}
       <div className={style.flex}>
         {currentPhones && allPhones.length ? (

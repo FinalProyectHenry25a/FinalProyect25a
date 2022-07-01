@@ -21,9 +21,11 @@ export default function Detail() {
       <nav aria-label="breadcrumb" style={{ margin: 10 + "px" }}>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <a href="/home" style={{ textDecoration: "none", color: "black" }}>
+            <Link to="/home">
+            <p style={{ textDecoration: "none", color: "black" }}>
               Home
-            </a>
+            </p>
+            </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             {PID.brand}

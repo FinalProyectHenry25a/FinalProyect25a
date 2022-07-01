@@ -3,12 +3,15 @@ const { User } = require("../db");
 
 const router = Router();
 
+
+// TRAE UN USUARIO POR EMAIL
+
 router.get("/:email", async (req, res) => {
   try {
     const { email } = req.params;
 
     console.log(email);
-
+    
     let user = await User.findOne({
       where: {
         email: email,
@@ -26,7 +29,7 @@ router.get("/:email", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     let users = await User.findAll();
-
+    
     res.json(users);
   } catch (error) {
     console.log(error);
@@ -35,7 +38,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { email, username, address, firstname, lastname } = req.body;
-
+  
   await User.create({
     email: email,
     username: username,
@@ -72,6 +75,9 @@ router.put("/:email/edit", async (req, res) => {
   }
 });
 
+
+/*  CON FIREBASE ESTA RUTA NO ES NECESARIA
+
 router.put("/changePassword", async (req, res) => {
   const { email, password } = req.body;
 
@@ -91,6 +97,6 @@ router.put("/changePassword", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+}); */
 
 module.exports = router;

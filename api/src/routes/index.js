@@ -8,6 +8,7 @@ const cart = require("./cart");
 const admin = require("./admin");
 const mercadopago = require('./mercadopago');
 const order = require('./order');
+const comprarealizada = require ('./compra-realizadas')
 
 const router = Router();
 
@@ -37,5 +38,8 @@ router.use('/admin', admin)
 //RUTA MERCADOPAGO
 router.use('/mercadopago', mercadopago);
 router.use('/order', order);
+
+//RUTA COMPRAS REALIZADAS
+router.use('/compra-realizada', comprarealizada)
 
 module.exports = router;

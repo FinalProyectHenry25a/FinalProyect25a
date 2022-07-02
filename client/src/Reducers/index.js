@@ -5,7 +5,8 @@ const initialState = {
     currentItem: null,
     filtered:[],
     users: [],
-    user: {}
+    user: {},
+    count: 1
 }
 
 function rootReducer (state = initialState, action){
@@ -32,7 +33,7 @@ function rootReducer (state = initialState, action){
                 phones: action.payload
             }
         case 'GET_LOCAL_CART':
-            const currentCart = JSON.parse(localStorage.getItem("cart")) || []
+            var currentCart = JSON.parse(localStorage.getItem("cart")) || []
             
             return { ...state, cart: currentCart }
         case 'GET_DETAILS':
@@ -66,7 +67,7 @@ function rootReducer (state = initialState, action){
                       : item
                   )
                 : [...state.cart, { ...item, qty: 1 }]
-
+                  
                 localStorage.setItem("cart", JSON.stringify(newCart))
 
                 return {
@@ -74,10 +75,14 @@ function rootReducer (state = initialState, action){
                   cart: newCart
                 };
               case 'REMOVE_FROM_CART':
-                localStorage.clear();
+
+                let removeCart = state.cart.filter((item) => item.id !== action.payload.id)
+  
+                localStorage.setItem("cart", JSON.stringify(removeCart));
+                 
                 return {
                   ...state,
-                  cart: state.cart.filter((item) => item.id !== action.payload.id),
+                  cart: removeCart
                 };
               case 'ADJUST_ITEM_QTY':
                 return {

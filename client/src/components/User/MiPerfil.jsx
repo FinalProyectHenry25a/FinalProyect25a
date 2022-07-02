@@ -8,6 +8,7 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 export default function MiPerfil() {
 
   const [user, setUser] = useState();
+  
 
   const verification = async () => {
 
@@ -51,6 +52,7 @@ export default function MiPerfil() {
       });
 
     document.getElementById("pw").value = "";
+    window.location.reload();
   }
 
   async function changeUserName() {
@@ -64,11 +66,12 @@ export default function MiPerfil() {
       };
       await axios.put(`http://localhost:3001/user/${user.email}/edit`,b);
       alert("Actualización exitosa");
+      document.getElementById("userName").value = "";
+      window.location.reload();
     } catch (error) {
       alert("No se pudieron actualidar los datos");
     }
 
-    document.getElementById("userName").value = "";
     verificarQueHayaUsuarioLogueado()
   }
 
@@ -81,15 +84,70 @@ export default function MiPerfil() {
         lastname: user.lastname,
       };
 
-      await axios.put(`http://localhost:3001/user/${user.email}/edit`,b);
+      const changed = await axios.put(
+        `http://localhost:3001/user/${user.email}/edit`, b);
       alert("Actualización exitosa");
+      window.location.reload();
+
     } catch (error) {
       alert("No se pudieron actualidar los datos");
     }
 
     document.getElementById("userAddress").value = ""
     verificarQueHayaUsuarioLogueado();
+
   }
+  const base64Convert = (ev) => {
+    let file = ev.target.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = async function () {
+      let base64 = fileReader.result;
+      //aca en base64 el archivo ya esta convertido a texto
+      try {
+        console.log("llegueeee", base64.length);
+        //setPhoto(base64)
+
+        await axios.post("http://localhost:3001/user/cambiarImagen", {
+          user: user.email,
+          image: base64,
+        });
+
+        alert("Operacion exitosa");
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+        alert("No se actualizaron los datos");
+      }
+
+    
+    };
+    
+  };
+ 
+
+  /* 
+  NO BORRAR!!!!!!!!!!! 
+
+  const base64Convert = (archivos) =>{
+
+    Array.from(archivos).forEach( archivo =>{
+      let reader = new FileReader();
+      reader.readAsDataURL(archivo);
+
+      reader.onload = function(){
+        let aux = [];              //corta cadena
+        let base64 = reader.result;
+        //console.log(base64);
+        aux = base64.split(',')
+        console.log(aux);
+      }
+    })
+
+    <input type='file' multiple onChange={ e => base64Convert(e.target.files)}></input>
+  } */
 
   return (
     <div>
@@ -97,23 +155,21 @@ export default function MiPerfil() {
       {user ? (
         <div>
           <h1>Mis datos</h1>
-          <br />
+          <br/>
+
+          <div>
+            <h5>Foto de perfil:</h5>
+            <img src={user.image} width="150px" height="100px" alt="ascsdc" />
+            <br/>
+            <input type='file' onChange={ ev => base64Convert(ev)}/>
+            <br/><br/>
+          </div>
 
           <div>
             <h5>E-mail:</h5>
             <p>{user.email}</p>
-          {auth.currentUser.emailVerified ? <p>Mail ya verificado</p> :<button onClick={verification}>verificar email</button>}
+            {auth.currentUser.emailVerified ? <p>Mail ya verificado</p> :<button onClick={verification}>verificar email</button>}
             <br/><br/>
-          </div>
-        
-          <div>
-          
-          
-          </div>
-          <div>
-          
-          
-         
           </div>
 
           <div>

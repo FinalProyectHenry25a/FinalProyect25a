@@ -6,7 +6,6 @@ import { getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
 export default function Admin() {
-
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -19,22 +18,14 @@ export default function Admin() {
   const userVerificate = async () => {
     await onAuthStateChanged(auth, async (currentUser) => {
       try {
-        
-        let info = await dispatch(getUser(currentUser.email))
+        let info = await dispatch(getUser(currentUser.email));
 
-        if(!info.payload.isAdmin){
-
+        if (!info.payload.isAdmin) {
           history.push("/home");
-
-          
         }
-
       } catch (error) {
-
         console.log(error);
-        
       }
-
     });
   };
 
@@ -45,8 +36,8 @@ export default function Admin() {
         <button>Publicar nuevo artículo</button>
       </Link>
       <br />
-      <Link to="/admin/eliminar-publicacion">
-        <button>Eliminar Publicación</button>
+      <Link to="/admin/publicaciones">
+        <button>Publicaciones</button>
       </Link>
       <br />
       <Link to="/admin/editar-stock">
@@ -56,11 +47,11 @@ export default function Admin() {
       <Link to="/admin/control-de-usuarios">
         <button>Administrar usuarios</button>
       </Link>
-      <Link to={`/admin/posts`}>
-        <button>Productos</button>
-      </Link>
       <Link to="/home">
         <button>Home</button>
+      </Link>
+      <Link to={`/admin/users`}>
+        <button>Usuarios</button>
       </Link>
 
       <h3>Ventas realizadas:</h3>

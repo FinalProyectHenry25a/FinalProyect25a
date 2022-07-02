@@ -19,7 +19,7 @@ export default function MisCompras() {
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
-    console.log(user);
+    
   }, []);
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -55,7 +55,7 @@ export default function MisCompras() {
 };
 
   function rate (points, postId){
-    console.log(points, postId);
+    
     setPuntaje(points)
 
   }

@@ -2,9 +2,9 @@ const Router = require('express');
 const { Publication, User } = require('../db.js');
 const { Op, where } = require('sequelize');
 
-const router = Router()
+const router = Router();
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   const { model } = req.query;
 
   try {
@@ -19,26 +19,46 @@ router.get('/', async (req, res, next) => {
 
       findByModel.length
         ? res.status(201).send(findByModel)
-        : res.status(400).send("no se encontro por ese nombre")
-    }
-    else {
+        : res.status(400).send("no se encontro por ese nombre");
+    } else {
       let publicaciones = await Publication.findAll();
       res.send(publicaciones);
     }
   } catch (error) {
     next(error);
   }
-})
+});
 
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    let smartPhone = await Publication.findByPk(id);
+
+    res.json(smartPhone);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+router.put('/:id', async (req, res, next) => {
 
   const { id } = req.params;
 
   try {
 
-    let smartPhone = await Publication.findByPk(id);
+    let stock = await Publication.findByPk(id);
 
-    res.json(smartPhone);
+    await Publication.update(
+
+      { stock: stock.dataValues.stock - 1 },
+      { where: { id: id } }
+
+    );
+
+    res.json("Stock modificado");
 
   } catch (error) {
 
@@ -47,31 +67,6 @@ router.get('/:id', async (req, res, next) => {
   }
 
 })
-
-// router.put('/:id', async (req, res, next) => {
-
-//   const { id } = req.params;
-
-//   try {
-
-//     let stock = await Publication.findByPk(id);
-
-//     await Publication.update(
-
-//       { stock: stock.dataValues.stock - 1 },
-//       { where: { id: id } }
-
-//     );
-
-//     res.json("Stock modificado");
-
-//   } catch (error) {
-
-//     next(error);
-
-//   }
-
-// })
 
 router.put("/:email/:id", async (req, res) => {
   const {comentario, rating} = req.body
@@ -85,14 +80,13 @@ router.put("/:email/:id", async (req, res) => {
       await Publication.update({ review:[{usuario: usuario.username, comentario:comentario, rating:rating}] }, { where: { id: id } });
  
     } else {
-      let masi = celular.review
-      // review sea igual a lo que habia en celular.review + lo nuevo
+      
 
       await Publication.update(
         { review: celular.review.concat({usuario: usuario.username, comentario:comentario, rating:rating}) },
         { where: { id: id } }
       );
-     console.log(celular.review)
+     
     }
 
     res.send("review agregada");

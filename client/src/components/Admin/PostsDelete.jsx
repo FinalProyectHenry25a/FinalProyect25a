@@ -1,30 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios, { Axios } from "axios";
-
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+import { getUser } from "../../Actions";
+import { useDispatch } from "react-redux";
 
 export default function PostsDelete(props) {
+
+  const dispatch = useDispatch();
   const [postsState, setPostsState] = useState([]);
-  const [user, setUser] = useState(auth.currentUser);
   const history = useHistory();
 
-  useEffect(async () => {
-    userVerificate();
-    const post = (await axios("http://localhost:3001/admin/posts")).data;
-    loadPosts();
-  }, [user]);
+  useEffect( () => {
 
-  const userVerificate = async () => {
-    await onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser || currentUser.email !== props.userRole) {
-        history.push("/home");
+    userVerificate();
+    loadPosts();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+ const userVerificate = async () => {
+
+    await onAuthStateChanged(auth, async (currentUser) => {
+
+      try {
+
+        let info = await dispatch(getUser(currentUser.email))
+
+        if(!info.payload.isAdmin){
+
+          history.push("/home");
+
+        }
+    
+      } catch (error) {
+
+        console.log(error);
+        
       }
+
     });
   };
-
+  
   async function loadPosts() {
     try {
       const post = (await axios("http://localhost:3001/admin/posts")).data;
@@ -36,7 +54,7 @@ export default function PostsDelete(props) {
 
   async function deletePost(id) {
     try {
-      const del = await axios.delete(`http://localhost:3001/admin/post/${id}`);
+      await axios.delete(`http://localhost:3001/admin/post/${id}`);
       await loadPosts();
       alert("Publicación borrada");
     } catch (error) {

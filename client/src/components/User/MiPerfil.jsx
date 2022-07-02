@@ -62,11 +62,7 @@ export default function MiPerfil() {
         firstname: user.firstname,
         lastname: user.lastname,
       };
-
-      const changed = await axios.put(
-        `http://localhost:3001/user/${user.email}/edit`,
-        b
-      );
+      await axios.put(`http://localhost:3001/user/${user.email}/edit`,b);
       alert("Actualización exitosa");
     } catch (error) {
       alert("No se pudieron actualidar los datos");
@@ -85,10 +81,7 @@ export default function MiPerfil() {
         lastname: user.lastname,
       };
 
-      const changed = await axios.put(
-        `http://localhost:3001/user/${user.email}/edit`,
-        b
-      );
+      await axios.put(`http://localhost:3001/user/${user.email}/edit`,b);
       alert("Actualización exitosa");
     } catch (error) {
       alert("No se pudieron actualidar los datos");

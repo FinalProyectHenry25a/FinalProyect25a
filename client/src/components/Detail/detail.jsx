@@ -26,7 +26,7 @@ export default function Detail() {
       if(PID.review)
       {   
         let arr=PID.review?.map(el=>el.rating)
-        console.log(arr)
+       
         let suma = 0
         for(let i=0;i<arr.length;i++){
           suma=suma+arr[i]
@@ -121,8 +121,7 @@ export default function Detail() {
               {/* <p className="sr-only">4 out of 5 stars</p> */}
               <div style={{fontSize: 26 + "px" }}>
                 {promedio()} 
-{/* 
-                {console.log(PID.review)} */}
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

@@ -99,7 +99,6 @@ const Login = () => {
 
     return function () {
 
-      console.log("ESTOY DESMONTANDO");
       setLoginEmail("");
       setLoginPassword("");
       setUser({});

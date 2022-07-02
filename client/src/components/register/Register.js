@@ -98,11 +98,20 @@ function validation (input){
        return function () {
 
         console.log("ESTOY DESMONTANDO");
-         setInput({}); 
+         setInput({
+
+          email: "",
+          password: "",
+          username: "",
+          firstname: "",
+          lastname: "",
+          address: ""
+
+        }); 
 
        };
 
-    },[input])
+    },[])
 
 
   return (

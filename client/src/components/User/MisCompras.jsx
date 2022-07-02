@@ -12,7 +12,7 @@ export default function MisCompras() {
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
-    console.log(user)
+    // eslint-disable-next-line
   }, []);
 
   const verificarQueHayaUsuarioLogueado = () => {

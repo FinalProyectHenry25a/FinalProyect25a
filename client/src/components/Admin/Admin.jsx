@@ -1,22 +1,40 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
-export default function Admin(props) {
+export default function Admin() {
 
-  const [user, setUser] = useState(auth.currentUser);
+  const dispatch = useDispatch();
+
   const history = useHistory();
 
   useEffect(() => {
     userVerificate();
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const userVerificate = async () => {
-    await onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser || currentUser.email !== props.userRole) {
-        history.push("/home");
+    await onAuthStateChanged(auth, async (currentUser) => {
+      try {
+        
+        let info = await dispatch(getUser(currentUser.email))
+
+        if(!info.payload.isAdmin){
+
+          history.push("/home");
+
+          
+        }
+
+      } catch (error) {
+
+        console.log(error);
+        
       }
+
     });
   };
 
@@ -40,6 +58,9 @@ export default function Admin(props) {
       </Link>
       <Link to={`/admin/posts`}>
         <button>Productos</button>
+      </Link>
+      <Link to="/home">
+        <button>Home</button>
       </Link>
 
       <h3>Ventas realizadas:</h3>

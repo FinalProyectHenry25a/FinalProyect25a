@@ -2,28 +2,43 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postPhone } from "../../Actions/index";
+import { getUser, postPhone } from "../../Actions/index";
 import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 
-export default function PhoneCreate(props) {
-  const [user, setUser] = useState(auth.currentUser);
+export default function PhoneCreate() {
+
+  const dispatch = useDispatch();
+  const [error,setError] = useState({});
   const history = useHistory();
-  const [error,setError] = useState({}) 
 
   useEffect(() => {
     userVerificate();
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const userVerificate = async () => {
-    await onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser || currentUser.email !== props.userRole) {
-        history.push("/home");
+
+    await onAuthStateChanged(auth, async (currentUser) => {
+
+      try {
+
+        let info = await dispatch(getUser(currentUser.email))
+
+        if(!info.payload.isAdmin){
+
+          history.push("/home");
+
+        }
+    
+      } catch (error) {
+
+        console.log(error);
+        
       }
+
     });
   };
-
-  const dispatch = useDispatch();
 
   const [input, setInput] = useState({
     brand: "",

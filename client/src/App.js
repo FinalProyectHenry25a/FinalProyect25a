@@ -15,7 +15,7 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
-import Posts from './components/Admin/posts';
+import Posts from './components/Admin/Posts';
 import ProductToEdit from './components/Admin/ProductToEdit';
 
 function App() {

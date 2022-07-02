@@ -16,9 +16,10 @@ function rootReducer (state = initialState, action){
                 phones: action.payload
             }
         case 'GET_USERS':
+          let usersWithouthSuperAdmin = action.payload.filter(element => element.email !== "finalproyect25a@gmail.com");
               return{
                 ...state,
-                users: action.payload
+                users: usersWithouthSuperAdmin
             }
         case 'GET_USER':
               return{

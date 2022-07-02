@@ -17,6 +17,8 @@ const NavBar = ({setCurrentPage}) => {
     });
 
     setCartCount(count);
+    console.log(cartCount);
+    console.log(cart);
   }, [cart, cartCount]);
 
   return (

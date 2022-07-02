@@ -109,9 +109,9 @@ router.put("/rating/:user/:rate", async (req, res) => {
 
 //CAMBIA IMAGEN DEL USUARIO
 
-router.put("/cambiarImagen", async (req, res) => {
+router.post("/cambiarImagen", async (req, res) => {
   try {
-    const { user, image } = req.body;
+    const { user, image } = req.body
 
     await User.update({ image: image }, { where: { email: user } });
 

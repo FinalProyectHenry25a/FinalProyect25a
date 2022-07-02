@@ -93,7 +93,16 @@ function validation (input){
 
     }
 
- 
+    // useEffect(() => {
+
+    //    return function () {
+
+    //     console.log("ESTOY DESMONTANDO");
+    //      setInput({}); 
+
+    //    };
+
+    // },[input])
 
 
   return (

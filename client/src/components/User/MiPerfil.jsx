@@ -64,11 +64,7 @@ export default function MiPerfil() {
         firstname: user.firstname,
         lastname: user.lastname,
       };
-
-      const changed = await axios.put(
-        `http://localhost:3001/user/${user.email}/edit`,
-        b
-      );
+      await axios.put(`http://localhost:3001/user/${user.email}/edit`,b);
       alert("Actualización exitosa");
       document.getElementById("userName").value = "";
       window.location.reload();

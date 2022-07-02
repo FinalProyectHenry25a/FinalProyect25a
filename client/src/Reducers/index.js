@@ -3,7 +3,9 @@ const initialState = {
     phonesId : [],
     cart: [],
     currentItem: null,
-    filtered:[]
+    filtered:[],
+    users: [],
+    user: {}
 }
 
 function rootReducer (state = initialState, action){
@@ -12,6 +14,16 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 phones: action.payload
+            }
+        case 'GET_USERS':
+              return{
+                ...state,
+                users: action.payload
+            }
+        case 'GET_USER':
+              return{
+                ...state,
+                user: action.payload
             }
         case 'GET_PHONES_BY_NAME':
             return{
@@ -80,7 +92,22 @@ function rootReducer (state = initialState, action){
                   ...state,
                   currentItem: action.payload,
                 };
-                
+              case 'ADMIN_POSTS':
+                return {
+                  ...state,
+                  phones: action.payload
+                }
+              case "EDIT_POSTS": 
+                return {
+                  ...state,
+                  phones: action.payload,
+                  phonesId: action.payload 
+                }
+              case "USERS_ADMIN":
+                return {
+                  ...state,
+                  users: action.payload,
+                };    
             default:
                 return state;
         }      

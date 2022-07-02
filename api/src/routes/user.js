@@ -18,8 +18,6 @@ router.get("/:email", async (req, res) => {
       },
     });
 
-    console.log(user);
-
     res.json(user);
   } catch (error) {
     console.log(error);
@@ -37,7 +35,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { email, username, address, firstname, lastname } = req.body;
+  const { email, username, address, firstname, lastname, isAdmin, isVerified } = req.body;
   
   await User.create({
     email: email,
@@ -45,6 +43,8 @@ router.post("/", async (req, res) => {
     address: address,
     firstname: firstname,
     lastname: lastname,
+    isAdmin: isAdmin,
+    isVerified: isVerified
   });
 
   res.status(200).send("successfully created");
@@ -75,37 +75,6 @@ router.put("/:email/edit", async (req, res) => {
   }
 });
 
-// ASIGNA PUNTUACION !! pendiente a terminar
-//http://localhost:3001/user/rating/33/33
-
-router.put("/rating/:user/:rate", async (req, res) => {
-
-  try {
-    const { user, rate } = req.params;
-   /* 
-
-    let post = await Publication.findByPk(id);
-    console.log("posttt", id);
-
-    let usuario = await User.findByPk(email);
-
-    if (usuario.dataValues.shopping === null) {
-
-      await User.update({ shopping: [post] }, { where: { email: email } });
-
-    } else {
-
-      await User.update(
-        { shopping: usuario.dataValues.shopping.concat(post) },
-        { where: { email: email } }
-      );
-    } */
-
-    res.status(200).send('puntuacion');
-  } catch (error) {
-    console.log(error);
-  }
-});
 
 //CAMBIA IMAGEN DEL USUARIO
 

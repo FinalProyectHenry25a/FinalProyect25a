@@ -50,10 +50,17 @@ module.exports = (sequelize) => {
       defaultValue: false
     },
 
+<<<<<<< HEAD
     image: {
       type: DataTypes.TEXT,
       allowNull: true
     },
+=======
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
+>>>>>>> 2389a726f53c71b254bde3e7214e5226815a998b
 
   });
 

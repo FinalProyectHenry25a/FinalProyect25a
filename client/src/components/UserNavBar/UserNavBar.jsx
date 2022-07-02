@@ -18,6 +18,7 @@ export default function UserNavBar({setCurrentPage}) {
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
   }, []);
+
   useEffect(() => {
     let count = 0;
     cart.forEach((item) => {
@@ -68,6 +69,9 @@ export default function UserNavBar({setCurrentPage}) {
           </ul>
         </li>
             </ul>
+            {user.isAdmin ? <Link className="nav-link active m-3" to="admin">
+              <button>Admin Menu</button>
+            </Link> : null}
             <Link className="nav-link active m-3" to="cart">
               <BsFillCartFill /> {cartCount}
             </Link>

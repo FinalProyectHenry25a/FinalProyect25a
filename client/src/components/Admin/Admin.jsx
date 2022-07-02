@@ -1,21 +1,30 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
-export default function Admin(props) {
+export default function Admin() {
+  const dispatch = useDispatch();
 
-  const [user, setUser] = useState(auth.currentUser);
   const history = useHistory();
 
   useEffect(() => {
     userVerificate();
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const userVerificate = async () => {
-    await onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser || currentUser.email !== props.userRole) {
-        history.push("/home");
+    await onAuthStateChanged(auth, async (currentUser) => {
+      try {
+        let info = await dispatch(getUser(currentUser.email));
+
+        if (!info.payload.isAdmin) {
+          history.push("/home");
+        }
+      } catch (error) {
+        console.log(error);
       }
     });
   };
@@ -27,8 +36,8 @@ export default function Admin(props) {
         <button>Publicar nuevo artículo</button>
       </Link>
       <br />
-      <Link to="/admin/eliminar-publicacion">
-        <button>Eliminar Publicación</button>
+      <Link to="/admin/publicaciones">
+        <button>Publicaciones</button>
       </Link>
       <br />
       <Link to="/admin/editar-stock">
@@ -37,6 +46,12 @@ export default function Admin(props) {
       <br />
       <Link to="/admin/control-de-usuarios">
         <button>Administrar usuarios</button>
+      </Link>
+      <Link to="/home">
+        <button>Home</button>
+      </Link>
+      <Link to={`/admin/users`}>
+        <button>Usuarios</button>
       </Link>
 
       <h3>Ventas realizadas:</h3>

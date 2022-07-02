@@ -92,13 +92,6 @@ export const adjustItemQty = (itemID, qty) => {
   };
 };
 
-export const loadCurrentItem = (item) => {
-  return {
-    type: "LOAD_CURRENT_ITEM",
-    payload: item,
-  };
-};
-
 export function postAdmin() {
   return async function (dispatch) {
     var json = await axios.get("http://localhost:3001/admin/posts");
@@ -120,6 +113,40 @@ export function editPost(id, payload) {
 
     return dispatch({
       type: "EDIT_POST",
+      payload: json.data,
+    });
+  };
+}
+
+export const loadCurrentItem = (item) => {
+  return {
+    type: "LOAD_CURRENT_ITEM",
+    payload: item,
+  };
+};
+
+export function getAllUsers() {
+  return async function (dispatch) {
+    var json = await axios.get("http://localhost:3001/user");
+    return dispatch({
+      type: "GET_USERS",
+      payload: json.data,
+    });
+  };
+}
+
+export function becomeAdmin(email) {
+  return async function () {
+    const json = await axios.put(`http://localhost:3001/admin/${email}`);
+    return json;
+  };
+}
+
+export function getUser(email) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/user/${email}`);
+    return dispatch({
+      type: "GET_USER",
       payload: json.data,
     });
   };

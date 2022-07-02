@@ -12,10 +12,17 @@ const comprarealizada = require ('./compra-realizadas')
 
 const router = Router();
 
+
+
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
 //TRAE TODAS LAS PUBLICACIONES O POR QUERY O POR MODELOS
+
+router.use('/compra-realizada', comprarealizada)
+
+
 router.use('/home', publication)
 
 router.use('/verification', verification)

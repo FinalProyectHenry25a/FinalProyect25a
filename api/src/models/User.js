@@ -48,6 +48,11 @@ module.exports = (sequelize) => {
     isVerified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
 
   });

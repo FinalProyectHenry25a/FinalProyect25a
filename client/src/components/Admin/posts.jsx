@@ -1,38 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { auth } from "../../firebase/firebase-config";
-import { postAdmin } from "../../Actions";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { auth } from "../../firebase/firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
+import { getUser } from "../../Actions";
+import { useDispatch } from "react-redux";
 
 export default function Posts(props) {
-  const [user, setUser] = useState(auth.currentUser);
-  const [postsState, setPostsState] = useState([]);
-  const [change, setChange] = useState({ do: "add", amount: 0 });
 
-  const history = useHistory();
   const dispatch = useDispatch();
-  const { id } = useParams()
+  const [postsState, setPostsState] = useState([]);
+  const history = useHistory();
 
-  const phonesAdmin = useSelector((state) => state.phones);
+  useEffect( () => {
 
-  useEffect(async () => {
     userVerificate();
-    dispatch(postAdmin());
-  }, [user, change]);
+    loadPosts();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const userVerificate = async () => {
-    await onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser || currentUser.email !== props.userRole) {
+ const userVerificate = async () => {
+
+    await onAuthStateChanged(auth, async (currentUser) => {
+
+      try {
+
+        let info = await dispatch(getUser(currentUser.email))
+
+        if(!info.payload.isAdmin){
+
+          history.push("/home");
+
+        }
+    
+      } catch (error) {
+
+        console.log(error);
+        
       }
+
     });
   };
+  
+  async function loadPosts() {
+    try {
+      const post = (await axios("http://localhost:3001/admin/posts")).data;
+      setPostsState(post);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function deletePost(id) {
     try {
       await axios.delete(`http://localhost:3001/admin/post/${id}`);
-      window.location.reload()
+      await loadPosts();
       alert("Publicación borrada");
     } catch (error) {
       console.log(error);
@@ -44,18 +67,17 @@ export default function Posts(props) {
       <Link to="/admin">
         <button>◀ Back</button>
       </Link>
-
       <br />
       <br />
 
-      {phonesAdmin?.map((el) => (
+      {postsState?.map((el) => (
         <div key={el.id}>
-            <img src={el.images} alt=""/>
+          <img src={el.images} alt=""/>
           <h6>
-            {el.brand} - {el.model} - {el.releaseDate} - {el.price} - {el.rating} - {el.color} - {el.processor} - {el.ram} - {el.rom} - {el.network} - {el.batery} - {el.frontal_cam} - {el.main_cam} - {el.inches} - {el.screen} - {el.resolution}
+          {el.brand} - {el.model} - {el.releaseDate} - {el.price} - {el.rating} - {el.color} - {el.processor} - {el.ram} - {el.rom} - {el.network} - {el.batery} - {el.frontal_cam} - {el.main_cam} - {el.inches} - {el.screen} - {el.resolution}
           </h6>
           <Link to={`/admin/ProductToEdit/${el.id}`}><button>editar</button></Link>
-          <Link onClick={() => deletePost(el.id)}><button>borrar</button></Link>   
+          <button onClick={() => deletePost(el.id)}> Borrar </button>
           <br />
           <br />
         </div>

@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./paginate.css";
 
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
   const [currentPage, setCurrentPage] = useState(1)
   const pageNumbers = [];
+
+  useEffect(() =>{
+
+    setCurrentPage(1)
+
+  }, [allPhones])
 
 
   for (let i = 0; i < Math.ceil(allPhones / phonesPerPage); i++) {

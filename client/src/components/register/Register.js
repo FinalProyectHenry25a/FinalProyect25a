@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './../register/Register.module.css'
 import axios from "axios";
 import { useState } from "react";
@@ -92,6 +92,17 @@ function validation (input){
       });
 
     }
+
+    useEffect(() => {
+
+       return function () {
+
+        console.log("ESTOY DESMONTANDO");
+         setInput({}); 
+
+       };
+
+    },[input])
 
 
   return (

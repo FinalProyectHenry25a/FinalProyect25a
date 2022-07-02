@@ -52,7 +52,6 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
       <ul className="pagination justify-content-center">
         <button className="page-link" onClick={()=>previousPage()}>Anterior</button>
-        {console.log(allPhones)}
         <label className="alert alert-light">{currentPage}/{Math.ceil(allPhones / phonesPerPage)}</label>
         <button className="page-link" onClick={()=>nextPage()}>Siguiente</button>
       </ul>        

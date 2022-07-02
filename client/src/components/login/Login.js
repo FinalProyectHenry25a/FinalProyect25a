@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./../login/Login.module.css";
 import { auth } from '../../firebase/firebase-config';
@@ -94,6 +94,21 @@ const Login = () => {
     }
 
   }
+
+  useEffect(() => {
+
+    console.log("ACABO DE MONTAR");
+
+    return function () {
+
+      console.log("ESTOY DESMONTANDO");
+      setLoginEmail("");
+      setLoginPassword("");
+      setUser({});
+
+    };
+
+  }, [])
 
   return (
 

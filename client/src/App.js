@@ -15,7 +15,16 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
+import Posts from './components/Admin/posts';
+import ProductToEdit from './components/Admin/ProductToEdit';
 
+<<<<<<< HEAD
+=======
+
+
+const adminEmail = 'fran20@gmail.com';
+
+>>>>>>> 6da1dc6ae36cefdb33c58fad9df35185b850928d
 function App() {
 
   return (
@@ -31,11 +40,21 @@ function App() {
         <Route path="/mis-compras" component={MisCompras} />
         <Route path="/cart" component={Cart} />
         <Route path="/mercadopago" component={mp}/>
+<<<<<<< HEAD
         <Route path="/admin/agregar-publicacion" component={Created} />
         <Route path="/admin/eliminar-publicacion" component={PostsDelete} />
         <Route path="/admin/editar-stock" component={StockEdit}/>
         <Route path="/admin/control-de-usuarios" component={UsersControl}/>
         <Route path="/admin" component={Admin} />      
+=======
+        <Route path="/admin/agregar-publicacion" render={ () => <Created userRole={adminEmail}/> } />
+        <Route path="/admin/eliminar-publicacion" render={ () => <PostsDelete userRole={adminEmail}/> } />
+        <Route path="/admin/editar-stock" render={ () => <StockEdit userRole={adminEmail}/> } />
+        <Route path="/admin/posts" component={Posts}/>
+        <Route path="/admin/ProductToEdit/:id" component={ProductToEdit}/>
+        <Route path="/admin/control-de-usuarios" render={ () => <UsersControl userRole={adminEmail}/> } />
+        <Route path="/admin" render={ () => <Admin userRole={adminEmail}/> } />      
+>>>>>>> 6da1dc6ae36cefdb33c58fad9df35185b850928d
       </Switch>
     </BrowserRouter>
   );

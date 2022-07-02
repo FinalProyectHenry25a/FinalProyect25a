@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 export default function Comprar({ productos, data }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  
 
 
   const cart = useSelector((state) => state.cart);

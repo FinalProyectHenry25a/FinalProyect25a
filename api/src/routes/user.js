@@ -76,6 +76,20 @@ router.put("/:email/edit", async (req, res) => {
 });
 
 
+//CAMBIA IMAGEN DEL USUARIO
+
+router.post("/cambiarImagen", async (req, res) => {
+  try {
+    const { user, image } = req.body
+
+    await User.update({ image: image }, { where: { email: user } });
+
+    res.status(200).send("Operación exitosa");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 /*  CON FIREBASE ESTA RUTA NO ES NECESARIA
 
 router.put("/changePassword", async (req, res) => {

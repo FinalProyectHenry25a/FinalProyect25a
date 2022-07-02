@@ -50,6 +50,10 @@ module.exports = (sequelize) => {
       defaultValue: false
     },
 
+    image: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

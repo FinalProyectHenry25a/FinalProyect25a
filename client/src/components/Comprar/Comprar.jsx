@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 
 export default function Comprar({ productos, data }) {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
+
+
   const cart = useSelector((state) => state.cart);
   
   useEffect(() => {
@@ -34,6 +35,8 @@ export default function Comprar({ productos, data }) {
     });
     setTotalPrice(price);
   }, [cart, totalPrice, setTotalPrice]);
+  console.log(cart)
+
   return (
     <form id="form1">
       <h4>Listado de Compras</h4>

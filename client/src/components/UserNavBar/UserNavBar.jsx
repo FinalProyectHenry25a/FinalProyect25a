@@ -8,14 +8,15 @@ import axios from "axios";
 import "./UserNavBar.css";
 import SearchBar from "../SearchBar/Searchbar";
 import { Link } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {getLocalCart} from '../../Actions'
+
 
 export default function UserNavBar({setCurrentPage}) {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
-  
-
   const [user, setUser] = useState();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -29,7 +30,10 @@ export default function UserNavBar({setCurrentPage}) {
     setCartCount(count);
   }, [cart, cartCount]);
 
-  
+    useEffect(() => {
+    dispatch(getLocalCart())
+  }, [])
+
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {

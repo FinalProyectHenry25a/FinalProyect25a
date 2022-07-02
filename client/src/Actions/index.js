@@ -102,3 +102,13 @@ export function getDetails(id){
       };
     };
     
+    export function getMercadoPago(payload){
+      return async(dispatch) => {
+          const mercadopago = await axios.post('http://localhost:3001/mercadopago', payload);
+          return dispatch({
+              type:"GET_MERCADOPAGO",
+              payload: mercadopago.data
+          })
+      }
+  }
+  

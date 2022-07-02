@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
+import {getLocalCart} from '../../Actions/index'
 
 //import style from "./../NavBar/NavBar.module.css";
 
 const NavBar = ({setCurrentPage}) => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
-  
+  const dispatch = useDispatch()
+  console.log(cart)
 
   useEffect(() => {
     let count = 0;
@@ -19,8 +21,10 @@ const NavBar = ({setCurrentPage}) => {
 
     setCartCount(count);
   }, [cart, cartCount, setCartCount]);
-
-  
+  useEffect(() => {
+    console.log("Entrando al effect")
+    dispatch(getLocalCart())
+  }, [])
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">

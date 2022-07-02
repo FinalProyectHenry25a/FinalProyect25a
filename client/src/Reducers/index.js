@@ -3,6 +3,7 @@ const initialState = {
     phonesId : [],
     cart: [],
     currentItem: null,
+    mercadoPago: {},
 }
 
 function rootReducer (state = initialState, action){
@@ -59,10 +60,12 @@ function rootReducer (state = initialState, action){
                   cart: newCart
                 };
               case 'REMOVE_FROM_CART':
-                localStorage.clear();
+                let cartFiltrado = state.cart.filter((item) => item.id !== action.payload.id)
+                localStorage.setItem("cart", JSON.stringify(cartFiltrado))
                 return {
                   ...state,
-                  cart: state.cart.filter((item) => item.id !== action.payload.id),
+                  cart: cartFiltrado,
+
                 };
               case 'ADJUST_ITEM_QTY':
                 return {
@@ -78,6 +81,11 @@ function rootReducer (state = initialState, action){
                   ...state,
                   currentItem: action.payload,
                 };
+                case 'GET_MERCADOPAGO':
+            return {
+                ...state,
+                mercadoPago: action.payload
+            }
                 
             default:
                 return state;

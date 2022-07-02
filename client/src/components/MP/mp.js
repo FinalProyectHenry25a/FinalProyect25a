@@ -9,22 +9,23 @@ function App() {
   const cart = useSelector(state => state.cart)
   console.log(cart)
   
+  
 
-  useEffect(()=>{
-    axios
-    .post("http://localhost:3001/mercadopago/")
-    .then((data)=>{
-      setDatos(data.data)
-      console.info('Contenido de data:', data)
-    }).catch(err => console.error(err))
-  },[])
+  // useEffect(()=>{
+  //   axios
+  //   .get("http://localhost:3001/mercadopago")
+  //   .then((data)=>{
+  //     setDatos(data.data)
+  //     console.info('Contenido de data:', data)
+  //   }).catch(err => console.error(err))
+  // },[])
 
   return (
     <div className="App">
-      { !datos
-        ? <p>Aguarde un momento....</p> 
-        : <Comprar productos={cart} data={datos}/>
-      }
+      {/* { !datos
+        ? <p>Aguarde un momento....</p>  */}
+         <Comprar productos={cart} data={datos}/>
+      {/* } */}
     </div>
   );
 }

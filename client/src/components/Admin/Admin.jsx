@@ -56,13 +56,11 @@ export default function Admin() {
       <Link to="/admin/control-de-usuarios">
         <button>Administrar usuarios</button>
       </Link>
-<<<<<<< HEAD
-      <Link to="/home">
-        <button>Home</button>
-=======
       <Link to={`/admin/posts`}>
         <button>Productos</button>
->>>>>>> 6da1dc6ae36cefdb33c58fad9df35185b850928d
+      </Link>
+      <Link to="/home">
+        <button>Home</button>
       </Link>
 
       <h3>Ventas realizadas:</h3>

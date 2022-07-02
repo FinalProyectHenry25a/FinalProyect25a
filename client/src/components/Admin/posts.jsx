@@ -1,30 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
-import { postAdmin } from "../../Actions";
-import axios from "axios";
+import { getUser, postAdmin } from "../../Actions";
 
-export default function Posts(props) {
-  const [user, setUser] = useState(auth.currentUser);
-  const [postsState, setPostsState] = useState([]);
-  const [change, setChange] = useState({ do: "add", amount: 0 });
+export default function Posts() {
+
 
   const history = useHistory();
   const dispatch = useDispatch();
 
   const phonesAdmin = useSelector((state) => state.phones);
 
-  useEffect(async () => {
+  useEffect(() => {
+    console.log("hola");
     userVerificate();
     dispatch(postAdmin());
-  }, [user, change]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   const userVerificate = async () => {
-    await onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser || currentUser.email !== props.userRole) {
+    await onAuthStateChanged(auth, async (currentUser) => {
+      try {
+        
+        let info = await dispatch(getUser(currentUser.email))
+
+        if(!info.payload.isAdmin){
+
+          history.push("/home");
+
+          
+        }
+
+      } catch (error) {
+
+        console.log(error);
+        
       }
+
     });
   };
 

@@ -97,8 +97,6 @@ const Login = () => {
 
   useEffect(() => {
 
-    console.log("ACABO DE MONTAR");
-
     return function () {
 
       console.log("ESTOY DESMONTANDO");

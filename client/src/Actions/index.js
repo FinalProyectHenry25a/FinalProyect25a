@@ -92,6 +92,30 @@ export const adjustItemQty = (itemID, qty) => {
   };
 };
 
+export function postAdmin() {
+  return async function (dispatch) {
+    var json = await axios.get("http://localhost:3001/admin/posts")
+    return dispatch ({
+      type: "ADMIN_POSTS",
+      payload: json.data
+    })
+  }
+}
+
+export function editPost(id, payload) {
+  return async function (dispatch) {
+    console.log(id)
+    console.log(payload)
+    var json = await axios.put(`http://localhost:3001/admin/posts/${id}`, payload)
+ 
+    return dispatch({
+      type: "EDIT_POST",
+      payload: json.data
+    })
+  }
+}
+
+
     
     export const loadCurrentItem = (item) => {
       return {

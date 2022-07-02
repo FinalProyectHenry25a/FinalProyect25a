@@ -20,7 +20,10 @@ const Home = () => {
   
 
   useEffect(() => {
+
     verificarQueHayaUsuarioLogueado();
+
+    
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

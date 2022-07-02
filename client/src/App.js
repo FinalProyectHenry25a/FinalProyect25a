@@ -15,46 +15,31 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
-import Posts from './components/Admin/posts';
+import Posts from './components/Admin/Posts';
 import ProductToEdit from './components/Admin/ProductToEdit';
 
-<<<<<<< HEAD
-=======
-
-
-const adminEmail = 'fran20@gmail.com';
-
->>>>>>> 6da1dc6ae36cefdb33c58fad9df35185b850928d
 function App() {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/home" component={Home} />
-        <Route path="/home/:id" component={Detail} />
-        <Route path="/login" component={Login} />
-        <Route path="/identify" component={Identify} />
-        <Route path="/register" component={Register} />
-        <Route path="/mi-perfil" component={MiPerfil} />
-        <Route path="/favoritos" component={Favourites} />
-        <Route path="/mis-compras" component={MisCompras} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/mercadopago" component={mp}/>
-<<<<<<< HEAD
-        <Route path="/admin/agregar-publicacion" component={Created} />
-        <Route path="/admin/eliminar-publicacion" component={PostsDelete} />
-        <Route path="/admin/editar-stock" component={StockEdit}/>
-        <Route path="/admin/control-de-usuarios" component={UsersControl}/>
-        <Route path="/admin" component={Admin} />      
-=======
-        <Route path="/admin/agregar-publicacion" render={ () => <Created userRole={adminEmail}/> } />
-        <Route path="/admin/eliminar-publicacion" render={ () => <PostsDelete userRole={adminEmail}/> } />
-        <Route path="/admin/editar-stock" render={ () => <StockEdit userRole={adminEmail}/> } />
-        <Route path="/admin/posts" component={Posts}/>
-        <Route path="/admin/ProductToEdit/:id" component={ProductToEdit}/>
-        <Route path="/admin/control-de-usuarios" render={ () => <UsersControl userRole={adminEmail}/> } />
-        <Route path="/admin" render={ () => <Admin userRole={adminEmail}/> } />      
->>>>>>> 6da1dc6ae36cefdb33c58fad9df35185b850928d
+        <Route exact path="/home/:id" component={Detail} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/identify" component={Identify} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/mi-perfil" component={MiPerfil} />
+        <Route exact path="/favoritos" component={Favourites} />
+        <Route exact path="/mis-compras" component={MisCompras} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/mercadopago" component={mp}/>
+        <Route exact path="/admin/agregar-publicacion" component={Created} />
+        <Route exact path="/admin/eliminar-publicacion" component={PostsDelete} />
+        <Route exact path="/admin/editar-stock" component={StockEdit}/>
+        <Route exact path="/admin/control-de-usuarios" component={UsersControl}/>
+        <Route exact path="/admin" component={Admin} />      
+        <Route exact path="/admin/posts" component={Posts}/>
+        <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/>     
       </Switch>
     </BrowserRouter>
   );

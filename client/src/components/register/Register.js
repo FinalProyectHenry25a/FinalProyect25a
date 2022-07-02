@@ -93,25 +93,7 @@ function validation (input){
 
     }
 
-    useEffect(() => {
-
-       return function () {
-
-        console.log("ESTOY DESMONTANDO");
-         setInput({
-
-          email: "",
-          password: "",
-          username: "",
-          firstname: "",
-          lastname: "",
-          address: ""
-
-        }); 
-
-       };
-
-    },[])
+ 
 
 
   return (

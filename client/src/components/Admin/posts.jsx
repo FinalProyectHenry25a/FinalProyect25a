@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 import { postAdmin } from "../../Actions";
 import axios from "axios";
@@ -13,6 +13,7 @@ export default function Posts(props) {
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const { id } = useParams()
 
   const phonesAdmin = useSelector((state) => state.phones);
 
@@ -27,6 +28,16 @@ export default function Posts(props) {
       }
     });
   };
+
+  async function deletePost(id) {
+    try {
+      await axios.delete(`http://localhost:3001/admin/post/${id}`);
+      window.location.reload()
+      alert("Publicación borrada");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -43,7 +54,8 @@ export default function Posts(props) {
           <h6>
             {el.brand} - {el.model} - {el.releaseDate} - {el.price} - {el.rating} - {el.color} - {el.processor} - {el.ram} - {el.rom} - {el.network} - {el.batery} - {el.frontal_cam} - {el.main_cam} - {el.inches} - {el.screen} - {el.resolution}
           </h6>
-          <Link to={`/admin/ProductToEdit/${el.id}`}><button>editar</button></Link>    
+          <Link to={`/admin/ProductToEdit/${el.id}`}><button>editar</button></Link>
+          <Link onClick={() => deletePost(el.id)}><button>borrar</button></Link>   
           <br />
           <br />
         </div>

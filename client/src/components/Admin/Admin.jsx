@@ -41,6 +41,9 @@ export default function Admin(props) {
       <Link to={`/admin/posts`}>
         <button>Productos</button>
       </Link>
+      <Link to={`/admin/users`}>
+        <button>Usuarios</button>  
+      </Link>
 
       <h3>Ventas realizadas:</h3>
     </div>

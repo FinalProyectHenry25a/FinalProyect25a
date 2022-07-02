@@ -9,21 +9,21 @@ export function getPhones() {
     });
   };
 }
-export function getLocalCart(){
-  return async function(dispatch){
-      return dispatch({
-          type: 'GET_LOCAL_CART'
-      })
-  }
+export function getLocalCart() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "GET_LOCAL_CART",
+    });
+  };
 }
-export function getPhonesByModel(model){
-    return async function(dispatch){
-        var json = await axios.get(`http://localhost:3001/home?model=${model}`);
-        return dispatch({
-            type: 'GET_PHONES_BY_NAME',
-            payload: json.data
-        })
-    }
+export function getPhonesByModel(model) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/home?model=${model}`);
+    return dispatch({
+      type: "GET_PHONES_BY_NAME",
+      payload: json.data,
+    });
+  };
 }
 export function getDetails(id) {
   return async function (dispatch) {
@@ -101,23 +101,36 @@ export const loadCurrentItem = (item) => {
 
 export function postAdmin() {
   return async function (dispatch) {
-    var json = await axios.get("http://localhost:3001/admin/posts")
-    return dispatch ({
+    var json = await axios.get("http://localhost:3001/admin/posts");
+    return dispatch({
       type: "ADMIN_POSTS",
-      payload: json.data
-    })
-  }
+      payload: json.data,
+    });
+  };
 }
 
 export function editPost(id, payload) {
   return async function (dispatch) {
-    console.log(id)
-    console.log(payload)
-    var json = await axios.put(`http://localhost:3001/admin/posts/${id}`, payload)
- 
+    console.log(id);
+    console.log(payload);
+    var json = await axios.put(
+      `http://localhost:3001/admin/posts/${id}`,
+      payload
+    );
+
     return dispatch({
       type: "EDIT_POST",
-      payload: json.data
-    })
-  }
+      payload: json.data,
+    });
+  };
+}
+
+export function usersAdmin() {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/admin/users`);
+    return dispatch({
+      type: "USERS_ADMIN",
+      payload: json.data,
+    });
+  };
 }

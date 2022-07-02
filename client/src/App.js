@@ -17,6 +17,7 @@ import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
 import Posts from './components/Admin/posts';
 import ProductToEdit from './components/Admin/ProductToEdit';
+import Users from './components/Admin/users';
 
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/admin/editar-stock" render={ () => <StockEdit userRole={adminEmail}/> } />
         <Route path="/admin/posts" component={Posts}/>
         <Route path="/admin/ProductToEdit/:id" component={ProductToEdit}/>
+        <Route path="/admin/users" component={Users}/>
         <Route path="/admin/control-de-usuarios" render={ () => <UsersControl userRole={adminEmail}/> } />
         <Route path="/admin" render={ () => <Admin userRole={adminEmail}/> } />      
       </Switch>

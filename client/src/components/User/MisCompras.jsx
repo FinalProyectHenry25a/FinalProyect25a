@@ -69,36 +69,6 @@ export default function MisCompras() {
         <div>
           {user.shopping ? (
             <div>
-<<<<<<< HEAD
-              <h1>Mis Compras:</h1>
-              {user.shopping?.map((e) => {
-
-                function rate (points, postId){
-                  console.log(points, postId);
-
-                /*   array de estos objetos:
-                  {
-                    us: email,
-                    p: de 1 a5
-                    id: del post
-                  }
-                */
-
-                }
-
-                return (
-
-                  <div key={e.id}>
-                    <h3>{e.brand} - {e.model}</h3>
-                    <p>Selecciona para puntuar el producto adquirido</p>
-                    <button onClick={()=>rate(1,e.id)}>⭐</button>
-                    <button onClick={()=>rate(2,e.id)}>⭐</button>
-                    <button onClick={()=>rate(3,e.id)}>⭐</button>
-                    <button onClick={()=>rate(4,e.id)}>⭐</button>
-                    <button onClick={()=>rate(5,e.id)}>⭐</button>
-                  </div>
-
-=======
               {" "}
               <h2>mis Compras</h2>
               {user.shopping?.map((e) => {
@@ -142,7 +112,6 @@ export default function MisCompras() {
                       <p></p>
                     )}
                   </div>
->>>>>>> 2389a726f53c71b254bde3e7214e5226815a998b
                 );
               })}
             </div>

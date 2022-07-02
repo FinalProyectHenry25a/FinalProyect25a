@@ -75,6 +75,51 @@ router.put("/:email/edit", async (req, res) => {
   }
 });
 
+// ASIGNA PUNTUACION !! pendiente a terminar
+//http://localhost:3001/user/rating/33/33
+
+router.put("/rating/:user/:rate", async (req, res) => {
+
+  try {
+    const { user, rate } = req.params;
+   /* 
+
+    let post = await Publication.findByPk(id);
+    console.log("posttt", id);
+
+    let usuario = await User.findByPk(email);
+
+    if (usuario.dataValues.shopping === null) {
+
+      await User.update({ shopping: [post] }, { where: { email: email } });
+
+    } else {
+
+      await User.update(
+        { shopping: usuario.dataValues.shopping.concat(post) },
+        { where: { email: email } }
+      );
+    } */
+
+    res.status(200).send('puntuacion');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//CAMBIA IMAGEN DEL USUARIO
+
+router.put("/cambiarImagen", async (req, res) => {
+  try {
+    const { user, image } = req.body;
+
+    await User.update({ image: image }, { where: { email: user } });
+
+    res.status(200).send("Operación exitosa");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 /*  CON FIREBASE ESTA RUTA NO ES NECESARIA
 

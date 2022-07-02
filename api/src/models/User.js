@@ -48,7 +48,12 @@ module.exports = (sequelize) => {
     isVerified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    }
+    },
+
+    image: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
 
   });
 

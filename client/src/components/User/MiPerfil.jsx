@@ -8,6 +8,7 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 export default function MiPerfil() {
 
   const [user, setUser] = useState();
+  const [photo, setPhoto] = useState('')
 
   const verification = async () => {
 
@@ -96,7 +97,79 @@ export default function MiPerfil() {
 
     document.getElementById("userAddress").value = ""
     verificarQueHayaUsuarioLogueado();
+
   }
+  const base64Convert = (ev) => {
+    let file = ev.target.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = async function () {
+      let base64 = fileReader.result;
+      //aca en base64 el archivo ya esta convertido a texto
+      try {
+        console.log('llegueeee', base64.length);
+        //setPhoto(base64)
+  
+        await axios.put("http://localhost:3001/user/cambiarImagen", {
+          user: "santi@santi.santi23",
+          image:  base64,
+        });
+
+        alert('Operacion exitosa')
+        
+      } catch (error) {
+        console.log(error);
+        alert('No se actualizaron los datos')
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    /* ejemplo de lo q recibe el put  
+     {
+        "user": "santi@santi.santi23",
+        "image":"rrrrrrrrr"
+    } */
+    
+    };
+    
+  };
+ 
+
+  /* 
+  NO BORRAR!!!!!!!!!!! 
+
+  const base64Convert = (archivos) =>{
+
+    Array.from(archivos).forEach( archivo =>{
+      let reader = new FileReader();
+      reader.readAsDataURL(archivo);
+
+      reader.onload = function(){
+        let aux = [];              //corta cadena
+        let base64 = reader.result;
+        //console.log(base64);
+        aux = base64.split(',')
+        console.log(aux);
+      }
+    })
+  } */
+
+
+function muestra (){
+  console.log('muestra', photo);
+}
 
   return (
     <div>
@@ -105,6 +178,14 @@ export default function MiPerfil() {
         <div>
           <h1>Mis datos</h1>
           <br />
+
+          <button onClick={muestra}>mostrar estado</button>
+          <img src={photo} width="50%" height="50%" alt="ascsdc" />
+
+
+        {/* <input type='file' multiple onChange={ e => base64Convert(e.target.files)}></input> */}
+        <input type='file' onChange={ ev => base64Convert(ev)}/>
+
 
           <div>
             <h5>E-mail:</h5>

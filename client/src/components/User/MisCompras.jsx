@@ -28,35 +28,45 @@ export default function MisCompras() {
   };
   return (
     <div>
-        <UserNavBar/>
+      <UserNavBar />
       {user ? (
         <div>
-         
-     
-         {user.shopping?(
-            <div>     <h2>mis Compras</h2>
-            {user.shopping?.map((e) => {
-              return (
-                <div key={e.id}>
-                  <Card
-                    brand={e.brand}
-                    model={e.model}
-                    images={e.images}
-                    price={e.price}
-                    id={e.id}
-                    stock={e.stock}
-                    />
-                    
-                </div>
-              );
-            }
-            )}
+          {user.shopping ? (
+            <div>
+              <h1>Mis Compras:</h1>
+              {user.shopping?.map((e) => {
 
-</div>
-         ):(
+                function rate (points, postId){
+                  console.log(points, postId);
+
+                /*   array de estos objetos:
+                  {
+                    us: email,
+                    p: de 1 a5
+                    id: del post
+                  }
+                */
+
+                }
+
+                return (
+
+                  <div key={e.id}>
+                    <h3>{e.brand} - {e.model}</h3>
+                    <p>Selecciona para puntuar el producto adquirido</p>
+                    <button onClick={()=>rate(1,e.id)}>⭐</button>
+                    <button onClick={()=>rate(2,e.id)}>⭐</button>
+                    <button onClick={()=>rate(3,e.id)}>⭐</button>
+                    <button onClick={()=>rate(4,e.id)}>⭐</button>
+                    <button onClick={()=>rate(5,e.id)}>⭐</button>
+                  </div>
+
+                );
+              })}
+            </div>
+          ) : (
             <h2>no ha realizado compras aun</h2>
-         )}
-
+          )}
         </div>
       ) : (
         <h1>no estas logeado</h1>

@@ -6,7 +6,7 @@ import Home from './components/home/home';
 import Detail from './components/Detail/detail';
 import Created from './components/Created/created';
 import Admin from './components/Admin/Admin';
-import PostsDelete from './components/Admin/PostsDelete';
+import Posts from './components/Admin/posts';
 import StockEdit from './components/Admin/StockEdit';
 import UsersControl from './components/Admin/UsersControl';
 import MiPerfil from './components/User/MiPerfil';
@@ -15,8 +15,8 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
-import Posts from './components/Admin/posts';
 import ProductToEdit from './components/Admin/ProductToEdit';
+import Users from './components/Admin/users';
 
 function App() {
 
@@ -34,11 +34,11 @@ function App() {
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/mercadopago" component={mp}/>
         <Route exact path="/admin/agregar-publicacion" component={Created} />
-        <Route exact path="/admin/eliminar-publicacion" component={PostsDelete} />
+        <Route exact path="/admin/publicaciones" component={Posts} />
         <Route exact path="/admin/editar-stock" component={StockEdit}/>
         <Route exact path="/admin/control-de-usuarios" component={UsersControl}/>
         <Route exact path="/admin" component={Admin} />      
-        <Route exact path="/admin/posts" component={Posts}/>
+        <Route path="/admin/users" component={Users}/>
         <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/>     
       </Switch>
     </BrowserRouter>

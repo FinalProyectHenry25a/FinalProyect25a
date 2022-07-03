@@ -6,6 +6,10 @@ const mercadopago = require("mercadopago");
 server.post('/', (req, res, next) => {
     const { userId, orderlines, status } = req.body
 
+    console.log("USERID", userID);
+    console.log("ORDERLINES", orderlines);
+    console.log("STATUS", status);
+
     Order.create({
         userId: userId,
         status: status

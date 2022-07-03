@@ -100,14 +100,12 @@ server.get("/pagos", async  (req, res)=>{
     if(usuario.shopping === null) {
 
       await User.update({ shopping: usuario.cart }, { where: { email: external_reference } });
-      await User.update({ cart: null }, { where: { email: external_reference } });
 
     } else {
       await User.update(
         { shopping: usuario.shopping.concat(usuario.cart) },
         { where: { email: external_reference } }
       );
-      await User.update({ cart: null }, { where: { email: external_reference } });
     }
 
     return res.redirect("http://localhost:3000/home")

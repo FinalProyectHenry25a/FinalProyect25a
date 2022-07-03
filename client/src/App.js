@@ -16,12 +16,12 @@ import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
 import Contacto from './components/Contacto/contacto';
+import ProductToEdit from './components/Admin/ProductToEdit';
+import Users from './components/Admin/users';
 
 
 
 const adminEmail = 'admin@admin.admin';
-import ProductToEdit from './components/Admin/ProductToEdit';
-import Users from './components/Admin/users';
 
 function App() {
 

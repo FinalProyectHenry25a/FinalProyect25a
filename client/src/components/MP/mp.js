@@ -7,7 +7,6 @@ import {getLocalCart} from '../../Actions'
 function App() {
   const [datos, setDatos] = useState("")
   const cart = useSelector(state => state.cart)
-  console.log(cart)
   
 
   useEffect(()=>{

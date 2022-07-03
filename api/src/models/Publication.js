@@ -99,8 +99,14 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+
     review:{
-      type:DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true
+    },
+
+    qty: {
+      type: DataTypes.INTEGER,
       allowNull: true
     }
 

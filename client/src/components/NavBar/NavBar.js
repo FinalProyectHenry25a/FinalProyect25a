@@ -52,6 +52,14 @@ const NavBar = ({setCurrentPage}) => {
               </Link>
             </li>
           </ul>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link active" to="/contacto">
+                Contacto
+              </Link>
+            </li>
+          </ul>
+
           <Link className="nav-link active m-4" to="/cart">
            <BsFillCartFill/> {cartCount}
           </Link>

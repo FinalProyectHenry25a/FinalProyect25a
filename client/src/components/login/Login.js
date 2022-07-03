@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./../login/Login.module.css";
 import { auth } from '../../firebase/firebase-config';
@@ -43,17 +43,36 @@ const Login = () => {
   const loginWithGoogle = async () => {
 
     try {
-
+      let createdUser;
       const provider = new GoogleAuthProvider();
       let response = await signInWithPopup(auth, provider)
       let name = response.user.displayName.split(" ");
-      const createdUser = {
 
-        email: response.user.email,
-        username: response.user.displayName,
-        address: "Sin especificar",
-        firstname: name[0],
-        lastname: name[1]
+      if(response.user.email === "finalproyect25a@gmail.com") {
+
+         createdUser = {
+
+          email: response.user.email,
+          username: response.user.displayName,
+          address: "Sin especificar",
+          firstname: name[0],
+          lastname: name[1],
+          isAdmin: true,
+          isVerified: true
+  
+        }
+
+      } else {
+
+         createdUser = {
+
+          email: response.user.email,
+          username: response.user.displayName,
+          address: "Sin especificar",
+          firstname: name[0],
+          lastname: name[1]
+  
+        }
 
       }
 
@@ -63,7 +82,6 @@ const Login = () => {
         history.push('/home');
 
       } else {
-
       await axios.post(`http://localhost:3001/user`, createdUser);
       history.push('/home');
 
@@ -76,6 +94,18 @@ const Login = () => {
     }
 
   }
+
+  useEffect(() => {
+
+    return function () {
+
+      setLoginEmail("");
+      setLoginPassword("");
+      setUser({});
+
+    };
+
+  }, [])
 
   return (
 

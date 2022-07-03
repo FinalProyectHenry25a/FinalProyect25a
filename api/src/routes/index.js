@@ -18,6 +18,10 @@ const correo = require('../controllers/auth')
 // Ejemplo: router.use('/auth', authRouter);
 
 //TRAE TODAS LAS PUBLICACIONES O POR QUERY O POR MODELOS
+
+router.use('/compra-realizada', comprarealizada)
+
+
 router.use('/home', publication)
 
 router.use('/verification', verification)

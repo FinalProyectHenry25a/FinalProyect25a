@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getPhones } from "../../Actions/index";
+import { filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
-import { Link } from "react-router-dom";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
@@ -19,12 +18,23 @@ import SearchBar from "../SearchBar/Searchbar";
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
 const Home = () => {
+
   const [loggedUser, setLoggedUser] = useState();
   
 
   useEffect(() => {
+
     verificarQueHayaUsuarioLogueado();
+
+    
+       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+
+    dispatch(getLocalCart())
+
+  }, [])
 
   const dispatch = useDispatch();
 
@@ -37,20 +47,18 @@ const Home = () => {
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
-        );
+     
+        let info = await dispatch(getUser(currentUser.email))
+
         if(currentUser.emailVerified){
 
           await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
 
         }
-        setLoggedUser(user.data);
+        setLoggedUser(info.payload);
       }
     });
   };
-
-  console.log(loggedUser);
 
   const [filtered, setFiltered] = useState({
     byRom: null,
@@ -77,9 +85,10 @@ const Home = () => {
 
 
   useEffect(() => {
-    (!filtrados.length?
+    (!filtrados?
     dispatch(getPhones()):console.log("casi"));
-  }, [dispatch]);
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtrados]);
 
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
@@ -126,11 +135,19 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart])
+  
+  useEffect(()=>{
+    let prueba=localStorage.getItem("filter")
+    prueba?(
+      dispatch(getLocalFilter())
+  ):(dispatch(getPhones()))},[])
+
+
 
   const send = async (e) => {
-    dispatch(filters(filtered));
-    setCurrentPage(1);
-    console.log(filtered)
+     dispatch(filters(filtered));
+    setCurrentPage(1);   
+  
   };
 
   const clearFilter =(e) => {
@@ -153,6 +170,7 @@ const Home = () => {
       byProcessor:null,
     }
 
+    localStorage.removeItem("filter")
     dispatch(filters(clear));
     setCurrentPage(1);
     

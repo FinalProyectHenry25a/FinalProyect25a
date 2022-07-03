@@ -18,7 +18,7 @@ const Cart = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log("Entrando al effect")
+
     dispatch(getLocalCart())
   }, [])
 
@@ -36,7 +36,6 @@ const Cart = () => {
     
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
   
-  
   return (
     <div className={styles.cart}>
       <UserNavBar/>
@@ -52,7 +51,7 @@ const Cart = () => {
           <span>$ {totalPrice}</span>
         </div>
 {auth.currentUser?.emailVerified ? <Link to="/mercadopago">
-        <button className={styles.summary__checkoutBtn}>
+        <button  className={styles.summary__checkoutBtn}>
         Confirmar Pedido <img src={mercadopago} />
         </button>
         </Link> : <span>Debes tener una cuenta con mail verificado para comprar</span>}

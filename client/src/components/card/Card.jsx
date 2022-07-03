@@ -5,7 +5,7 @@ import { auth } from "../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../Actions";
+import { addToCart, addToCartUser } from "../../Actions";
 import soldOut from "../../images/sold-out.png"
 
 export default function Card(props) {
@@ -57,9 +57,11 @@ export default function Card(props) {
         </div>
         {props.stock>0?(
           <div>
-        <Link to="#">
+     {auth.currentUser  ? <Link to="#">
+          <button className="btn btn-outline-dark, w-100" type="submit"  onClick={e => dispatch(addToCartUser(user.email , props.id))}>Agregar al carrito User</button>
+        </Link> : <Link to="#">
           <button className="btn btn-outline-dark, w-100" type="submit"  onClick={e => dispatch(addToCart(props.id))}>Agregar al carrito</button>
-        </Link>
+        </Link>}
         <p>Disponibles: {props.stock}</p>
         </div>
         

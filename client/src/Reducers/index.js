@@ -41,8 +41,17 @@ function rootReducer (state = initialState, action){
                 ...state,
                 phonesId: action.payload
             }
+            case "GET_LOCAL_FILTERS":
+              let currentFilter = JSON.parse(localStorage.getItem("filter")) || []
+              return{
+                ...state,
+                phones:currentFilter,
+                filtered:currentFilter
+              }
             
                case 'FILTERS':
+               
+                
             return{
                 ...state,
                 phones: action.payload,

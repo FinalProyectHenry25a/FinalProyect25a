@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
+import { getLocalCart } from "../../Actions";
 
 //import style from "./../NavBar/NavBar.module.css";
 
 const NavBar = ({setCurrentPage}) => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("Entrando al effect")
+    dispatch(getLocalCart())
+  }, [])
 
   useEffect(() => {
     let count = 0;

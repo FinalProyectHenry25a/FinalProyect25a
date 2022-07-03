@@ -51,20 +51,19 @@ export default function Card(props) {
         <h3 className="card-title">{props.brand}</h3>
         <h3>{props.model}</h3>
         <div className="card-text">
-          <h4>US${props.price}</h4>
           {user ? <button onClick={addToFavourites}>❤️</button> : null}
           <br />
         </div>
         {props.stock>0?(
           <div>
         <Link to="#">
-          <button className="btn btn-outline-dark, w-100" type="submit"  onClick={e => dispatch(addToCart(props.id))}>Agregar al carrito</button>
+          <button className="btn btn-outline-dark, w-100" type="submit" onClick={e => dispatch(addToCart(props.id))}>Agregar al carrito</button>
         </Link>
-        <p>Disponibles: {props.stock}</p>
+        <p className="">Disponibles: {props.stock}</p>
         </div>
         
-        ):<p>AGOTADO</p>}
-        <br/>
+        ):<p className="">AGOTADO</p>}
+        
         <br/>
         <Link className="btn btn-outline-dark, w-100" to={"/home/" + props.id}>Detalle</Link>
       </div>

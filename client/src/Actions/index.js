@@ -69,10 +69,34 @@ export const addToCart = (itemID) => {
   };
 };
 
+export const addToCartUser = (email, itemID) => {
+  return async function (dispatch) {
+    await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
+    return dispatch({
+      type: "ADD_TO_CART_USER",
+      payload: {
+        id: itemID,
+      },
+    });
+  };
+};
+
 export const removeFromCart = (itemID) => {
   return async function (dispatch) {
     return dispatch({
       type: "REMOVE_FROM_CART",
+      payload: {
+        id: itemID,
+      },
+    });
+  };
+};
+
+export const removeFromCartUser = (email, itemID) => {
+  return async function (dispatch) {
+    await axios.put((`http://localhost:3001/cart/delete/${email}/${itemID}`))
+    return dispatch({
+      type: "REMOVE_FROM_CART_USER",
       payload: {
         id: itemID,
       },
@@ -161,3 +185,4 @@ export function usersAdmin() {
     });
   };
 }
+

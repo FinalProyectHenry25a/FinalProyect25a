@@ -40,16 +40,27 @@ export function getDetails(id) {
 }
 
 export const filters = (setters) => (dispatch) => {
+  
   return axios
     .post("http://localhost:3001/filtersAndOrders", setters)
+    .then((response)=>{localStorage.setItem("filter",JSON.stringify(response.data)) 
+  return response})
     .then((response) => {
       dispatch({
         type: "FILTERS",
         payload: response.data,
       });
     })
+    
     .catch((error) => console.log(error));
 };
+export function getLocalFilter() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "GET_LOCAL_FILTERS",
+    });
+  };
+}
 
 export function postPhone(payload) {
   return async function () {

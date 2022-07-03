@@ -15,6 +15,7 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
+import Contacto from './components/Contacto/contacto';
 
 
 
@@ -25,6 +26,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/home" component={Home} />
+        <Route exact path="/contacto" component={Contacto} />
         <Route path="/home/:id" component={Detail} />
         <Route path="/login" component={Login} />
         <Route path="/identify" component={Identify} />

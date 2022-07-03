@@ -12,6 +12,8 @@ const comprarealizada = require ('./compra-realizadas')
 
 const router = Router();
 
+const correo = require('../controllers/auth')
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
@@ -41,5 +43,8 @@ router.use('/order', order);
 
 //RUTA COMPRAS REALIZADAS
 router.use('/compra-realizada', comprarealizada)
+
+//RUTA FORMULARIO DE CORREO ELECTRONICO
+router.use('/correo', correo);
 
 module.exports = router;

@@ -10,8 +10,9 @@ import Paginado from "../Paginate/paginate";
 import { Link } from "react-router-dom";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
+import { auth } from "../../firebase/firebase-config";
+
 import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
 
@@ -73,6 +74,7 @@ const Home = () => {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
 
   useEffect(() => {
     (!filtrados.length?
@@ -159,6 +161,8 @@ const Home = () => {
   const logout = async () => {
     await signOut(auth);
   };
+
+  
 
   return (
     <div>

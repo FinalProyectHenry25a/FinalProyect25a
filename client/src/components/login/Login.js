@@ -78,7 +78,11 @@ const Login = () => {
 
   useEffect(() => {
     return function () {
+<<<<<<< HEAD
       console.log("ESTOY DESMONTANDO");
+=======
+
+>>>>>>> fb16914332dc758d4b43d3b8e9edb41360b81475
       setLoginEmail("");
       setLoginPassword("");
       setUser({});

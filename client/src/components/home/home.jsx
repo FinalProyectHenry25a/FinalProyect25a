@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getPhones, getUser } from "../../Actions/index";
+import { filters, getLocalCart, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -26,6 +26,12 @@ const Home = () => {
     
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+
+    dispatch(getLocalCart())
+
+  }, [])
 
   const dispatch = useDispatch();
 

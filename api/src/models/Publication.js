@@ -1,4 +1,5 @@
-const { DataTypes } = require("sequelize");
+const { text } = require("body-parser");
+const { DataTypes, TEXT } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("publication", {
@@ -97,6 +98,16 @@ module.exports = (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+
+    review:{
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true
+    },
+
+    qty: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
 
   });

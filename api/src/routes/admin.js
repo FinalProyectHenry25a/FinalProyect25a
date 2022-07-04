@@ -70,7 +70,7 @@ router.post("/post", async (req, res) => {
   }
 });
 
-//RUTA PARA MODIFICAR STOCK     
+//RUTA PARA MODIFICAR STOCK
 router.put("/modifica-stock", async (req, res) => {
   try {
     let post = await Publication.findByPk(req.body.id);
@@ -88,9 +88,119 @@ router.put("/modifica-stock", async (req, res) => {
     }
 
     console.log(req.body);
-    res.send(post)
+    res.send(post);
   } catch (error) {
     res.status(404).send(error);
+  }
+});
+
+router.put("/:email", async (req, res) => {
+
+  const { email } = req.params;
+
+  try {
+
+    await User.update( 
+      
+      { isAdmin: true } ,
+      { where: { email: email } }
+       
+       );
+
+    res.status(200).json("Conversion a Admin satisfactoria!");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+router.put("/posts/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log(id)
+  const {
+    brand,
+    releaseDate,
+    model,
+    price,
+    rating,
+    images,
+    color,
+    processor,
+    ram,
+    rom,
+    network,
+    batery,
+    frontal_cam,
+    main_cam,
+    inches,
+    screen,
+    resolution,
+  } = req.body;
+
+  console.log(brand)
+  try {
+    let publicacion = await Publication.findOne({
+      where: {
+        id: id,
+      },
+    });
+    console.log(publicacion)
+    if (publicacion) {
+      await Publication.update(
+        {
+          brand,
+          releaseDate,
+          model,
+          price,
+          rating,
+          images,
+          color,
+          processor,
+          ram,
+          rom,
+          network,
+          batery,
+          frontal_cam,
+          main_cam,
+          inches,
+          screen,
+          resolution,
+        },
+        { where: { id: id } }
+      );
+      
+    }
+    else {
+      await Publication.update(
+        {
+          brand,
+          releaseDate,
+          model,
+          price,
+          rating,
+          images,
+          color,
+          processor,
+          ram,
+          rom,
+          network,
+          batery,
+          frontal_cam,
+          main_cam,
+          inches,
+          screen,
+          resolution,
+        },
+        { where: { id: id } }
+      );
+
+    }
+
+    res.status(200).send("se edito con exito");
+  } catch (error) {
+    console.log(error);
   }
 });
 

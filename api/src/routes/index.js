@@ -8,13 +8,20 @@ const cart = require("./cart");
 const admin = require("./admin");
 const mercadopago = require('./mercadopago');
 const order = require('./order');
+const comprarealizada = require ('./compra-realizadas')
 
 const router = Router();
+
+const correo = require('../controllers/auth')
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
 //TRAE TODAS LAS PUBLICACIONES O POR QUERY O POR MODELOS
+
+router.use('/compra-realizada', comprarealizada)
+
+
 router.use('/home', publication)
 
 router.use('/verification', verification)
@@ -37,5 +44,11 @@ router.use('/admin', admin)
 //RUTA MERCADOPAGO
 router.use('/mercadopago', mercadopago);
 router.use('/order', order);
+
+//RUTA COMPRAS REALIZADAS
+router.use('/compra-realizada', comprarealizada)
+
+//RUTA FORMULARIO DE CORREO ELECTRONICO
+router.use('/correo', correo);
 
 module.exports = router;

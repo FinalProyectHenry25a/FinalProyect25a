@@ -3,19 +3,20 @@ const { User } = require("../db");
 
 const router = Router();
 
+
+// TRAE UN USUARIO POR EMAIL
+
 router.get("/:email", async (req, res) => {
   try {
     const { email } = req.params;
 
     console.log(email);
-
+    
     let user = await User.findOne({
       where: {
         email: email,
       },
     });
-
-    console.log(user);
 
     res.json(user);
   } catch (error) {
@@ -26,7 +27,7 @@ router.get("/:email", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     let users = await User.findAll();
-
+    
     res.json(users);
   } catch (error) {
     console.log(error);
@@ -34,14 +35,16 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { email, username, address, firstname, lastname } = req.body;
-
+  const { email, username, address, firstname, lastname, isAdmin, isVerified } = req.body;
+  
   await User.create({
     email: email,
     username: username,
     address: address,
     firstname: firstname,
     lastname: lastname,
+    isAdmin: isAdmin,
+    isVerified: isVerified
   });
 
   res.status(200).send("successfully created");
@@ -72,6 +75,23 @@ router.put("/:email/edit", async (req, res) => {
   }
 });
 
+
+//CAMBIA IMAGEN DEL USUARIO
+
+router.post("/cambiarImagen", async (req, res) => {
+  try {
+    const { user, image } = req.body
+
+    await User.update({ image: image }, { where: { email: user } });
+
+    res.status(200).send("Operación exitosa");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/*  CON FIREBASE ESTA RUTA NO ES NECESARIA
+
 router.put("/changePassword", async (req, res) => {
   const { email, password } = req.body;
 
@@ -91,6 +111,6 @@ router.put("/changePassword", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+}); */
 
 module.exports = router;

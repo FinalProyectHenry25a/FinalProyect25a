@@ -166,8 +166,8 @@ export default function MiPerfil() {
 
           <section>
   <div className="container py-5">
-    <div className="row">
-      <div className="col-lg-4">
+    <div className="row ">
+      <div className="col-lg-4 ">
         <div className="card mb-4">
           <div className="card-body text-center">
 

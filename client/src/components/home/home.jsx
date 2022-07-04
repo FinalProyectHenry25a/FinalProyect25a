@@ -193,6 +193,7 @@ const Home = () => {
 
       {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
       <Carrousel />
+      <SearchBar setCurrentPage={setCurrentPage}/>
       <div id="filtros">
       <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">Todas</option>

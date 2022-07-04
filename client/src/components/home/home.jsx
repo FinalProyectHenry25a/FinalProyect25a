@@ -8,9 +8,12 @@ import NavBar from "../NavBar/NavBar";
 import { filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
+import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
+import { auth } from "../../firebase/firebase-config";
+
+import { right } from "@popperjs/core";
+import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
@@ -79,6 +82,7 @@ const Home = () => {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
 
   useEffect(() => {
     (!filtrados?
@@ -175,6 +179,8 @@ const Home = () => {
   const logout = async () => {
     await signOut(auth);
   };
+
+  
 
   return (
     <div>

@@ -15,8 +15,13 @@ import Favourites from './components/User/Favourites';
 import MisCompras from './components/User/MisCompras';
 import mp from './components/MP/mp';
 import Identify from './components/login/indentify';
+import Contacto from './components/Contacto/contacto';
 import ProductToEdit from './components/Admin/ProductToEdit';
 import Users from './components/Admin/users';
+
+
+
+const adminEmail = 'admin@admin.admin';
 
 function App() {
 
@@ -39,7 +44,8 @@ function App() {
         <Route exact path="/admin/control-de-usuarios" component={UsersControl}/>
         <Route exact path="/admin" component={Admin} />      
         <Route path="/admin/users" component={Users}/>
-        <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/>     
+        <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/> 
+        <Route exact path="/contacto" component={Contacto} />    
       </Switch>
     </BrowserRouter>
   );

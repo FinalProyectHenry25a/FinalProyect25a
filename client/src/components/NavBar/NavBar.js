@@ -26,7 +26,7 @@ const NavBar = ({ setCurrentPage }) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-#FFFFFF">
+    <nav className="navbar navbar-expand-lg navbar-light" style={{background: "#028090"}} >
       <div className="container-fluid justify-content-between">
         {/* Left elements */}
         <div className="d-flex">
@@ -51,7 +51,6 @@ const NavBar = ({ setCurrentPage }) => {
         {/* Center elements */}
         <div className="navbar-collapse collapse show" style={{justifyContent: "space-between" }} id="navbarSupportedContent">
           <br/>
-          <SearchBar  setCurrentPage={setCurrentPage}/>
           {/* Center elements */}
 
           {/* Right elements */}

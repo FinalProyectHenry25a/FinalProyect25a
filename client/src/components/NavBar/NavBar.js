@@ -63,7 +63,6 @@ const NavBar = ({setCurrentPage}) => {
           <Link className="nav-link active m-4" to="/cart">
            <BsFillCartFill/> {cartCount}
           </Link>
-          <SearchBar setCurrentPage={setCurrentPage}/>
         </div>
       </div>
     </nav>

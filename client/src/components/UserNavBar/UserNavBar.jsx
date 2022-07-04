@@ -83,7 +83,6 @@ export default function UserNavBar({setCurrentPage}) {
             <Link className="nav-link active m-3" to="cart">
               <BsFillCartFill /> {cartCount}
             </Link>
-            <SearchBar setCurrentPage={setCurrentPage} />
           </div>
         </div>
       ) : (

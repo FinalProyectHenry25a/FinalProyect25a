@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getLocalCart, getPhones, getUser } from "../../Actions/index";
+import { filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
+import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
+import { auth } from "../../firebase/firebase-config";
+
+import { right } from "@popperjs/core";
+import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
@@ -80,11 +83,12 @@ const Home = () => {
     setCurrentPage(pageNumber);
   };
 
+
   useEffect(() => {
-    (!filtrados.length?
+    (!filtrados?
     dispatch(getPhones()):console.log("casi"));
        // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [filtrados]);
 
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
@@ -131,11 +135,19 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart])
+  
+  useEffect(()=>{
+    let prueba=localStorage.getItem("filter")
+    prueba?(
+      dispatch(getLocalFilter())
+  ):(dispatch(getPhones()))},[])
+
+
 
   const send = async (e) => {
-    dispatch(filters(filtered));
-    setCurrentPage(1);
-    console.log(filtered)
+     dispatch(filters(filtered));
+    setCurrentPage(1);   
+  
   };
 
   const clearFilter =(e) => {
@@ -158,6 +170,7 @@ const Home = () => {
       byProcessor:null,
     }
 
+    localStorage.removeItem("filter")
     dispatch(filters(clear));
     setCurrentPage(1);
     
@@ -166,6 +179,8 @@ const Home = () => {
   const logout = async () => {
     await signOut(auth);
   };
+
+  
 
   return (
     <div>

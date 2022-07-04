@@ -11,9 +11,7 @@ import { BsPersonCircle } from "react-icons/bs";
 
 export default function Favourites(props) {
   const [user, setUser] = useState();
-
-  const {email} = useParams();
-
+  let emailUser = "";
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
   }, []);
@@ -25,30 +23,30 @@ export default function Favourites(props) {
           `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
-     
+          emailUser = auth.currentUser.email
       }
     });
   };
 
-  async function deleteFavourites(email, id) {
+
+
+  async function deleteFavourites(emailUser, id) {
+
     try {
-      await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`);
-      
-      window.location.reload();
+      await axios.put(`http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`);
       alert("favorito eliminado");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   }
-
-
 
   return (
     <div>
       <UserNavBar />
       {user ? (
         <div>
-          <h2>mis favoritos</h2>
+          <h2>Mis favoritos</h2>
           {user.favourites?.map((e) => {
             return (
               <div key={e.id}>
@@ -60,15 +58,16 @@ export default function Favourites(props) {
                   id={e.id}
                   stock={e.stock}
                   />
-                  <button onClick={() => deleteFavourites(auth.currentUser.email, e.id)}>Eliminar</button> 
+                      <button onClick={() => deleteFavourites(auth.currentUser.email, e.id)}>Eliminar</button>
               </div>
+              
             );
           }
           )}
 
         </div>
       ) : (
-        <h1>no tienes favoritos</h1>
+        <h1>No tienes favoritos</h1>
       )}
     </div>
   );

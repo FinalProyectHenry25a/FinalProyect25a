@@ -1,4 +1,4 @@
-const { Order_detail , Order} = require('../db.js');
+const { Order_detail , Order , User, Publication } = require('../db.js');
 
 const {
     PROD_ACCESS_TOKEN,
@@ -7,49 +7,51 @@ const {
 const server = require('express').Router();
   // SDK de Mercado Pago
 const mercadopago = require ('mercadopago');
-const { route } = require('./order');
 
-server.get("/", (req, res, next)=>{
-  //const id_orden = req.query.id 
 
-  const id_orden= 1
+server.post("/", async (req, res, next)=>{
 
+  let email = req.body.pop()
+
+  const cart = req.body
+
+  for (let i = 0; i < cart[0].length; i++) {
+    
+    await Publication.update({ qty: cart[0][i].qty }, { where: { id: cart[0][i].id } });
+
+  }
   // cargamos el carrido de la bd
-  const carrito = [
-    {title: "Producto 1", quantity: 5, price: 10.52},
-    {title: "Producto 2", quantity: 15, price: 100.52},
-    {title: "Producto 3", quantity: 6, price: 200}
-  ]
+
   // Agrega credenciales
 mercadopago.configure({
     access_token: PROD_ACCESS_TOKEN
   });
   
-  console.info('ml configured')
-  const items_ml = carrito.map(i => ({
-    title: i.title,
+  const items_ml = cart[0].map(i => ({
+    title: `${i.brand} ${i.model}`,
     unit_price: i.price,
-    quantity: i.quantity,
+    quantity: i.qty,
   }))
+
   console.info('carrito', items_ml)
   // Crea un objeto de preferencia
   let preference = {
     items: items_ml,
-    external_reference : `${id_orden}`, //`${new Date().valueOf()}`,
+    external_reference : `${email}`, //`${new Date().valueOf()}`,
     back_urls: {
       success: 'http://localhost:3001/mercadopago/pagos',
       failure: 'http://localhost:3001/mercadopago/pagos',
       pending: 'http://localhost:3001/mercadopago/pagos',
     }
   };
-  console.info('preference:', preference)
+
   mercadopago.preferences.create(preference)
 
   .then(function(response){
     console.info('respondio')
   // Este valor reemplazará el string"<%= global.id %>" en tu HTML
     global.id = response.body.id;
-    console.log(response.body)
+    //console.log(response.body)
     res.json({id: global.id, init_point: response.body.init_point});
   }).catch(function(error){
     console.log(error);
@@ -61,10 +63,10 @@ mercadopago.configure({
 server.get("/pagos/:id", (req, res)=>{
   const mp = new mercadopago (PROD_ACCESS_TOKEN)
   const id = req.params.id
-  console.info("Buscando el id", id)
+  //console.info("Buscando el id", id)
   mp.get(`/v1/payments/search`, {'status': 'pending'})//{"external_reference":id})
   .then(resultado  => {
-    console.info('resultado', resultado)
+    //console.info('resultado', resultado)
     res.json({"resultado": resultado})
   })
   .catch(err => {
@@ -76,15 +78,39 @@ server.get("/pagos/:id", (req, res)=>{
 
 })
 
-server.get("/pagos", (req, res)=>{
-  console.info("EN LA RUTA PAGOS ", req)
-  const payment_id= req.query.payment_id
-  const payment_status= req.query.status
-  const external_reference = req.query.external_reference
-  const merchant_order_id= req.query.merchant_order_id
-  console.log("EXTERNAL REFERENCE ", external_reference)
+server.get("/pagos", async  (req, res)=>{
 
-  //Aquí edito el status de mi orden
+  const payment_id= req.query.payment_id
+  const payment_status= req.query.status // ESTADO DE LA OPERACION
+  const external_reference = req.query.external_reference // MAIL DE USUARIO
+  const merchant_order_id= req.query.merchant_order_id
+
+  if(payment_status === "approved") {
+
+    let usuario = await User.findByPk(external_reference)
+
+    for (let i = 0; i < usuario.cart.length; i++) {
+      
+      let publicacion = await Publication.findByPk(usuario.cart[i].id)
+      await Publication.update({ stock: publicacion.stock - publicacion.qty }, { where: { id: usuario.cart[i].id } });
+      await Publication.update({ qty: null }, { where: { id: usuario.cart[i].id } });
+      
+    }
+
+    if(usuario.shopping === null) {
+
+      await User.update({ shopping: usuario.cart }, { where: { email: external_reference } });
+
+    } else {
+      await User.update(
+        { shopping: usuario.shopping.concat(usuario.cart) },
+        { where: { email: external_reference } }
+      );
+    }
+
+    return res.redirect("http://localhost:3000/home")
+
+  }
 
   Order.findByPk(external_reference)
   .then((order) => {
@@ -92,7 +118,7 @@ server.get("/pagos", (req, res)=>{
     order.payment_status= payment_status
     order.merchant_order_id = merchant_order_id
     order.status = "created"
-    console.info('Salvando order')
+    // console.info('Salvando order')
     order.save()
     .then((_) => {
       console.info('redirect success')
@@ -109,7 +135,7 @@ server.get("/pagos", (req, res)=>{
 
 
   //proceso los datos del pago 
-  // redirijo de nuevo a react con mensaje de exito, falla o pendiente
+  //redirijo de nuevo a react con mensaje de exito, falla o pendiente
   //res.send(`${payment_id} ${payment_status} ${external_reference} ${merchant_order_id} `)
 })
 

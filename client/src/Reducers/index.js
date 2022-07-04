@@ -41,8 +41,17 @@ function rootReducer (state = initialState, action){
                 ...state,
                 phonesId: action.payload
             }
+            case "GET_LOCAL_FILTERS":
+              let currentFilter = JSON.parse(localStorage.getItem("filter")) || []
+              return{
+                ...state,
+                phones:currentFilter,
+                filtered:currentFilter
+              }
             
                case 'FILTERS':
+               
+                
             return{
                 ...state,
                 phones: action.payload,
@@ -74,6 +83,45 @@ function rootReducer (state = initialState, action){
                   ...state,
                   cart: newCart
                 };
+
+              case "ADD_TO_CART_USER":
+
+                const itemUser = state.phones.find(
+                  (product) => product.id === action.payload.id
+                );
+                // Check if Item is in cart already
+                const inCartUser = state.cart.find((item) =>
+                  item.id === action.payload.id ? true : false
+                );
+          
+
+                
+                const newCartUser = inCartUser
+                ? state.cart.map((item) =>
+                    item.id === action.payload.id
+                      ? { ...itemUser, qty: item.qty + 1 }
+                      : item
+                  )
+                : [...state.cart, { ...itemUser, qty: 1 }]
+                  
+                localStorage.setItem("cart", JSON.stringify(newCartUser))
+
+                return {
+                  ...state,
+                  cart: newCartUser
+                };
+
+                case "REMOVE_FROM_CART_USER":
+
+                  let removeCartUser = state.cart.filter((item) => item.id !== action.payload.id)
+  
+                  localStorage.setItem("cart", JSON.stringify(removeCartUser));
+                   
+                  return {
+                    ...state,
+                    cart: removeCartUser
+                  };
+
               case 'REMOVE_FROM_CART':
 
                 let removeCart = state.cart.filter((item) => item.id !== action.payload.id)
@@ -113,7 +161,8 @@ function rootReducer (state = initialState, action){
                 return {
                   ...state,
                   users: action.payload,
-                };    
+                }; 
+                  
             default:
                 return state;
         }      

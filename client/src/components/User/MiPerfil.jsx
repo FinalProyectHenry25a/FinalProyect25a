@@ -5,6 +5,8 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import UserNavBar from "../UserNavBar/UserNavBar";
 
+import 'bootstrap/dist/css/bootstrap.min.css'; //s
+
 export default function MiPerfil() {
 
   const [user, setUser] = useState();
@@ -151,56 +153,156 @@ export default function MiPerfil() {
 
   return (
     <div>
+   
       <UserNavBar />
+
+
+
+
+
       {user ? (
         <div>
-          <h1>Mis datos</h1>
-          <br/>
+          
 
-          <div>
-            <h5>Foto de perfil:</h5>
-            <img src={user.image} width="150px" height="100px" alt="ascsdc" />
-            <br/>
-            <input type='file' onChange={ ev => base64Convert(ev)}/>
-            <br/><br/>
-          </div>
+          <section>
+  <div className="container py-5">
+    <div className="row">
+      <div className="col-lg-4">
+        <div className="card mb-4">
+          <div className="card-body text-center">
 
-          <div>
-            <h5>E-mail:</h5>
-            <p>{user.email}</p>
-            {auth.currentUser.emailVerified ? <p>Mail ya verificado</p> :<button onClick={verification}>verificar email</button>}
-            <br/><br/>
-          </div>
 
-          <div>
-            <h5>Nombre de usuario:</h5>
-            <p>{user.username}</p>
-            <input type="text" id="userName" placeholder="..." />
-            <button onClick={changeUserName}>modificar</button>
-            <br />
-            <br />
-          </div>
+            {user.image ? <img src={user.image} alt="avatar" className="rounded img-fluid col-8" />
+            :<img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="avatar"
+              className="rounded-circle img-fluid col-8"/>}
 
-          <div>
-            <h5>Direccion actual:</h5>
-            <p>{user.address}</p>
-            <input id="userAddress" type="text" placeholder="..." />
-            <button onClick={changeUserAdress}>modificar</button>
-            <br />
-            <br />
-          </div>
+              <input type="file" id="inputarchivo" name="file" onChange={ ev => base64Convert(ev)} className="d-none" required/><br/>
+              <button className="btn btn-light"><label htmlFor="inputarchivo" id="labelarchivo">✏️</label></button>
 
-          <div>
-            <br />
-            <h5>Cotraseña:</h5>
-            <input id="pw" type="password" placeholder="..."></input>
-            <button onClick={() => changePassword()}>Cambiar contraseña</button>
-            <br />
+
+            <h5 className="my-3">{user.username}</h5>
+            <p className="text-muted mb-1">{user.email}</p>
+            
+            <div className="d-flex justify-content-center mb-2">
+             
+            </div>
           </div>
+        </div>
+       
+      </div>
+      <div className="col-lg-8">
+        <div className="card mb-4">
+          <div className="card-body">
+
+            <div className="row">
+              <div className="col-sm-3">
+                <p className="mb-0">Nombre completo</p>
+              </div>
+              <div className="col-sm-9">
+                <p className="text-muted mb-0">{user.firstname} {user.lastname}</p>
+              </div>
+            </div>
+
+
+            <hr/>
+            <div className="row">
+              <div className="col-sm-3">
+                <p className="mb-0">Email</p>
+                
+              </div>
+              <div className="col-sm-9">
+                {auth.currentUser.emailVerified ? <p>Verificado</p> :<button className="btn btn-secondary" onClick={verification}>Verificar</button>}
+              </div>
+            </div>
+
+
+            <hr/>
+            <div className="row">
+              <div className="col-sm-3">
+                <p className="mb-0">Nombre de usuario</p>
+              </div>
+              <div className="col-sm-9">
+                <p className="text-muted mb-0">  <input className="form-control" type="text" id="userName" placeholder="..." />
+            <button className="btn btn-secondary" onClick={changeUserName}>modificar</button></p>
+              </div>
+            </div>
+
+            
+
+
+            <hr/>
+            <div className="row">
+              <div className="col-sm-3">
+                <p className="mb-0">Dirección</p>
+              </div>
+              <div className="col-sm-9">
+              <p className="text-muted mb-0"> <input className="form-control" type="text" id="address" placeholder="..." />
+            <button className="btn btn-secondary" onClick={changeUserAdress}>modificar</button></p>
+              </div>
+            </div>
+
+
+            <hr/>
+            <div className="row">
+              <div className="col-sm-3">
+                <p className="mb-0">Contraseña</p>
+              </div>
+              <div className="col-sm-9">
+              <input className="form-control" id="pw" type="password" placeholder="..."></input>
+            <button className="btn btn-secondary" onClick={() => changePassword()}>Cambiar contraseña</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+         
+            
+            
+         
+     
+            
+          
+
+ 
+ 
+
+   
+          
+
+       
+
+
+        
         </div>
       ) : (
         <h1>no estas logeado</h1>
       )}
-    </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>  
+
   );
 }

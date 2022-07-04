@@ -40,16 +40,27 @@ export function getDetails(id) {
 }
 
 export const filters = (setters) => (dispatch) => {
+  
   return axios
     .post("http://localhost:3001/filtersAndOrders", setters)
+    .then((response)=>{localStorage.setItem("filter",JSON.stringify(response.data)) 
+  return response})
     .then((response) => {
       dispatch({
         type: "FILTERS",
         payload: response.data,
       });
     })
+    
     .catch((error) => console.log(error));
 };
+export function getLocalFilter() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "GET_LOCAL_FILTERS",
+    });
+  };
+}
 
 export function postPhone(payload) {
   return async function () {
@@ -69,10 +80,34 @@ export const addToCart = (itemID) => {
   };
 };
 
+export const addToCartUser = (email, itemID) => {
+  return async function (dispatch) {
+    await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
+    return dispatch({
+      type: "ADD_TO_CART_USER",
+      payload: {
+        id: itemID,
+      },
+    });
+  };
+};
+
 export const removeFromCart = (itemID) => {
   return async function (dispatch) {
     return dispatch({
       type: "REMOVE_FROM_CART",
+      payload: {
+        id: itemID,
+      },
+    });
+  };
+};
+
+export const removeFromCartUser = (email, itemID) => {
+  return async function (dispatch) {
+    await axios.put((`http://localhost:3001/cart/delete/${email}/${itemID}`))
+    return dispatch({
+      type: "REMOVE_FROM_CART_USER",
       payload: {
         id: itemID,
       },

@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { FcGoogle } from "react-icons/fc"
+import { BsGoogle } from "react-icons/bs"
 
 const Login = () => {
   const history = useHistory();
@@ -78,11 +78,6 @@ const Login = () => {
 
   useEffect(() => {
     return function () {
-<<<<<<< HEAD
-      console.log("ESTOY DESMONTANDO");
-=======
-
->>>>>>> fb16914332dc758d4b43d3b8e9edb41360b81475
       setLoginEmail("");
       setLoginPassword("");
       setUser({});
@@ -183,14 +178,14 @@ const Login = () => {
                   Login
                 </button>
 
-                <hr className="my-4" />
+                <hr className="my-4" style={{color: "white"}} />
 
-                <div className="one-btn-container google" data-ng-show="vm.continueWith3rdParty == 'GG'">
-                  <button className="one-cancel one-button" onClick={loginWithGoogle} type="submit">
-                   <FcGoogle/> Iniciar sesión con Google
+                <div className="d-grid rounded-pill" style={{height: 30 + "%", width: 100 + "%", textAlign: "center"}} data-ng-show="vm.continueWith3rdParty == 'GG'">
+                  <button className="btn btn-primary" style={{fontSize: 17 + "px", background:"#5D5D5D", border: "none", textAlign: "center" }} onClick={loginWithGoogle} type="submit">
+                    <BsGoogle style={{display: "inline-flex", justifyContent: "flex-start", fontSize: 20 + "px" }}/> Iniciar sesión con Google
                   </button>
                 </div>
-
+                <br/>
                 <div className="text-center">
                   <p>
                     No estas registrado? <a href="/register">Register</a>

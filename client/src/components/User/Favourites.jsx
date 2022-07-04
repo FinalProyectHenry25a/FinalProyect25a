@@ -5,12 +5,14 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BsFillCartFill } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
 
-export default function Favourites() {
+export default function Favourites(props) {
   const [user, setUser] = useState();
+
+  const {email} = useParams();
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -27,6 +29,19 @@ export default function Favourites() {
       }
     });
   };
+
+  async function deleteFavourites(email, id) {
+    try {
+      await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`);
+      
+      window.location.reload();
+      alert("favorito eliminado");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 
   return (
     <div>
@@ -45,7 +60,7 @@ export default function Favourites() {
                   id={e.id}
                   stock={e.stock}
                   />
-                  
+                  <button onClick={() => deleteFavourites(auth.currentUser.email, e.id)}>Eliminar</button> 
               </div>
             );
           }

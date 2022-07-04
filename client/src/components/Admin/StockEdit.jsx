@@ -89,7 +89,7 @@ export default function StockEdit() {
           setChange({ ...change, amount: 0 });
           console.log(change);
           document.getElementById(id).value = null;
-          history.push("/admin")
+       
 
         }
       } catch (error) {
@@ -107,8 +107,12 @@ export default function StockEdit() {
 
       {postsState?.map((el) => (
         <div key={el.id}>
-          <h6> {el.brand} - {el.model} - {el.stock} unidades </h6>
-          
+
+          <div>
+            <h6> {el.brand} - {el.model} - {el.stock} unidades </h6>
+            {el.stock <= 5 ? <p>⚠️ Cantidad de stock crítica</p> : null}
+          </div>
+
           <select  id = 'do' name='do' onChange={settings}>
             <option value="add">Agregar stock</option>
             <option value="remove">Quitar stock</option>

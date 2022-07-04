@@ -26,60 +26,7 @@ const NavBar = ({ setCurrentPage }) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light" style={{background: "#028090"}} >
-      <div className="container-fluid justify-content-between">
-        {/* Left elements */}
-        <div className="d-flex">
-          {/* Brand */}
-          <a className="navbar-brand" href="/home">
-            Henry Store
-          </a>
-        </div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        {/* Left elements */}
-
-        {/* Center elements */}
-        <div className="navbar-collapse collapse show" style={{justifyContent: "space-between" }} id="navbarSupportedContent">
-          <br/>
-          {/* Center elements */}
-
-          {/* Right elements */}
-          <ul className="navbar-nav flex-row">
-            <li className="nav-item me-3 me-lg-1">
-              <Link
-                className="nav-link d-sm-flex active align-items-sm-center"
-                to="/login"
-              >
-                Login
-              </Link>
-            </li>
-            <li className="nav-item me-3 me-lg-2">
-              <Link
-                className="nav-link d-sm-flex active align-items-sm-center"
-                to="/cart"
-              >
-                <BsFillCartFill /> {cartCount}
-              </Link>
-            </li>
-          </ul>
-        </div>
-        {/* Right elements */}
-      </div>
-    </nav>
-  );
-};
-{
-  /*<nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="/home">
           Henry Store
@@ -95,7 +42,6 @@ const NavBar = ({ setCurrentPage }) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <SearchBar className="form-control form-control-lg rounde bg-transparent" setCurrentPage={setCurrentPage}/>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -113,15 +59,12 @@ const NavBar = ({ setCurrentPage }) => {
           </ul>
 
           <Link className="nav-link active m-4" to="/cart">
-           <BsFillCartFill/> {cartCount}
+            <BsFillCartFill /> {cartCount}
           </Link>
-<<<<<<< HEAD
-          
-=======
->>>>>>> 198c228bfb3d59197c516f1ae28ab36a4f149b4c
         </div>
       </div>
-</nav> */
-}
+    </nav>
+  );
+};
 
 export default NavBar;

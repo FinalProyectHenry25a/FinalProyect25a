@@ -92,10 +92,6 @@ const Register = () => {
           address: input.address
         }
         await axios.post("http://localhost:3001/user", newUser);
-<<<<<<< HEAD
-
-        console.log(cart);
-        console.log(auth.currentUser.email);
 
         for (let i = 0; i < cart.length; i++) {
           
@@ -103,9 +99,6 @@ const Register = () => {
           
         }
 
-=======
-        
->>>>>>> 8085a02c2a54946d3ac31ea127ef06fbe5937207
         setInput({
 
           email: "",

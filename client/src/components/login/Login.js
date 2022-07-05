@@ -13,8 +13,6 @@ const Login = () => {
 
   const cart = useSelector(state => state.cart)
 
-  console.log(cart);
-
   const history = useHistory();
 
   const [loginEmail, setLoginEmail] = useState("");
@@ -36,8 +34,6 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       setLoginEmail("");
       setLoginPassword("");
-
-      console.log(auth.currentUser.email);
 
       for (let i = 0; i < cart.length; i++) {
           

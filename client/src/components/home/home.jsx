@@ -50,13 +50,10 @@ const Home = () => {
      
         let info = await dispatch(getUser(currentUser.email))
 
-       
-
         if(info.payload.emptyCart) {
 
           dispatch(clearCart(info.payload.email));
           // dispatch(emptyCart(info.payload.email));
-          window.location.reload()
 
         } 
 

@@ -5,8 +5,11 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/firebase-config';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Register = () => {
+
+  const cart = useSelector(state => state.cart)
 
   const history = useHistory();
 
@@ -43,6 +46,16 @@ const Register = () => {
           address: input.address
         }
         await axios.post("http://localhost:3001/user", newUser);
+
+        console.log(cart);
+        console.log(auth.currentUser.email);
+
+        for (let i = 0; i < cart.length; i++) {
+          
+          await axios.put(`http://localhost:3001/cart/${auth.currentUser.email}/${cart[i].id}`)
+          
+        }
+
         setInput({
 
           email: "",

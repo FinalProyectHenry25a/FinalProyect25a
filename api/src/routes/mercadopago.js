@@ -102,10 +102,12 @@ server.get("/pagos", async  (req, res)=>{
   
       if(usuario.shopping === null) {
   
-        await User.update({ shopping: usuario.cart, cart: null, emptyCart: true}, { where: { email: external_reference } });
+      await User.update({ shopping: usuario.cart, cart: null, emptyCart: true}, { where: { email: external_reference } });
         // await User.update({ cart: null }, { where: { id: external_reference } });
         // await User.update({ emptyCart: true }, { where: { id: external_reference } });
-  
+        let usuario2 = await User.findByPk(external_reference)
+
+        console.log(usuario2.emptyCart);
   
       } else {
   
@@ -115,7 +117,9 @@ server.get("/pagos", async  (req, res)=>{
         );
         // await User.update({ cart: null }, { where: { id: external_reference } });
         // await User.update({ emptyCart: true }, { where: { id: external_reference } });
-  
+        let usuario2 = await User.findByPk(external_reference)
+
+        console.log(usuario2.emptyCart);
   
       }
   

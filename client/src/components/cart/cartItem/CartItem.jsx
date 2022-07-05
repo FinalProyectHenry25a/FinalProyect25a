@@ -57,7 +57,7 @@ const CartItem = (props) => {
             id="qty"
             name="qty"
             className={styles.input}
-            value={""}
+            value={input}
             onChange={onChangeHandler}
           />
         </div>

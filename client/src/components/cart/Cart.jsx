@@ -25,18 +25,18 @@ const Cart = () => {
     verificarQueHayaUsuarioLogueado();
   }, []);
   useEffect(() => {
-    console.log("Entrando al effect")
+
     dispatch(getLocalCart())
   }, [])
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
+          `http://localhost:8080/user/${currentUser.email}`
         );
         if(currentUser.emailVerified){
 
-          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+          await axios.put(`http://localhost:8080/verification/${currentUser.email}`)
 
         }
         setLoggedUser(user.data);
@@ -70,7 +70,6 @@ const Cart = () => {
     
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
   
-  
   return (
     <div className={styles.cart}>
       <UserNavBar/>
@@ -85,8 +84,8 @@ const Cart = () => {
           <span>TOTAL: ({totalItems} productos)</span>
           <span>$ {totalPrice}</span>
         </div>
-   {auth.currentUser?.emailVerified ? <Link to="/mercadopago"> 
-        <button className={styles.summary__checkoutBtn} onClick={() => pay()}>
+{auth.currentUser?.emailVerified ? <Link to="/mercadopago">
+        <button  className={styles.summary__checkoutBtn}>
         Confirmar Pedido <img src={mercadopago} />
         </button>
         </Link> : <span>Debes tener una cuenta con mail verificado para comprar</span>}

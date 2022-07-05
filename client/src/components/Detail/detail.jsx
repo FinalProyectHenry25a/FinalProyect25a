@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails, addToCart } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Detail() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [review, setReview] = useState({
+    comentario: ""
+  })
+
 
   useEffect(() => {
     dispatch(getDetails(id));
@@ -14,16 +19,38 @@ export default function Detail() {
 
   const PID = useSelector((state) => state.phonesId);
 
+ 
+ 
+
+    function promedio(){
+      if(PID.review)
+      {   
+        let arr=PID.review?.map(el=>el.rating)
+       
+        let suma = 0
+        for(let i=0;i<arr.length;i++){
+          suma=suma+arr[i]
+        }
+    
+    return (suma/arr.length).toFixed(2)
+  }else return "no fue ranqueado"
+    }
+  
+
+
   return (
     <div
       style={{ background: "white", height: "max-content", overflow: "auto" }}
     >
+     
       <nav aria-label="breadcrumb" style={{ margin: 10 + "px" }}>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <a href="/home" style={{ textDecoration: "none", color: "black" }}>
+            <Link to="/home">
+            <p style={{ textDecoration: "none", color: "black" }}>
               Home
-            </a>
+            </p>
+            </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             {PID.brand}
@@ -93,7 +120,8 @@ export default function Detail() {
               </div>
               {/* <p className="sr-only">4 out of 5 stars</p> */}
               <div style={{fontSize: 26 + "px" }}>
-                {PID.rating} 
+                {promedio()} 
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -195,8 +223,29 @@ export default function Detail() {
               </p>
             </div>
           </div> */}
+
+
+            <div>
+
+            <h3>Comentarios</h3>
+          {PID.review? PID.review.map((e) =>{
+            return(
+              <div className="border">
+            <p>{e.usuario}</p>
+            <p>{e.rating}</p>
+            <p>{e.comentario}</p>
+            </div>
+            )})
+          :(
+            <p>este articulo no tiene comentarios</p>
+          )}
+             
+          
+           </div>
+
         </div>
       </div>
+
     </div>
   );
 }

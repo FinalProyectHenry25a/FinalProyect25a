@@ -5,7 +5,8 @@ import { auth } from "../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../Actions";
+import { addToCart, addToCartUser } from "../../Actions";
+import soldOut from "../../images/sold-out.png"
 
 export default function Card(props) {
 
@@ -25,7 +26,7 @@ export default function Card(props) {
     try {
       let add = (
         await axios.put(
-          `http://localhost:3001/favourites/${user.email}/${props.id}`
+          `http://localhost:8080/favourites/${user.email}/${props.id}`
         )
       ).data;
       alert("Artículo agregado a favoritos.");
@@ -39,7 +40,13 @@ export default function Card(props) {
 
   return (
     <div className="card" style={{width: 18 + 'rem', display: "inline-flex", flexFlow: "row wrap", justifyContent: "center"}} >
-      <img src={props.images} style={{height: 300 + "px" }} alt="..." />
+      <div style={{height: 300 + "px" }}>
+      {props.stock>0?(
+        <img src={props.images} style={{height: 300 + "px" }} alt="..." />
+      ):
+      <img src={soldOut} style={{height: 200 + "px" }} alt="..." />
+      }
+      </div>
       <div className="card-body">
         <h3 className="card-title">{props.brand}</h3>
         <h3>{props.model}</h3>
@@ -49,9 +56,15 @@ export default function Card(props) {
           <br />
         </div>
         {props.stock>0?(
-        <Link to="#">
+          <div>
+     {auth.currentUser  ? <Link to="#">
+          <button className="btn btn-outline-dark, w-100" type="submit"  onClick={e => dispatch(addToCartUser(user.email , props.id))}>Agregar al carrito User</button>
+        </Link> : <Link to="#">
           <button className="btn btn-outline-dark, w-100" type="submit"  onClick={e => dispatch(addToCart(props.id))}>Agregar al carrito</button>
-        </Link>
+        </Link>}
+        <p>Disponibles: {props.stock}</p>
+        </div>
+        
         ):<p>AGOTADO</p>}
         <br/>
         <br/>

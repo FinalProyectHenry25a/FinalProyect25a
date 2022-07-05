@@ -8,19 +8,19 @@ import axios from "axios";
 import "./UserNavBar.css";
 import SearchBar from "../SearchBar/Searchbar";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {getLocalCart} from '../../Actions'
-
+import { useDispatch, useSelector } from "react-redux";
+import { getLocalCart } from "../../Actions";
 
 export default function UserNavBar({setCurrentPage}) {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const [user, setUser] = useState();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
   }, []);
+
   useEffect(() => {
     let count = 0;
     cart.forEach((item) => {
@@ -30,16 +30,17 @@ export default function UserNavBar({setCurrentPage}) {
     setCartCount(count);
   }, [cart, cartCount]);
 
-    useEffect(() => {
-    dispatch(getLocalCart())
-  }, [])
+  useEffect(() => {
 
+    dispatch(getLocalCart())
+
+  }, [])
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
+          `http://localhost:8080/user/${currentUser.email}`
         );
         setUser(user.data);
       }
@@ -76,10 +77,12 @@ export default function UserNavBar({setCurrentPage}) {
           </ul>
         </li>
             </ul>
+            {user.isAdmin ? <Link className="nav-link active m-3" to="admin">
+              <button>Admin Menu</button>
+            </Link> : null}
             <Link className="nav-link active m-3" to="cart">
               <BsFillCartFill /> {cartCount}
             </Link>
-            <SearchBar setCurrentPage={setCurrentPage} />
           </div>
         </div>
       ) : (

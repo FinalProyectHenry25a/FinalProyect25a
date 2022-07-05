@@ -5,29 +5,41 @@ import { useDispatch, useSelector } from "react-redux";
 import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getPhones } from "../../Actions/index";
+import { filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
-import { Link } from "react-router-dom";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
+import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
+import { auth } from "../../firebase/firebase-config";
+
 import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
 const Home = () => {
+
   const [loggedUser, setLoggedUser] = useState();
   
 
   useEffect(() => {
+
     verificarQueHayaUsuarioLogueado();
+
+    
+       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+
+    dispatch(getLocalCart())
+
+  }, [])
 
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
+  const filtrados = useSelector((state) => state.filtered)
 
  
   
@@ -35,20 +47,18 @@ const Home = () => {
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
-        );
+     
+        let info = await dispatch(getUser(currentUser.email))
+
         if(currentUser.emailVerified){
 
           await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
 
         }
-        setLoggedUser(user.data);
+        setLoggedUser(info.payload);
       }
     });
   };
-
-  console.log(loggedUser);
 
   const [filtered, setFiltered] = useState({
     byRom: null,
@@ -65,17 +75,19 @@ const Home = () => {
   const indexOfLastPhones = currentPage * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
 
-
+ const cart = useSelector(state => state.cart)
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+
   useEffect(() => {
-    dispatch(getPhones());
-    localStorage.getItem('filter')
-  }, [dispatch]);
+    (!filtrados?
+    dispatch(getPhones()):console.log("casi"));
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtrados]);
 
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
@@ -112,23 +124,62 @@ const Home = () => {
           : document.getElementById("order").value,
       byPrice: price,
       byProcessor:
-        document.getElementById("processor").value === ""
+        document.getElementById("processor").value === "null"
           ? null
           : document.getElementById("processor").value,
     }));
 
    
   }
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart])
   
+  useEffect(()=>{
+    let prueba=localStorage.getItem("filter")
+    prueba?(
+      dispatch(getLocalFilter())
+  ):(dispatch(getPhones()))},[])
+
+
 
   const send = async (e) => {
-    dispatch(filters(filtered));
+     dispatch(filters(filtered));
+    setCurrentPage(1);   
+  
+  };
+
+  const clearFilter =(e) => {
+
+    document.getElementById("brand").value = "null"
+    document.getElementById("rom").value = "null"
+    document.getElementById("price").value = "null"
+    document.getElementById("ram").value = "null"
+    document.getElementById("network").value = "null"
+    document.getElementById("order").value = "null"
+    document.getElementById("processor").value = "null"
+
+    let clear={
+      byBrand:null,
+      byRom: null,
+      byRam:null,
+      byNetwork:null,
+      byOrder: null,
+      byPrice: null,
+      byProcessor:null,
+    }
+
+    localStorage.removeItem("filter")
+    dispatch(filters(clear));
     setCurrentPage(1);
+    
   };
 
   const logout = async () => {
     await signOut(auth);
   };
+
+  
 
   return (
     <div>
@@ -141,7 +192,8 @@ const Home = () => {
 
       {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
       <Carrousel />
-
+      <SearchBar setCurrentPage={setCurrentPage}/>
+      <div id="filtros">
       <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">Todas</option>
         <option value="Samsung">Samsung</option>
@@ -194,10 +246,21 @@ const Home = () => {
       </select>
 
       {/* por processor--------------------------------------------------- */}
-      <div style={{ display: "inline-flex", margin: 3 + "px" }}>
-        <input id="processor" className="form-control me-3" placeholder="busca por procesador" type="search" style={{ width: 100 + "%" }} onChange={(e) => filtersSetters(e)}></input>
+      {/* <div style={{ display: "inline-flex", margin: 3 + "px" }}> */}
+        <select id="processor" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+        <option  value= "null" >Procesador</option>
+        <option value="Snapdragon">Snapdragon</option>
+        <option value="Exynos">Exynos</option>
+        <option value="Mediatek">Mediatek</option>
+        <option value="Kirin">Kirin</option>
+        <option value="Apple">Apple</option>
+        </select>
+
+
         <button className="btn btn-outline-dark" onClick={() => send()}>Buscar</button>
-      </div>
+        <button className="btn btn-outline-dark" onClick={() => clearFilter()}>Limpiar filtros</button>
+        </div>
+      {/* </div> */}
       {/* filtrado************************************ */}
       <div className={style.flex}>
         {currentPhones && allPhones.length ? (

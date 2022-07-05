@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   adjustItemQty,
     removeFromCart,
-    adjustQty
+    adjustQty,
+    removeFromCartUser
   } from "../../../Actions/index";
+import { auth } from "../../../firebase/firebase-config";
 import styles from './CartItem.module.css'
 
 const CartItem = (props) => {
@@ -42,12 +44,18 @@ const CartItem = (props) => {
             onChange={onChangeHandler}
           />
         </div>
+    {auth.currentUser ? <button
+          onClick={() => dispatch(removeFromCartUser(auth.currentUser.email ,props.item.id))}
+          className={styles.actions__deleteItemBtn}
+        >
+          x
+        </button> :
         <button
           onClick={() => dispatch(removeFromCart(props.item.id))}
           className={styles.actions__deleteItemBtn}
         >
           x
-        </button>
+        </button>}
       </div>
     </div>
   )

@@ -3,7 +3,10 @@ const initialState = {
     phonesId : [],
     cart: [],
     currentItem: null,
-    mercadoPago: {},
+    filtered:[],
+    users: [],
+    user: {},
+    count: 1
 }
 
 function rootReducer (state = initialState, action){
@@ -13,13 +16,24 @@ function rootReducer (state = initialState, action){
                 ...state,
                 phones: action.payload
             }
+        case 'GET_USERS':
+          let usersWithouthSuperAdmin = action.payload.filter(element => element.email !== "finalproyect25a@gmail.com");
+              return{
+                ...state,
+                users: usersWithouthSuperAdmin
+            }
+        case 'GET_USER':
+              return{
+                ...state,
+                user: action.payload
+            }
         case 'GET_PHONES_BY_NAME':
             return{
                 ...state,
                 phones: action.payload
             }
         case 'GET_LOCAL_CART':
-            const currentCart = JSON.parse(localStorage.getItem("cart")) || []
+            var currentCart = JSON.parse(localStorage.getItem("cart")) || []
             
             return { ...state, cart: currentCart }
         case 'GET_DETAILS':
@@ -27,13 +41,21 @@ function rootReducer (state = initialState, action){
                 ...state,
                 phonesId: action.payload
             }
+            case "GET_LOCAL_FILTERS":
+              let currentFilter = JSON.parse(localStorage.getItem("filter")) || []
+              return{
+                ...state,
+                phones:currentFilter,
+                filtered:currentFilter
+              }
             
                case 'FILTERS':
-                let filters = action.payload
-                localStorage.setItem('filter', JSON.stringify(filters))
+               
+                
             return{
                 ...state,
-                phones: action.payload
+                phones: action.payload,
+                filtered:action.payload
             }
             case 'ADD_TO_CART':
                 // Great Item data from products array
@@ -54,20 +76,61 @@ function rootReducer (state = initialState, action){
                       : item
                   )
                 : [...state.cart, { ...item, qty: 1 }]
-
+                  
                 localStorage.setItem("cart", JSON.stringify(newCart))
 
                 return {
                   ...state,
                   cart: newCart
                 };
-              case 'REMOVE_FROM_CART':
-                let cartFiltrado = state.cart.filter((item) => item.id !== action.payload.id)
-                localStorage.setItem("cart", JSON.stringify(cartFiltrado))
+
+              case "ADD_TO_CART_USER":
+
+                const itemUser = state.phones.find(
+                  (product) => product.id === action.payload.id
+                );
+                // Check if Item is in cart already
+                const inCartUser = state.cart.find((item) =>
+                  item.id === action.payload.id ? true : false
+                );
+          
+
+                
+                const newCartUser = inCartUser
+                ? state.cart.map((item) =>
+                    item.id === action.payload.id
+                      ? { ...itemUser, qty: item.qty + 1 }
+                      : item
+                  )
+                : [...state.cart, { ...itemUser, qty: 1 }]
+                  
+                localStorage.setItem("cart", JSON.stringify(newCartUser))
+
                 return {
                   ...state,
-                  cart: cartFiltrado,
+                  cart: newCartUser
+                };
 
+                case "REMOVE_FROM_CART_USER":
+
+                  let removeCartUser = state.cart.filter((item) => item.id !== action.payload.id)
+  
+                  localStorage.setItem("cart", JSON.stringify(removeCartUser));
+                   
+                  return {
+                    ...state,
+                    cart: removeCartUser
+                  };
+
+              case 'REMOVE_FROM_CART':
+
+                let removeCart = state.cart.filter((item) => item.id !== action.payload.id)
+  
+                localStorage.setItem("cart", JSON.stringify(removeCart));
+                 
+                return {
+                  ...state,
+                  cart: removeCart
                 };
               case 'ADJUST_ITEM_QTY':
                 return {
@@ -83,12 +146,23 @@ function rootReducer (state = initialState, action){
                   ...state,
                   currentItem: action.payload,
                 };
-                case 'GET_MERCADOPAGO':
-            return {
-                ...state,
-                mercadoPago: action.payload
-            }
-                
+              case 'ADMIN_POSTS':
+                return {
+                  ...state,
+                  phones: action.payload
+                }
+              case "EDIT_POSTS": 
+                return {
+                  ...state,
+                  phones: action.payload,
+                  phonesId: action.payload 
+                }
+              case "USERS_ADMIN":
+                return {
+                  ...state,
+                  users: action.payload,
+                }; 
+                  
             default:
                 return state;
         }      

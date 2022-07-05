@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react'
 import { useSelector} from 'react-redux'
 import Comprar from '../Comprar/Comprar'
 import axios from 'axios'
-
+import {getLocalCart} from '../../Actions'
+import { auth } from '../../firebase/firebase-config'
 
 function App() {
   const [datos, setDatos] = useState("")
   const cart = useSelector(state => state.cart)
-  console.log(cart)
   
   
 
   //  useEffect(()=>{
   //    axios
-  //    .get("http://localhost:3001/mercadopago/")
+  //    .get("http://localhost:8080/mercadopago/")
   //    .then((data)=>{
   //      setDatos(data.data)
   //      console.info('Contenido de data:', data)
@@ -27,13 +27,16 @@ function App() {
 
 
   useEffect(()=>{
-    axios.post("http://localhost:3001/mercadopago/",{
-      items: productos
-    }).then((data)=>{
-           setDatos(data.data)
-            console.info('Contenido de data:', data)
-          }).catch(err => console.error(err))
-  }, [])
+    let pack = []
+    pack.push(cart)
+    pack.push(auth.currentUser.email)
+    axios
+    .post(`http://localhost:8080/mercadopago`, pack)
+    .then((data)=>{
+      setDatos(data.data)
+    }).catch(err => console.error(err))
+  },[])
+
   return (
     <div className="App">
        { !datos

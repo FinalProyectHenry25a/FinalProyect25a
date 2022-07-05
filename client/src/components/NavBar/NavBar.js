@@ -25,6 +25,12 @@ const NavBar = ({setCurrentPage}) => {
     dispatch(getLocalCart())
   }, [])
 
+  useEffect(() => {
+
+    dispatch(getLocalCart())
+
+  }, [])
+
   return (
     <nav className={style.navContainer}>
 

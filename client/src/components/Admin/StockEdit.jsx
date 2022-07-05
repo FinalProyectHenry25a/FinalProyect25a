@@ -2,25 +2,27 @@ import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
-export default function StockEdit(props) {
-  const [user, setUser] = useState(auth.currentUser);
+export default function StockEdit() {
+
+  const dispatch = useDispatch();
   const [postsState, setPostsState] = useState([]);
   const [change, setChange] = useState({do:'add', amount: 0});
-
   const history = useHistory();
 
-  useEffect(async() => {
+  useEffect(() => {
+
     userVerificate();
-    const post = (await axios("http://localhost:3001/admin/posts")).data;
-  
     loadPosts();
-  }, [user, change]);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [change]);
 
   async function loadPosts() {
     try {
-        let post = (await axios("http://localhost:3001/admin/posts")).data;
+        let post = (await axios.get("http://localhost:8080/admin/posts")).data;
 
         post = post.sort(function (a, b) {
           if (a.model.toLowerCase() > b.model.toLowerCase()) return 1;
@@ -34,14 +36,28 @@ export default function StockEdit(props) {
     }
   }
 
-  const userVerificate = async () => {
-    await onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser || currentUser.email !== props.userRole) {
-        history.push("/home");
+ const userVerificate = async () => {
+
+    await onAuthStateChanged(auth, async (currentUser) => {
+
+      try {
+
+        let info = await dispatch(getUser(currentUser.email))
+
+        if(!info.payload.isAdmin){
+
+          history.push("/home");
+          
+        }
+
+      } catch (error) {
+
+        console.log(error);
+        
       }
+
     });
   };
-
 
   function settings(e) {
     setChange({ 
@@ -65,17 +81,19 @@ export default function StockEdit(props) {
             "No se puede realizar la operacion debido. Revise stock actual  y valores unicamente positivos"
           );
         } else {
+
           let bod = { ...change, id: id };
 
-          let add = (
-            await axios.put("http://localhost:3001/admin/modifica-stock", bod)
-          ).data;
-
+            await axios.put("http://localhost:8080/admin/modifica-stock", bod)
+        
           setChange({ ...change, amount: 0 });
+          console.log(change);
           document.getElementById(id).value = null;
+       
+
         }
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     }
 
@@ -89,8 +107,12 @@ export default function StockEdit(props) {
 
       {postsState?.map((el) => (
         <div key={el.id}>
-          <h6> {el.brand} - {el.model} - {el.stock} unidades </h6>
-          
+
+          <div>
+            <h6> {el.brand} - {el.model} - {el.stock} unidades </h6>
+            {el.stock <= 5 ? <p>⚠️ Cantidad de stock crítica</p> : null}
+          </div>
+
           <select  id = 'do' name='do' onChange={settings}>
             <option value="add">Agregar stock</option>
             <option value="remove">Quitar stock</option>

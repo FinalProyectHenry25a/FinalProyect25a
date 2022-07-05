@@ -34,6 +34,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/emptyCart/:email", async (req, res) => {
+
+  const { email } = req.params;
+
+  try {
+
+    await User.update({ emptyCart: false }, { where: { email: email } });
+    
+    res.json("Carrito vacio satisfactoriamente");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+
 router.post("/", async (req, res) => {
   const { email, username, address, firstname, lastname, isAdmin, isVerified } = req.body;
   

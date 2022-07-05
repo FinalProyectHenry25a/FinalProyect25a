@@ -1,22 +1,29 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
-import { getAllUsers, becomeAdmin, getUser } from "../../Actions/index";
+import { getAllUsers, becomeAdmin, getUser, usersAdmin, removeAdmin } from "../../Actions/index";
 
 export default function UsersControl() {
 
   const dispatch = useDispatch();
 
-  const allUsers = useSelector((state) => state.users);
-  const user = useSelector((state) => state.user);
+  const history = useHistory();
+
+  const users = useSelector((state) => state.users);
+
+  const allUsers = users.filter((e) => e.email !== "finalproyect25a@gmail.com")
+
+  useEffect(() => {
+    
+    dispatch(usersAdmin());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   useEffect(() => {
     userVerificate();
-    dispatch(getAllUsers());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, []);
 
   const userVerificate = async () => {
 
@@ -26,9 +33,25 @@ export default function UsersControl() {
 
         let info = await dispatch(getUser(currentUser.email))
 
-        if(!info.payload.isAdmin){
+        if(info.payload.banned) {
 
-          return <Redirect to="/home" />
+          history.push("/home");
+
+        }
+
+        if(info.payload.isAdmin){
+
+          if(!info.payload.email === "finalproyect25a@gmail.com") {
+
+            console.log(info.payload.email);
+
+            history.push("/admin");
+
+          }
+
+        } else {
+
+          history.push("/home");
 
         }
     
@@ -41,24 +64,19 @@ export default function UsersControl() {
     });
   };
 
-  const clickAdmin = (e) => {
-
-    dispatch(becomeAdmin(e.target.value));
-    alert("Se convirtio en admin el weon")
-    console.log(e.target.value);
-
-  }
-
   return (
     <div>
       <Link to="/admin">
         <button>◀ Back</button>
       </Link>
-      {allUsers ? allUsers.map((users) => {
+      {allUsers ? allUsers.map((user) => {
         return (
-          <div key={users.username}>
-          <button key={users.lastname} value={users.email}>{users.email}</button>
-          {user.email === "finalproyect25a@gmail.com" ? <button key={users.firstname} value={users.email} onClick={clickAdmin}>Convertir en Admin</button> : null}
+          <div key={user.username}>
+            <h6>
+            {user.email} - {user.username} - {user.firstname} - {user.lastname}
+            </h6>
+          {!user.isAdmin ? <button key={user.firstname} value={user.email} onClick={() => dispatch(becomeAdmin(user.email))}>Convertir en Admin</button> : null}
+          {user.isAdmin ? <button key={user.firstname} value={user.email} onClick={() => dispatch(removeAdmin(user.email))}>Quitar privilegio de Admin</button> : null}
           </div>
         )
       }) : <span>No hay usuarios registrados</span>}

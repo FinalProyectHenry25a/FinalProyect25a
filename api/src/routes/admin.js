@@ -117,6 +117,30 @@ router.put("/:email", async (req, res) => {
   }
 
 });
+
+router.put("/removeAdmin/:email", async (req, res) => {
+
+  const { email } = req.params;
+
+  try {
+
+    await User.update( 
+      
+      { isAdmin: false } ,
+      { where: { email: email } }
+       
+       );
+
+    res.status(200).json("Se quito el admin satisfactoriamente!");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+
 router.put("/posts/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id)

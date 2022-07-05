@@ -11,7 +11,6 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
-
 import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
 
@@ -20,7 +19,6 @@ import SearchBar from "../SearchBar/Searchbar";
 const Home = () => {
 
   const [loggedUser, setLoggedUser] = useState();
-  
 
   useEffect(() => {
 
@@ -53,7 +51,6 @@ const Home = () => {
         if(info.payload.emptyCart) {
 
           dispatch(clearCart(info.payload.email));
-          // dispatch(emptyCart(info.payload.email));
 
         } 
 

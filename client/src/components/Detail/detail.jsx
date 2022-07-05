@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDetails, addToCart } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/firebase-config";
 
 export default function Detail() {
   const dispatch = useDispatch();
@@ -12,10 +14,31 @@ export default function Detail() {
     comentario: ""
   })
 
+  // const history = useHistory();
+
 
   useEffect(() => {
     dispatch(getDetails(id));
   }, [dispatch, id]);
+
+  // useEffect(() => {
+  //   verificarQueHayaUsuarioLogueado();
+  // }, []);
+
+  // const verificarQueHayaUsuarioLogueado = () => {
+  //   onAuthStateChanged(auth, async (currentUser) => {
+  //     if (currentUser) {
+  //       let user = await axios.get(
+  //         `http://localhost:3001/user/${currentUser.email}`
+  //       );
+  //       if(user.data.banned){
+
+  //         history.push("/banned")
+
+  //       }
+  //     }
+  //   });
+  // };
 
   const PID = useSelector((state) => state.phonesId);
 

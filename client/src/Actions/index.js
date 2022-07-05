@@ -113,6 +113,28 @@ export const clearCart = (email) => {
   };
 };
 
+export const banUser = (email) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/banned/${email}`)
+    window.location.reload()
+    return dispatch({
+      type: "BAN_USER",
+      payload: []
+    });
+  };
+};
+
+export const unbanUser = (email) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/banned/unban/${email}`)
+    window.location.reload()
+    return dispatch({
+      type: "UNBAN_USER",
+      payload: []
+    });
+  };
+};
+
 // export const emptyCart = (email) => {
 //   return async function (dispatch) {
 //     await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
@@ -194,6 +216,15 @@ export function getAllUsers() {
 export function becomeAdmin(email) {
   return async function () {
     const json = await axios.put(`http://localhost:3001/admin/${email}`);
+    window.location.reload();
+    return json;
+  };
+}
+
+export function removeAdmin(email) {
+  return async function () {
+    const json = await axios.put(`http://localhost:3001/admin/removeAdmin/${email}`);
+    window.location.reload();
     return json;
   };
 }

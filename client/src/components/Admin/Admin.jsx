@@ -20,7 +20,7 @@ export default function Admin() {
       try {
         let info = await dispatch(getUser(currentUser.email));
 
-        if (!info.payload.isAdmin) {
+        if (!info.payload.isAdmin || info.payload.banned) {
           history.push("/home");
         }
       } catch (error) {

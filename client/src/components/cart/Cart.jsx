@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from './Cart.module.css'
 import CartItem from '../cart/cartItem/CartItem'
 import {getLocalCart} from '../../Actions/index'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import mercadopago from "../../images/mercadopago.png";
 import { auth } from "../../firebase/firebase-config";
 import SearchBar from "../SearchBar/Searchbar";
 import UserNavBar from "../UserNavBar/UserNavBar";
+import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
 
 
 const Cart = () => {
@@ -16,11 +18,31 @@ const Cart = () => {
   const [totalItems, setTotalItems] = useState(0);
   const cart = useSelector(state => state.cart)
   const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
 
     dispatch(getLocalCart())
   }, [])
+
+  useEffect(() => {
+    verificarQueHayaUsuarioLogueado();
+  }, []);
+
+  const verificarQueHayaUsuarioLogueado = () => {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        let user = await axios.get(
+          `http://localhost:3001/user/${currentUser.email}`
+        );
+        if(user.data.banned){
+
+          history.push("/banned")
+
+        }
+      }
+    });
+  };
 
   useEffect(() => {
     let items = 0;

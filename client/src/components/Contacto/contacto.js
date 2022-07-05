@@ -1,11 +1,17 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchstoken } from "./fetchmetod";
 import Swal from 'sweetalert2';
+import { useHistory } from "react-router-dom";
+import { auth } from "../../firebase/firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
 
 
 
 export default function Contacto () {
+
+    const history = useHistory()
+
     const [correo, SetCorreo] = useState({
       contact_user: "",
       correo_user:"",
@@ -20,6 +26,7 @@ const onChangeCorreo = (e) => {
       [name]: value,
     })
    }
+
 
 const correoEmail = async(e) =>{
     e.preventDefault();
@@ -57,6 +64,25 @@ const correoEmail = async(e) =>{
       })
     }
   }
+
+  useEffect(() => {
+    verificarQueHayaUsuarioLogueado();
+  }, []);
+
+  const verificarQueHayaUsuarioLogueado = () => {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        let user = await axios.get(
+          `http://localhost:3001/user/${currentUser.email}`
+        );
+        if(user.data.banned){
+
+          history.push("/banned")
+
+        }
+      }
+    });
+  };
 
 
 return(

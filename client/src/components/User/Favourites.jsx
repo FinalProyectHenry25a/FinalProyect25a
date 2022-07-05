@@ -5,12 +5,13 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { BsFillCartFill } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
 
 export default function Favourites() {
   const [user, setUser] = useState();
+  const history = useHistory()
   let emailUser = "";
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -22,6 +23,11 @@ export default function Favourites() {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        if(user.data.banned){
+
+          history.push("/banned")
+
+        }
         setUser(user.data);
           emailUser = auth.currentUser.email
       }

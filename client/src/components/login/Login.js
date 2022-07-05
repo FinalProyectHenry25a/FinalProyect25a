@@ -10,9 +10,14 @@ import {
 } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { BsGoogle } from "react-icons/bs"
+import { useSelector } from "react-redux";
+import { BsWindowSidebar } from "react-icons/bs";
+
 
 const Login = () => {
+
+  const cart = useSelector(state => state.cart)
+
   const history = useHistory();
 
   const [loginEmail, setLoginEmail] = useState("");
@@ -29,7 +34,15 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       setLoginEmail("");
       setLoginPassword("");
-      history.push("/home");
+
+      for (let i = 0; i < cart.length; i++) {
+          
+        await axios.put(`http://localhost:3001/cart/${auth.currentUser.email}/${cart[i].id}`)
+        
+      }
+
+      history.push('/home');
+
     } catch {
       alert("❌ mail o contraseña incorrecta❗❗❗");
     }
@@ -62,15 +75,31 @@ const Login = () => {
         };
       }
 
-      let database = await axios.get(
-        `http://localhost:3001/user/${response.user.email}`
-      );
-      if (database.data) {
-        history.push("/home");
+      let database = await axios.get(`http://localhost:3001/user/${response.user.email}`)
+      if(database.data) {
+
+        for (let i = 0; i < cart.length; i++) {
+          
+          await axios.put(`http://localhost:3001/cart/${response.user.email}/${cart[i].id}`)
+          
+        }
+
+        history.push('/home');
+
       } else {
-        await axios.post(`http://localhost:3001/user`, createdUser);
-        history.push("/home");
+
+      await axios.post(`http://localhost:3001/user`, createdUser);
+
+      for (let i = 0; i < cart.length; i++) {
+          
+        await axios.put(`http://localhost:3001/cart/${response.user.email}/${cart[i].id}`)
+        
       }
+
+      history.push('/home');
+
+    }
+      
     } catch (error) {
       console.log(error);
     }

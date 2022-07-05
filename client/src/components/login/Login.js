@@ -5,9 +5,13 @@ import { auth } from '../../firebase/firebase-config';
 import { onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { BsWindowSidebar } from "react-icons/bs";
 
 
 const Login = () => {
+
+  const cart = useSelector(state => state.cart)
 
   const history = useHistory();
 
@@ -30,6 +34,13 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       setLoginEmail("");
       setLoginPassword("");
+
+      for (let i = 0; i < cart.length; i++) {
+          
+        await axios.put(`http://localhost:3001/cart/${auth.currentUser.email}/${cart[i].id}`)
+        
+      }
+
       history.push('/home');
 
     } catch {
@@ -79,10 +90,24 @@ const Login = () => {
       let database = await axios.get(`http://localhost:3001/user/${response.user.email}`)
       if(database.data) {
 
+        for (let i = 0; i < cart.length; i++) {
+          
+          await axios.put(`http://localhost:3001/cart/${response.user.email}/${cart[i].id}`)
+          
+        }
+
         history.push('/home');
 
       } else {
+
       await axios.post(`http://localhost:3001/user`, createdUser);
+
+      for (let i = 0; i < cart.length; i++) {
+          
+        await axios.put(`http://localhost:3001/cart/${response.user.email}/${cart[i].id}`)
+        
+      }
+
       history.push('/home');
 
     }

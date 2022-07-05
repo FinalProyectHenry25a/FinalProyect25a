@@ -7,7 +7,7 @@ import { getLocalCart } from "../../Actions";
 
 //import style from "./../NavBar/NavBar.module.css";
 
-const NavBar = ({setCurrentPage}) => {
+const NavBar = ({ setCurrentPage }) => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -22,10 +22,8 @@ const NavBar = ({setCurrentPage}) => {
   }, [cart, cartCount]);
 
   useEffect(() => {
-
-    dispatch(getLocalCart())
-
-  }, [])
+    dispatch(getLocalCart());
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -61,11 +59,12 @@ const NavBar = ({setCurrentPage}) => {
           </ul>
 
           <Link className="nav-link active m-4" to="/cart">
-           <BsFillCartFill/> {cartCount}
+            <BsFillCartFill /> {cartCount}
           </Link>
         </div>
       </div>
     </nav>
   );
 };
+
 export default NavBar;

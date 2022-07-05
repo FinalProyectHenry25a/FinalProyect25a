@@ -82,6 +82,8 @@ export const addToCart = (itemID) => {
 
 export const addToCartUser = (email, itemID) => {
   return async function (dispatch) {
+    console.log(email);
+    console.log(itemID)
     await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
     return dispatch({
       type: "ADD_TO_CART_USER",

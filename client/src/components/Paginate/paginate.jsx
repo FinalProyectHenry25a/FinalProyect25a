@@ -1,15 +1,14 @@
-import React, { useState, useEffect} from "react";
+import { parseActionCodeURL } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 import "./paginate.css";
 
-
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
-
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [];
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [allPhones])
+  }, [allPhones]);
 
   for (let i = 0; i < Math.ceil(allPhones / phonesPerPage); i++) {
     pageNumbers.push(i + 1);
@@ -17,18 +16,38 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
   function nextPage() {
     if (!(currentPage >= Math.ceil(allPhones / phonesPerPage))) {
-      paginado(currentPage + 1);
-      setCurrentPage(currentPage + 1);
+      paginado(parseInt(currentPage) + 1);
+      setCurrentPage(parseInt(currentPage) + 1);
     }
   }
 
   function previousPage() {
     if (currentPage - 1 > 0) {
-      paginado(currentPage - 1);
-      setCurrentPage(currentPage - 1);
+      paginado(parseInt(currentPage) - 1);
+      setCurrentPage(parseInt(currentPage) - 1);
     }
   }
 
+  function onKeyDown(e) {
+    if (e.keyCode == 13) {
+      setCurrentPage(parseInt(e.target.value));
+      if (
+        parseInt(e.target.value) < 1 ||
+        parseInt(e.target.value) > Math.ceil(allPhones / phonesPerPage) ||
+        isNaN(parseInt(e.target.value))
+      ) {
+        setCurrentPage(1);
+        paginado(1);
+      }
+      else {
+        paginado(parseInt(e.target.value))
+      }
+    }
+  }
+
+  function onChange(e) {
+    setCurrentPage(e.target.value)
+  }
 
   function pag(number) {
     paginado(number);
@@ -37,7 +56,7 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
   return (
     <nav aria-label="...">
-      <ul className="pagination justify-content-center">
+      {/* <ul className="pagination justify-content-center">
         {pageNumbers &&
           pageNumbers.map((number) => (
             <li className="page-item" key={number}>
@@ -46,15 +65,20 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
               </button>
             </li>
           ))}
-      </ul>
+      </ul> */}
 
       <ul className="pagination justify-content-center">
-        <button className="page-link" onClick={()=>previousPage()}>Anterior</button>
-        <label className="alert alert-light">{currentPage}/{Math.ceil(allPhones / phonesPerPage)}</label>
-        <button className="page-link" onClick={()=>nextPage()}>Siguiente</button>
-      </ul>        
-
+        <button className="page-link" onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
+          Anterior
+        </button>
+        <input onChange={(e) => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={currentPage} />
+        <label className="alert alert-light">
+          / {Math.ceil(allPhones / phonesPerPage)}
+        </label>
+        <button className="page-link" onClick={() => nextPage()} disabled={currentPage === Math.ceil(allPhones / phonesPerPage) || currentPage > Math.ceil(allPhones / phonesPerPage) }>
+          Siguiente
+        </button>
+      </ul>
     </nav>
   );
 }
-

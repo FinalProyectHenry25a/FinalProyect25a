@@ -8,10 +8,16 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import { Link, useHistory } from "react-router-dom";
 import { BsFillCartFill } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addToCartUser, addToCart } from "../../Actions";
+import { useParams } from "react-router-dom";
 
-export default function Favourites() {
+export default function Favourites(props) {
   const [user, setUser] = useState();
   const history = useHistory()
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   let emailUser = "";
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -29,17 +35,16 @@ export default function Favourites() {
 
         }
         setUser(user.data);
-          emailUser = auth.currentUser.email
+        emailUser = auth.currentUser.email;
       }
     });
   };
 
-
-
   async function deleteFavourites(emailUser, id) {
-
     try {
-      await axios.put(`http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`);
+      await axios.put(
+        `http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`
+      );
       alert("favorito eliminado");
       window.location.reload();
     } catch (error) {
@@ -63,14 +68,15 @@ export default function Favourites() {
                   price={e.price}
                   id={e.id}
                   stock={e.stock}
-                  />
-                      <button onClick={() => deleteFavourites(auth.currentUser.email, e.id)}>Eliminar</button>
+                />
+                <button
+                  onClick={() => deleteFavourites(auth.currentUser.email, e.id)}
+                >
+                  Eliminar
+                </button>
               </div>
-              
             );
-          }
-          )}
-
+          })}
         </div>
       ) : (
         <h1>No tienes favoritos</h1>

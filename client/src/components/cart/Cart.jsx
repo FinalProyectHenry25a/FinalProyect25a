@@ -40,8 +40,8 @@ const Cart = () => {
     <div className={styles.cart}>
       <UserNavBar/>
       <div className={styles.cartItems}>
-        {cart.map((item) => (
-          <CartItem key={item.id} item={item} />
+        {cart.map((item , i) => (
+          <CartItem key={i} item={item} />
         ))}
       </div>
       <div className={styles.cartSummary}>

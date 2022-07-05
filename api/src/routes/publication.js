@@ -27,7 +27,7 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-
+// TRAE PUBLICACION POR ID
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 

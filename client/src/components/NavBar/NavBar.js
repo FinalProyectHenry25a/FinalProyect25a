@@ -73,7 +73,7 @@ const NavBar = ({ setCurrentPage }) => {
           </div>
 
           <div>
-            <Link className={style.links} to="/login">
+            <Link className={style.links} to="/register">
               Creá tu cuenta
             </Link>
           </div>

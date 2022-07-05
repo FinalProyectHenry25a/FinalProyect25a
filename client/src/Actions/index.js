@@ -64,7 +64,7 @@ export function getLocalFilter() {
 
 export function postPhone(payload) {
   return async function () {
-    const json = await axios.post("http://localhost:3001/postCreator", payload);
+    const json = await axios.post("http://localhost:3001/admin/post", payload);
     return json;
   };
 }

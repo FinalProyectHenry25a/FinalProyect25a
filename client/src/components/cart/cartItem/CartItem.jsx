@@ -18,7 +18,7 @@ const CartItem = (props) => {
   const [stockView, setStockView] = useState(0);
 
   useEffect(async () => {
-    let st = (await axios.get(`http://localhost:8080/home/${props.item.id}`)).data.stock;
+    let st = (await axios.get(`http://localhost:3001/home/${props.item.id}`)).data.stock;
     setStockView(st);
   }, []);
 
@@ -29,7 +29,7 @@ const CartItem = (props) => {
   const onChangeHandler = async (e) => {
     setInput(e.target.value);
 
-    let post = (await axios.get(`http://localhost:8080/home/${props.item.id}`))
+    let post = (await axios.get(`http://localhost:3001/home/${props.item.id}`))
       .data;
 
     if (e.target.value > post.stock) {

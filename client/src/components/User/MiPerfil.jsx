@@ -26,7 +26,7 @@ export default function MiPerfil() {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
+          `http://localhost:8080/user/${currentUser.email}`
         );
         setUser(user.data);
       }
@@ -60,7 +60,7 @@ export default function MiPerfil() {
         lastname: user.lastname,
       };
 
-      await axios.put(`http://localhost:3001/user/${user.email}/edit`, b);
+      await axios.put(`http://localhost:8080/user/${user.email}/edit`, b);
       alert("Actualización exitosa");
       document.getElementById("userName").value = "";
       window.location.reload();
@@ -80,7 +80,7 @@ export default function MiPerfil() {
         lastname: user.lastname,
       };
 
-      await axios.put(`http://localhost:3001/user/${user.email}/edit`, b);
+      await axios.put(`http://localhost:8080/user/${user.email}/edit`, b);
       alert("Actualización exitosa");
       document.getElementById("userAddress").value = "";
       window.location.reload();
@@ -100,11 +100,9 @@ export default function MiPerfil() {
     fileReader.onload = async function () {
       let base64 = fileReader.result;
       //aca en base64 el archivo ya esta convertido a texto
+     
       try {
-        console.log("llegueeee", base64.length);
-        //setPhoto(base64)
-
-        await axios.post("http://localhost:3001/user/cambiarImagen", {
+        await axios.post("http://localhost:8080/user/cambiarImagen", {
           user: user.email,
           image: base64,
         });
@@ -117,6 +115,21 @@ export default function MiPerfil() {
       }
     };
   };
+
+  const removeImage = async() =>{
+    try {
+      await axios.post("http://localhost:8080/user/cambiarImagen", {
+        user: user.email,
+        image: ''
+      });
+
+      alert("Imagen removida");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      alert("No se actualizaron los datos");
+    }
+  }
 
   /* 
   NO BORRAR!!!!!!!!!!! 
@@ -176,9 +189,13 @@ export default function MiPerfil() {
                       <br />
                       <button className="btn btn-light">
                         <label htmlFor="inputarchivo" id="labelarchivo">
-                          ✏️
+                          ✏️editar
                         </label>
                       </button>
+
+                      {user.image? <button className="btn btn-light" onClick={removeImage}>
+                        🗑️quitar
+                      </button> : null}
 
                       <h5 className="my-3">{user.username}</h5>
                       <p className="text-muted mb-1">{user.email}</p>

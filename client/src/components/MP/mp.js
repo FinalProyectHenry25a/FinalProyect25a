@@ -13,7 +13,7 @@ function App() {
 
   //  useEffect(()=>{
   //    axios
-  //    .get("http://localhost:3001/mercadopago/")
+  //    .get("http://localhost:8080/mercadopago/")
   //    .then((data)=>{
   //      setDatos(data.data)
   //      console.info('Contenido de data:', data)
@@ -31,7 +31,7 @@ function App() {
     pack.push(cart)
     pack.push(auth.currentUser.email)
     axios
-    .post(`http://localhost:3001/mercadopago`, pack)
+    .post(`http://localhost:8080/mercadopago`, pack)
     .then((data)=>{
       setDatos(data.data)
     }).catch(err => console.error(err))

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -26,7 +26,7 @@ const Home = () => {
 
     verificarQueHayaUsuarioLogueado();
 
-    
+
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -49,10 +49,17 @@ const Home = () => {
       if (currentUser) {
      
         let info = await dispatch(getUser(currentUser.email))
-        console.log(info.payload)
+
+        if(info.payload.emptyCart) {
+
+          dispatch(clearCart(info.payload.email));
+          // dispatch(emptyCart(info.payload.email));
+
+        } 
+
         if(currentUser.emailVerified){
 
-          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+          await axios.put(`http://localhost:8080/verification/${currentUser.email}`)
 
         }
         setLoggedUser(info.payload);

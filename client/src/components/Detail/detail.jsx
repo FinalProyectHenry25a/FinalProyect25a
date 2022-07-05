@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails, addToCart } from "../../Actions/index";
+import { auth } from "../../firebase/firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
+import { getDetails, addToCart, addToCartUser } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
 
 export default function Detail() {
+  const [user, setUser] = useState(auth.currentUser);
+  useEffect(() => {
+    userVerificate();
+  }, []);
+
+  const userVerificate = async () => {
+    await onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  };
   const dispatch = useDispatch();
   const { id } = useParams();
   const [review, setReview] = useState({
@@ -138,9 +149,37 @@ export default function Detail() {
             </div>
           </div>
           <form>
-            <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
+          {PID.stock > 0 ? (
+          <div>
+            {auth.currentUser ? (
+              <Link to="#">
+                <button
+                  className="btn btn-outline-dark, w-100"
+                  type="submit"
+                  onClick={(e) => dispatch(addToCartUser(user.email, PID.id))}
+                >
+                  Agregar al carrito User
+                </button>
+              </Link>
+            ) : (
+              <Link to="#">
+                <button
+                  className="btn btn-outline-dark, w-100"
+                  type="submit"
+                  onClick={(e) => dispatch(addToCart(PID.id))}
+                >
+                  Agregar al carrito
+                </button>
+              </Link>
+            )}
+            <p>Disponibles: {PID.stock}</p>
+          </div>
+        ) : (
+          <p className="">AGOTADO</p>
+        )}
+            {/* <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
               Agregar al Carrito
-            </button>
+            </button> */}
           </form>
         </div>
 

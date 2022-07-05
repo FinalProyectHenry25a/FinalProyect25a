@@ -7,7 +7,13 @@ import { BsFillCartFill } from "react-icons/bs";
 import {getLocalCart} from '../../Actions/index'
 import style from "./../NavBar/NavBar.module.css";
 import logo from '../../images/smartworld.jpg'
-const NavBar = ({setCurrentPage}) => {
+
+
+
+
+//import style from "./../NavBar/NavBar.module.css";
+
+const NavBar = ({ setCurrentPage }) => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch()
@@ -28,10 +34,8 @@ const NavBar = ({setCurrentPage}) => {
   }, [])
 
   useEffect(() => {
-
-    dispatch(getLocalCart())
-
-  }, [])
+    dispatch(getLocalCart());
+  }, []);
 
   const change = () => {
     setOpen(!open)
@@ -88,4 +92,5 @@ const NavBar = ({setCurrentPage}) => {
     </nav>
   );
 };
-export default NavBar;
+
+export default NavBar

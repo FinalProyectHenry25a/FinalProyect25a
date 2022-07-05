@@ -4,13 +4,18 @@ import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/firebase-config';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
 import swal2 from 'sweetalert'
 import {Link} from 'react-router-dom';
 
 
+
+
 const Register = () => {
+
+  const cart = useSelector(state => state.cart)
   
   const history = useHistory();
   
@@ -88,8 +93,14 @@ const Register = () => {
           lastname: input.lastname,
           address: input.address
         }
-        await axios.post("http://localhost:3001/user", newUser);
-        
+        await axios.post("http://localhost:8080/user", newUser);
+
+        for (let i = 0; i < cart.length; i++) {
+          
+          await axios.put(`http://localhost:8080/cart/${auth.currentUser.email}/${cart[i].id}`)
+          
+        }
+
         setInput({
 
           email: "",

@@ -305,7 +305,7 @@ module.exports = [
     "model": "Moto G71 5G",
     "price": 250,
     "rating": 3,
-    "images": "https://armoto.vtexassets.com/arquivos/ids/161713-800-auto",
+    "images": "https://armoto.vtexassets.com/arquivos/ids/162506-600-auto",
     "color": "Violet",
     "processor": "Snapdragon 695",
     "ram": "8Gb",

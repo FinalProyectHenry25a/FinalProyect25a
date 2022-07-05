@@ -24,7 +24,7 @@ export default function Card(props) {
     try {
       let add = (
         await axios.put(
-          `http://localhost:3001/favourites/${user.email}/${props.id}`
+          `http://localhost:8080/favourites/${user.email}/${props.id}`
         )
       ).data;
       alert("Artículo agregado a favoritos.");

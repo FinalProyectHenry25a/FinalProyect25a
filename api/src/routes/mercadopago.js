@@ -40,7 +40,7 @@ mercadopago.configure({
     external_reference : `${email}`, //`${new Date().valueOf()}`,
     back_urls: {
       success: 'http://localhost:3001/mercadopago/pagos',
-      failure: 'http://localhost:3001/mercadopago/pagos',
+      failgetItemure: 'http://localhost:3001/mercadopago/pagos',
       pending: 'http://localhost:3001/mercadopago/pagos',
     }
   };

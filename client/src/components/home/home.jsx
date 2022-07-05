@@ -59,7 +59,7 @@ const Home = () => {
 
         if(currentUser.emailVerified){
 
-          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+          await axios.put(`http://localhost:8080/verification/${currentUser.email}`)
 
         }
         setLoggedUser(info.payload);
@@ -81,9 +81,8 @@ const Home = () => {
   const [phonesPerPage] = useState(4);
   const indexOfLastPhones = currentPage * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
-  const cart = useSelector(state => state.cart)
 
-
+ const cart = useSelector(state => state.cart)
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
 
   const paginado = (pageNumber) => {

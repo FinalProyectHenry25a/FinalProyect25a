@@ -59,7 +59,7 @@ const Home = () => {
 
         if(currentUser.emailVerified){
 
-          await axios.put(`http://localhost:8080/verification/${currentUser.email}`)
+          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
 
         }
         setLoggedUser(info.payload);
@@ -191,17 +191,17 @@ const Home = () => {
   return (
     <div>
        
-      <button onClick={logout}>desloguear</button>
+      {/* <button onClick={logout}>desloguear</button> */}
 
       {/* <Link to="/agregado">
         <button>Agregar Phone</button>
       </Link> */}
 
       {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
-      <Carrousel />
-      <SearchBar setCurrentPage={setCurrentPage}/>
+      {/* <Carrousel /> */}
+      
       <div id="filtros">
-      <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+      <select id='brand' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">Todas</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>

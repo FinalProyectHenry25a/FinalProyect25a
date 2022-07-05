@@ -26,7 +26,7 @@ export default function MisCompras() {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:8080/user/${currentUser.email}`
+          `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
       }
@@ -45,7 +45,7 @@ export default function MisCompras() {
     let productID = e.nativeEvent.path[1].id;
     if(input &&puntaje){
 
-    await axios.put(`http://localhost:8080/home/${user.email}/${productID}`, {
+    await axios.put(`http://localhost:3001/home/${user.email}/${productID}`, {
       comentario: input, rating: puntaje
     });
     alert("review agregada")

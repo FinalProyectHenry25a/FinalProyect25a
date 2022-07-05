@@ -20,9 +20,8 @@ export default function Detail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [review, setReview] = useState({
-    comentario: ""
-  })
-
+    comentario: "",
+  });
 
   useEffect(() => {
     dispatch(getDetails(id));
@@ -30,37 +29,28 @@ export default function Detail() {
 
   const PID = useSelector((state) => state.phonesId);
 
- 
- 
+  function promedio() {
+    if (PID.review) {
+      let arr = PID.review?.map((el) => el.rating);
 
-    function promedio(){
-      if(PID.review)
-      {   
-        let arr=PID.review?.map(el=>el.rating)
-       
-        let suma = 0
-        for(let i=0;i<arr.length;i++){
-          suma=suma+arr[i]
-        }
-    
-    return (suma/arr.length).toFixed(2)
-  }else return "no fue ranqueado"
-    }
-  
+      let suma = 0;
+      for (let i = 0; i < arr.length; i++) {
+        suma = suma + arr[i];
+      }
 
+      return (suma / arr.length).toFixed(2);
+    } else return "no fue ranqueado";
+  }
 
   return (
     <div
       style={{ background: "white", height: "max-content", overflow: "auto" }}
     >
-     
       <nav aria-label="breadcrumb" style={{ margin: 10 + "px" }}>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
             <Link to="/home">
-            <p style={{ textDecoration: "none", color: "black" }}>
-              Home
-            </p>
+              <p style={{ textDecoration: "none", color: "black" }}>Home</p>
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
@@ -130,8 +120,8 @@ export default function Detail() {
               </svg> */}
               </div>
               {/* <p className="sr-only">4 out of 5 stars</p> */}
-              <div style={{fontSize: 26 + "px" }}>
-                {promedio()} 
+              <div style={{ fontSize: 26 + "px" }}>
+                {promedio()}
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -145,38 +135,40 @@ export default function Detail() {
                   <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
                 </svg>
               </div>
-              <br/>
+              <br />
             </div>
           </div>
           <form>
-          {PID.stock > 0 ? (
-          <div>
-            {auth.currentUser ? (
-              <Link to="#">
-                <button
-                  className="btn btn-outline-dark, w-100"
-                  type="submit"
-                  onClick={(e) => dispatch(addToCartUser(user.email, PID.id))}
-                >
-                  Agregar al carrito User
-                </button>
-              </Link>
+            {PID.stock > 0 ? (
+              <div>
+                {auth.currentUser ? (
+                  <Link to="#">
+                    <button
+                      className="btn btn-outline-dark, w-100"
+                      type="submit"
+                      onClick={(e) =>
+                        dispatch(addToCartUser(user.email, PID.id))
+                      }
+                    >
+                      Agregar al carrito User
+                    </button>
+                  </Link>
+                ) : (
+                  <Link to="#">
+                    <button
+                      className="btn btn-outline-dark, w-100"
+                      type="submit"
+                      onClick={(e) => dispatch(addToCart(PID.id))}
+                    >
+                      Agregar al carrito
+                    </button>
+                  </Link>
+                )}
+                <p>Disponibles: {PID.stock}</p>
+              </div>
             ) : (
-              <Link to="#">
-                <button
-                  className="btn btn-outline-dark, w-100"
-                  type="submit"
-                  onClick={(e) => dispatch(addToCart(PID.id))}
-                >
-                  Agregar al carrito
-                </button>
-              </Link>
+              <p className="">AGOTADO</p>
             )}
-            <p>Disponibles: {PID.stock}</p>
-          </div>
-        ) : (
-          <p className="">AGOTADO</p>
-        )}
             {/* <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
               Agregar al Carrito
             </button> */}
@@ -263,28 +255,24 @@ export default function Detail() {
             </div>
           </div> */}
 
-
-            <div>
-
+          <div>
             <h3>Comentarios</h3>
-          {PID.review? PID.review.map((e) =>{
-            return(
-              <div className="border">
-            <p>{e.usuario}</p>
-            <p>{e.rating}</p>
-            <p>{e.comentario}</p>
-            </div>
-            )})
-          :(
-            <p>este articulo no tiene comentarios</p>
-          )}
-             
-          
-           </div>
-
+            {PID.review ? (
+              PID.review.map((e) => {
+                return (
+                  <div className="border">
+                    <p>{e.usuario}</p>
+                    <p>{e.rating}</p>
+                    <p>{e.comentario}</p>
+                  </div>
+                );
+              })
+            ) : (
+              <p>este articulo no tiene comentarios</p>
+            )}
+          </div>
         </div>
       </div>
-
     </div>
   );
 }

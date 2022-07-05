@@ -99,7 +99,7 @@ function rootReducer (state = initialState, action){
                 const newCartUser = inCartUser
                 ? state.cart.map((item) =>
                     item.id === action.payload.id
-                      ? { ...itemUser, qty: item.qty + 1 }
+                      ? { ...item, qty: item.qty + 1 }
                       : item
                   )
                 : [...state.cart, { ...itemUser, qty: 1 }]

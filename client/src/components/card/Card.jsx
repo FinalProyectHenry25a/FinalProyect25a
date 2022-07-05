@@ -66,7 +66,7 @@ export default function Card(props) {
                 <button
                   className="btn btn-outline-dark, w-100"
                   type="submit"
-                  onClick={(props) => dispatch(addToCartUser(user.email, props.id))}
+                  onClick={() => dispatch(addToCartUser(user.email, props.id))}
                 >
                   Agregar al carrito User
                 </button>
@@ -76,7 +76,7 @@ export default function Card(props) {
                 <button
                   className="btn btn-outline-dark, w-100"
                   type="submit"
-                  onClick={(props) => dispatch(addToCart(props.id))}
+                  onClick={() => dispatch(addToCart(props.id))}
                 >
                   Agregar al carrito
                 </button>

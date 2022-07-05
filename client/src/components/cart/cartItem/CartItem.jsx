@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { adjustItemQty, removeFromCart, adjustQty, removeFromCartUser } from "../../../Actions/index";
 import { auth } from "../../../firebase/firebase-config";
@@ -17,7 +17,7 @@ const CartItem = (props) => {
 
   const dispatch = useDispatch();
   
-  console.log(props.item.brand)
+  console.log(props)
 
   return (
     <div className={styles.cartItem}>
@@ -38,7 +38,7 @@ const CartItem = (props) => {
             id="qty"
             name="qty"
             className={styles.input}
-            value={input}
+            value={""}
             onChange={onChangeHandler}
           />
         </div>

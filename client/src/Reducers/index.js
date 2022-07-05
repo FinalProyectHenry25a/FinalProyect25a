@@ -29,6 +29,8 @@ function rootReducer (state = initialState, action){
             }
             
                case 'FILTERS':
+                let filters = action.payload
+                localStorage.setItem('filter', JSON.stringify(filters))
             return{
                 ...state,
                 phones: action.payload

@@ -5,6 +5,9 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from '../../firebase/firebase-config';
 import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import swal from 'sweetalert';
+
 
 const Register = () => {
 
@@ -33,6 +36,7 @@ const Register = () => {
         lastname: input.lastname,
         address: input.address
       }
+      
       await axios.post("http://localhost:3001/user", newUser);
       setInput({
 
@@ -45,7 +49,13 @@ const Register = () => {
 
       });
 
-      alert('User created successfully');
+      
+      // swal('Buen Trabajo','Te registraste correctamente!', "Ver productos");
+      swal({
+        title: "Buen Trabajo!",
+        text: "Te registraste correctamente!",
+        icon: "success",
+      });
 
       history.push('/home');
 
@@ -79,32 +89,36 @@ const Register = () => {
     <div className={style.login}>
       <div className={style.container}>
         <div className={style.image}>
-          <h1>REGISTER</h1>
+          <h1>Formulario de registro</h1>
         </div>
         <div>
-          <input placeholder="Username..." type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Nombre de usuario" type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
         </div>
         <div>
-          <input placeholder="Firstname..." type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Nombre" type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
         </div>
         <div>
-          <input placeholder="Lastname..." type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Apellido" type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
         </div>
         <div>
-          <input placeholder="Address..." type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Dirección" type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
         </div>
         <div>
-          <input placeholder="Email..." autoFocus type="email" id='email' name="email" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Email" autoFocus type="email" id='email' name="email" className={style.input} required onChange={handleChange}></input>
         </div>
         <div>
-          <input placeholder="Contraseña..." type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Contraseña" type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
         </div>
         {/* <div>
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
         </div> */}
         <div className={style.register}>
-          <button onClick={register} type='submit' className={style.btn}>Registrarse</button>
+          <button onClick={register} type='submit' className={style.btn}>Registrarme</button>
         </div>
+        <Link to="login">
+            <p className={style.ancor}>Volver</p>
+          
+          </Link>
         {/* <div className={style.register}>
           <button className={style.btn}>Ingresar con Google</button>
         </div>

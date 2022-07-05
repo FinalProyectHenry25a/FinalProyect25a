@@ -74,6 +74,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getPhones());
+    localStorage.getItem('filter')
   }, [dispatch]);
 
   function filtersSetters(e) {

@@ -9,7 +9,7 @@ const admin = require("./admin");
 const mercadopago = require('./mercadopago');
 const order = require('./order');
 const comprarealizada = require ('./compra-realizadas')
-
+const preguntas = require('./preguntas');
 const router = Router();
 
 const correo = require('../controllers/auth')
@@ -50,5 +50,8 @@ router.use('/compra-realizada', comprarealizada)
 
 //RUTA FORMULARIO DE CORREO ELECTRONICO
 router.use('/correo', correo);
+
+//RUTA PREGUNTAS Y RESPUESTAS
+router.use('/detalle',preguntas );
 
 module.exports = router;

@@ -53,7 +53,9 @@ export default function Admin() {
       <Link to={`/admin/users`}>
         <button>Usuarios</button>
       </Link>
-
+      <Link to={`/admin/preguntas`}>
+        <button>Preguntas</button>
+      </Link>
       <h3>Ventas realizadas:</h3>
     </div>
   );

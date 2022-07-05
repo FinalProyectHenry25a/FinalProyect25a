@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails, addToCart } from "../../Actions/index";
+import { getDetails, addToCart, getUser } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
+import { onAuthStateChanged, reload, signOut } from "firebase/auth";
+import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 
 export default function Detail() {
@@ -11,7 +13,9 @@ export default function Detail() {
   const [review, setReview] = useState({
     comentario: ""
   })
-
+  const [user, setUser] = useState();
+  const [loggedUser, setLoggedUser] = useState();
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     dispatch(getDetails(id));
@@ -36,6 +40,43 @@ export default function Detail() {
   }else return "no fue ranqueado"
     }
   
+    const verificarQueHayaUsuarioLogueado = () => {
+      onAuthStateChanged(auth, async (currentUser) => {
+        if (currentUser) {
+          let user = await axios.get(
+            `http://localhost:3001/user/${currentUser.email}`
+          );
+          setUser(user.data);
+        }
+      });
+    };
+
+    
+    useEffect(() => {
+
+      verificarQueHayaUsuarioLogueado();
+  
+      
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handlerChange = (e) => {
+      setInput(e.target.value);
+    };
+
+    const publicar = async (e) => {
+      // let productID = e.nativeEvent.path[1].id;
+      if(input){
+  
+      await axios.put(`http://localhost:3001/detalle/${user.email}/${PID.id}`, {
+        pregunta: input
+      });
+      alert("pregunta enviada")
+      window.location.reload()
+    }else alert("haga una pregunta antes de publicar")
+  
+  };
+
 
 
   return (
@@ -239,9 +280,32 @@ export default function Detail() {
           :(
             <p>este articulo no tiene comentarios</p>
           )}
-             
-          
-           </div>
+             </div>
+             <div>
+
+              <h3>Preguntas y Respuestas</h3>
+              {user?
+              (<div>
+              <input onChange={(e) => handlerChange(e)} type="text" placeholder="escribinos tu pregunta..." />
+              <button onClick={(e) => publicar(e)}>preguntar</button>
+              </div>
+              ):(
+                <p></p>
+              )
+            }
+              {PID.QyA? PID.QyA.map((e) =>{
+            return(
+              <div className="border">
+            <p>{e.usuario}</p>
+            <p>{e.pregunta}</p>
+            <p>{e.respuesta}</p>
+            </div>
+            )}):(
+              <p></p>
+            )
+
+            }
+             </div>
 
         </div>
       </div>

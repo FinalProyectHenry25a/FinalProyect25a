@@ -8,7 +8,11 @@ const {
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/e_commerce`, {
   logging: false, // set to console.log to see the raw SQL queries
+<<<<<<< HEAD
   native: false,
+=======
+  native: false // set to true to
+>>>>>>> 410d545830ababc8eae15fcdea8ec56156fd8b94
   // lets Sequelize know we can use pg-native for ~30% more ostgspeed
 });
 

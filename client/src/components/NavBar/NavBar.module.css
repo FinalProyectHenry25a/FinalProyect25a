@@ -16,6 +16,27 @@
   margin-left: 10px;
   font-size: 17px;
 }
+
+.toggleButton {
+  position: absolute;
+  top: 2.3rem;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+transition: ease 0.3 seg;
+}
+
+.toggleButton .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+transition: ease 0.3 seg;
+  z-index: 100;
+}
 .containerCuentas{
   display: flex;
   flex-direction: column;

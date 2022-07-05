@@ -22,7 +22,7 @@ const SearchBar = ({setCurrentPage}) => {
   return (
     <form className={style.container}>
       <input className={style.input} onChange={(e) => handleSearch(e)}/>
-      <button className={style.btn} type="submit" onClick={(e) => handleSubmit(e)}> Search </button>
+      <button className={style.btn} type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
     </form>
   );
 };

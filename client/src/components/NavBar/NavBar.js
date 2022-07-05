@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
@@ -11,6 +12,7 @@ const NavBar = ({setCurrentPage}) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch()
   console.log(cart)
+  const [open, setOpen] = useState(false)
 
 
   useEffect(() => {
@@ -31,6 +33,10 @@ const NavBar = ({setCurrentPage}) => {
 
   }, [])
 
+  const change = () => {
+    setOpen(!open)
+  }
+
   return (
     <nav className={style.navContainer}>
 
@@ -39,6 +45,11 @@ const NavBar = ({setCurrentPage}) => {
           <img src={logo} alt="logo" className={style.logo}/>
         </a> 
           </div>
+          <a href="#" className={style.toggleButton} onClick={change}>
+          <span className={style.bar}></span>
+          <span className={style.bar}></span>
+          <span className={style.bar}></span>
+        </a>
           <div className={style.container}>
 
           <SearchBar setCurrentPage={setCurrentPage}/>

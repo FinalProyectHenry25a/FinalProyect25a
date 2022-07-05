@@ -49,10 +49,10 @@ const Home = () => {
       if (currentUser) {
      
         let info = await dispatch(getUser(currentUser.email))
-
+        console.log(info.payload)
         if(currentUser.emailVerified){
 
-          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+          await axios.put(`http://localhost:8080/verification/${currentUser.email}`)
 
         }
         setLoggedUser(info.payload);

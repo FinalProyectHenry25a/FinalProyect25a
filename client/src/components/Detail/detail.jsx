@@ -5,6 +5,7 @@ import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import { getDetails, addToCart, addToCartUser } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
+import styles from './Detail.module.css'
 
 export default function Detail() {
   const [user, setUser] = useState(auth.currentUser);
@@ -54,58 +55,44 @@ export default function Detail() {
       style={{ background: "white", height: "max-content", overflow: "auto" }}
     >
      
-      <nav aria-label="breadcrumb" style={{ margin: 10 + "px" }}>
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
+      <nav  style={{ margin: 10 + "px" }}>
+        <ol >
+          <li >
             <Link to="/home">
             <p style={{ textDecoration: "none", color: "black" }}>
               Home
             </p>
             </Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
+          <li  >
             {PID.brand}
           </li>
         </ol>
       </nav>
       <div
-        style={{
-          display: "inline-flex",
-          justifyContent: "center",
-          width: 20 + "%",
-          height: 10 + "%",
-          margin: 20 + "px",
-        }}
+        
       >
         <img
           src={PID.images}
           alt="Two each of gray, white, and black shirts laying flat."
-          className="img-fluid"
+         
         />
       </div>
 
-      <div style={{ height: "max-content" }}>
-        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-          <h1 style={{ margin: 25 + "px" }}>{PID.model}</h1>
+      <div >
+        <div >
+          <h1 >{PID.model}</h1>
         </div>
 
         <div
-          style={{
-            display: "inline-flex",
-            flexFlow: "column wrap",
-            position: "relative",
-            right: 4 + "%",
-            width: 85 + "%",
-            justifyContent: "end",
-            alignContent: "end",
-          }}
+         
         >
           <p className="fs-2 fw-bolder">${PID.price}</p>
 
-          <div className="mt-6">
-            <h3 className="sr-only">Rating</h3>
-            <div className="flex items-center">
-              <div className="flex items-center">
+          <div >
+            <h3>Rating</h3>
+            <div >
+              <div >
                 {/* <svg className="text-gray-900 h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
@@ -130,7 +117,7 @@ export default function Detail() {
               </svg> */}
               </div>
               {/* <p className="sr-only">4 out of 5 stars</p> */}
-              <div style={{fontSize: 26 + "px" }}>
+              <div >
                 {promedio()} 
 
                 <svg
@@ -154,7 +141,7 @@ export default function Detail() {
             {auth.currentUser ? (
               <Link to="#">
                 <button
-                  className="btn btn-outline-dark, w-100"
+                  
                   type="submit"
                   onClick={(e) => dispatch(addToCartUser(user.email, PID.id))}
                 >
@@ -164,7 +151,7 @@ export default function Detail() {
             ) : (
               <Link to="#">
                 <button
-                  className="btn btn-outline-dark, w-100"
+                  
                   type="submit"
                   onClick={(e) => dispatch(addToCart(PID.id))}
                 >
@@ -175,7 +162,7 @@ export default function Detail() {
             <p>Disponibles: {PID.stock}</p>
           </div>
         ) : (
-          <p className="">AGOTADO</p>
+          <p >AGOTADO</p>
         )}
             {/* <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
               Agregar al Carrito
@@ -184,12 +171,7 @@ export default function Detail() {
         </div>
 
         <div
-          style={{
-            position: "relative",
-            bottom: 200 + "px",
-            margin: 25 + "px",
-            width: 60 + "%",
-          }}
+          
         >
           {/* <div>
             <h3 className="sr-only">Descripcion</h3>
@@ -204,44 +186,44 @@ export default function Detail() {
           </div>
  */}
           <div>
-            <h3 className="text-sm font-medium text-gray-900">
+            <h3 >
               Especificaciones
             </h3>
 
-            <div className="mt-4">
-              <ul role="list" className="pl-4 list-disc text-sm space-y-2">
-                <li className="text-gray-400">
-                  <span className="text-gray-600">{PID.ram}</span>
+            <div >
+              <ul role="list">
+                <li >
+                  <span >{PID.ram}</span>
                 </li>
 
-                <li className="text-gray-400">
-                  <span className="text-gray-600">{PID.rom}</span>
+                <li >
+                  <span >{PID.rom}</span>
                 </li>
 
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
+                <li >
+                  <span >
                     Cuenta con un procesador {PID.processor}
                   </span>
                 </li>
 
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
+                <li>
+                  <span >
                     Conectividad {PID.network}
                   </span>
                 </li>
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
+                <li >
+                  <span>
                     Una bateria de {PID.batery} mAh
                   </span>
                 </li>
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
+                <li >
+                  <span >
                     Una camara frontal de {PID.frontal_cam}" y una principal de{" "}
                     {PID.main_cam}"
                   </span>
                 </li>
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
+                <li>
+                  <span >
                     Cuenta con una pantalla {PID.screen} de {PID.inches}" y una
                     resolucion de {PID.resolution}"
                   </span>
@@ -269,7 +251,7 @@ export default function Detail() {
             <h3>Comentarios</h3>
           {PID.review? PID.review.map((e) =>{
             return(
-              <div className="border">
+              <div >
             <p>{e.usuario}</p>
             <p>{e.rating}</p>
             <p>{e.comentario}</p>

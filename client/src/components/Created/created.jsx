@@ -197,10 +197,6 @@ export default function PhoneCreate() {
     fileReader.onload = async function () {
       let base64 = fileReader.result;
 
-      //aca en base64 el archivo ya esta convertido a texto
-
-      console.log("llegueeee", base64.length);
-
       setInput({ ...input, images: base64 });
     };
   };

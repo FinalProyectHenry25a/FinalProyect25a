@@ -11,8 +11,7 @@ import {
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { BsWindowSidebar } from "react-icons/bs";
-import { BsGoogle } from "react-icons/bs";
+import { BsGoogle, BsWindowSidebar } from "react-icons/bs";
 
 
 const Login = () => {

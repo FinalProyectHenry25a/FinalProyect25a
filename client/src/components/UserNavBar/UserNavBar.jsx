@@ -40,7 +40,7 @@ export default function UserNavBar({setCurrentPage}) {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:8080/user/${currentUser.email}`
+          `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
       }

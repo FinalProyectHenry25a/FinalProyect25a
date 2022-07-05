@@ -65,6 +65,12 @@ const NavBar = ({setCurrentPage}) => {
                 Creá tu cuenta
               </Link>
               </div>
+              <div>
+
+              <Link className={style.links} to="/contacto">
+                Contacto
+              </Link>
+              </div>
               </div>
               
         </div>

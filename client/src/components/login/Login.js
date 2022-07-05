@@ -79,13 +79,13 @@ const Login = () => {
 
       }
 
-      let database = await axios.get(`http://localhost:8080/user/${response.user.email}`)
+      let database = await axios.get(`http://localhost:3001/user/${response.user.email}`)
       if(database.data) {
 
         history.push('/home');
 
       } else {
-      await axios.post(`http://localhost:8080/user`, createdUser);
+      await axios.post(`http://localhost:3001/user`, createdUser);
       history.push('/home');
 
     }

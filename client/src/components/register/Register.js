@@ -45,7 +45,7 @@ const Register = () => {
           lastname: input.lastname,
           address: input.address
         }
-        await axios.post("http://localhost:8080/user", newUser);
+        await axios.post("http://localhost:3001/user", newUser);
         setInput({
 
           email: "",

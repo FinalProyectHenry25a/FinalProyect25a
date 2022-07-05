@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function getPhones() {
   return async function (dispatch) {
-    var json = await axios.get("http://localhost:3001/home");
+    var json = await axios.get("http://localhost:8080/home");
     return dispatch({
       type: "GET_PHONES",
       payload: json.data,
@@ -18,7 +18,7 @@ export function getLocalCart() {
 }
 export function getPhonesByModel(model) {
   return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3001/home?model=${model}`);
+    var json = await axios.get(`http://localhost:8080/home?model=${model}`);
     return dispatch({
       type: "GET_PHONES_BY_NAME",
       payload: json.data,
@@ -28,7 +28,7 @@ export function getPhonesByModel(model) {
 export function getDetails(id) {
   return async function (dispatch) {
     try {
-      const json = await axios.get(`http://localhost:3001/home/` + id);
+      const json = await axios.get(`http://localhost:8080/home/` + id);
       return dispatch({
         type: "GET_DETAILS",
         payload: json.data,
@@ -42,7 +42,7 @@ export function getDetails(id) {
 export const filters = (setters) => (dispatch) => {
   
   return axios
-    .post("http://localhost:3001/filtersAndOrders", setters)
+    .post("http://localhost:8080/filtersAndOrders", setters)
     .then((response)=>{localStorage.setItem("filter",JSON.stringify(response.data)) 
   return response})
     .then((response) => {
@@ -64,7 +64,7 @@ export function getLocalFilter() {
 
 export function postPhone(payload) {
   return async function () {
-    const json = await axios.post("http://localhost:3001/admin/post", payload);
+    const json = await axios.post("http://localhost:8080/admin/post", payload);
     return json;
   };
 }
@@ -84,7 +84,7 @@ export const addToCartUser = (email, itemID) => {
   return async function (dispatch) {
     console.log(email);
     console.log(itemID)
-    await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
+    await axios.put((`http://localhost:8080/cart/${email}/${itemID}`))
     return dispatch({
       type: "ADD_TO_CART_USER",
       payload: {
@@ -107,7 +107,7 @@ export const removeFromCart = (itemID) => {
 
 export const clearCart = (email) => {
   return async function (dispatch) {
-    await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
+    await axios.put(`http://localhost:8080/user//emptyCart/${email}`)
     return dispatch({
       type: "CLEAR_CART_POST_BUY",
       payload: []
@@ -117,7 +117,7 @@ export const clearCart = (email) => {
 
 // export const emptyCart = (email) => {
 //   return async function (dispatch) {
-//     await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
+//     await axios.put(`http://localhost:8080/user//emptyCart/${email}`)
 //     return dispatch({
 //       type: "EMPTY_CART",
 //       payload: []
@@ -128,7 +128,7 @@ export const clearCart = (email) => {
 
 export const removeFromCartUser = (email, itemID) => {
   return async function (dispatch) {
-    await axios.put((`http://localhost:3001/cart/delete/${email}/${itemID}`))
+    await axios.put((`http://localhost:8080/cart/delete/${email}/${itemID}`))
     return dispatch({
       type: "REMOVE_FROM_CART_USER",
       payload: {
@@ -152,7 +152,7 @@ export const adjustItemQty = (itemID, qty) => {
 
 export function postAdmin() {
   return async function (dispatch) {
-    var json = await axios.get("http://localhost:3001/admin/posts");
+    var json = await axios.get("http://localhost:8080/admin/posts");
     return dispatch({
       type: "ADMIN_POSTS",
       payload: json.data,
@@ -165,7 +165,7 @@ export function editPost(id, payload) {
     console.log(id);
     console.log(payload);
     var json = await axios.put(
-      `http://localhost:3001/admin/posts/${id}`,
+      `http://localhost:8080/admin/posts/${id}`,
       payload
     );
 
@@ -185,7 +185,7 @@ export const loadCurrentItem = (item) => {
 
 export function getAllUsers() {
   return async function (dispatch) {
-    var json = await axios.get("http://localhost:3001/user");
+    var json = await axios.get("http://localhost:8080/user");
     return dispatch({
       type: "GET_USERS",
       payload: json.data,
@@ -195,14 +195,14 @@ export function getAllUsers() {
 
 export function becomeAdmin(email) {
   return async function () {
-    const json = await axios.put(`http://localhost:3001/admin/${email}`);
+    const json = await axios.put(`http://localhost:8080/admin/${email}`);
     return json;
   };
 }
 
 export function getUser(email) {
   return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3001/user/${email}`);
+    var json = await axios.get(`http://localhost:8080/user/${email}`);
     return dispatch({
       type: "GET_USER",
       payload: json.data,
@@ -212,7 +212,7 @@ export function getUser(email) {
 
 export function usersAdmin() {
   return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3001/admin/users`);
+    var json = await axios.get(`http://localhost:8080/admin/users`);
     return dispatch({
       type: "USERS_ADMIN",
       payload: json.data,

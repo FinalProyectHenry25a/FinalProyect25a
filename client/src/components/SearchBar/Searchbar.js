@@ -20,9 +20,9 @@ const SearchBar = ({setCurrentPage}) => {
     setCurrentPage(1)
   }
   return (
-    <form className="d-flex" role="search">
-      <input className="form-control me-3 text-truncate" type="search" placeholder="Busca tu proximo celular" aria-label="Search" onChange={(e) => handleSearch(e)}/>
-      <button className="btn btn-outline-dark" type="submit" onClick={(e) => handleSubmit(e)}> Search </button>
+    <form className={style.container}>
+      <input className={style.input} onChange={(e) => handleSearch(e)}/>
+      <button className={style.btn} type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
     </form>
   );
 };

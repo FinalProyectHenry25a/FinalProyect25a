@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
+import swal2 from 'sweetalert'
+import {Link} from 'react-router-dom';
 
 
 
@@ -91,11 +93,11 @@ const Register = () => {
           lastname: input.lastname,
           address: input.address
         }
-        await axios.post("http://localhost:3001/user", newUser);
+        await axios.post("http://localhost:8080/user", newUser);
 
         for (let i = 0; i < cart.length; i++) {
           
-          await axios.put(`http://localhost:3001/cart/${auth.currentUser.email}/${cart[i].id}`)
+          await axios.put(`http://localhost:8080/cart/${auth.currentUser.email}/${cart[i].id}`)
           
         }
 
@@ -109,24 +111,30 @@ const Register = () => {
           address: ""
 
         });
+      
+      // swal('Buen Trabajo','Te registraste correctamente!', "Ver productos");
+      swal2({
+        title: "Buen Trabajo!",
+        text: "Te registraste correctamente!",
+        icon: "success",
+      });
 
-        alert('User created successfully');
+      history.push('/home');
 
-        history.push('/home');
-      }
+    } 
 
-}
+  }
 
-function validation (input){
-  let error = {}
-  if (!input.email) error.email = "Ingresa el email del usuario"
-  if (!input.password) error.password = "Ingresa la contraseña del usuario"
-  if (!input.username) error.username = "Ingresa el nombre de usuario"
-  if (!input.firstname) error.firstname = "Ingresa el nombre del usuario"
-  if (!input.lastname) error.lastname = "Ingresa el apellido del usuario"
-  if (!input.address) error.address = "Ingresa la direccion del usuario"
-  return error
-}
+  function validation (input){
+    let error = {}
+    if (!input.email) error.email = "Ingresa el email del usuario"
+    if (!input.password) error.password = "Ingresa la contraseña del usuario"
+    if (!input.username) error.username = "Ingresa el nombre de usuario"
+    if (!input.firstname) error.firstname = "Ingresa el nombre del usuario"
+    if (!input.lastname) error.lastname = "Ingresa el apellido del usuario"
+    if (!input.address) error.address = "Ingresa la direccion del usuario"
+    return error
+  }
 
 const handleChange = (e) => {
   
@@ -187,7 +195,7 @@ const handleChange = (e) => {
           <div className={style.login}>
       <div className={style.container}>
         <div className={style.image}>
-          <h1>REGISTER</h1>
+          <h1>Formulario de registro</h1>
         </div>
         <div>
           <input placeholder="Username..." type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
@@ -216,6 +224,10 @@ const handleChange = (e) => {
         <div className={style.register}>
           <button onClick={DOS} type='submit' className={style.btn}>Registrarse</button>
         </div>
+        <Link to="login">
+            <p className={style.ancor}>Volver</p>
+          
+          </Link>
         {/* <div className={style.register}>
           <button className={style.btn}>Ingresar con Google</button>
         </div>

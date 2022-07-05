@@ -1,22 +1,81 @@
-.flex {
-    width: 100%;
-    height: 15vh;
-    display: flex;
-    background-color:darkslategrey;
-    flex-direction: column;
-    align-items: center;
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 50px;
 }
-.carrito{
+.navContainer{
+  display: flex;
+  width: 100%;
+  height: 150px;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: rgb(255, 252, 252);
+}
+.prf {
+  margin-left: 10px;
+  font-size: 17px;
+}
+
+.toggleButton {
+  position: absolute;
+  top: 2.3rem;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+transition: ease 0.3 seg;
+}
+
+.toggleButton .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+transition: ease 0.3 seg;
+  z-index: 100;
+}
+.containerCuentas{
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  justify-content:center;
+  
+}
+.containerCuentas2{
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+  
+  justify-content: center;
+}
+.links{
+  text-decoration: none;
+  color: black;
+}
+.cart {
+  margin-left: 100px;
+}
+.logo {
+  width: 250px;
+}
+/* .carrito{
     display: flex;
     flex-direction: row;
-}
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+} */
 /* .btn{
     height: 30px;
     width: 75px;
     margin-top: 17px;
 } */
 
-.btn {
+
+/* .btn {
     font-family: "Zen Antique", serif;
     display: inline-block;
     color: white;
@@ -28,17 +87,17 @@
     max-width: 150px;
     padding: 10px;
     text-align: center;
-  }
+  } */
   
-  .btn:hover {
+  /* .btn:hover {
     color: black;
-    background-color: whitesmoke;
+    background-color: whitesmoke; */
   
     /* -webkit-transition: all 0.5s ease-in-out; */
-    transition: all 0.5s ease-in-out;
-  }
+    /* transition: all 0.5s ease-in-out;
+  } */
 
-  .btn {
+  /* .btn {
     font-family: "Zen Antique", serif;
     display: block;
     margin:0 auto;
@@ -48,9 +107,9 @@
     box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     width:80%;
-    text-align:center;
+    text-align:center; */
     /* //vertical-align: middle; */
     /* max-width: 150px; */
     /* padding: 10px; */
     /* //text-align: center; */
-  }
+  

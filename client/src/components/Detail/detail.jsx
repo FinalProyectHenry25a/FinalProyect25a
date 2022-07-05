@@ -5,9 +5,6 @@ import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import { getDetails, addToCart, addToCartUser } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
 
 export default function Detail() {
   const [user, setUser] = useState(auth.currentUser);

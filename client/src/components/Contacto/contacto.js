@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+import styles from './Contacto.module.css'
+import UserNavBar from "../UserNavBar/UserNavBar";
 
 
 
@@ -86,10 +88,12 @@ const correoEmail = async(e) =>{
 
 
 return(
-    <div>
+  <>
+    <UserNavBar/>
+    <div className={styles.containerContact}>
 
-<h3>Contactar</h3>
-      <div>
+      <div className={styles.info}>
+        <h1>información de contacto</h1>
         <h3>Llamanos: </h3>
         <p>+54 9 236 470-3985</p>
         <h3>Ubicacion:</h3>
@@ -97,18 +101,21 @@ return(
         <h3>Horarios de Trabajo: </h3>
         <p>Lunes a Viernes, 8 A.M - 6 P.M</p>
       </div>
+      
 
-      <form name="formulario-contacto" onSubmit={correoEmail}>
+      <form name="formulario-contacto" onSubmit={correoEmail} className={styles.formContainer}>
+        <h1>Formulario de contacto</h1>
         <label name='nombre'>Nombre:</label>
-        <input type='text' name="contact_user" placeholder="Ingresa tu Nombre" value={correo.contact_user} onChange={onChangeCorreo}/>
+        <input type='text' name="contact_user" placeholder="Ingresa tu Nombre" value={correo.contact_user} onChange={onChangeCorreo} className={styles.input}/>
         <label>Correo Electronico:</label>
-        <input type='email' name="correo_user" placeholder="Ingresa tu Correo" value={correo.correo_user} onChange={onChangeCorreo}/>
+        <input type='email' name="correo_user" placeholder="Ingresa tu Correo" value={correo.correo_user} onChange={onChangeCorreo} className={styles.input}/>
         <label>Asunto:</label>
-        <input type='text' name="asunto_user" placeholder="Asunto" value={correo.asunto_user} onChange={onChangeCorreo}/>
+        <input type='text' name="asunto_user" placeholder="Asunto" value={correo.asunto_user} onChange={onChangeCorreo} className={styles.input}/>
         <label>Descripcion:</label>
-        <textarea name="descripcion_user" placeholder="Descripcion" value={correo.descripcion_user} onChange={onChangeCorreo}/>
-        <button type='submit'>Enviar</button>
+        <textarea name="descripcion_user" placeholder="Descripcion" value={correo.descripcion_user} onChange={onChangeCorreo} className={styles.input}/>
+        <button type='submit' className={styles.btn}>Enviar</button>
       </form>
     </div>
+    </>
 )}
 

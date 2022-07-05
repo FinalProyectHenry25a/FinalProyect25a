@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector} from 'react-redux'
 import Comprar from '../Comprar/Comprar'
 import axios from 'axios'
 import {getLocalCart} from '../../Actions'
@@ -32,6 +32,22 @@ function App() {
     });
   };
   
+  
+
+  //  useEffect(()=>{
+  //    axios
+  //    .get("http://localhost:3001/mercadopago/")
+  //    .then((data)=>{
+  //      setDatos(data.data)
+  //      console.info('Contenido de data:', data)
+  //    }).catch(err => console.error(err))
+  //  },[])
+  const productos = cart.map(e => ({
+    title: e.model,
+    unit_price: e.price,
+    quantity: e.qty
+  }))
+
 
   useEffect(()=>{
     let pack = []
@@ -46,10 +62,10 @@ function App() {
 
   return (
     <div className="App">
-      { !datos
-        ? <p>Aguarde un momento....</p> 
+       { !datos
+        ? <p>Aguarde un momento....</p>  
         : <Comprar productos={cart} data={datos}/>
-      }
+       } 
     </div>
   );
 }

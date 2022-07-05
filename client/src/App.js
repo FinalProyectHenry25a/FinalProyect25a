@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './components/login/Login';
 import Register from './components/register/Register';
@@ -19,6 +19,8 @@ import Contacto from './components/Contacto/contacto';
 import ProductToEdit from './components/Admin/ProductToEdit';
 import Users from './components/Admin/users';
 import BannedUser from './components/User/BannedUser';
+import LandingPage from './components/landingPage/LandingPage';
+
 
 function App() {
 
@@ -26,21 +28,22 @@ function App() {
 
     <BrowserRouter>
       <Switch>
+        <Route exact path="/" component={LandingPage} />
         <Route exact path="/banned" component={BannedUser} />
-        <Route exact path="/home" component={Home} />  
-        <Route exact path="/home/:id" component={Detail} />  
-        <Route exact path="/login" component={Login} /> 
-        <Route exact path="/identify" component={Identify} /> 
-        <Route exact path="/register" component={Register} /> 
-        <Route exact path="/mi-perfil" component={MiPerfil} /> 
-        <Route exact path="/favoritos" component={Favourites} /> 
-        <Route exact path="/mis-compras" component={MisCompras} /> 
-        <Route exact path="/cart" component={Cart} /> 
-        <Route exact path="/mercadopago" component={mp}/> 
-        <Route exact path="/admin/agregar-publicacion" component={Created} /> 
-        <Route exact path="/admin/publicaciones" component={Posts} /> 
-        <Route exact path="/admin/editar-stock" component={StockEdit}/> 
-        <Route exact path="/admin/control-de-usuarios" component={UsersControl}/> 
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/home/:id" component={Detail} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/identify" component={Identify} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/mi-perfil" component={MiPerfil} />
+        <Route exact path="/favoritos" component={Favourites} />
+        <Route exact path="/mis-compras" component={MisCompras} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/mercadopago" component={mp}/>
+        <Route exact path="/admin/agregar-publicacion" component={Created} />
+        <Route exact path="/admin/publicaciones" component={Posts} />
+        <Route exact path="/admin/editar-stock" component={StockEdit}/>
+        <Route exact path="/admin/control-de-usuarios" component={UsersControl}/>
         <Route exact path="/admin" component={Admin} />      
         <Route exact path="/admin/users" component={Users}/> 
         <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/> 

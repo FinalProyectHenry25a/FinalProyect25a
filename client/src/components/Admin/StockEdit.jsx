@@ -89,7 +89,10 @@ export default function StockEdit() {
           setChange({ ...change, amount: 0 });
           console.log(change);
           document.getElementById(id).value = null;
+<<<<<<< HEAD
        
+=======
+>>>>>>> e806890e2a1dcdc0698e93f44042984c5ce47c8d
 
         }
       } catch (error) {

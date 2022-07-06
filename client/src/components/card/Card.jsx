@@ -24,7 +24,7 @@ export default function Card(props) {
     try {
       let add = (
         await axios.put(
-          `http://localhost:8080/favourites/${user.email}/${props.id}`
+          `http://localhost:3001/favourites/${user.email}/${props.id}`
         )
       ).data;
       alert("Artículo agregado a favoritos.");
@@ -66,7 +66,7 @@ export default function Card(props) {
                 <button
                   className="btn btn-outline-dark, w-100"
                   type="submit"
-                  onClick={(e) => dispatch(addToCartUser(user.email, props.id))}
+                  onClick={() => dispatch(addToCartUser(user.email, props.id))}
                 >
                   Agregar al carrito User
                 </button>
@@ -76,7 +76,7 @@ export default function Card(props) {
                 <button
                   className="btn btn-outline-dark, w-100"
                   type="submit"
-                  onClick={(e) => dispatch(addToCart(props.id))}
+                  onClick={() => dispatch(addToCart(props.id))}
                 >
                   Agregar al carrito
                 </button>

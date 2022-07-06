@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from './Cart.module.css'
-import CartItem from '../cart/cartItem/CartItem'
-import {getLocalCart} from '../../Actions/index'
+import styles from "./Cart.module.css";
+import CartItem from "../cart/cartItem/CartItem";
+import { getLocalCart } from "../../Actions/index";
 import { Link } from "react-router-dom";
 import mercadopago from "../../images/mercadopago.png";
 import { auth } from "../../firebase/firebase-config";
 import SearchBar from "../SearchBar/Searchbar";
 import UserNavBar from "../UserNavBar/UserNavBar";
 
-
 const Cart = () => {
-
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const cart = useSelector(state => state.cart)
-  const dispatch = useDispatch()
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-
-    dispatch(getLocalCart())
-  }, [])
+    dispatch(getLocalCart());
+  }, []);
 
   useEffect(() => {
     let items = 0;
@@ -33,16 +30,15 @@ const Cart = () => {
 
     setTotalItems(items);
     setTotalPrice(price);
-    
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
   
+  
   return (
-    <>
-      <UserNavBar/>
     <div className={styles.cart}>
+      <UserNavBar />
       <div className={styles.cartItems}>
-        {cart.map((item) => (
-          <CartItem key={item.id} item={item} />
+        {cart.map((item, i) => (
+          <CartItem key={i} item={item} />
         ))}
       </div>
       <div className={styles.cartSummary}>
@@ -51,15 +47,18 @@ const Cart = () => {
           <span>TOTAL: ({totalItems} productos)</span>
           <span>$ {totalPrice}</span>
         </div>
-{auth.currentUser?.emailVerified ? <Link to="/mercadopago">
-        <button  className={styles.summary__checkoutBtn}>
-        Confirmar Pedido <img src={mercadopago} />
-        </button>
-        </Link> : <span>Debes tener una cuenta con mail verificado para comprar</span>}
+        {auth.currentUser?.emailVerified ? (
+          <Link to="/mercadopago">
+            <button className={styles.summary__checkoutBtn}>
+              Confirmar Pedido <img src={mercadopago} />
+            </button>
+          </Link>
+        ) : (
+          <span>Debes tener una cuenta con mail verificado para comprar</span>
+        )}
       </div>
     </div>
-    </>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

@@ -40,7 +40,7 @@ export default function UserNavBar({setCurrentPage}) {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:8080/user/${currentUser.email}`
+          `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
       }
@@ -69,11 +69,11 @@ export default function UserNavBar({setCurrentPage}) {
                   <BsPersonCircle /> {user.username}
                 </Link>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a className="dropdown-item" href="/mi-perfil/">Mi perfil</a></li>
-            <li><a className="dropdown-item" href="/mis-compras">Mis compras</a></li>
-            <li><a className="dropdown-item" href="/favoritos">Favoritos</a></li>
+            <li><Link className="dropdown-item" to="/mi-perfil/">Mi perfil</Link></li>
+            <li><Link className="dropdown-item" to="/mis-compras">Mis compras</Link></li>
+            <li><Link className="dropdown-item" to="/favoritos">Favoritos</Link></li>
             <li><hr className="dropdown-divider"/></li>
-            <li><a className="dropdown-item" href="/home" onClick={logout}>Cerrar Sesion</a></li>
+            <li><Link className="dropdown-item" to="/home" onClick={logout}>Cerrar Sesion</Link></li>
           </ul>
         </li>
             </ul>

@@ -14,7 +14,6 @@ const NavBar = ({ setCurrentPage }) => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  console.log(cart);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

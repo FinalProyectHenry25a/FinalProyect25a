@@ -15,7 +15,7 @@ import styles from "./CartItem.module.css";
 const CartItem = (props) => {
 
   const {item} = props
-  console.log(item)
+
 
   const [input, setInput] = useState(item.qty);
   const [stockView, setStockView] = useState(0);
@@ -25,14 +25,15 @@ const CartItem = (props) => {
     setStockView(st.data.stock);
   }, []);
 
-/*   const adjustQty = (id, value) => {
-    dispatch(adjustItemQty(id, value));
-  }; */
+  // const adjustQty = (id, value) => {
+    
+  // };
 
   const onChangeHandler = async (e) => {
-    setInput(e.target.value);
 
-    let post = (await axios.get(`http://localhost:3001/home/${item.id}`))
+    setInput(e.target.value);
+    dispatch(adjustItemQty(props.item.id, e.target.value));
+    let post = (await axios.get(`http://localhost:3001/home/${props.item.id}`))
       .data;
 
     if (e.target.value > post.stock) {
@@ -40,7 +41,7 @@ const CartItem = (props) => {
     }
   };
 
-  console.log(props)
+
 
   const dispatch = useDispatch();
   return (

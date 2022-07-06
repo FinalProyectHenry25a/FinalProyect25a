@@ -6,9 +6,12 @@ import axios from "axios";
 import UserNavBar from "../UserNavBar/UserNavBar";
 
 import 'bootstrap/dist/css/bootstrap.min.css'; //s
+import { useHistory } from "react-router-dom";
 
 export default function MiPerfil() {
   const [user, setUser] = useState();
+
+  const history = useHistory()
 
   const verification = async () => {
     alert("Correo de verifiacion enviado");
@@ -28,6 +31,11 @@ export default function MiPerfil() {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        if(user.data.banned){
+
+          history.push("/banned")
+
+        }
         setUser(user.data);
       }
     });

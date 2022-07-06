@@ -5,12 +5,16 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
+import { Link, useHistory } from "react-router-dom";
+import { BsFillCartFill } from "react-icons/bs";
+import { BsPersonCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { addToCartUser, addToCart } from "../../Actions";
 import { useParams } from "react-router-dom";
 
 export default function Favourites(props) {
   const [user, setUser] = useState();
+  const history = useHistory()
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -25,6 +29,11 @@ export default function Favourites(props) {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        if(user.data.banned){
+
+          history.push("/banned")
+
+        }
         setUser(user.data);
         emailUser = auth.currentUser.email;
       }

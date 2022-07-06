@@ -1,7 +1,9 @@
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getDetails, editPost } from "../../Actions";
+import { getDetails, editPost, getUser } from "../../Actions";
+import { auth } from "../../firebase/firebase-config";
 
 export default function ProductToEdit() {
   const dispatch = useDispatch();
@@ -11,6 +13,25 @@ export default function ProductToEdit() {
   useEffect(() => {
     dispatch(getDetails(id));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    userVerificate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const userVerificate = async () => {
+    await onAuthStateChanged(auth, async (currentUser) => {
+      try {
+        let info = await dispatch(getUser(currentUser.email));
+
+        if (!info.payload.isAdmin || info.payload.banned) {
+          history.push("/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
 
   const PID = useSelector((state) => state.phonesId);
 

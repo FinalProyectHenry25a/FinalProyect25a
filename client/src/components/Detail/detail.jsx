@@ -38,6 +38,25 @@ export default function Detail() {
     dispatch(getQuestions());
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   verificarQueHayaUsuarioLogueado();
+  // }, []);
+
+  // const verificarQueHayaUsuarioLogueado = () => {
+  //   onAuthStateChanged(auth, async (currentUser) => {
+  //     if (currentUser) {
+  //       let user = await axios.get(
+  //         `http://localhost:3001/user/${currentUser.email}`
+  //       );
+  //       if(user.data.banned){
+
+  //         history.push("/banned")
+
+  //       }
+  //     }
+  //   });
+  // };
+
   const PID = useSelector((state) => state.phonesId);
 
 

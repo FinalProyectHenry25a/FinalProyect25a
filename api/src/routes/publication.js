@@ -27,6 +27,26 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+// AGREGA FOTOS ADICIONALES
+
+router.post("/additionalphotos", async (req, res) => {
+
+  try {
+  console.log('acaaa', req.body);
+
+  let post = await Publication.findByPk(req.body.id);
+
+  await Publication.update({ additionalphotos: req.body.array }, { where: { id: req.body.id } });
+
+    res.json('Actualizacion exitosa');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
 // TRAE PUBLICACION POR ID
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
@@ -96,5 +116,6 @@ router.put("/:email/:id", async (req, res) => {
     console.log(error);
   }
 });
+
 
 module.exports = router;

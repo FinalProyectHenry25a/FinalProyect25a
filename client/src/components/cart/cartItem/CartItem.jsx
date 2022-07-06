@@ -25,25 +25,15 @@ const CartItem = (props) => {
     setStockView(st.data.stock);
   }, []);
 
-<<<<<<< HEAD
   // const adjustQty = (id, value) => {
     
   // };
-=======
-/*   const adjustQty = (id, value) => {
-    dispatch(adjustItemQty(id, value));
-  }; */
->>>>>>> dc9dc23cb17486e9f7bed7f0c5c7f92ed13993e7
 
   const onChangeHandler = async (e) => {
 
-<<<<<<< HEAD
     setInput(e.target.value);
     dispatch(adjustItemQty(props.item.id, e.target.value));
     let post = (await axios.get(`http://localhost:3001/home/${props.item.id}`))
-=======
-    let post = (await axios.get(`http://localhost:3001/home/${item.id}`))
->>>>>>> dc9dc23cb17486e9f7bed7f0c5c7f92ed13993e7
       .data;
 
     if (e.target.value > post.stock) {

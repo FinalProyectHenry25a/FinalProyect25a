@@ -82,9 +82,7 @@ export const addToCart = (itemID) => {
 
 export const addToCartUser = (email, itemID) => {
   return async function (dispatch) {
-    console.log(email);
-    console.log(itemID)
-    await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
+    let json = await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
     return dispatch({
       type: "ADD_TO_CART_USER",
       payload: {
@@ -218,7 +216,6 @@ export function getAllUsers() {
 export function becomeAdmin(email) {
   return async function () {
     const json = await axios.put(`http://localhost:3001/admin/${email}`);
-<<<<<<< HEAD
     window.location.reload();
     return json;
   };
@@ -228,8 +225,6 @@ export function removeAdmin(email) {
   return async function () {
     const json = await axios.put(`http://localhost:3001/admin/removeAdmin/${email}`);
     window.location.reload();
-=======
->>>>>>> 410d545830ababc8eae15fcdea8ec56156fd8b94
     return json;
   };
 }

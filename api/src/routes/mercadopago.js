@@ -115,11 +115,19 @@ server.get("/pagos", async  (req, res)=>{
       return res.redirect("http://localhost:3000/home")
   
     }
+
+    if(payment_status === "cancelled") {
+
+      console.log("Su pago fue cancelado");
+      return res.redirect("http://localhost:3000/home")
+      
+    }
     
   } catch (error) {
     
 
     console.log(error);
+    console.log("Hubo algun error con su pago y no pudo ejecutarse");
     return res.redirect("http://localhost:3000/home")
 
   }

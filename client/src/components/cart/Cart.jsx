@@ -36,14 +36,9 @@ const Cart = () => {
     <div className={styles.cart}>
       <UserNavBar />
       <div className={styles.cartItems}>
-        {cart?.map((e, i) => {
-          return (
-            <CartItem
-            key={i}
-            item={e}
-            />
-          )
-        })}
+        {cart.map((item, i) => (
+          <CartItem key={i} item={item} />
+        ))}
       </div>
       <div className={styles.cartSummary}>
         <h4 className={styles.summary__title}>Total</h4>

@@ -11,6 +11,9 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
+import { fetchstoken } from "../Contacto/fetchmetod";
+import Swal from 'sweetalert2';
+
 
 import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
@@ -21,15 +24,12 @@ const Home = () => {
 
   const [loggedUser, setLoggedUser] = useState();
   
-
   useEffect(() => {
 
     verificarQueHayaUsuarioLogueado();
-
-
+    
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(() => {
 
     dispatch(getLocalCart())
@@ -41,7 +41,48 @@ const Home = () => {
   const allPhones = useSelector((state) => state.phones);
   const filtrados = useSelector((state) => state.filtered)
 
+  const correoEmail = async(email) =>{
+
+      let obj = {
+      contact_user: "MercadoPago",
+      correo_user: email,
+      asunto_user:"Compra realizada",
+      descripcion_user:"Gracias por elegirnos!!! su producto fue despachado, estara llegando en un lapso de entre 7 a 21 dias.", 
+    }
+     
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) =>{
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
+
+    try{
+    
+      const resultCorreo = await fetchstoken('correo', obj , "POST");
+
+      if(!resultCorreo.ok){
+
+        throw Error(resultCorreo.errors.msg);
+        
+      }
+      Toast.fire({
+        icon: 'success',
+        title: 'El correo se envio con exito'
+      });
  
+    } catch (error) {
+      Toast.fire({
+        icon: 'error',
+        title: error.message
+      })
+    }
+  }
   
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -53,13 +94,21 @@ const Home = () => {
         if(info.payload.emptyCart) {
 
           dispatch(clearCart(info.payload.email));
-          // dispatch(emptyCart(info.payload.email));
 
         } 
 
         if(currentUser.emailVerified){
 
           await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+
+        }
+        
+        if(info.payload.sendEmail){
+
+          correoEmail(currentUser.email)
+          
+          await axios.put(`http://localhost:3001/sendEmail/${currentUser.email}`)
+
 
         }
         setLoggedUser(info.payload);
@@ -185,8 +234,6 @@ const Home = () => {
   const logout = async () => {
     await signOut(auth);
   };
-
-  
 
   return (
     <div>

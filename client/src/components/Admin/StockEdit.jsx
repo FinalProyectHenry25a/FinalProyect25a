@@ -44,7 +44,7 @@ export default function StockEdit() {
 
         let info = await dispatch(getUser(currentUser.email))
 
-        if(!info.payload.isAdmin){
+        if(!info.payload.isAdmin || info.payload.banned){
 
           history.push("/home");
           
@@ -89,7 +89,7 @@ export default function StockEdit() {
           setChange({ ...change, amount: 0 });
           console.log(change);
           document.getElementById(id).value = null;
-       
+          
 
         }
       } catch (error) {

@@ -19,6 +19,7 @@ import Contacto from './components/Contacto/contacto';
 import ProductToEdit from './components/Admin/ProductToEdit';
 import Users from './components/Admin/users';
 import Preguntas from './components/Admin/Preguntas';
+import LandingPage from './components/landingPage/LandingPage';
 
 
 
@@ -29,6 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+      <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/home/:id" component={Detail} />
         <Route exact path="/login" component={Login} />

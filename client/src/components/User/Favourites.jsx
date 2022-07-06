@@ -5,12 +5,15 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { Link } from "react-router-dom";
-import { BsFillCartFill } from "react-icons/bs";
-import { BsPersonCircle } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addToCartUser, addToCart } from "../../Actions";
+import { useParams } from "react-router-dom";
 
-export default function Favourites() {
+export default function Favourites(props) {
   const [user, setUser] = useState();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   let emailUser = "";
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -23,17 +26,16 @@ export default function Favourites() {
           `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
-          emailUser = auth.currentUser.email
+        emailUser = auth.currentUser.email;
       }
     });
   };
 
-
-
   async function deleteFavourites(emailUser, id) {
-
     try {
-      await axios.put(`http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`);
+      await axios.put(
+        `http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`
+      );
       alert("favorito eliminado");
       window.location.reload();
     } catch (error) {
@@ -47,7 +49,7 @@ export default function Favourites() {
       {user ? (
         <div>
           <h2>Mis favoritos</h2>
-          {user.favourites?.map((e) => {
+          {user?.favourites.map((e) => {
             return (
               <div key={e.id}>
                 <Card
@@ -57,14 +59,15 @@ export default function Favourites() {
                   price={e.price}
                   id={e.id}
                   stock={e.stock}
-                  />
-                      <button onClick={() => deleteFavourites(auth.currentUser.email, e.id)}>Eliminar</button>
+                />
+                <button
+                  onClick={() => deleteFavourites(auth.currentUser.email, e.id)}
+                >
+                  Eliminar
+                </button>
               </div>
-              
             );
-          }
-          )}
-
+          })}
         </div>
       ) : (
         <h1>No tienes favoritos</h1>

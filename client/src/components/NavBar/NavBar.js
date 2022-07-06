@@ -1,16 +1,21 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
-import { getLocalCart } from "../../Actions";
+import { getLocalCart } from "../../Actions/index";
+import style from "./../NavBar/NavBar.module.css";
+import logo from "../../images/smartworld.jpg";
 
 //import style from "./../NavBar/NavBar.module.css";
 
-const NavBar = ({setCurrentPage}) => {
+const NavBar = ({ setCurrentPage }) => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  console.log(cart);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     let count = 0;
@@ -19,53 +24,68 @@ const NavBar = ({setCurrentPage}) => {
     });
 
     setCartCount(count);
-  }, [cart, cartCount]);
+  }, [cart, cartCount, setCartCount]);
+  useEffect(() => {
+    dispatch(getLocalCart());
+  }, []);
 
   useEffect(() => {
+    dispatch(getLocalCart());
+  }, []);
 
-    dispatch(getLocalCart())
-
-  }, [])
+  const change = () => {
+    setOpen(!open);
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/home">
-          Henry Store
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link active" to="/login">
-                Login
-              </Link>
-            </li>
-          </ul>
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link active" to="/contacto">
-                Contacto
-              </Link>
-            </li>
-          </ul>
+    <nav className={style.navContainer}>
 
-          <Link className="nav-link active m-4" to="/cart">
-           <BsFillCartFill/> {cartCount}
-          </Link>
+      <div className={style.container}>
+
+        <a className={style.ancor} href="/home">
+          <img src={logo} alt="logo" className={style.logo} />
+        </a>
+
+      </div>
+        <SearchBar setCurrentPage={setCurrentPage} className={style.search}/>
+            <a href="#" className={style.toggleButton} onClick={change}>
+              <span className={style.bar}></span>
+              <span className={style.bar}></span>
+              <span className={style.bar}></span>
+            </a>
+      <div className={style.container2}>
+        <Link className={style.links} to="/cart">
+          <BsFillCartFill className={style.cart} /> {cartCount}
+        </Link>
+      </div>
+      <div
+        className={`${open ? style.navbarLinksActive : style.containerCuentas}`}
+      >
+        <div>
+          <p className={style.prf}>Envíos gratis a partir de $2000.</p>
+        </div>
+        <div className={style.containerCuentas2}>
+          <div>
+
+            <Link className={style.links} to="/login">
+              Ingresá
+            </Link>
+          </div>
+
+          <div>
+            <Link className={style.links} to="/register">
+              Creá tu cuenta
+            </Link>
+          </div>
+          <div>
+            <Link className={style.links} to="/contacto">
+              Contacto
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
   );
 };
+
 export default NavBar;

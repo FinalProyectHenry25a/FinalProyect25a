@@ -1,21 +1,34 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails, addToCart, getUser, getQuestions } from "../../Actions/index";
+import { getDetails, addToCart, getUser, getQuestions, addToCartUser } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
+import styles from "./Detail.module.css";
+import NavBar from "../NavBar/NavBar";
 
 export default function Detail() {
+  const [user, setUser] = useState(auth.currentUser);
+  useEffect(() => {
+    userVerificate();
+  }, []);
+
+  const userVerificate = async () => {
+    await onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  };
   const dispatch = useDispatch();
   const { id } = useParams();
   const [review, setReview] = useState({
     comentario: ""
   })
-  const [user, setUser] = useState();
+
   const [loggedUser, setLoggedUser] = useState();
   const [input, setInput] = useState("");
+
 
   useEffect(() => {
     dispatch(getDetails(id));
@@ -84,90 +97,24 @@ export default function Detail() {
   };
 
 
-
-  return (
-    <div
-      style={{ background: "white", height: "max-content", overflow: "auto" }}
-    >
-     
-      <nav aria-label="breadcrumb" style={{ margin: 10 + "px" }}>
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/home">
-            <p style={{ textDecoration: "none", color: "black" }}>
-              Home
-            </p>
-            </Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {PID.brand}
-          </li>
-        </ol>
-      </nav>
-      <div
-        style={{
-          display: "inline-flex",
-          justifyContent: "center",
-          width: 20 + "%",
-          height: 10 + "%",
-          margin: 20 + "px",
-        }}
-      >
-        <img
-          src={PID.images}
-          alt="Two each of gray, white, and black shirts laying flat."
-          className="img-fluid"
-        />
-      </div>
-
-      <div style={{ height: "max-content" }}>
-        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-          <h1 style={{ margin: 25 + "px" }}>{PID.model}</h1>
-        </div>
-
-        <div
-          style={{
-            display: "inline-flex",
-            flexFlow: "column wrap",
-            position: "relative",
-            right: 4 + "%",
-            width: 85 + "%",
-            justifyContent: "end",
-            alignContent: "end",
-          }}
-        >
-          <p className="fs-2 fw-bolder">${PID.price}</p>
-
-          <div className="mt-6">
-            <h3 className="sr-only">Rating</h3>
-            <div className="flex items-center">
-              <div className="flex items-center">
-                {/* <svg className="text-gray-900 h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-
-
-              <svg className="text-gray-900 h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-
       
-              <svg className="text-gray-900 h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-
-
-              <svg className="text-gray-900 h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg> */}
-
-                {/* <svg className="text-gray-200 h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg> */}
-              </div>
-              {/* <p className="sr-only">4 out of 5 stars</p> */}
-              <div style={{fontSize: 26 + "px" }}>
-                {promedio()} 
+  return (
+    <>
+      <NavBar />
+      <hr/>
+      <div className={styles.divContainer}>
+        <div className={styles.container1}>
+          <img src={PID.images} alt="marcas" width={300} />
+        </div>
+<hr/>
+        <div className={styles.container2}>
+          <div>
+            <h1>{PID.model}</h1>
+            <h3>${PID.price}</h3>
+            <h3>Rating</h3>
+            <div>
+              <div>
+                {promedio()}
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -181,111 +128,90 @@ export default function Detail() {
                   <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
                 </svg>
               </div>
-              <br/>
+
+              <br />
             </div>
-          </div>
-          <form>
-            <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
+
+            <form>
+              {PID.stock > 0 ? (
+                <div>
+                  {auth.currentUser ? (
+                    <Link to="#">
+                      <button
+                        type="submit"
+                        className={styles.btn}
+                        onClick={(e) =>
+                          dispatch(addToCartUser(user.email, PID.id))
+                        }
+                      >
+                        Agregar al carrito User
+                      </button>
+                    </Link>
+                  ) : (
+                    <Link to="#">
+                      <button
+                        type="submit"
+                        className={styles.btn}
+                        onClick={(e) => dispatch(addToCart(PID.id))}
+                      >
+                        Agregar al carrito
+                      </button>
+                    </Link>
+                  )}
+                  <p>Disponibles: {PID.stock}</p>
+                </div>
+              ) : (
+                <p>AGOTADO</p>
+              )}
+              {/* <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
               Agregar al Carrito
-            </button>
-          </form>
-        </div>
-
-        <div
-          style={{
-            position: "relative",
-            bottom: 200 + "px",
-            margin: 25 + "px",
-            width: 60 + "%",
-          }}
-        >
-          {/* <div>
-            <h3 className="sr-only">Descripcion</h3>
-            <div>
-              <p className="text-base text-gray-900">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                quaerat magni beatae praesentium odit. Ipsa rem incidunt officia
-                at. Aperiam maiores aut voluptate velit numquam aliquam
-                possimus. Corrupti, voluptatem veniam!
-              </p>
-            </div>
+            </button> */}
+            </form>
           </div>
- */}
+
           <div>
-            <h3 className="text-sm font-medium text-gray-900">
-              Especificaciones
-            </h3>
-
-            <div className="mt-4">
-              <ul role="list" className="pl-4 list-disc text-sm space-y-2">
-                <li className="text-gray-400">
-                  <span className="text-gray-600">{PID.ram}</span>
-                </li>
-
-                <li className="text-gray-400">
-                  <span className="text-gray-600">{PID.rom}</span>
-                </li>
-
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
-                    Cuenta con un procesador {PID.processor}
-                  </span>
-                </li>
-
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
-                    Conectividad {PID.network}
-                  </span>
-                </li>
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
-                    Una bateria de {PID.batery} mAh
-                  </span>
-                </li>
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
-                    Una camara frontal de {PID.frontal_cam}" y una principal de{" "}
-                    {PID.main_cam}"
-                  </span>
-                </li>
-                <li className="text-gray-400">
-                  <span className="text-gray-600">
-                    Cuenta con una pantalla {PID.screen} de {PID.inches}" y una
-                    resolucion de {PID.resolution}"
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/*  <div className="mt-10">
-            <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-            <div className="mt-4 space-y-6">
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-                dolore nihil necessitatibus pariatur fuga itaque cumque maxime
-                exercitationem beatae hic? Aperiam, hic quibusdam et at
-                distinctio fugit qui officiis nam?
-              </p>
-            </div>
-          </div> */}
-
-
             <div>
+              <h3>Especificaciones</h3>
 
-            <h3>Comentarios</h3>
-          {PID.review? PID.review.map((e) =>{
-            return(
-              <div className="border">
-            <p>{e.usuario}</p>
-            <p>{e.rating}</p>
-            <p>{e.comentario}</p>
+              <div>
+                <ul>
+                  <li>
+                    <span>{PID.ram}</span>
+                  </li>
+
+                  <li>
+                    <span>{PID.rom}</span>
+                  </li>
+
+                  <li>
+                    <span>Cuenta con un procesador {PID.processor}</span>
+                  </li>
+
+                  <li>
+                    <span>Conectividad {PID.network}</span>
+                  </li>
+                  <li>
+                    <span>Una bateria de {PID.batery} mAh</span>
+                  </li>
+                  <li>
+                    <span>
+                      Una camara frontal de {PID.frontal_cam}" y una principal
+                      de {PID.main_cam}"
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      Cuenta con una pantalla {PID.screen} de {PID.inches}" y
+                      una resolucion de {PID.resolution}"
+                    </span>
+                  </li>
+                </ul>
+              </div>
             </div>
-            )})
+            
           :(
             <p>este articulo no tiene comentarios</p>
-          )}
+          )
              </div>
              <div>
 
@@ -318,7 +244,23 @@ export default function Detail() {
 
         </div>
       </div>
-
-    </div>
+      <hr/>
+      <div className={styles.answer}>
+        <h3>Comentarios</h3>
+        {PID.review ? (
+          PID.review.map((e) => {
+            return (
+              <div>
+                <p>{e.usuario}</p>
+                <p>{e.rating}</p>
+                <p>{e.comentario}</p>
+              </div>
+            );
+          })
+        ) : (
+          <p>este articulo no tiene comentarios</p>
+        )}
+      </div>
+    </>
   );
 }

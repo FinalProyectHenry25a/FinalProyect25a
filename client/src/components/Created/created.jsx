@@ -94,7 +94,7 @@ export default function PhoneCreate() {
       ...input,
      [e.target.name]: e.target.value
    }))
-   console.log(error)
+   //console.log(error)
   }
 
   function handleBrand(e) {
@@ -161,6 +161,8 @@ export default function PhoneCreate() {
     error.resolution
  ){alert ("No se creo la publicacion, revisa bien los campos weon")
 } else {
+
+  //console.log(input);
     dispatch(postPhone(input));
     alert("La publicacion se creo exitosamente");
     setInput({
@@ -184,6 +186,20 @@ export default function PhoneCreate() {
       stock: "",
  });}
   }
+
+
+  const base64Convert = (ev) => {
+    let file = ev.target.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = async function () {
+      let base64 = fileReader.result;
+
+      setInput({ ...input, images: base64 });
+    };
+  };
 
   return (
     <div>
@@ -257,13 +273,15 @@ export default function PhoneCreate() {
               <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
                 <h5>Images</h5>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  type="text"
-                  value={input.images}
-                  name="images"
-                  onChange={(e) => handleOnChange(e)}
-                />{error.images && <p>{error.images}</p>}
+
+                      <input
+                        type="file"
+                        onChange={(ev) => base64Convert(ev)}
+                        required
+                      />
+                
+                  
+                {error.images && <p>{error.images}</p>}
               </label>
             </div>
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

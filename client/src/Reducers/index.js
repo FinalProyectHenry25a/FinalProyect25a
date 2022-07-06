@@ -133,6 +133,17 @@ function rootReducer (state = initialState, action){
                   ...state,
                   cart: removeCart
                 };
+
+                case "CLEAR_CART_POST_BUY":
+
+                localStorage.clear()
+
+                return {
+                  ...state,
+                  cart: []
+                };
+
+
               case 'ADJUST_ITEM_QTY':
                 return {
                   ...state,

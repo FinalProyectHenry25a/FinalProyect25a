@@ -1,56 +1,110 @@
-.flex {
-    width: 100%;
-    height: 15vh;
+.navContainer{
+  display: flex;
+  width: 100%;
+  height: 150px;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: rgb(255, 252, 252);
+  z-index: 999;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 50px;
+  z-index: 999;
+}
+
+.prf {
+  margin-left: 10px;
+  font-size: 17px;
+}
+
+.toggleButton {
+  position: absolute;
+  top: 5.5rem;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  transition: ease 0.3 seg;
+}
+
+.toggleButton .bar {
+  height: 3px;
+  width: 100%;
+  background-color: black;
+  border-radius: 10px;
+  transition: ease 0.3 seg;
+  z-index: 100;
+}
+.containerCuentas{
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  justify-content:center;
+  z-index: 999;
+  
+}
+.container2 {
+  display: flex;
+  align-items: center;
+}
+.containerCuentas2{
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+  justify-content: center;
+  z-index: 999;
+}
+.links{
+  text-decoration: none;
+  color: black;
+}
+
+.logo {
+  width: 250px;
+  margin-right: 40px;
+}
+
+.navbarLinksActive ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: ease 0.3 seg;
+  gap: 10px;
+  z-index: 999;
+}
+.navbarLinksActive li {
+  list-style: none;
+  z-index: 999;
+}
+
+@media (max-width: 1150px) {
+  .navContainer {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .toggleButton {
+      display: flex;
+  }
+  .navbarLinksActive {
     display: flex;
-    background-color:darkslategrey;
+  }
+  .container {
     flex-direction: column;
-    align-items: center;
-}
-.carrito{
-    display: flex;
-    flex-direction: row;
-}
-/* .btn{
-    height: 30px;
-    width: 75px;
-    margin-top: 17px;
-} */
-
-.btn {
-    font-family: "Zen Antique", serif;
-    display: inline-block;
-    color: white;
-    border: 1px solid #ccc;
-    background: black;
-    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    vertical-align: middle;
-    max-width: 150px;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .btn:hover {
-    color: black;
-    background-color: whitesmoke;
-  
-    /* -webkit-transition: all 0.5s ease-in-out; */
-    transition: all 0.5s ease-in-out;
   }
 
-  .btn {
-    font-family: "Zen Antique", serif;
-    display: block;
-    margin:0 auto;
-    color: white;
-    border: 1px solid #ccc;
-    background: black;
-    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    width:80%;
-    text-align:center;
-    /* //vertical-align: middle; */
-    /* max-width: 150px; */
-    /* padding: 10px; */
-    /* //text-align: center; */
+  .logo{
+    margin-top: 100px;
+    margin-right: 60px;
+    margin-bottom: 10px;
   }
+  .cart {
+    margin-left: 30px;
+    
+  }
+}

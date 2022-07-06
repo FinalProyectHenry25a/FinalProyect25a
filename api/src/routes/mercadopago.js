@@ -101,15 +101,26 @@ server.get("/pagos", async  (req, res)=>{
   
       if(usuario.shopping === null) {
   
+<<<<<<< HEAD
       await User.update({ shopping: usuario.cart, cart: null, emptyCart: true}, { where: { email: external_reference } });
   
+=======
+      await User.update({ shopping: usuario.cart, cart: null, emptyCart: true, sendEmail: true}, { where: { email: external_reference } });
+      const getInfo = await User.findByPk(external_reference)
+      console.log(getInfo.sendEmail)
+>>>>>>> f56342f91b691216f00faab6ae28cfa2eb183aa4
       } else {
   
         await User.update(
-          { shopping: usuario.shopping.concat(usuario.cart), cart: null, emptyCart: true },
+          { shopping: usuario.shopping.concat(usuario.cart), cart: null, emptyCart: true, sendEmail: true },
           { where: { email: external_reference } }
         );
+<<<<<<< HEAD
 
+=======
+         const getInfo = await User.findByPk(external_reference)
+         console.log(getInfo.sendEmail)
+>>>>>>> f56342f91b691216f00faab6ae28cfa2eb183aa4
       }
 
       return res.redirect("http://localhost:3000/home")

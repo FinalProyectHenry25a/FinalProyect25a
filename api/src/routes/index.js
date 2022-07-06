@@ -9,8 +9,14 @@ const cart = require("./cart");
 const admin = require("./admin");
 const mercadopago = require('./mercadopago');
 const order = require('./order');
+<<<<<<< HEAD
 const comprarealizada = require ('./compra-realizadas');
+=======
+const comprarealizada = require ('./compra-realizadas')
+const sendEmail = require ('./sendEmail')
+>>>>>>> f56342f91b691216f00faab6ae28cfa2eb183aa4
 
+const preguntas = require('./preguntas');
 const router = Router();
 
 const correo = require('../controllers/auth')
@@ -53,5 +59,10 @@ router.use('/compra-realizada', comprarealizada)
 
 //RUTA FORMULARIO DE CORREO ELECTRONICO
 router.use('/correo', correo);
+
+//RUTA ENVIO DE PAGO
+router.use('/sendEmail', sendEmail);
+//RUTA PREGUNTAS Y RESPUESTAS
+router.use('/pregunta',preguntas );
 
 module.exports = router;

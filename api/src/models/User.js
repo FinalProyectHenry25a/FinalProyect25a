@@ -59,6 +59,14 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+<<<<<<< HEAD
+=======
+    sendEmail: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+
+>>>>>>> f56342f91b691216f00faab6ae28cfa2eb183aa4
 
     emptyCart: {
       type: DataTypes.BOOLEAN,

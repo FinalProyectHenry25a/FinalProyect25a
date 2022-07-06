@@ -1,13 +1,13 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { getUser } from "../../Actions";
+import { getAllUsers, getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
 export default function Admin() {
   const dispatch = useDispatch();
-
+  const allUsers = useSelector((state) => state.users)
   const history = useHistory();
 
   useEffect(() => {
@@ -28,6 +28,12 @@ export default function Admin() {
       }
     });
   };
+
+  useEffect(() => {
+    userVerificate();
+    dispatch(getAllUsers());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return (
     <div>
@@ -53,8 +59,32 @@ export default function Admin() {
       <Link to={`/admin/users`}>
         <button>Usuarios</button>
       </Link>
-
+      <Link to={`/admin/preguntas`}>
+        <button>Preguntas</button>
+      </Link>
       <h3>Ventas realizadas:</h3>
+        {<div>
+          {allUsers ? allUsers.map((el) => {
+            return (
+              <div key={el.email}>
+              <h6>
+                 {el.shopping.map(el => {
+                  return (
+                    <div>
+                    <h6>
+                    {el.brand} - {el.model} - {el.releaseDate} - {el.price} - {el.rating} - {el.color} - {el.processor} - {el.ram} - {el.rom} - {el.network} - {el.batery} - {el.frontal_cam} - {el.main_cam} - {el.inches} - {el.screen} - {el.resolution}
+                    </h6>
+                    <img src={el.images} alt=""/>
+                    </div>
+                  )
+                })}
+              </h6>
+            </div>
+            )
+            }): <span>Sin Ventas</span>}
+            
+        </div> }
+      
     </div>
   );
 }

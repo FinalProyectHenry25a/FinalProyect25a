@@ -198,25 +198,25 @@ const handleChange = (e) => {
           <h1>Formulario de registro</h1>
         </div>
         <div>
-          <input placeholder="Username..." type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Nombre de usuario" type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
         {error.username && <p>{error.username}</p>}</div>
         <div>
-          <input placeholder="Firstname..." type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Nombre" type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
         {error.firstname && <p>{error.firstname}</p>}</div>
         <div>
-          <input placeholder="Lastname..." type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Apellido" type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
         {error.lastname && <p>{error.lastname}</p>}</div>
         <div>
-          <input placeholder="Address..." type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Dirección" type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
         {error.address && <p>{error.address}</p>}</div>
         {/* <div>
           <input placeholder="Email..." autoFocus type="email" id='email' name="email" required onChange={handleChange}></input>
           {error.email && <p>{error.email}</p>}</div> */}
         <div>
-        <input type='email' name="correo_user" placeholder="Email..." className={style.input} value={correo.correo_user} onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }/>
+        <input type='email' name="correo_user" placeholder="Email" className={style.input} value={correo.correo_user} onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }/>
         </div>
         <div>
-          <input placeholder="Contraseña..." type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Contraseña" type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
         {error.password && <p>{error.password}</p>}</div>
         {/* <div>
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
@@ -224,7 +224,7 @@ const handleChange = (e) => {
         <div className={style.register}>
           <button onClick={DOS} type='submit' className={style.btn}>Registrarse</button>
         </div>
-        <Link to="login">
+        <Link to="home">
             <p className={style.ancor}>Volver</p>
           
           </Link>

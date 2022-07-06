@@ -31,7 +31,8 @@ const Cart = () => {
     setTotalItems(items);
     setTotalPrice(price);
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
-
+  
+  
   return (
     <div className={styles.cart}>
       <UserNavBar />

@@ -264,8 +264,8 @@ const Home = () => {
         </select>
 
 
-        <button className="btn btn-outline-dark" onClick={() => send()}>Buscar</button>
-        <button className="btn btn-outline-dark" onClick={() => clearFilter()}>Limpiar filtros</button>
+        <button className={style.btn} onClick={() => send()}>Buscar</button>
+        <button className={style.btn} onClick={() => clearFilter()}>Limpiar filtros</button>
         </div>
       {/* </div> */}
       {/* filtrado************************************ */}

@@ -1,6 +1,6 @@
 import { parseActionCodeURL } from "firebase/auth";
 import React, { useState, useEffect } from "react";
-import "./paginate.css";
+import styles from './Paginate.module.css'
 
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,14 +68,14 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       </ul> */}
 
       <ul className="pagination justify-content-center">
-        <button className="page-link" onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
+        <button className={styles.btn} onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
           Anterior
         </button>
-        <input onChange={(e) => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={currentPage} />
-        <label className="alert alert-light">
+        <input className={styles.input} onChange={(e) => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={currentPage} />
+        <label className={styles.input}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>
-        <button className="page-link" onClick={() => nextPage()} disabled={currentPage === Math.ceil(allPhones / phonesPerPage) || currentPage > Math.ceil(allPhones / phonesPerPage) }>
+        <button className={styles.btn} onClick={() => nextPage()} disabled={currentPage === Math.ceil(allPhones / phonesPerPage) || currentPage > Math.ceil(allPhones / phonesPerPage) }>
           Siguiente
         </button>
       </ul>

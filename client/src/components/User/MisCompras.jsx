@@ -12,6 +12,7 @@ import { getPhones } from "../../Actions";
 
 export default function MisCompras() {
   const [user, setUser] = useState();
+  const [compras, setCompras] = useState();
   const [input, setInput] = useState("");
   const [puntaje, setPuntaje]=useState(null)
   const allPhones = useSelector((state) => state.phones);
@@ -29,6 +30,27 @@ export default function MisCompras() {
           `http://localhost:3001/user/${currentUser.email}`
         );
         setUser(user.data);
+
+        let array = user.data.shopping;
+
+        let arrSinRep = [];
+
+        for (let i = 0; i < array.length; i++) {
+          let flag = false;
+          for (let j = 0; j < arrSinRep.length; j++) {
+            if (array[i].id === arrSinRep[j].id) flag = true;
+          }
+          if (flag === false) arrSinRep.push(array[i]);
+        }
+
+        for (let i = 0; i < arrSinRep.length; i++) {
+          arrSinRep[i].cant = 0;
+          for (let j = 0; j < array.length; j++) {
+            if (arrSinRep[i].id === array[j].id)
+              arrSinRep[i].cant = arrSinRep[i].cant + 1;
+          }
+        }
+        setCompras(arrSinRep);
       }
     });
   };
@@ -71,9 +93,14 @@ export default function MisCompras() {
             <div>
               {" "}
               <h2>mis Compras</h2>
-              {user.shopping?.map((e) => {
+
+              {compras?.map((e) => {
+
                 return (
                   <div key={e.id}>
+
+                    <br/>
+                    <h3>Unidades: {e.cant}</h3>
                     <Card
                       brand={e.brand}
                       model={e.model}

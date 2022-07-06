@@ -24,7 +24,7 @@ useEffect(()=>{
     };
     const responder = async (e) => {
         let questionID = e.nativeEvent.path[1].id;
-        console.log(questionID)
+        
         if(input){
     
         await axios.put(`http://localhost:3001/pregunta/${questionID}`, {
@@ -37,20 +37,39 @@ useEffect(()=>{
     
     };
 
+const editar = async (e)=>{
+    let questionID = e.nativeEvent.path[1].id;
+    console.log(questionID)
+    await axios.put(`http://localhost:3001/pregunta/${questionID}`, {
+
+        answer: null
+      });
+      window.location.reload()
+}
+
 return(
     <div>
             <h1>Preguntas</h1>
          { allQuestions? allQuestions.map(e=>{      
              
             return(
-                <div  id={e.id}>
+                
+                <div   className="border">
                     <p>{e.question}</p>
                     <p>{e.user_email}</p>
                    
-                    <input onChange={(e) => handlerChange(e)} type="text" placeholder="responder..." />
+                   {!e.answer?
+                   <div id={e.id}>
+                   <input onChange={(e) => handlerChange(e)} type="text" placeholder="responder..." />
                     <button  onClick={(e) => responder(e)}>responder</button>
-                    
-                    
+                    </div>
+                    :
+                    (
+                    <div id={e.id}>
+                    <p>{e.answer}</p>
+                    <button onClick={(e) => editar(e)}>borrar respuesta</button>
+                    </div>
+                   )}
                 </div>
             )
         // quiero retornar TODAS las preguntas de TODOS los celulars

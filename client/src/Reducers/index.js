@@ -50,12 +50,10 @@ function rootReducer (state = initialState, action){
               }
             
                case 'FILTERS':
-               
-                
-            return{
-                ...state,
-                phones: action.payload,
-                filtered:action.payload
+                return{
+                  ...state,
+                  phones: action.payload,
+                  filtered:action.payload
             }
             case 'ADD_TO_CART':
                 // Great Item data from products array

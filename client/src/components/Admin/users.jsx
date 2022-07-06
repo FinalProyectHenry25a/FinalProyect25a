@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { banUser, getUser, unbanUser, usersAdmin } from "../../Actions";
+import { banUser, getAllUsers, getUser, unbanUser, usersAdmin } from "../../Actions";
 import { Link, useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
@@ -16,7 +16,7 @@ export default function Users() {
     const users = useSelector((state) => state.users)
 
     useEffect(() => {
-        dispatch(usersAdmin());
+        dispatch(getAllUsers());
     }, [dispatch]);
 
     useEffect(() => {

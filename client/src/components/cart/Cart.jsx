@@ -57,8 +57,7 @@ const Cart = () => {
     setTotalItems(items);
     setTotalPrice(price);
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
-  
-  console.log(auth.currentUser);
+
   
   return (
     <div className={styles.cart}>

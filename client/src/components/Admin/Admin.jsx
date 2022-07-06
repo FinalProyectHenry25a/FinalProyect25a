@@ -10,13 +10,9 @@ export default function Admin() {
   const allUsers = useSelector((state) => state.users)
   const history = useHistory();
 
-  useEffect(() => {
-    userVerificate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const userVerificate = async () => {
     await onAuthStateChanged(auth, async (currentUser) => {
+      dispatch(getAllUsers());
       try {
         let info = await dispatch(getUser(currentUser.email));
 
@@ -31,7 +27,6 @@ export default function Admin() {
 
   useEffect(() => {
     userVerificate();
-    dispatch(getAllUsers());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -64,17 +59,18 @@ export default function Admin() {
       </Link>
       <h3>Ventas realizadas:</h3>
         {<div>
+          
           {allUsers ? allUsers.map((el) => {
             return (
               <div key={el.email}>
               <h6>
-                 {el.shopping.map(el => {
+                 {el?.shopping?.map(e => {
                   return (
-                    <div>
+                    <div key={e.id}>
                     <h6>
-                    {el.brand} - {el.model} - {el.releaseDate} - {el.price} - {el.rating} - {el.color} - {el.processor} - {el.ram} - {el.rom} - {el.network} - {el.batery} - {el.frontal_cam} - {el.main_cam} - {el.inches} - {el.screen} - {el.resolution}
+                    {e.brand} - {e.model} - {e.releaseDate} - {e.price} - {e.rating} - {e.color} - {e.processor} - {e.ram} - {e.rom} - {e.network} - {e.batery} - {e.frontal_cam} - {e.main_cam} - {e.inches} - {e.screen} - {e.resolution}
                     </h6>
-                    <img src={el.images} alt=""/>
+                    <img src={e.images} alt={e.model}/>
                     </div>
                   )
                 })}

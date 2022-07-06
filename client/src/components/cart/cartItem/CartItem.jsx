@@ -15,7 +15,7 @@ import styles from "./CartItem.module.css";
 const CartItem = (props) => {
 
   const {item} = props
-  console.log(item)
+
 
   const [input, setInput] = useState(item.qty);
   const [stockView, setStockView] = useState(0);
@@ -41,7 +41,7 @@ const CartItem = (props) => {
     }
   };
 
-  console.log(props)
+
 
   const dispatch = useDispatch();
   return (

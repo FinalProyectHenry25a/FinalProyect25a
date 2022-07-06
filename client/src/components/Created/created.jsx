@@ -10,6 +10,8 @@ export default function PhoneCreate() {
 
   const dispatch = useDispatch();
   const [error,setError] = useState({});
+  const [fotoP, setFotoP] = useState('');
+  const [fotosSec, setFotosSec] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -163,6 +165,7 @@ export default function PhoneCreate() {
 } else {
 
   //console.log(input);
+
     dispatch(postPhone(input));
     alert("La publicacion se creo exitosamente");
     setInput({
@@ -196,9 +199,22 @@ export default function PhoneCreate() {
 
     fileReader.onload = async function () {
       let base64 = fileReader.result;
-
-      setInput({ ...input, images: base64 });
+      setFotoP(base64);
+      setInput({ ...input, images: base64 }); 
     };
+  };
+
+  const base64Multiple = (ev) => {
+    let file = ev.target.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = async function () {
+      let base64 = fileReader.result;
+      setFotosSec([...fotosSec, base64]);
+      setInput({...input, additionalphotos: fotosSec});
+    };                                                         
   };
 
   return (
@@ -272,14 +288,28 @@ export default function PhoneCreate() {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Images</h5>
+                <h5>Imagen principal</h5>
 
                       <input
                         type="file"
                         onChange={(ev) => base64Convert(ev)}
                         required
                       />
-                
+                      <br/>
+                      {fotoP !== '' ? <img src={fotoP} width="50" height="60" alt="no se pudo cargar la imagen" /> : null}
+
+                <h5>Imagenes secundarias (máximo 3)</h5>  
+                      {fotosSec?.length <= 2 ?
+                        <input
+                        type="file"
+                        onChange={(ev) => base64Multiple(ev)}
+                        required
+                      /> : null }
+               
+                      {fotosSec?.length >= 1?
+                      <div> {fotosSec.map( (el, index) => <img key={index} src={el} width="50" height="60" alt="no se pudo cargar la imagen" />)} </div>       
+                      :null}
+  
                   
                 {error.images && <p>{error.images}</p>}
               </label>

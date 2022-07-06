@@ -91,8 +91,8 @@ const Home = () => {
 
 
   useEffect(() => {
-    (!filtrados?
-    dispatch(getPhones()):console.log("casi"));
+    if(!filtrados) dispatch(getPhones())
+    
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtrados]);
 

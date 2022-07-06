@@ -49,7 +49,7 @@ export default function Favourites(props) {
       {user ? (
         <div>
           <h2>Mis favoritos</h2>
-          {user.favourites?.map((e) => {
+          {user?.favourites.map((e) => {
             return (
               <div key={e.id}>
                 <Card

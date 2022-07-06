@@ -22,13 +22,14 @@ const CartItem = (props) => {
     setStockView(st);
   }, []);
 
-  const adjustQty = (id, value) => {
-    dispatch(adjustItemQty(id, value));
-  };
+  // const adjustQty = (id, value) => {
+    
+  // };
 
   const onChangeHandler = async (e) => {
-    setInput(e.target.value);
 
+    setInput(e.target.value);
+    dispatch(adjustItemQty(props.item.id, e.target.value));
     let post = (await axios.get(`http://localhost:3001/home/${props.item.id}`))
       .data;
 

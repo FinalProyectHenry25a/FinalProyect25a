@@ -183,12 +183,12 @@ const Home = () => {
     await signOut(auth);
   };
 
-  
+  console.log(auth.currentUser);
 
   return (
     <div>
        
-      {/* <button onClick={logout}>desloguear</button> */}
+      <button onClick={logout}>desloguear</button>
 
       {/* <Link to="/agregado">
         <button>Agregar Phone</button>

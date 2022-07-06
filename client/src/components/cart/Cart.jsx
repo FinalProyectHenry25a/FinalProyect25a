@@ -19,15 +19,18 @@ const Cart = () => {
   const cart = useSelector(state => state.cart)
   const dispatch = useDispatch()
   const history = useHistory()
-
-  useEffect(() => {
-
-    dispatch(getLocalCart())
-  }, [])
+  
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
   }, []);
+
+  useEffect(() => {
+
+    dispatch(getLocalCart())
+
+  }, [])
+
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
@@ -58,6 +61,7 @@ const Cart = () => {
     
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
   
+  console.log(auth.currentUser);
   
   return (
     <>
@@ -78,7 +82,7 @@ const Cart = () => {
         <button  className={styles.summary__checkoutBtn}>
         Confirmar Pedido <img src={mercadopago} />
         </button>
-        </Link> : <span>Debes tener una cuenta con mail verificado para comprar</span>}
+        </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
       </div>
     </div>
     </>

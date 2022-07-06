@@ -59,6 +59,7 @@ export default function Detail() {
 
   const PID = useSelector((state) => state.phonesId);
 
+
   const allQuestions = useSelector((state)=>state.questions)
 
 
@@ -122,13 +123,18 @@ export default function Detail() {
       <NavBar />
       <hr/>
       <div className={styles.divContainer}>
-        <div className={styles.container1}>
+
+          <div className={styles.container1}>
           <img src={PID.images} alt="marcas" width={300} />
-        </div>
+          </div>
+
+
+          
 <hr/>
         <div className={styles.container2}>
           <div>
-            <h1>{PID.model}</h1>
+          <h1>{PID.model}</h1>
+          {PID.additionalphotos?.length >=1 ? PID.additionalphotos.map ( el => <img src={el} width="50" height="60" alt="No encontrada" />):null }
             <h3>${PID.price}</h3>
             <h3>Rating</h3>
             <div>

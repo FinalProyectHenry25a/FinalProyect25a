@@ -212,9 +212,12 @@ export default function PhoneCreate() {
 
     fileReader.onload = async function () {
       let base64 = fileReader.result;
-      setFotosSec([...fotosSec, base64]);
-      setInput({...input, additionalphotos: fotosSec});
-    };                                                         
+
+      let aux = fotosSec;
+      aux.push(base64);
+
+      setInput({ ...input, additionalphotos: aux });
+    };
   };
 
   return (
@@ -462,7 +465,7 @@ export default function PhoneCreate() {
                 <h5>Main Camera</h5>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  type="text"
+                  type="number"
                   value={input.main_cam}
                   name="main_cam"
                   onChange={(e) => handleOnChange(e)}

@@ -9,6 +9,7 @@ import Card from "../card/Card";
 import { async } from "@firebase/util";
 import { useDispatch, useSelector } from "react-redux";
 import { getPhones } from "../../Actions";
+import { useHistory } from "react-router-dom";
 
 export default function MisCompras() {
   const [user, setUser] = useState();
@@ -17,6 +18,7 @@ export default function MisCompras() {
   const [puntaje, setPuntaje]=useState(null)
   const allPhones = useSelector((state) => state.phones);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
@@ -29,6 +31,11 @@ export default function MisCompras() {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        if(user.data.banned){
+
+          history.push("/banned")
+
+        }
         setUser(user.data);
 
         let array = user.data.shopping;

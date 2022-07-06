@@ -10,6 +10,7 @@ import { async } from "@firebase/util";
 import { useDispatch, useSelector } from "react-redux";
 import { getPhones } from "../../Actions";
 import { useHistory } from "react-router-dom";
+import styles from './styles/MisCompras.module.css'
 
 export default function MisCompras() {
   const [user, setUser] = useState();
@@ -92,14 +93,14 @@ export default function MisCompras() {
 
 
   return (
-    <div>
+    <>
       <UserNavBar />
       {user ? (
-        <div>
+        <div className={styles.container}>
           {user.shopping ? (
-            <div>
+            <div className={styles.containerCard}>
               {" "}
-              <h2>mis Compras</h2>
+              <h2>Mis Compras</h2>
 
               {compras?.map((e) => {
 
@@ -127,20 +128,21 @@ export default function MisCompras() {
                       <div id={e.id}>
                         <input
                           name={e.id}
+                          className={styles.input}
                           onChange={(e) => handlerChange(e)}
                           type="text"
                           placeholder="Dejanos tu opinion..."
                           value={input.id}
                         ></input>
                         <div>
-                        <p>Selecciona para puntuar el producto adquirido</p>
+                        <p className={styles.prf}>Selecciona para puntuar el producto adquirido</p>
                              <button onClick={()=>rate(1,e.id)}>⭐</button>
                              <button onClick={()=>rate(2,e.id)}>⭐</button>
                              <button onClick={()=>rate(3,e.id)}>⭐</button>
                              <button onClick={()=>rate(4,e.id)}>⭐</button>
                              <button onClick={()=>rate(5,e.id)}>⭐</button>
                         </div>
-                        <button onClick={(e) => publicar(e)}>compartir</button>
+                        <button onClick={(e) => publicar(e)} className={styles.btn}>compartir</button>
                       </div>
                     ) : (
                       <p></p>
@@ -156,6 +158,6 @@ export default function MisCompras() {
       ) : (
         <h1>no estas logeado</h1>
       )}
-    </div>
+    </>
   );
 }

@@ -60,8 +60,9 @@ const Cart = () => {
 
   
   return (
-    <div className={styles.cart}>
+    <>
       <UserNavBar />
+    <div className={styles.cart}>
       <div className={styles.cartItems}>
         {cart.map((item, i) => (
           <CartItem key={i} item={item} />
@@ -80,6 +81,7 @@ const Cart = () => {
         </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
       </div>
     </div>
+    </>
   );
 };
 

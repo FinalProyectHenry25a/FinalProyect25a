@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../firebase/firebase-config";
-import { onAuthStateChanged } from "firebase/auth";
-import { getDetails, addToCart, addToCartUser } from "../../Actions/index";
+import { getDetails, addToCart, getUser, getQuestions, addToCartUser } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
+import { onAuthStateChanged, reload, signOut } from "firebase/auth";
+import { auth } from "../../firebase/firebase-config";
+import axios from "axios";
 import styles from "./Detail.module.css";
 import NavBar from "../NavBar/NavBar";
 
@@ -22,28 +23,81 @@ export default function Detail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [review, setReview] = useState({
-    comentario: "",
-  });
+    comentario: ""
+  })
+
+  const [loggedUser, setLoggedUser] = useState();
+  const [input, setInput] = useState("");
+
 
   useEffect(() => {
     dispatch(getDetails(id));
   }, [dispatch, id]);
+  
+  useEffect(() => {
+    dispatch(getQuestions());
+  }, [dispatch]);
 
   const PID = useSelector((state) => state.phonesId);
 
-  function promedio() {
-    if (PID.review) {
-      let arr = PID.review?.map((el) => el.rating);
+  const allQuestions = useSelector((state)=>state.questions)
 
-      let suma = 0;
-      for (let i = 0; i < arr.length; i++) {
-        suma = suma + arr[i];
-      }
 
-      return (suma / arr.length).toFixed(2);
-    } else return "no fue ranqueado";
-  }
+    function promedio(){
+      if(PID.review)
+      {   
+        let arr=PID.review?.map(el=>el.rating)
+       
+        let suma = 0
+        for(let i=0;i<arr.length;i++){
+          suma=suma+arr[i]
+        }
+    
+    return (suma/arr.length).toFixed(2)
+  }else return "no fue ranqueado"
+    }
+  
+    const verificarQueHayaUsuarioLogueado = () => {
+      onAuthStateChanged(auth, async (currentUser) => {
+        if (currentUser) {
+          let user = await axios.get(
+            `http://localhost:3001/user/${currentUser.email}`
+          );
+          setUser(user.data);
+        }
+      });
+    };
 
+    
+    useEffect(() => {
+
+      verificarQueHayaUsuarioLogueado();
+  
+      
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handlerChange = (e) => {
+      setInput(e.target.value);
+    };
+
+    const publicar = async (e) => {
+      // let productID = e.nativeEvent.path[1].id;
+      if(input){
+  
+      await axios.post(`http://localhost:3001/pregunta`, {
+        question: input,
+        user_email: user.email,
+        product_ID: PID.id,
+      });
+      alert("pregunta enviada")
+      window.location.reload()
+    }else alert("haga una pregunta antes de publicar")
+  
+  };
+
+
+      
   return (
     <>
       <NavBar />
@@ -154,7 +208,40 @@ export default function Detail() {
                 </ul>
               </div>
             </div>
-          </div>
+            
+          :(
+            <p>este articulo no tiene comentarios</p>
+          )
+             </div>
+             <div>
+
+              <h3>Preguntas y Respuestas</h3>
+              {user?
+              (<div>
+              <input onChange={(e) => handlerChange(e)} type="text" placeholder="escribinos tu pregunta..." />
+              <button onClick={(e) => publicar(e)}>preguntar</button>
+              </div>
+              ):(
+                <p></p>
+              )
+            }
+              {allQuestions? allQuestions.map((e) =>{
+                console.log("id de producto",PID.id)
+                console.log("id de producto de la question",e.product_ID)
+                if(e.product_ID===PID.id){
+            return(
+              <div className="border">
+            <p>{e.user_email}</p>
+            <p>{e.question}</p>
+            <p>{e.answer}</p>
+            </div>
+            )}}):(
+              console.log("id de producto",PID.id)
+            )
+
+            }
+             </div>
+
         </div>
       </div>
       <hr/>

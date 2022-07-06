@@ -108,7 +108,12 @@ module.exports = (sequelize) => {
     qty: {
       type: DataTypes.INTEGER,
       allowNull: true
-    }
+    },
+
+    additionalphotos:{
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: true
+    },
 
   });
 };

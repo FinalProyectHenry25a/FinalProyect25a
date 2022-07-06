@@ -52,6 +52,6 @@ router.use('/compra-realizada', comprarealizada)
 router.use('/correo', correo);
 
 //RUTA PREGUNTAS Y RESPUESTAS
-router.use('/detalle',preguntas );
+router.use('/pregunta',preguntas );
 
 module.exports = router;

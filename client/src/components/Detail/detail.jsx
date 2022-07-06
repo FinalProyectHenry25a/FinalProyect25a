@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails, addToCart, getUser } from "../../Actions/index";
+import { getDetails, addToCart, getUser, getQuestions } from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
@@ -20,11 +20,15 @@ export default function Detail() {
   useEffect(() => {
     dispatch(getDetails(id));
   }, [dispatch, id]);
+  
+  useEffect(() => {
+    dispatch(getQuestions());
+  }, [dispatch]);
 
   const PID = useSelector((state) => state.phonesId);
 
- 
- 
+  const allQuestions = useSelector((state)=>state.questions)
+
 
     function promedio(){
       if(PID.review)
@@ -68,8 +72,10 @@ export default function Detail() {
       // let productID = e.nativeEvent.path[1].id;
       if(input){
   
-      await axios.put(`http://localhost:3001/detalle/${user.email}/${PID.id}`, {
-        pregunta: input
+      await axios.post(`http://localhost:3001/pregunta`, {
+        question: input,
+        user_email: user.email,
+        product_ID: PID.id,
       });
       alert("pregunta enviada")
       window.location.reload()
@@ -293,15 +299,18 @@ export default function Detail() {
                 <p></p>
               )
             }
-              {PID.QyA? PID.QyA.map((e) =>{
+              {allQuestions? allQuestions.map((e) =>{
+                console.log("id de producto",PID.id)
+                console.log("id de producto de la question",e.product_ID)
+                if(e.product_ID===PID.id){
             return(
               <div className="border">
-            <p>{e.usuario}</p>
-            <p>{e.pregunta}</p>
-            <p>{e.respuesta}</p>
+            <p>{e.user_email}</p>
+            <p>{e.question}</p>
+            <p>{e.answer}</p>
             </div>
-            )}):(
-              <p></p>
+            )}}):(
+              console.log("id de producto",PID.id)
             )
 
             }

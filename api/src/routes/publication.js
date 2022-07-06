@@ -2,6 +2,7 @@ const Router = require('express');
 const { Publication, User } = require('../db.js');
 const { Op, where } = require('sequelize');
 
+
 const router = Router();
 
 router.get("/", async (req, res, next) => {
@@ -33,7 +34,8 @@ router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    let smartPhone = await Publication.findByPk(id);
+    let smartPhone = await Publication.findByPk(id)
+
 
     res.json(smartPhone);
   } catch (error) {

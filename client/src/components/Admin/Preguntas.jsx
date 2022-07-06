@@ -1,49 +1,35 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPhones } from "../../Actions";
+import { getPhones, getQuestions } from "../../Actions";
 
 
 export default function Preguntas(){
-const allPhones = useSelector((state) => state.phones)
+const allQuestions = useSelector((state) => state.questions)
 
-const [preguntasYRespuestas, setPreguntasyRespuestas]= useState([])
+
 const dispatch = useDispatch()
 const [input, setInput] = useState("");
 
 useEffect(()=>{
-    dispatch(getPhones())
+    dispatch(getQuestions())
 },[dispatch])
 
 
  
 
- async function buscoPreguntas() {
-let arr=[]
-    for(let i=0;i<allPhones.length;i++){
-         allPhones[i].QyA!==null  ?
-        arr.push(allPhones[i].QyA):
-        (
-            console.log("ee")
-        )
-    }
-    setPreguntasyRespuestas(arr)
-  
-}
-useEffect(()=>{
-    buscoPreguntas()
-    },[])
-
     const handlerChange = (e) => {
+        
         setInput(e.target.value);
-      };
-      const responder = async (e) => {
-        // let productID = e.nativeEvent.path[1].id;
+    };
+    const responder = async (e) => {
+        let questionID = e.nativeEvent.path[1].id;
+        console.log(questionID)
         if(input){
     
-        await axios.put(`http://localhost:3001/detalle/finalproyect25a@gmail.com/60d188bb-21fd-4519-97e4-029faa460e45`, {
+        await axios.put(`http://localhost:3001/pregunta/${questionID}`, {
 
-          respuesta: input
+          answer: input
         });
         alert("respuesta enviada")
         window.location.reload()
@@ -54,16 +40,17 @@ useEffect(()=>{
 return(
     <div>
             <h1>Preguntas</h1>
-         { preguntasYRespuestas.length>0? preguntasYRespuestas.map(e=>{      
-            //me rotorna la pregunta, si solo tengo 1   
+         { allQuestions? allQuestions.map(e=>{      
+             
             return(
-                <div>
-                    <p>{e[0].pregunta}</p>
-                    <p>{e[0].usuario}</p>
-                    <div>
+                <div  id={e.id}>
+                    <p>{e.question}</p>
+                    <p>{e.user_email}</p>
+                   
                     <input onChange={(e) => handlerChange(e)} type="text" placeholder="responder..." />
-                    <button onClick={(e) => responder(e)}>responder</button>
-                    </div>
+                    <button  onClick={(e) => responder(e)}>responder</button>
+                    
+                    
                 </div>
             )
         // quiero retornar TODAS las preguntas de TODOS los celulars

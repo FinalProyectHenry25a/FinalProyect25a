@@ -197,3 +197,13 @@ export function usersAdmin() {
   };
 }
 
+export function getQuestions() {
+  return async function (dispatch) {
+    var json = await axios.get("http://localhost:3001/pregunta");
+    return dispatch({
+      type: "GET_QUESTIONS",
+      payload: json.data,
+    });
+  };
+}
+

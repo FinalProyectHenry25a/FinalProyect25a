@@ -19,6 +19,7 @@ module.exports = (sequelize) => {
     },
     answer:{
         type: DataTypes.TEXT,
+    
     },
 });
 };

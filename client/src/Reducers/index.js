@@ -6,7 +6,8 @@ const initialState = {
     filtered:[],
     users: [],
     user: {},
-    count: 1
+    count: 1,
+    questions:[]
 }
 
 function rootReducer (state = initialState, action){
@@ -132,6 +133,17 @@ function rootReducer (state = initialState, action){
                   ...state,
                   cart: removeCart
                 };
+
+                case "CLEAR_CART_POST_BUY":
+
+                localStorage.clear()
+
+                return {
+                  ...state,
+                  cart: []
+                };
+
+
               case 'ADJUST_ITEM_QTY':
                 return {
                   ...state,
@@ -162,7 +174,11 @@ function rootReducer (state = initialState, action){
                   ...state,
                   users: action.payload,
                 }; 
-                  
+                case "GET_QUESTIONS":
+                  return {
+                    ...state,
+                    questions: action.payload,
+                  }; 
             default:
                 return state;
         }      

@@ -64,6 +64,11 @@ module.exports = (sequelize) => {
     },
 
 
+    emptyCart: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    
   });
 
 };

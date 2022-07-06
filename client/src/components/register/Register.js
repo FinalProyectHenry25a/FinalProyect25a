@@ -4,11 +4,18 @@ import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/firebase-config';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
+import swal2 from 'sweetalert'
+import {Link} from 'react-router-dom';
+
+
 
 
 const Register = () => {
+
+  const cart = useSelector(state => state.cart)
   
   const history = useHistory();
   
@@ -87,7 +94,13 @@ const Register = () => {
           address: input.address
         }
         await axios.post("http://localhost:3001/user", newUser);
-        
+
+        for (let i = 0; i < cart.length; i++) {
+          
+          await axios.put(`http://localhost:3001/cart/${auth.currentUser.email}/${cart[i].id}`)
+          
+        }
+
         setInput({
 
           email: "",
@@ -98,24 +111,30 @@ const Register = () => {
           address: ""
 
         });
+      
+      // swal('Buen Trabajo','Te registraste correctamente!', "Ver productos");
+      swal2({
+        title: "Buen Trabajo!",
+        text: "Te registraste correctamente!",
+        icon: "success",
+      });
 
-        alert('User created successfully');
+      history.push('/home');
 
-        history.push('/home');
-      }
+    } 
 
-}
+  }
 
-function validation (input){
-  let error = {}
-  if (!input.email) error.email = "Ingresa el email del usuario"
-  if (!input.password) error.password = "Ingresa la contraseña del usuario"
-  if (!input.username) error.username = "Ingresa el nombre de usuario"
-  if (!input.firstname) error.firstname = "Ingresa el nombre del usuario"
-  if (!input.lastname) error.lastname = "Ingresa el apellido del usuario"
-  if (!input.address) error.address = "Ingresa la direccion del usuario"
-  return error
-}
+  function validation (input){
+    let error = {}
+    if (!input.email) error.email = "Ingresa el email del usuario"
+    if (!input.password) error.password = "Ingresa la contraseña del usuario"
+    if (!input.username) error.username = "Ingresa el nombre de usuario"
+    if (!input.firstname) error.firstname = "Ingresa el nombre del usuario"
+    if (!input.lastname) error.lastname = "Ingresa el apellido del usuario"
+    if (!input.address) error.address = "Ingresa la direccion del usuario"
+    return error
+  }
 
 const handleChange = (e) => {
   
@@ -176,28 +195,28 @@ const handleChange = (e) => {
           <div className={style.login}>
       <div className={style.container}>
         <div className={style.image}>
-          <h1>REGISTER</h1>
+          <h1>Formulario de registro</h1>
         </div>
         <div>
-          <input placeholder="Username..." type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Nombre de usuario" type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
         {error.username && <p>{error.username}</p>}</div>
         <div>
-          <input placeholder="Firstname..." type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Nombre" type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
         {error.firstname && <p>{error.firstname}</p>}</div>
         <div>
-          <input placeholder="Lastname..." type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Apellido" type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
         {error.lastname && <p>{error.lastname}</p>}</div>
         <div>
-          <input placeholder="Address..." type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Dirección" type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
         {error.address && <p>{error.address}</p>}</div>
         {/* <div>
           <input placeholder="Email..." autoFocus type="email" id='email' name="email" required onChange={handleChange}></input>
           {error.email && <p>{error.email}</p>}</div> */}
         <div>
-        <input type='email' name="correo_user" placeholder="Email..." className={style.input} value={correo.correo_user} onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }/>
+        <input type='email' name="correo_user" placeholder="Email" className={style.input} value={correo.correo_user} onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }/>
         </div>
         <div>
-          <input placeholder="Contraseña..." type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
+          <input placeholder="Contraseña" type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
         {error.password && <p>{error.password}</p>}</div>
         {/* <div>
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
@@ -205,6 +224,10 @@ const handleChange = (e) => {
         <div className={style.register}>
           <button onClick={DOS} type='submit' className={style.btn}>Registrarse</button>
         </div>
+        <Link to="home">
+            <p className={style.ancor}>Volver</p>
+          
+          </Link>
         {/* <div className={style.register}>
           <button className={style.btn}>Ingresar con Google</button>
         </div>

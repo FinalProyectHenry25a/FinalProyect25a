@@ -82,6 +82,8 @@ export const addToCart = (itemID) => {
 
 export const addToCartUser = (email, itemID) => {
   return async function (dispatch) {
+    console.log(email);
+    console.log(itemID)
     await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
     return dispatch({
       type: "ADD_TO_CART_USER",
@@ -102,6 +104,27 @@ export const removeFromCart = (itemID) => {
     });
   };
 };
+
+export const clearCart = (email) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
+    return dispatch({
+      type: "CLEAR_CART_POST_BUY",
+      payload: []
+    });
+  };
+};
+
+// export const emptyCart = (email) => {
+//   return async function (dispatch) {
+//     await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
+//     return dispatch({
+//       type: "EMPTY_CART",
+//       payload: []
+//     });
+//   };
+// };
+
 
 export const removeFromCartUser = (email, itemID) => {
   return async function (dispatch) {
@@ -192,6 +215,16 @@ export function usersAdmin() {
     var json = await axios.get(`http://localhost:3001/admin/users`);
     return dispatch({
       type: "USERS_ADMIN",
+      payload: json.data,
+    });
+  };
+}
+
+export function getQuestions() {
+  return async function (dispatch) {
+    var json = await axios.get("http://localhost:3001/pregunta");
+    return dispatch({
+      type: "GET_QUESTIONS",
       payload: json.data,
     });
   };

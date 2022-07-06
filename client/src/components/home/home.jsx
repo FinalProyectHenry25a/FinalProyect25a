@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -42,6 +42,8 @@ const Home = () => {
     })}
     verificarQueHayaUsuarioLogueado();
     
+
+
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(correo)
@@ -108,6 +110,13 @@ const Home = () => {
      
         let info = await dispatch(getUser(currentUser.email))
 
+        if(info.payload.emptyCart) {
+
+          dispatch(clearCart(info.payload.email));
+          // dispatch(emptyCart(info.payload.email));
+
+        } 
+
         if(currentUser.emailVerified){
 
           await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
@@ -140,9 +149,8 @@ const Home = () => {
   const [phonesPerPage] = useState(4);
   const indexOfLastPhones = currentPage * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
-  const cart = useSelector(state => state.cart)
 
-
+ const cart = useSelector(state => state.cart)
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
 
   const paginado = (pageNumber) => {
@@ -151,8 +159,8 @@ const Home = () => {
 
 
   useEffect(() => {
-    (!filtrados?
-    dispatch(getPhones()):console.log("casi"));
+    if(!filtrados) dispatch(getPhones())
+    
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtrados]);
 
@@ -258,10 +266,10 @@ const Home = () => {
       </Link> */}
 
       {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
-      <Carrousel />
-      <SearchBar setCurrentPage={setCurrentPage}/>
+      {/* <Carrousel /> */}
+      
       <div id="filtros">
-      <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+      <select id='brand' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">Todas</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>
@@ -324,8 +332,8 @@ const Home = () => {
         </select>
 
 
-        <button className="btn btn-outline-dark" onClick={() => send()}>Buscar</button>
-        <button className="btn btn-outline-dark" onClick={() => clearFilter()}>Limpiar filtros</button>
+        <button className={style.btn} onClick={() => send()}>Buscar</button>
+        <button className={style.btn} onClick={() => clearFilter()}>Limpiar filtros</button>
         </div>
       {/* </div> */}
       {/* filtrado************************************ */}

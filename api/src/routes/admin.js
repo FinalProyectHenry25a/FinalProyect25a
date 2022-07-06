@@ -62,7 +62,6 @@ router.delete("/users/:email", async (req, res) => {
 //RUTA PARA CREAR PUBLICACIONES
 router.post("/post", async (req, res) => {
   try {
-    console.log('acaaaaaaa', req.body);
     await Publication.create(req.body);
 
     res.send("Producto agregado exitosamente");

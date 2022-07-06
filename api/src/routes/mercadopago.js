@@ -39,9 +39,9 @@ mercadopago.configure({
     items: items_ml,
     external_reference : `${email}`, //`${new Date().valueOf()}`,
     back_urls: {
-      success: 'http://localhost:8080/mercadopago/pagos',
-      failure: 'http://localhost:8080/mercadopago/pagos',
-      pending: 'http://localhost:8080/mercadopago/pagos',
+      success: 'http://localhost:3001/mercadopago/pagos',
+      failure: 'http://localhost:3001/mercadopago/pagos',
+      pending: 'http://localhost:3001/mercadopago/pagos',
     }
   };
 
@@ -97,71 +97,43 @@ server.get("/pagos", async  (req, res)=>{
         await Publication.update({ stock: publicacion.stock - publicacion.qty }, { where: { id: usuario.cart[i].id } });
         await Publication.update({ qty: null }, { where: { id: usuario.cart[i].id } });
   
-  
       }
   
       if(usuario.shopping === null) {
   
-      await User.update({ shopping: usuario.cart, cart: null, emptyCart: true}, { where: { email: external_reference } });
-        // await User.update({ cart: null }, { where: { id: external_reference } });
-        // await User.update({ emptyCart: true }, { where: { id: external_reference } });
-        let usuario2 = await User.findByPk(external_reference)
-
-        console.log(usuario2.emptyCart);
-  
+      await User.update({ shopping: usuario.cart, cart: null, emptyCart: true, sendEmail: true}, { where: { email: external_reference } });
+      const getInfo = await User.findByPk(external_reference)
+      console.log(getInfo.sendEmail)
       } else {
   
         await User.update(
-          { shopping: usuario.shopping.concat(usuario.cart), cart: null, emptyCart: true },
+          { shopping: usuario.shopping.concat(usuario.cart), cart: null, emptyCart: true, sendEmail: true },
           { where: { email: external_reference } }
         );
-        // await User.update({ cart: null }, { where: { id: external_reference } });
-        // await User.update({ emptyCart: true }, { where: { id: external_reference } });
-        let usuario2 = await User.findByPk(external_reference)
-
-        console.log(usuario2.emptyCart);
-  
+         const getInfo = await User.findByPk(external_reference)
+         console.log(getInfo.sendEmail)
       }
-  
+
       return res.redirect("http://localhost:3000/home")
   
+    }
+
+    if(payment_status === "cancelled") {
+
+      console.log("Su pago fue cancelado");
+      return res.redirect("http://localhost:3000/home")
+      
     }
     
   } catch (error) {
     
 
     console.log(error);
+    console.log("Hubo algun error con su pago y no pudo ejecutarse");
     return res.redirect("http://localhost:3000/home")
 
   }
 
- 
-
-  // Order.findByPk(external_reference)
-  // .then((order) => {
-  //   order.payment_id= payment_id
-  //   order.payment_status= payment_status
-  //   order.merchant_order_id = merchant_order_id
-  //   order.status = "created"
-  //   // console.info('Salvando order')
-  //   order.save()
-  //   .then((_) => {
-  //     console.info('redirect success')
-      
-  //     return res.redirect("http://localhost:3000")
-  //   }).catch((err) =>{
-  //     console.error('error al salvar', err)
-  //     return res.redirect(`http://localhost:3000/?error=${err}&where=al+salvar`)
-  //   })
-  // }).catch(err =>{
-  //   console.error('error al buscar', err)
-  //   return res.redirect(`http://localhost:3000/?error=${err}&where=al+buscar`)
-  // })
-
-
-  //proceso los datos del pago 
-  //redirijo de nuevo a react con mensaje de exito, falla o pendiente
-  //res.send(`${payment_id} ${payment_status} ${external_reference} ${merchant_order_id} `)
 })
 
 

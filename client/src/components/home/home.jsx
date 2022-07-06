@@ -11,6 +11,9 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
+import { fetchstoken } from "../Contacto/fetchmetod";
+import Swal from 'sweetalert2';
+
 
 import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
@@ -21,15 +24,27 @@ const Home = () => {
 
   const [loggedUser, setLoggedUser] = useState();
   
-
+  const [correo, SetCorreo] = useState({
+    contact_user: "MercadoPago Oficial",
+    correo_user: "faculeve12@gmail.com",
+    asunto_user:"Compra realizada",
+    descripcion_user:"Bienvenido a SMART WORLD, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.",
+  })
+  
   useEffect(() => {
 
+    if(!auth.currentUser){}else{
+    SetCorreo({
+      contact_user: "MercadoPago Oficial",
+      correo_user: "faculeve12@gmail.com",
+      asunto_user:"Compra realizada",
+      descripcion_user:"Bienvenido a SMART WORLD, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.", 
+    })}
     verificarQueHayaUsuarioLogueado();
-
     
        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log(correo)
   useEffect(() => {
 
     dispatch(getLocalCart())
@@ -41,7 +56,50 @@ const Home = () => {
   const allPhones = useSelector((state) => state.phones);
   const filtrados = useSelector((state) => state.filtered)
 
- 
+  const correoEmail = async(email) =>{
+     
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) =>{
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
+    console.log(email)
+    SetCorreo({
+      contact_user: "MercadoPago Oficial",
+      correo_user: "faculeve12@gmail.com",
+      asunto_user:"Compra realizada",
+      descripcion_user:"Bienvenido a SMART WORLD, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.", 
+    })
+    try{
+      console.log(correo);
+      const resultCorreo = await fetchstoken('correo', correo , "POST");
+      console.log(resultCorreo);
+      if(!resultCorreo.ok){
+        throw Error(resultCorreo.errors.msg);
+      }
+      Toast.fire({
+        icon: 'success',
+        title: 'El correo se envio con exito'
+      });
+      SetCorreo({
+        contact_user: "MercadoPago Oficial",
+        correo_user: "",
+        asunto_user:"Compra realizada",
+        descripcion_user:"Bienvenido a SMART WORLD, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.", 
+      });
+    } catch (error) {
+      Toast.fire({
+        icon: 'error',
+        title: error.message
+      })
+    }
+  }
   
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -53,6 +111,14 @@ const Home = () => {
         if(currentUser.emailVerified){
 
           await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+
+        }
+        
+        if(info.payload.sendEmail){
+          correoEmail(currentUser.email)
+          
+          await axios.put(`http://localhost:3001/sendEmail/${currentUser.email}`)
+
 
         }
         setLoggedUser(info.payload);

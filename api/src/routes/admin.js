@@ -228,4 +228,5 @@ para probar y como ejemplo del body:
     "stock":5
 } */
 
+
 module.exports = router;

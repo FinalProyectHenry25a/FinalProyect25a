@@ -28,7 +28,6 @@ export default function Card(props) {
         )
       ).data;
       alert("Artículo agregado a favoritos.");
-      document.getElementById("favourite").disabled=true
       console.log(user);
     } catch (error) {
       alert("No se pudo agregar la publicacion a favoritos.");
@@ -57,9 +56,7 @@ export default function Card(props) {
         <h3 className="card-title">{props.brand}</h3>
         <h3>{props.model}</h3>
         <div className="card-text">
-          {user
-            ? <button id="favourite" onClick={addToFavourites}>❤️</button>
-          : null}
+          {user ? <button onClick={addToFavourites}>❤️</button> : null}
           <br />
         </div>
         {props.stock > 0 ? (

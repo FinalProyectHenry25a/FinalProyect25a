@@ -58,6 +58,7 @@ const Cart = () => {
     
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
   
+  
   return (
     <>
       <UserNavBar/>

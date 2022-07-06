@@ -11,9 +11,7 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 
-
 const Cart = () => {
-
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const cart = useSelector(state => state.cart)
@@ -58,18 +56,16 @@ const Cart = () => {
 
     setTotalItems(items);
     setTotalPrice(price);
-    
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
   
   console.log(auth.currentUser);
   
   return (
-    <>
-      <UserNavBar/>
     <div className={styles.cart}>
+      <UserNavBar />
       <div className={styles.cartItems}>
-        {cart.map((item) => (
-          <CartItem key={item.id} item={item} />
+        {cart.map((item, i) => (
+          <CartItem key={i} item={item} />
         ))}
       </div>
       <div className={styles.cartSummary}>
@@ -85,8 +81,7 @@ const Cart = () => {
         </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
       </div>
     </div>
-    </>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

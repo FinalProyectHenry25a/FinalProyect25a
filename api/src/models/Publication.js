@@ -108,7 +108,7 @@ module.exports = (sequelize) => {
     qty: {
       type: DataTypes.INTEGER,
       allowNull: true
-    }
+    },
 
   });
 };

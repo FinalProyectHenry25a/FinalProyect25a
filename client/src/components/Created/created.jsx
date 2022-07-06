@@ -166,10 +166,6 @@ export default function PhoneCreate() {
 
   //console.log(input);
 
-
-
-
-
     dispatch(postPhone(input));
     alert("La publicacion se creo exitosamente");
     setInput({
@@ -217,8 +213,8 @@ export default function PhoneCreate() {
     fileReader.onload = async function () {
       let base64 = fileReader.result;
       setFotosSec([...fotosSec, base64]);
-      setInput({ ...input, imagesadditionalphotos: fotosSec }); //tendria q ver esta ruta para q me agregue
-    };                                                          // y tb si sale todo el input con las fotos
+      setInput({...input, additionalphotos: fotosSec});
+    };                                                         
   };
 
   return (
@@ -311,7 +307,7 @@ export default function PhoneCreate() {
                       /> : null }
                
                       {fotosSec?.length >= 1?
-                      <div> {fotosSec.map( el => <img src={el} width="50" height="60" alt="no se pudo cargar la imagen" />)} </div>       
+                      <div> {fotosSec.map( (el, index) => <img key={index} src={el} width="50" height="60" alt="no se pudo cargar la imagen" />)} </div>       
                       :null}
   
                   

@@ -11,13 +11,10 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
-<<<<<<< HEAD
-=======
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
 
 
->>>>>>> f56342f91b691216f00faab6ae28cfa2eb183aa4
 import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
 
@@ -26,9 +23,7 @@ import SearchBar from "../SearchBar/Searchbar";
 const Home = () => {
 
   const [loggedUser, setLoggedUser] = useState();
-<<<<<<< HEAD
 
-=======
   
   const [correo, SetCorreo] = useState({
     contact_user: "MercadoPago Oficial",
@@ -37,7 +32,6 @@ const Home = () => {
     descripcion_user:"Bienvenido a SMART WORLD, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.",
   })
   
->>>>>>> f56342f91b691216f00faab6ae28cfa2eb183aa4
   useEffect(() => {
 
     if(!auth.currentUser){}else{

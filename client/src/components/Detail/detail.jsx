@@ -15,8 +15,7 @@ import {FormattedMessage, IntlProvider} from 'react-intl'
 
 
 export default function Detail() {
-  //aca se setea el idioma
-  const messages = detailLang["es"];
+ 
 
   const [user, setUser] = useState(auth.currentUser);
   useEffect(() => {
@@ -67,6 +66,10 @@ export default function Detail() {
   const PID = useSelector((state) => state.phonesId);
 
   const allQuestions = useSelector((state) => state.questions);
+  const lan = useSelector((state) => state.language)
+
+   //aca se setea el idioma
+   const messages = detailLang[lan];
 
   function promedio() {
     if (PID.review) {
@@ -297,7 +300,7 @@ export default function Detail() {
                   placeholder="Escribinos tu pregunta"
                 />
                 <button onClick={(e) => publicar(e)} className={styles.btn2}>
-                  Preguntar
+                {detailLang[lan].Preguntar}
                 </button>
               </div>
             ) : (
@@ -311,7 +314,7 @@ export default function Detail() {
                     return (
                       <>
                         <div className={styles.question}>
-                          <p>Pregunta: {e.user_email}</p>
+                          <p>{detailLang[lan].Pregunta}: {e.user_email}</p>
                           <p>- {e.question}</p>
                         </div>
                         <div className={styles.answer}>

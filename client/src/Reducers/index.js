@@ -15,7 +15,8 @@ const initialState = {
     users: [],
     user: {},
     count: 1,
-    questions:[]
+    questions:[],
+    language: 'es',
 }
 
 function rootReducer (state = initialState, action){
@@ -195,6 +196,13 @@ function rootReducer (state = initialState, action){
                     ...state,
                     questions: action.payload,
                   }; 
+
+                  case "LANGUAGE" :
+                  return {
+                    ...state,
+                    language: action.payload
+                  }  
+
             default:
                 return state;
         }      

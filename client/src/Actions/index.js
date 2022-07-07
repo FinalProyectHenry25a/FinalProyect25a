@@ -43,12 +43,13 @@ export const filters = (setters) => (dispatch) => {
   
   return axios
     .post("http://localhost:3001/filtersAndOrders", setters)
-    .then((response)=>{localStorage.setItem("filter",JSON.stringify(response.data)) 
+    .then((response)=>{localStorage.setItem("filter",JSON.stringify(setters)) 
   return response})
     .then((response) => {
       dispatch({
         type: "FILTERS",
         payload: response.data,
+        maxifiltros: setters,
       });
     })
     
@@ -91,7 +92,7 @@ export const addToCartUser = (email, itemID) => {
         id: itemID,
       },
     });
-  };
+  }
 };
 
 export const removeFromCart = (itemID) => {
@@ -104,13 +105,14 @@ export const removeFromCart = (itemID) => {
     });
   };
 };
+ 
 
 export const clearCart = (email) => {
   return async function (dispatch) {
     await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
     return dispatch({
       type: "CLEAR_CART_POST_BUY",
-      payload: []
+      payload: [],
     });
   };
 };

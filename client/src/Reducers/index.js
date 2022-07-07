@@ -3,7 +3,7 @@ const initialState = {
     phonesId : [],
     cart: [],
     currentItem: null,
-    filtered:[],
+    filtered:{},
     users: [],
     user: {},
     count: 1,
@@ -46,7 +46,7 @@ function rootReducer (state = initialState, action){
               let currentFilter = JSON.parse(localStorage.getItem("filter")) || []
               return{
                 ...state,
-                phones:currentFilter,
+//                phones:currentFilter,
                 filtered:currentFilter
               }
             
@@ -56,7 +56,7 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 phones: action.payload,
-                filtered:action.payload
+               filtered:action.maxifiltros
             }
             case 'ADD_TO_CART':
                 // Great Item data from products array

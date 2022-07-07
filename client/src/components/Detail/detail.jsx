@@ -107,7 +107,7 @@ export default function Detail() {
   
       await axios.post(`http://localhost:3001/pregunta`, {
         question: input,
-        user_email: user.email,
+        user_email: user.username,
         product_ID: PID.id,
       });
       alert("pregunta enviada")

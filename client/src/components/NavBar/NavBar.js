@@ -54,7 +54,7 @@ const NavBar = ({ setCurrentPage }) => {
         <span className={styles.bar}></span>
         <span className={styles.bar}></span>
         <span className={styles.bar}></span>
-      </a>
+      </a> 
       <div
         className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
       >

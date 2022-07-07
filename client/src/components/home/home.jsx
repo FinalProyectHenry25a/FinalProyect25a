@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Card from "../card/Card";
 import { useDispatch, useSelector } from "react-redux";
-import Carrousel from "../carrousel/Carrousel";
+//import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser, language } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -14,13 +14,17 @@ import { auth } from "../../firebase/firebase-config";
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
 
+import { homeLang } from "./homeLang";
+import {FormattedMessage, IntlProvider} from 'react-intl'
 
-import { right } from "@popperjs/core";
-import SearchBar from "../SearchBar/Searchbar";
+
+//import { right } from "@popperjs/core";
+//import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
 const Home = () => {
+
 
   const [loggedUser, setLoggedUser] = useState();
   
@@ -28,28 +32,29 @@ const Home = () => {
 
     verificarQueHayaUsuarioLogueado();
     
-       // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-
+    
     dispatch(getLocalCart())
-
+    
   }, [])
-
+  
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
-  const filtrados = useSelector((state) => state.filtered)
-
+  const filtrados = useSelector((state) => state.filtered);
+  const lan = useSelector((state) => state.language)
+  
   const correoEmail = async(email) =>{
-
-      let obj = {
+    
+    let obj = {
       contact_user: "MercadoPago",
       correo_user: email,
       asunto_user:"Compra realizada",
       descripcion_user:"Gracias por elegirnos!!! su producto fue despachado, estara llegando en un lapso de entre 7 a 21 dias.", 
     }
-     
+    
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -61,13 +66,13 @@ const Home = () => {
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     });
-
-    try{
     
+    try{
+      
       const resultCorreo = await fetchstoken('correo', obj , "POST");
-
+      
       if(!resultCorreo.ok){
-
+        
         throw Error(resultCorreo.errors.msg);
         
       }
@@ -75,7 +80,7 @@ const Home = () => {
         icon: 'success',
         title: 'El correo se envio con exito'
       });
- 
+      
     } catch (error) {
       Toast.fire({
         icon: 'error',
@@ -84,38 +89,38 @@ const Home = () => {
     }
   }
   
-
+  
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-     
+        
         let info = await dispatch(getUser(currentUser.email))
-
+        
         if(info.payload.emptyCart) {
-
+          
           dispatch(clearCart(info.payload.email));
 
         } 
-
+        
         if(currentUser.emailVerified){
-
+          
           await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
-
+          
         }
         
         if(info.payload.sendEmail){
-
+          
           correoEmail(currentUser.email)
           
           await axios.put(`http://localhost:3001/sendEmail/${currentUser.email}`)
-
-
+          
+          
         }
         setLoggedUser(info.payload);
       }
     });
   };
-
+  
   const [filtered, setFiltered] = useState({
     byRom: null,
     byRam: null,
@@ -125,26 +130,28 @@ const Home = () => {
     byProcessor: null,
     byOrder: null,
   });
-
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [phonesPerPage] = useState(4);
   const indexOfLastPhones = currentPage * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
-
- const cart = useSelector(state => state.cart)
+  
+  const cart = useSelector(state => state.cart)
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
-
+  
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-
+  
+  
   useEffect(() => {
-    if(!filtrados) dispatch(getPhones())
-    
-       // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtrados]);
-
+    dispatch(getLocalFilter())
+    let localfilter =JSON.parse(localStorage.getItem("filter"))
+    localfilter!==null?
+    dispatch(filters(localfilter)):
+    dispatch(filters(filtered))
+  }, []);
+  
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
     if (price === "null") {
@@ -156,67 +163,68 @@ const Home = () => {
         parseInt(document.getElementById("price").value.split(",")[1]),
       ];
     }
-
+    
     setFiltered(() => ({
       byBrand:
-        document.getElementById("brand").value === "null"
-          ? null
-          : document.getElementById("brand").value,
+      document.getElementById("brand").value === "null"
+      ? null
+      : document.getElementById("brand").value,
       byRom:
-        document.getElementById("rom").value === "null"
-          ? null
-          : document.getElementById("rom").value,
+      document.getElementById("rom").value === "null"
+      ? null
+      : document.getElementById("rom").value,
       byRam:
-        document.getElementById("ram").value === "null"
-          ? null
-          : document.getElementById("ram").value,
+      document.getElementById("ram").value === "null"
+      ? null
+      : document.getElementById("ram").value,
       byNetwork:
-        document.getElementById("network").value === "null"
-          ? null
-          : document.getElementById("network").value,
+      document.getElementById("network").value === "null"
+      ? null
+      : document.getElementById("network").value,
       byOrder:
-        document.getElementById("order").value === "null"
-          ? null
-          : document.getElementById("order").value,
+      document.getElementById("order").value === "null"
+      ? null
+      : document.getElementById("order").value,
       byPrice: price,
       byProcessor:
-        document.getElementById("processor").value === "null"
-          ? null
-          : document.getElementById("processor").value,
+      document.getElementById("processor").value === "null"
+      ? null
+      : document.getElementById("processor").value,
     }));
-
-   
+    
+    
   }
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart])
   
-  useEffect(()=>{
-    let prueba=localStorage.getItem("filter")
-    prueba?(
-      dispatch(getLocalFilter())
-  ):(dispatch(getPhones()))},[])
+  // useEffect(()=>{
+    //   let prueba=localStorage.getItem("filter")
+    //   prueba?(
+      //     dispatch(getLocalFilter())
+      // ):(dispatch(getPhones()))},[])
 
 
 
-  const send = async (e) => {
-     dispatch(filters(filtered));
-    setCurrentPage(1);   
-  
-  };
-
-  const clearFilter =(e) => {
-
-    document.getElementById("brand").value = "null"
-    document.getElementById("rom").value = "null"
-    document.getElementById("price").value = "null"
-    document.getElementById("ram").value = "null"
-    document.getElementById("network").value = "null"
-    document.getElementById("order").value = "null"
-    document.getElementById("processor").value = "null"
-
-    let clear={
-      byBrand:null,
+      const send = async (e) => {
+        dispatch(filters(filtered));
+        localStorage.setItem('filter', JSON.stringify(filtered));
+        setCurrentPage(1);   
+        
+      };
+      
+      const clearFilter =(e) => {
+        
+        document.getElementById("brand").value = "null"
+        document.getElementById("rom").value = "null"
+        document.getElementById("price").value = "null"
+        document.getElementById("ram").value = "null"
+        document.getElementById("network").value = "null"
+        document.getElementById("order").value = "null"
+        document.getElementById("processor").value = "null"
+        
+        let clear={
+          byBrand:null,
       byRom: null,
       byRam:null,
       byNetwork:null,
@@ -224,38 +232,57 @@ const Home = () => {
       byPrice: null,
       byProcessor:null,
     }
-
+    
     localStorage.removeItem("filter")
     dispatch(filters(clear));
     setCurrentPage(1);
     
   };
-
+  
   const logout = async () => {
     await signOut(auth);
   };
+  
+  const lang = (e) => {
+    dispatch(language(e.target.value))
+  }
+
+  //acá se setea el idioma
+  const messages = homeLang[lan]
+
+ // console.log(homeLang[lan].Todas);
 
   return (
+    <IntlProvider locale='es' messages={messages}>
     <div>
-       
+   
       <button onClick={logout}>desloguear</button>
 
       {/* <Link to="/agregado">
         <button>Agregar Phone</button>
       </Link> */}
 
+      <br/>
+      
+      <select onChange={lang} className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+
       {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
       {/* <Carrousel /> */}
       
       <div id="filtros">
+
       <select id='brand' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
-        <option value="null">Todas</option>
+        <option value="null">{homeLang[lan].Todas}</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>
         <option value="Motorola">Motorola</option>
         <option value="Xiaomi">Xiaomi</option>
         <option value="Huawei">Huawei</option>
       </select>
+      
 
       {/* por Ram--------------------------------------------------- */}
       <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
@@ -268,7 +295,7 @@ const Home = () => {
       {/* por network----------------------------------------------- */}
 
       <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option  value="null">Network</option>
+        <option  value="null">{homeLang[lan].Red}</option>
         <option value="4G">4G</option>
         <option value="5G">5G</option>
       </select>
@@ -284,16 +311,16 @@ const Home = () => {
       {/* por orden--------------------------------------------------- */}
 
       <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option  value="null">Por defecto</option>
-        <option value="rating">Por puntuación</option>
-        <option value="ascendingPrice">Orden ascendiente</option>
-        <option value="descendingPrice">Orden descendiente</option>
+        <option  value="null">{homeLang[lan].Pordefecto}</option>
+        <option value="rating">{homeLang[lan].Porpuntuacion}</option>
+        <option value="ascendingPrice">{homeLang[lan].Ordenascendiente}</option>
+        <option value="descendingPrice">{homeLang[lan].Ordendescendiente}</option>
       </select>
 
       {/* por precio--------------------------------------------------- */}
 
       <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option  value="null">precio</option>
+        <option  value="null">{homeLang[lan].precio}</option>
         <option value={[0, 500]}>de u$ 0 a u$ 500</option>
         <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
         <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
@@ -302,7 +329,7 @@ const Home = () => {
       {/* por processor--------------------------------------------------- */}
       {/* <div style={{ display: "inline-flex", margin: 3 + "px" }}> */}
         <select id="processor" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option  value= "null" >Procesador</option>
+        <option  value= "null" >{homeLang[lan].Procesador}</option>
         <option value="Snapdragon">Snapdragon</option>
         <option value="Exynos">Exynos</option>
         <option value="Mediatek">Mediatek</option>
@@ -311,8 +338,8 @@ const Home = () => {
         </select>
 
 
-        <button className={style.btn} onClick={() => send()}>Buscar</button>
-        <button className={style.btn} onClick={() => clearFilter()}>Limpiar filtros</button>
+        <button className={style.btn} onClick={() => send()}>{homeLang[lan].Buscar}</button>
+        <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
         </div>
       {/* </div> */}
       {/* filtrado************************************ */}
@@ -346,6 +373,7 @@ const Home = () => {
         paginado={paginado}
       />
     </div>
+    </IntlProvider>
   );
 };
 

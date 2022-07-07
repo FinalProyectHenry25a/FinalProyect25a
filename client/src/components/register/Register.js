@@ -55,11 +55,7 @@ const Register = () => {
       console.log(resultCorreo);
       if(!resultCorreo.ok){
         throw Error(resultCorreo.errors.msg);
-      }
-      Toast.fire({
-        icon: 'success',
-        title: 'El correo se envio con exito'
-      });
+      };
       SetCorreo({
         contact_user: "Henry Commerse",
         correo_user:"",
@@ -67,10 +63,6 @@ const Register = () => {
         descripcion_user:"Bienvenido a Henry Commerse, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.", 
       });
     } catch (error) {
-      Toast.fire({
-        icon: 'error',
-        title: error.message
-      })
     }
   }
 
@@ -83,7 +75,12 @@ const Register = () => {
       error.firstname ||
       error.lastname ||
       error.address 
-   ){alert ("No se pudo registrar correctamente, revisa bien los campos")
+   ){Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Algo salio mal, revisa de completar todas las casillas correctamente!',
+    footer: '<a href="/home">Continuar sin registrarme</a>'
+  })
   } else {
         await createUserWithEmailAndPassword(auth, input.email, input.password);
         const newUser = {
@@ -113,6 +110,7 @@ const Register = () => {
         });
       
       // swal('Buen Trabajo','Te registraste correctamente!', "Ver productos");
+      
       swal2({
         title: "Buen Trabajo!",
         text: "Te registraste correctamente!",
@@ -162,9 +160,9 @@ const handleChange = (e) => {
       setInput({
         ...input,
         email: e.target.value
-    })
-    
-  }
+      })
+      
+    }
   
   console.log(input)
     const onChangeCorreo = (e) => {
@@ -224,6 +222,9 @@ const handleChange = (e) => {
         <div className={style.register}>
           <button onClick={DOS} type='submit' className={style.btn}>Registrarse</button>
         </div>
+
+
+        
         <Link to="home">
             <p className={style.ancor}>Volver</p>
           

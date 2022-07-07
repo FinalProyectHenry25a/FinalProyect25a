@@ -5,11 +5,18 @@ const initialState = {
     phonesId : [],
     cart: [],
     currentItem: null,
-    filtered:[],
+    filtered:{ byRom: null,
+      byRam: null,
+      byBrand: null,
+      byPrice: null,
+      byNetwork: null,
+      byProcessor: null,
+      byOrder: null,},
     users: [],
     user: {},
     count: 1,
-    questions:[]
+    questions:[],
+    language: 'es',
 }
 
 function rootReducer (state = initialState, action){
@@ -48,7 +55,7 @@ function rootReducer (state = initialState, action){
               let currentFilter = JSON.parse(localStorage.getItem("filter")) || []
               return{
                 ...state,
-                phones:currentFilter,
+//                phones:currentFilter,
                 filtered:currentFilter
               }
             
@@ -58,7 +65,7 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 phones: action.payload,
-                filtered:action.payload
+               filtered:action.maxifiltros
             }
             case 'ADD_TO_CART':
                 // Great Item data from products array
@@ -189,6 +196,13 @@ function rootReducer (state = initialState, action){
                     ...state,
                     questions: action.payload,
                   }; 
+
+                  case "LANGUAGE" :
+                  return {
+                    ...state,
+                    language: action.payload
+                  }  
+
             default:
                 return state;
         }      

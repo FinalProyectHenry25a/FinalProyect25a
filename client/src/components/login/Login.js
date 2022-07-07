@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2';
 import axios from "axios";
 import google from '../../images/google.png'
 import logo from '../../images/smartworld.jpg'
@@ -46,8 +47,12 @@ const Login = () => {
 
       history.push('/home');
 
-    } catch {
-      alert("❌ mail o contraseña incorrecta❗❗❗");
+    } catch {{Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Algo salio mal, revisa que el mail o contraseña ingresados sean los correctos',
+      footer: '<a href="/home">Continuar sin iniciar sesión</a>'
+    })}
     }
   };
 

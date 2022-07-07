@@ -1,7 +1,7 @@
 .divContainer {
     display: flex;
     flex-direction: row;
-    margin-top: 100px;
+    margin-top: 10px;
     gap: 100px;
     place-content: center;
     
@@ -72,6 +72,7 @@
         flex-direction: column;
         text-align: center;
         gap: 50px;
+        margin-top: 10px;
     }
     .answer {
         margin-left: 10px;

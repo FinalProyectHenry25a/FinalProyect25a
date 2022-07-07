@@ -246,7 +246,7 @@ const Home = () => {
   };
 
   return (
-    <IntlProvider messages={messages}>
+    <IntlProvider locale='es' messages={messages}>
 
         
     <div>

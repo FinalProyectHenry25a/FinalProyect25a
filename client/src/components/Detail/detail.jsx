@@ -8,6 +8,7 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import styles from "./Detail.module.css";
 import NavBar from "../NavBar/NavBar";
+import BtnBack from "../back/BtnBack";
 
 export default function Detail() {
   const [user, setUser] = useState(auth.currentUser);
@@ -122,6 +123,7 @@ export default function Detail() {
     <>
       <NavBar />
       <hr/>
+      <BtnBack/>
       <div className={styles.divContainer}>
 
           <div className={styles.container1}>

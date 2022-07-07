@@ -54,10 +54,23 @@ export default function Card(props) {
         )}
       </div>
       <div className="card-body">
-        <h3 className="card-title">{props.brand}</h3>
-        <h3>{props.model}</h3>
+        <h3 className="card-title" style={{
+        textAlign: 'center',
+        justifyContent: "center",
+      }}>{props.brand}</h3>
+        <h3 style={{
+        textAlign: 'center',
+        justifyContent: "center",
+      }}>{props.model}</h3>
+        <h2 style={{
+        textAlign: 'center',
+        justifyContent: "center",
+      }}>${props.price}</h2>
         <div className="card-text">
-          {user ? <button onClick={addToFavourites}>❤️</button> : null}
+          {user ? <button onClick={addToFavourites} style={{
+        background: 'transparent',
+        border: 'none'
+      }}>❤️</button> : null}
           <br />
         </div>
         {props.stock > 0 ? (
@@ -67,6 +80,11 @@ export default function Card(props) {
                 <button
                   className="btn btn-outline-dark, w-100"
                   type="submit"
+                  style={{
+                    border: '1px solid black',
+                    justifyContent: "center",
+                    marginBottom: '10px'
+                  }}
                   onClick={() => dispatch(addToCartUser(user.email, props.id))}
                 >
                   Agregar al carrito User
@@ -75,22 +93,35 @@ export default function Card(props) {
             ) : (
               <Link to="#">
                 <button
-                  className="btn btn-outline-dark, w-100"
+                  className="btn btn-outline-dark, w-80"
                   type="submit"
+                  style={{
+                    border: '1px solid black',
+                    justifyContent: "center",
+                    marginLeft: '52px',
+                    marginBottom: '10px'
+                  }}
                   onClick={() => dispatch(addToCart(props.id))}
                 >
                   Agregar al carrito
                 </button>
               </Link>
             )}
-            <p>Disponibles: {props.stock}</p>
+            <p style={{
+        textAlign: 'center',
+        justifyContent: "center",
+      }}>Disponibles: {props.stock}</p>
           </div>
         ) : (
           <p className="">AGOTADO</p>
         )}
 
         <br />
-        <Link className="btn btn-outline-dark, w-100" to={"/home/" + props.id}>
+        <Link className="btn btn-outline-dark, w-100" style={{
+                    border: '1px solid black',
+                    justifyContent: "center",
+                    
+                  }} to={"/home/" + props.id}>
           Detalle
         </Link>
       </div>

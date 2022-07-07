@@ -140,10 +140,9 @@ const Home = () => {
 
 
   useEffect(() => {
-    if(!filtrados) dispatch(getPhones())
-    
-       // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtrados]);
+    dispatch(getLocalFilter())
+    dispatch(filters(JSON.parse(localStorage.getItem("filter"))))
+  }, []);
 
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
@@ -191,16 +190,17 @@ const Home = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart])
   
-  useEffect(()=>{
-    let prueba=localStorage.getItem("filter")
-    prueba?(
-      dispatch(getLocalFilter())
-  ):(dispatch(getPhones()))},[])
+  // useEffect(()=>{
+  //   let prueba=localStorage.getItem("filter")
+  //   prueba?(
+  //     dispatch(getLocalFilter())
+  // ):(dispatch(getPhones()))},[])
 
 
 
   const send = async (e) => {
      dispatch(filters(filtered));
+     localStorage.setItem('filter', JSON.stringify(filtered));
     setCurrentPage(1);   
   
   };
@@ -214,7 +214,7 @@ const Home = () => {
     document.getElementById("network").value = "null"
     document.getElementById("order").value = "null"
     document.getElementById("processor").value = "null"
-
+ 
     let clear={
       byBrand:null,
       byRom: null,

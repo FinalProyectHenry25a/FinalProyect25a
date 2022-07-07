@@ -13,8 +13,14 @@
     margin-top: 20px;
     
 }
+.cartItemActions {
+    
+    margin-left: 40px;
+}
 
 .input {
-    width: 40px;
+    width: 59px;
     margin-right: 30px;
+    margin-left: 20px;
+    padding-left: 12px;
 }

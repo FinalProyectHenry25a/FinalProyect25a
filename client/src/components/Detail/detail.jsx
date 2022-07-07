@@ -233,18 +233,15 @@ export default function Detail() {
                 </ul>
               </div>
             </div>
-            
-          :(
-            <p>este articulo no tiene comentarios</p>
-          )
              </div>
              <div>
-
+            <hr></hr>
               <h3>Preguntas y Respuestas</h3>
               {user?
               (<div>
-              <input onChange={(e) => handlerChange(e)} type="text" placeholder="escribinos tu pregunta..." />
-              <button onClick={(e) => publicar(e)}>preguntar</button>
+         
+              <input onChange={(e) => handlerChange(e)} type="text" className={styles.input} placeholder="Escribinos tu pregunta" />
+              <button onClick={(e) => publicar(e)} className={styles.btn2}>Preguntar</button>
               </div>
               ):(
                 <p></p>
@@ -254,23 +251,27 @@ export default function Detail() {
                 console.log("id de producto",PID.id)
                 console.log("id de producto de la question",e.product_ID)
                 if(e.product_ID===PID.id){
-            return(
-              <div className="border">
-            <p>{e.user_email}</p>
-            <p>{e.question}</p>
-            <p>{e.answer}</p>
-            </div>
-            )}}):(
-              console.log("id de producto",PID.id)
-            )
+                  return(
+                    <>
+                    <div className={styles.question}>
+                      <p>Pregunta: {e.user_email}</p>
+                      <p>- {e.question}</p>
+                    </div>
+                    <div className={styles.answer}>
+                      <p>{e.answer}</p>
+                    </div>
+                  </>
+                  )}}):(
+                    console.log("id de producto",PID.id)
+                  )
 
-            }
+              }
              </div>
 
         </div>
       </div>
-      <hr/>
-      <div className={styles.answer}>
+     
+      <div className={styles.contact}>
         <h3>Comentarios</h3>
         {PID.review ? (
           PID.review.map((e) => {

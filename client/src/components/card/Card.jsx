@@ -32,23 +32,20 @@ export default function Card(props) {
 
       console.log(usuario);
       if (usuario.favourites?.length === 0) {
-        await axios.put(
-          `http://localhost:3001/favourites/${usuario.email}/${props.id}`
-        ).data;
+        await axios.put(`http://localhost:3001/favourites/${usuario.email}/${props.id}`).data;
         /* let guardar = localStorage.getItem("favs");
         console.log(guardar); */
 
         let obj = props.id;
-        let obj1 = localStorage.setItem("favs", JSON.stringify(obj));
-        setFavs(obj1);
+
+        localStorage.setItem("favs", JSON.stringify(obj));
+        setFavs(obj);
         setFlag(true);
       } else if (usuario.favourites?.find((e) => e.id === props.id)) {
         console.log("ya esta agregado");
       } else {
         console.log(`soy el false ${props.id}`);
-        await axios.put(
-          `http://localhost:3001/favourites/${usuario.email}/${props.id}`
-        ).data;
+        await axios.put(`http://localhost:3001/favourites/${usuario.email}/${props.id}`).data;
         let guardar = JSON.parse(localStorage.getItem("favs"));
         console.log(guardar);
         let obj = [guardar, props.id];

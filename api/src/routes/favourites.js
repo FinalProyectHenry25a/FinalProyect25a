@@ -38,7 +38,8 @@ router.put("/:email/:id", async (req, res) => {
 
     if (!usuario.favourites) {
       await User.update({ favourites: favoritos }, { where: { email: email } });
-    } else {
+    }
+    else {
       await User.update(
         { favourites: usuario.favourites.concat(favoritos) },
         { where: { email: email } }

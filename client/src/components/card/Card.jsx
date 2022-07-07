@@ -23,17 +23,23 @@ export default function Card(props) {
   const addToFavourites = async () => {
     try {
       let add = (
-        await axios.put(
+        await axios.get(
           `http://localhost:3001/favourites/${user.email}/${props.id}`
         )
       ).data;
-      alert("Artículo agregado a favoritos.");
+      var btn = document.getElementById("heart");
+      var disableButton = () => {
+        btn.disabled = true;
+      };
+      btn.addEventListener("click", disableButton, false);
       console.log(user);
     } catch (error) {
       alert("No se pudo agregar la publicacion a favoritos.");
       console.log(error);
     }
   };
+
+  console.log(user?.favourites?.includes(props.id));
 
   return (
     <div
@@ -56,7 +62,7 @@ export default function Card(props) {
         <h3 className="card-title">{props.brand}</h3>
         <h3>{props.model}</h3>
         <div className="card-text">
-          {user ? <button onClick={addToFavourites}>❤️</button> : null}
+          {user ? <button id="heart" name="heart" onClick={addToFavourites}>❤️</button> : null}
           <br />
         </div>
         {props.stock > 0 ? (

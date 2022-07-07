@@ -17,6 +17,8 @@ export const detailLang = {
     "Este articulo no tiene comentarios":"Este articulo no tiene comentarios",
     "Memoria RAM":"Memoria RAM:",
     "Memoria ROM":"Memoria ROM:",
+    'Preguntar':'Preguntar',
+    'Pregunta':'Pregunta',
 },
 
 'en':{
@@ -36,7 +38,10 @@ export const detailLang = {
     "Este articulo no tiene comentarios":"This article has no comments",
     "Memoria RAM":"RAM memory:",
     "Memoria ROM":"ROM memory:",
+    'Preguntar':'Ask',
+    'Pregunta':'Question',
 }
 
 
 }
+

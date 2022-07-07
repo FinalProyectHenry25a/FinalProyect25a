@@ -145,13 +145,19 @@ function rootReducer (state = initialState, action){
 
 
               case 'ADJUST_ITEM_QTY':
+
+
+              let newQtyCart =  state.cart.map((item) =>
+              item.id === action.payload.id
+                ? { ...item, qty: + action.payload.qty }
+                : item
+            )
+
+                localStorage.setItem("cart", JSON.stringify(newQtyCart))
+
                 return {
                   ...state,
-                  cart: state.cart.map((item) =>
-                    item.id === action.payload.id
-                      ? { ...item, qty: +action.payload.qty }
-                      : item
-                  ),
+                  cart: newQtyCart
                 };
               case 'LOAD_CURRENT_ITEM':
                 return {

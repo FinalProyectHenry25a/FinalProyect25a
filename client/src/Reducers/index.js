@@ -1,3 +1,5 @@
+import swal from 'sweetalert';
+
 const initialState = {
     phones : [],
     phonesId : [],
@@ -77,6 +79,7 @@ function rootReducer (state = initialState, action){
                 : [...state.cart, { ...item, qty: 1 }]
                   
                 localStorage.setItem("cart", JSON.stringify(newCart))
+                swal('Agregaste correctamente el producto al carrito')
 
                 return {
                   ...state,
@@ -97,13 +100,14 @@ function rootReducer (state = initialState, action){
                 
                 const newCartUser = inCartUser
                 ? state.cart.map((item) =>
-                    item.id === action.payload.id
-                      ? { ...itemUser, qty: item.qty + 1 }
-                      : item
-                  )
+                item.id === action.payload.id
+                ? { ...itemUser, qty: item.qty + 1 }
+                : item
+                )
                 : [...state.cart, { ...itemUser, qty: 1 }]
-                  
+                
                 localStorage.setItem("cart", JSON.stringify(newCartUser))
+                
 
                 return {
                   ...state,
@@ -115,7 +119,7 @@ function rootReducer (state = initialState, action){
                   let removeCartUser = state.cart.filter((item) => item.id !== action.payload.id)
   
                   localStorage.setItem("cart", JSON.stringify(removeCartUser));
-                   
+                    
                   return {
                     ...state,
                     cart: removeCartUser
@@ -126,7 +130,7 @@ function rootReducer (state = initialState, action){
                 let removeCart = state.cart.filter((item) => item.id !== action.payload.id)
   
                 localStorage.setItem("cart", JSON.stringify(removeCart));
-                 
+                
                 return {
                   ...state,
                   cart: removeCart
@@ -143,13 +147,19 @@ function rootReducer (state = initialState, action){
 
 
               case 'ADJUST_ITEM_QTY':
+
+
+              let newQtyCart =  state.cart.map((item) =>
+              item.id === action.payload.id
+                ? { ...item, qty: + action.payload.qty }
+                : item
+            )
+
+                localStorage.setItem("cart", JSON.stringify(newQtyCart))
+
                 return {
                   ...state,
-                  cart: state.cart.map((item) =>
-                    item.id === action.payload.id
-                      ? { ...item, qty: +action.payload.qty }
-                      : item
-                  ),
+                  cart: newQtyCart
                 };
               case 'LOAD_CURRENT_ITEM':
                 return {

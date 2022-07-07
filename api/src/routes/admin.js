@@ -87,7 +87,6 @@ router.put("/modifica-stock", async (req, res) => {
       );
     }
 
-    console.log(req.body);
     res.send(post);
   } catch (error) {
     res.status(404).send(error);
@@ -142,7 +141,7 @@ router.put("/removeAdmin/:email", async (req, res) => {
 
 router.put("/posts/:id", async (req, res) => {
   const { id } = req.params;
-  console.log(id)
+
   const {
     brand,
     releaseDate,
@@ -163,14 +162,14 @@ router.put("/posts/:id", async (req, res) => {
     resolution,
   } = req.body;
 
-  console.log(brand)
+
   try {
     let publicacion = await Publication.findOne({
       where: {
         id: id,
       },
     });
-    console.log(publicacion)
+  
     if (publicacion) {
       await Publication.update(
         {
@@ -227,29 +226,5 @@ router.put("/posts/:id", async (req, res) => {
     console.log(error);
   }
 });
-
-/*
-para probar y como ejemplo del body:
-{
-    "brand": "santi",
-    "releaseDate": "alguna fecha",
-    "model": "ssdcs",
-    "price": 250,
-    "rating": 5,
-    "images": "slksdmlcsmk",
-    "color": "rojo",
-    "processor": "sdsfds",
-    "ram":"4Gb",
-    "rom":"32Gb",
-    "network":"3G",
-    "batery":6,
-    "frontal_cam":5,
-    "main_cam":7,
-    "inches": 10,
-    "screen": 11,
-    "resolution":"sdsdf",
-    "stock":5
-} */
-
 
 module.exports = router;

@@ -14,9 +14,18 @@ import { onAuthStateChanged } from "firebase/auth";
 const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const cart = useSelector(state => state.cart)
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [ user, setUser ] = useState();
+  let items = 0;
+  let price = 0;
+
+  
+  cart.forEach((item) => {
+    items += item.qty;
+    price += item.qty * item.price;
+  });
   
 
   useEffect(() => {
@@ -41,27 +50,25 @@ const Cart = () => {
           history.push("/banned")
 
         }
+        setTotalItems(items)
+        setTotalPrice(price);
       }
     });
   };
 
   useEffect(() => {
-    let items = 0;
-    let price = 0;
 
-    cart.forEach((item) => {
-      items += item.qty;
-      price += item.qty * item.price;
-    });
+
 
     setTotalItems(items);
     setTotalPrice(price);
-  }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
+  }, [cart, totalPrice, totalItems]);
 
   
   return (
-    <div className={styles.cart}>
+    <>
       <UserNavBar />
+    <div className={styles.cart}>
       <div className={styles.cartItems}>
         {cart.map((item, i) => (
           <CartItem key={i} item={item} />
@@ -80,6 +87,7 @@ const Cart = () => {
         </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
       </div>
     </div>
+    </>
   );
 };
 

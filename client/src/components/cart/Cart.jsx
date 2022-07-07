@@ -10,6 +10,7 @@ import SearchBar from "../SearchBar/Searchbar";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
+import BtnBack from "../back/BtnBack";
 
 const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -68,6 +69,7 @@ const Cart = () => {
   return (
     <>
       <UserNavBar />
+      <BtnBack/>
     <div className={styles.cart}>
       <div className={styles.cartItems}>
         {cart.map((item, i) => (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Card from "../card/Card";
 import { useDispatch, useSelector } from "react-redux";
-import Carrousel from "../carrousel/Carrousel";
+//import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
 import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser } from "../../Actions/index";
@@ -14,13 +14,20 @@ import { auth } from "../../firebase/firebase-config";
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
 
+import { homeLang } from "./homeLang";
+import {FormattedMessage, IntlProvider} from 'react-intl'
 
-import { right } from "@popperjs/core";
-import SearchBar from "../SearchBar/Searchbar";
+
+//import { right } from "@popperjs/core";
+//import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
 
 const Home = () => {
+
+
+  //aca se setea el idioma
+  const messages = homeLang['es']
 
   const [loggedUser, setLoggedUser] = useState();
   
@@ -140,10 +147,12 @@ const Home = () => {
 
 
   useEffect(() => {
-    if(!filtrados) dispatch(getPhones())
-    
-       // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtrados]);
+    dispatch(getLocalFilter())
+    let localfilter =JSON.parse(localStorage.getItem("filter"))
+    localfilter!==null?
+    dispatch(filters(localfilter)):
+    dispatch(filters(filtered))
+  }, []);
 
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
@@ -191,16 +200,17 @@ const Home = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart])
   
-  useEffect(()=>{
-    let prueba=localStorage.getItem("filter")
-    prueba?(
-      dispatch(getLocalFilter())
-  ):(dispatch(getPhones()))},[])
+  // useEffect(()=>{
+  //   let prueba=localStorage.getItem("filter")
+  //   prueba?(
+  //     dispatch(getLocalFilter())
+  // ):(dispatch(getPhones()))},[])
 
 
 
   const send = async (e) => {
      dispatch(filters(filtered));
+     localStorage.setItem('filter', JSON.stringify(filtered));
     setCurrentPage(1);   
   
   };
@@ -214,7 +224,7 @@ const Home = () => {
     document.getElementById("network").value = "null"
     document.getElementById("order").value = "null"
     document.getElementById("processor").value = "null"
-
+ 
     let clear={
       byBrand:null,
       byRom: null,
@@ -236,6 +246,9 @@ const Home = () => {
   };
 
   return (
+    <IntlProvider locale='es' messages={messages}>
+
+        
     <div>
        
       <button onClick={logout}>desloguear</button>
@@ -346,6 +359,7 @@ const Home = () => {
         paginado={paginado}
       />
     </div>
+    </IntlProvider>
   );
 };
 

@@ -201,6 +201,11 @@
    transition: ease 0.3 seg;
    z-index: 100;
 }
+.cart{
+  margin-left: 190px;
+  text-decoration: none;
+  color: black;
+}
 .links {
   text-decoration: none;
   color: black;
@@ -251,8 +256,11 @@
        text-align: center;
    }
    .search {
-    margin-left: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+      margin-left: 16px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+  }
+  .cart {
+    margin-left: 140px;
   }
 }

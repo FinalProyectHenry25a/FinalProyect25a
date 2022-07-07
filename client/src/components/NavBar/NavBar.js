@@ -37,80 +37,46 @@ const NavBar = ({ setCurrentPage }) => {
   };
 
   return (
-    // <nav className={style.navContainer}>
-
-    //   <div className={style.container}>
-
-    //     <a className={style.ancor} href="/home">
-    //       <img src={logo} alt="logo" className={style.logo} />
-    //     </a>
-
-    //   </div>
-    //   <div>
-    //     <SearchBar setCurrentPage={setCurrentPage} className={style.search}/>
-    //         <a href="#" className={style.toggleButton} onClick={change}>
-    //           <span className={style.bar}></span>
-    //           <span className={style.bar}></span>
-    //           <span className={style.bar}></span>
-    //         </a>
-    //         </div>
-    //   <div className={style.container2}>
-    //     <Link className={style.links} to="/cart">
-    //       <BsFillCartFill className={style.cart} /> {cartCount}
-    //     </Link>
-    //   </div>
-    //   <div
-    //     className={`${open ? style.navbarLinksActive : style.containerCuentas}`}
-    //   >
-        
-    //     <div>
-    //       <p className={style.prf}>Envíos gratis a partir de $70000.</p>
-    //     </div>
-    //     <div className={style.containerCuentas2}>
-    //       <div>
-
-    //         <Link className={style.links} to="/login">
-    //           Ingresá
-    //         </Link>
-    //       </div>
-
-    //       <div>
-    //         <Link className={style.links} to="/register">
-    //           Creá tu cuenta
-    //         </Link>
-    //       </div>
-    //       <div>
-    //         <Link className={style.links} to="/contacto">
-    //           Contacto
-    //         </Link>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </nav>
     <nav className={styles.navbar}>
-        <div className={styles.brandLogo}> <img src={logo} alt="logo" className={styles.logo}/></div>
-        <div className={styles.search}><SearchBar setCurrentPage={setCurrentPage} className={styles.search}/></div>
-        
-        <a href="#" className={styles.toggleButton} onClick={change}>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-        </a>
-        <div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}>
-          <ul>
-            
-            <li><Link to="/login" className={styles.links}>
-    Ingresá
-           </Link></li>
-            <li><Link  to="/register" className={styles.links}>
-               Creá tu cuenta
-             </Link></li>
-            <li><Link to="/contacto" className={styles.links}>
-               Contacto
-             </Link></li>
-          </ul>
-        </div>
-      </nav>
+      <div className={styles.brandLogo}>
+      <a href="/home">
+           <img src={logo} alt="logo" className={styles.logo} />
+         </a>
+      </div>
+      <div className={styles.search}>
+        <SearchBar setCurrentPage={setCurrentPage} className={styles.search} />
+        <Link className={styles.cart} to="/cart">
+           <BsFillCartFill/> {cartCount}
+         </Link>
+      </div>
+
+      <a href="#" className={styles.toggleButton} onClick={change}>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+      </a>
+      <div
+        className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
+      >
+        <ul>
+          <li>
+            <Link to="/login" className={styles.links}>
+              Ingresá
+            </Link>
+          </li>
+          <li>
+            <Link to="/register" className={styles.links}>
+              Creá tu cuenta
+            </Link>
+          </li>
+          <li>
+            <Link to="/contacto" className={styles.links}>
+              Contacto
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 };
 

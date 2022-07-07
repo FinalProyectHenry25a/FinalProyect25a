@@ -141,7 +141,10 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getLocalFilter())
-    dispatch(filters(JSON.parse(localStorage.getItem("filter"))))
+    let localfilter =JSON.parse(localStorage.getItem("filter"))
+    localfilter!==null?
+    dispatch(filters(localfilter)):
+    dispatch(filters(filtered))
   }, []);
 
   function filtersSetters(e) {
@@ -238,7 +241,7 @@ const Home = () => {
   return (
     <div>
        
-      {/* <button onClick={logout}>desloguear</button> */}
+      <button onClick={logout}>desloguear</button>
 
       {/* <Link to="/agregado">
         <button>Agregar Phone</button>

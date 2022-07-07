@@ -4,10 +4,33 @@ import Comprar from '../Comprar/Comprar'
 import axios from 'axios'
 import {getLocalCart} from '../../Actions'
 import { auth } from '../../firebase/firebase-config'
+import { onAuthStateChanged } from 'firebase/auth'
+import { useHistory } from 'react-router-dom'
 
 function App() {
-  const [datos, setDatos] = useState("")
-  const cart = useSelector(state => state.cart)
+  
+  const [datos, setDatos] = useState("");
+  const cart = useSelector(state => state.cart);
+  const history = useHistory();
+
+  useEffect(() => {
+    verificarQueHayaUsuarioLogueado();
+  }, []);
+
+  const verificarQueHayaUsuarioLogueado = () => {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        let user = await axios.get(
+          `http://localhost:3001/user/${currentUser.email}`
+        );
+        if(user.data.banned){
+
+          history.push("/banned")
+
+        }
+      }
+    });
+  };
   
   
 

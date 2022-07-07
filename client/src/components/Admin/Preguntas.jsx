@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPhones, getQuestions } from "../../Actions";
+import {getQuestions } from "../../Actions";
 
 
 export default function Preguntas(){
@@ -39,11 +39,18 @@ useEffect(()=>{
 
 const editar = async (e)=>{
     let questionID = e.nativeEvent.path[1].id;
-    console.log(questionID)
+    
     await axios.put(`http://localhost:3001/pregunta/${questionID}`, {
 
         answer: null
       });
+      window.location.reload()
+}
+
+const eliminar = async (e)=>{
+    let questionID = e.nativeEvent.path[1].id;
+   
+    await axios.delete(`http://localhost:3001/pregunta/${questionID}`);
       window.location.reload()
 }
 
@@ -54,7 +61,8 @@ return(
              
             return(
                 
-                <div   className="border">
+                <div id={e.id} className="border">
+                    <button onClick={(e) => eliminar(e)}>X</button>
                     <p>{e.question}</p>
                     <p>{e.user_email}</p>
                    

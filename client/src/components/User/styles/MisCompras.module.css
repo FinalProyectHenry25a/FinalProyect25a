@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    place-content: center;
+
+}
+.prf {
+    margin-top: 10px;
+}
+.input{
+    margin: 0;
+    width: 322px;
+    height: 40px;
+    position: relative;
+    border-radius: 5px;
+    background-color: white;
+    padding-left: 5px;
+    margin-top: 20px;
+}
+
+.containerCard {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.btn {
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 320px;
+    height: 40px;
+    margin-top: 30px;
+    background-color: rgb(80, 95, 214);
+    border-radius: 5px;
+}
+.containerCard h2{
+    margin-bottom: 30px;
+}

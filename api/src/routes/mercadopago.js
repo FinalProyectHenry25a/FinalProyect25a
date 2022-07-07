@@ -103,7 +103,7 @@ server.get("/pagos", async  (req, res)=>{
   
       await User.update({ shopping: usuario.cart, cart: null, emptyCart: true, sendEmail: true}, { where: { email: external_reference } });
       const getInfo = await User.findByPk(external_reference)
-      console.log(getInfo.sendEmail)
+
       } else {
   
         await User.update(
@@ -111,7 +111,7 @@ server.get("/pagos", async  (req, res)=>{
           { where: { email: external_reference } }
         );
          const getInfo = await User.findByPk(external_reference)
-         console.log(getInfo.sendEmail)
+   
       }
 
       return res.redirect("http://localhost:3000/home")

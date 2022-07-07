@@ -12,7 +12,7 @@ body('asunto_user','El asunto es obligatorio').notEmpty(),
 body('descripcion_user','la descripsion es obligatoria').notEmpty(),
 validacioncampos, async (req, res) => {
     const {contact_user,correo_user, asunto_user,descripcion_user } = req.body;
-    console.log(req.body)
+  
     try {
         await transporter.sendMail({
             from: `"${contact_user}" <finalproyect25a@gmail.com>`, // sender address

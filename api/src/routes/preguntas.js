@@ -46,6 +46,19 @@ try{
 }
 })
 
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Questions.destroy({
+      where: {
+        id: id,
+      },
+    });
+    res.status(200).send("successfully removed");
+  } catch (error) {
+    console.log(error);
+  }
+});
 // router.put("/:email/:id", async (req, res) => {
 //     const {pregunta, respuesta} = req.body
 //     const {id, email}  = req.params;

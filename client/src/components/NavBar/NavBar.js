@@ -5,7 +5,7 @@ import SearchBar from "../SearchBar/Searchbar";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
 import { getLocalCart } from "../../Actions/index";
-import style from "./../NavBar/NavBar.module.css";
+import styles from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
 
 //import style from "./../NavBar/NavBar.module.css";
@@ -37,51 +37,44 @@ const NavBar = ({ setCurrentPage }) => {
   };
 
   return (
-    <nav className={style.navContainer}>
-
-      <div className={style.container}>
-
-        <a className={style.ancor} href="/home">
-          <img src={logo} alt="logo" className={style.logo} />
-        </a>
-
+    <nav className={styles.navbar}>
+      <div className={styles.brandLogo}>
+      <a href="/home">
+           <img src={logo} alt="logo" className={styles.logo} />
+         </a>
       </div>
-        <SearchBar setCurrentPage={setCurrentPage} className={style.search}/>
-            <a href="#" className={style.toggleButton} onClick={change}>
-              <span className={style.bar}></span>
-              <span className={style.bar}></span>
-              <span className={style.bar}></span>
-            </a>
-      <div className={style.container2}>
-        <Link className={style.links} to="/cart">
-          <BsFillCartFill className={style.cart} /> {cartCount}
-        </Link>
+      <div className={styles.search}>
+        <SearchBar setCurrentPage={setCurrentPage} className={styles.search} />
+        <Link className={styles.cart} to="/cart">
+           <BsFillCartFill/> {cartCount}
+         </Link>
       </div>
+
+      <a href="#" className={styles.toggleButton} onClick={change}>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+      </a> 
       <div
-        className={`${open ? style.navbarLinksActive : style.containerCuentas}`}
+        className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
       >
-        <div>
-          <p className={style.prf}>Envíos gratis a partir de $2000.</p>
-        </div>
-        <div className={style.containerCuentas2}>
-          <div>
-
-            <Link className={style.links} to="/login">
+        <ul>
+          <li>
+            <Link to="/login" className={styles.links}>
               Ingresá
             </Link>
-          </div>
-
-          <div>
-            <Link className={style.links} to="/register">
+          </li>
+          <li>
+            <Link to="/register" className={styles.links}>
               Creá tu cuenta
             </Link>
-          </div>
-          <div>
-            <Link className={style.links} to="/contacto">
+          </li>
+          <li>
+            <Link to="/contacto" className={styles.links}>
               Contacto
             </Link>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </nav>
   );

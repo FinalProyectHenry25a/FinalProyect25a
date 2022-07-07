@@ -8,6 +8,7 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import styles from "./Detail.module.css";
 import NavBar from "../NavBar/NavBar";
+import BtnBack from "../back/BtnBack";
 
 import { detailLang } from "./detailLang";
 import {FormattedMessage, IntlProvider} from 'react-intl'
@@ -15,7 +16,7 @@ import {FormattedMessage, IntlProvider} from 'react-intl'
 
 export default function Detail() {
   //aca se setea el idioma
-  const messages = detailLang["en"];
+  const messages = detailLang["es"];
 
   const [user, setUser] = useState(auth.currentUser);
   useEffect(() => {
@@ -111,7 +112,7 @@ export default function Detail() {
     if (input) {
       await axios.post(`http://localhost:3001/pregunta`, {
         question: input,
-        user_email: user.email,
+        user_email: user.username,
         product_ID: PID.id,
       });
       alert("pregunta enviada");
@@ -124,6 +125,8 @@ export default function Detail() {
       <NavBar />
       <hr />
 
+      <hr/>
+      <BtnBack/>
       <div className={styles.divContainer}>
         <div className={styles.container1}>
           <img src={PID.images} alt="marcas" width={300} />

@@ -13,15 +13,18 @@ export default function UsersControl() {
 
   const users = useSelector((state) => state.users);
 
-  const allUsers = users.filter((e) => e.email !== "finalproyect25a@gmail.com")
-
   useEffect(() => {
     
-    dispatch(usersAdmin());
+    dispatch(getAllUsers());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {
+    if(auth.currentUser === null || auth.currentUser.email !== "finalproyect25a@gmail.com"){
+
+      history.push("/home");
+
+    }
     userVerificate();
   }, []);
 
@@ -66,17 +69,20 @@ export default function UsersControl() {
 
   return (
     <div>
+      <h1>Control de Usuarios</h1>
       <Link to="/admin">
         <button>◀ Back</button>
       </Link>
-      {allUsers ? allUsers.map((user) => {
+      <br/>
+      <br/>
+      {users ? users.map((user) => {
         return (
-          <div key={user.username}>
+          <div className="border rounder w-50" key={user.username}>
             <h6>
             {user.email} - {user.username} - {user.firstname} - {user.lastname}
             </h6>
-          {!user.isAdmin ? <button key={user.firstname} value={user.email} onClick={() => dispatch(becomeAdmin(user.email))}>Convertir en Admin</button> : null}
-          {user.isAdmin ? <button key={user.firstname} value={user.email} onClick={() => dispatch(removeAdmin(user.email))}>Quitar privilegio de Admin</button> : null}
+          {!user.isAdmin ? <button key={user.firstname} value={user.email} className="btn btn-secondary" onClick={() => dispatch(becomeAdmin(user.email))}>Convertir en Admin</button> : null}
+          {user.isAdmin ? <button key={user.firstname} value={user.email} className="btn btn-danger" onClick={() => dispatch(removeAdmin(user.email))}>Quitar privilegio de Admin</button> : null}
           </div>
         )
       }) : <span>No hay usuarios registrados</span>}

@@ -7,6 +7,7 @@ import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import styles from './Contacto.module.css'
 import UserNavBar from "../UserNavBar/UserNavBar";
+import BtnBack from "../back/BtnBack";
 
 
 
@@ -90,6 +91,7 @@ const correoEmail = async(e) =>{
 return(
   <>
     <UserNavBar/>
+    <BtnBack/>
     <div className={styles.containerContact}>
 
       <div className={styles.info}>

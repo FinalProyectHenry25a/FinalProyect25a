@@ -14,6 +14,11 @@ export default function StockEdit() {
   const history = useHistory();
 
   useEffect(() => {
+    if(auth.currentUser === null){
+
+      history.push("/home");
+
+    }
 
     userVerificate();
     loadPosts();
@@ -99,6 +104,7 @@ export default function StockEdit() {
 
   return (
     <div>
+      <h1>Cambio de stock</h1>
       <Link to="/admin">
         <button>◀ Back</button>
       </Link>
@@ -106,25 +112,28 @@ export default function StockEdit() {
       <br/><br/>
 
       {postsState?.map((el) => (
-        <div key={el.id}>
+        <div className="row border rounded w-50 mb-2 h-5"key={el.id}>
 
-          <div>
-            <h6> {el.brand} - {el.model} - {el.stock} unidades </h6>
+          <div className="row " >
+            <h6 className=" d-flex justify-content-center"> {el.brand} - {el.model} - {el.stock} unidades </h6>
             {el.stock <= 5 ? <p>⚠️ Cantidad de stock crítica</p> : null}
           </div>
-
-          <select  id = 'do' name='do' onChange={settings}>
+<div className="row justify-content-center ">
+          <select className="form-select w-50 m-2 "  id = 'do' name='do' onChange={settings}>
             <option value="add">Agregar stock</option>
             <option value="remove">Quitar stock</option>
           </select>
+<div className="row w-25 justify-content-center align-items-center">
+          <input type="number" className="form-control w-75  " id={el.id} name='amount' onChange={settings} />
+          {/* <label className=" ms-2 w-25">U</label> */}
+          </div>
 
-          <input id={el.id} name='amount' onChange={settings} />
-          <label>unidades</label>
 
-
-          <button onClick={() => editStock(el.id)}> editar </button>
+          <button className="btn btn-outline-secondary mt-2 mb-2 w-25 " onClick={() => editStock(el.id)}> editar </button>
+          
           <br />
           <br />
+        </div>
         </div>
       ))}
     </div>

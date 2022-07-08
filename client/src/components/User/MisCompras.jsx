@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPhones } from "../../Actions";
 import { useHistory } from "react-router-dom";
 import styles from './styles/MisCompras.module.css'
+import BtnBack from '../back/BtnBack'
 
 export default function MisCompras() {
   const [user, setUser] = useState();
@@ -95,6 +96,7 @@ export default function MisCompras() {
   return (
     <>
       <UserNavBar />
+      <BtnBack/>
       {user ? (
         <div className={styles.container}>
           {user.shopping ? (

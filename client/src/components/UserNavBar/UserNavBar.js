@@ -12,7 +12,7 @@ import { getLocalCart } from "../../Actions";
 import logo from "../../images/smartworld.jpg";
 
 import styles from '../UserNavBar/usernavbar.module.css'
-
+import { userNavBarLang } from "./userNavBarLang";
 
 export default function UserNavBar({setCurrentPage}) {
   const [cartCount, setCartCount] = useState(0);
@@ -128,7 +128,7 @@ export default function UserNavBar({setCurrentPage}) {
             <ul>
               <li>
                 <Link to="/mi-perfil/" className={styles.links}>
-                  Mi perfil
+                {userNavBarLang[lan].Miperfil}
                 </Link>
               </li>
               <li>

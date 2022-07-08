@@ -1,21 +1,43 @@
 import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getQuestions } from "../../Actions";
+import { useHistory } from "react-router-dom";
+import {getAllUsers, getQuestions, getUser } from "../../Actions";
+import { auth } from "../../firebase/firebase-config";
 
 
 export default function Preguntas(){
 const allQuestions = useSelector((state) => state.questions)
 
-
+const history = useHistory();
 const dispatch = useDispatch()
 const [input, setInput] = useState("");
 
 useEffect(()=>{
+    if(auth.currentUser === null){
+
+        history.push("/home");
+  
+      }
+      userVerificate()
     dispatch(getQuestions())
 },[dispatch])
 
+const userVerificate = async () => {
+    await onAuthStateChanged(auth, async (currentUser) => {
+      try {
 
+        let info = await dispatch(getUser(currentUser.email));
+
+        if (!info.payload.isAdmin || info.payload.banned) {
+          history.push("/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
  
 
     const handlerChange = (e) => {

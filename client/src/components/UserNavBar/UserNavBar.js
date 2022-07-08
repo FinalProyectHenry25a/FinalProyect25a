@@ -133,23 +133,23 @@ export default function UserNavBar({setCurrentPage}) {
               </li>
               <li>
                 <Link to="/mis-compras" className={styles.links}>
-                  Mis compras
+                {userNavBarLang[lan].MisCompras}
                 </Link>
               </li>
               <li>
                 <Link to="/favoritos" className={styles.links}>
-                  Favoritos
+                {userNavBarLang[lan].Favoritos}
                 </Link>
               </li>
               <li>
                 <Link to="/home" className={styles.links} onClick={logout}>
-                  Cerrar Sesion
+                {userNavBarLang[lan].CerrarSesion}
                 </Link>
               </li>
             </ul>
 
             {user?.isAdmin ? <Link className="nav-link active m-3" to="admin">
-              <button>Admin Menu</button>
+              <button>Menu de administración</button>
             </Link> : null}
           </div></>
     ) : (

@@ -4,9 +4,7 @@ const { User, Publication } = require("../db");
 const router = Router();
 
 router.get("/", async (req, res) => {
-
   try {
-
     // const { email } = req.params;
 
     // if(email) {
@@ -17,18 +15,14 @@ router.get("/", async (req, res) => {
 
     // } else {
 
-       let users = await User.findAll();
+    let users = await User.findAll();
 
-       res.json(users);
+    res.json(users);
 
     // }
-
   } catch (error) {
-
     console.log(error);
-
   }
-
 });
 
 router.put("/:email/:id", async (req, res) => {
@@ -44,18 +38,25 @@ router.put("/:email/:id", async (req, res) => {
 
     if (!usuario.favourites) {
       await User.update({ favourites: favoritos }, { where: { email: email } });
-    } else {
+    }
+    else {
       await User.update(
         { favourites: usuario.favourites.concat(favoritos) },
         { where: { email: email } }
       );
     }
-
     res.send("agregado a favorito");
   } catch (error) {
     console.log(error);
   }
-});
+}); /* else if (usuario.favourites) {
+      for (let i = 0; i <= usuario.favourites; i++) {
+        if (usuario.favourites[i].id == [favoritos.id]) {
+          res.send("ya esta agregado");
+          break;
+        } 
+      }
+    } */
 
 router.put("/delete/:email/:id", async (req, res) => {
   const { email, id } = req.params;
@@ -63,16 +64,15 @@ router.put("/delete/:email/:id", async (req, res) => {
   try {
     let usuario = await User.findByPk(email);
 
-    let destroy = usuario.favourites.filter((f) => f.id != id)
+    let destroy = usuario.favourites.filter((f) => f.id != id);
 
-    if(usuario.favourites){
-      await User.update({ favourites: destroy}, {where:{email: email}})
+    if (usuario.favourites) {
+      await User.update({ favourites: destroy }, { where: { email: email } });
     }
-    res.send("se saco de favoritos")
+    res.send("se saco de favoritos");
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 });
 
 module.exports = router;

@@ -4,7 +4,9 @@ import { getAuth, updatePassword,onAuthStateChanged, sendEmailVerification } fro
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import 'bootstrap/dist/css/bootstrap.min.css'; //s
+import BtnBack from '../back/BtnBack'
+import styles from './styles/MiPerfil.module.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory } from "react-router-dom";
 import { miPerfilLang } from "./styles/miPerfilLang";
 import { useSelector } from "react-redux";
@@ -145,28 +147,25 @@ export default function MiPerfil() {
   return (
     <div>
       <UserNavBar />
-
+      <BtnBack/>
       {user ? (
-        <div>
           <section>
-            <div className="container py-5">
-              <div className="row">
-                <div className="col-lg-12 d-flex align-items-center justify-content-center">
-                  <div className="w-75 p-3  card mb-4">
-                    <div className="card-body text-center">
-                      {user.image ? (
-                        <img
-                          src={user.image}
-                          alt="avatar"
-                          height="100%" width="50%"
-                        />
-                      ) : (
-                        <img
-                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                          alt="avatar"
-                          className="rounded-circle img-fluid" height="100%" width="50%"
-                        />
-                      )}
+                  <div className={styles.containerPerfil}>
+
+                        <div className={styles.container}>
+                            {user.image ? (
+                              <img
+                                src={user.image}
+                                alt="avatar"
+                                className={styles.image}
+                              />
+                            ) : (
+                              <img
+                                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                alt="avatar"
+                                className={styles.image}
+                              />
+                            )}
 
                       <input
                         type="file"
@@ -187,121 +186,112 @@ export default function MiPerfil() {
                         🗑️{miPerfilLang[lan].quitar}
                       </button> : null}
 
-                      <h5 className="my-3">{user.username}</h5>
-                      <p className="text-muted mb-1">{user.email}</p>
+                            {user.image? <button onClick={removeImage}>
+                              🗑️ quitar
+                            </button> : null}
 
-                      <div className="d-flex justify-content-center mb-2"></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-12 d-flex align-items-center justify-content-center">
-                  <div className="w-75 p-3  card mb-4">
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <p className="mb-0">{miPerfilLang[lan].nombreCompleto}</p>
-                        </div>
-                        <div className="col-sm-9">
-                          <p className="text-muted mb-0">
+                      <div>
+                        <h5>{user.username}</h5>
+                      </div>
+                      <div>
+                        <p>{user.email}</p>
+                      </div>
+                      </div>
+                  
+                
+                
+                  
+                      <div className={styles.container2}>
+                      <hr/>
+                        <div>
+                          <p className={styles.prf}>{miPerfilLang[lan].nombreCompleto}</p>
+                        <div>
+                          <p>
                             {user.firstname} {user.lastname}
                           </p>
                         </div>
-                      </div>
-
+                      
                       <hr />
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <p className="mb-0">{miPerfilLang[lan].correoElectronico}</p>
+                        <div>
+                          <p className={styles.prf}>{miPerfilLang[lan].correoElectronico}</p>
                         </div>
-                        <div className="col-sm-9">
+                        <div>
                           {auth.currentUser.emailVerified ? (
-                            <p>{miPerfilLang[lan].verificado}</p>
+                            <p>{miPerfilLang[lan].verificado}👌</p>
                           ) : (
                             <button
-                              className="btn btn-secondary"
                               onClick={verification}
                             >
                               {miPerfilLang[lan].verificar}
                             </button>
                           )}
                         </div>
-                      </div>
+                      
 
-                      <hr />
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <p className="mb-0">{miPerfilLang[lan].nombreDelUsuario}</p>
+                      <hr/>
+                    
+                        <div>
+                        
+                          <p className={styles.prf}>{miPerfilLang[lan].nombreDelUsuario}</p>
                         </div>
-                        <div className="row col-sm-9">
-                          <p className="text-muted mb-0">
+                        <div>
+                          <p>
                             {" "}
                             <input
-                              className="form-control"
                               type="text"
                               id="userName"
-                              placeholder="..."
+                              placeholder="Nuevo nombre"
+                              className={styles.input}
                             />
-                            <button
-                              className="btn btn-secondary"
-                              onClick={changeUserName}
-                            >
-                              {miPerfilLang[lan].modificar}
+                            <button onClick={changeUserName} className={styles.btn}>
+                            {miPerfilLang[lan].modificar}
                             </button>
                           </p>
                         </div>
-                      </div>
+                      
 
-                      <hr />
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <p className="mb-0">{miPerfilLang[lan].direccion}</p>
+                      <hr/>
+                      
+                        <div>
+                          <p className={styles.prf}>{miPerfilLang[lan].direccion}</p>
                         </div>
-                        <div className="col-sm-9">
-                          <p className="text-muted mb-0">
+                        <div className={styles.containerInput}>
+                          <p>
                             {" "}
                             <input
-                              className="form-control"
                               type="text"
                               id="address"
-                              placeholder="..."
+                              placeholder="Nueva dirección"
+                              className={styles.input}
                             />
-                            <button
-                              className="btn btn-secondary"
-                              onClick={changeUserAdress}
-                            >
-                              {miPerfilLang[lan].modificar}
+                            <button onClick={changeUserAdress} className={styles.btn}>
+                            {miPerfilLang[lan].modificar}
                             </button>
                           </p>
                         </div>
-                      </div>
+                      
 
-                      <hr />
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <p className="mb-0">{miPerfilLang[lan].contraseña}</p>
+                        <hr/>
+                        <div>
+                          <p className={styles.prf}>{miPerfilLang[lan].contraseña}</p>
                         </div>
-                        <div className="col-sm-9">
+
+                        <div>
                           <input
-                            className="form-control"
                             id="pw"
                             type="password"
-                            placeholder="..."
-                          ></input>
-                          <button
-                            className="btn btn-secondary"
-                            onClick={() => changePassword()}
-                          >
-                            {miPerfilLang[lan].cambiarContraseña}
+                            placeholder="Nueva contraseña"
+                            className={styles.input}
+                          />
+                          <button onClick={() => changePassword()} className={styles.btn2}>
+                          {miPerfilLang[lan].cambiarContraseña}
                           </button>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    </div>
           </section>
-        </div>
+        
       ) : (
         <h1>{miPerfilLang[lan].noEstasLogueado}</h1>
       )}

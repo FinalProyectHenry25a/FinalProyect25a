@@ -7,7 +7,8 @@ const initialState = {
     users: [],
     user: {},
     count: 1,
-    questions:[]
+    questions:[],
+    
 }
 
 function rootReducer (state = initialState, action){

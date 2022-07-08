@@ -19,9 +19,18 @@ import { right } from "@popperjs/core";
 import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
+const initialTheme = "light"
 
 const Home = () => {
-
+  const [theme, setTheme] = useState(initialTheme)
+  const handleTheme = (e) => {
+    console.log(e.target.value)
+    if(e.target.value === "light"){
+      setTheme("light");
+    }else{
+      setTheme("dark");
+    }
+  }
   const [loggedUser, setLoggedUser] = useState();
   
   const [correo, SetCorreo] = useState({
@@ -257,15 +266,20 @@ const Home = () => {
   
 
   return (
-    <div>
-       
+    <div className={theme}>
+      <div className={style.facu}>
+
       <button onClick={logout}>desloguear</button>
 
       {/* <Link to="/agregado">
         <button>Agregar Phone</button>
       </Link> */}
 
-      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
+      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar  setCurrentPage={setCurrentPage} />}
+      <input type="radio" name="theme" id="light" onClick={handleTheme} value="light"/>
+     <label htmlFor="light">Claro</label>
+     <input type="radio" name="theme" id="dark" onClick={handleTheme} value="dark"/>
+     <label htmlFor="dark">Oscuro</label>
       {/* <Carrousel /> */}
       
       <div id="filtros">
@@ -366,6 +380,7 @@ const Home = () => {
         allPhones={allPhones.length}
         paginado={paginado}
       />
+      </div>
     </div>
   );
 };

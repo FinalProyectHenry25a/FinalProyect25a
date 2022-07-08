@@ -7,6 +7,10 @@
   background-color: rgb(255, 252, 252);
   z-index: 999;
 }
+.dark{
+  background-color: #fff;
+  filter:invert(1)
+}
 .container {
   display: flex;
   flex-direction: row;

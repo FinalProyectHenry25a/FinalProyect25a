@@ -8,9 +8,12 @@ import { getLocalCart } from "../../Actions/index";
 import style from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
 
+
 //import style from "./../NavBar/NavBar.module.css";
 
+
 const NavBar = ({ setCurrentPage }) => {
+  
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -39,14 +42,18 @@ const NavBar = ({ setCurrentPage }) => {
 
   return (
     <nav className={style.navContainer}>
+      
 
       <div className={style.container}>
 
         <a className={style.ancor} href="/home">
           <img src={logo} alt="logo" className={style.logo} />
         </a>
-
       </div>
+         
+      
+      
+
         <SearchBar setCurrentPage={setCurrentPage} className={style.search}/>
             <a href="#" className={style.toggleButton} onClick={change}>
               <span className={style.bar}></span>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './components/login/Login';
 import Register from './components/register/Register';
@@ -20,18 +20,19 @@ import ProductToEdit from './components/Admin/ProductToEdit';
 import Users from './components/Admin/users';
 import Preguntas from './components/Admin/Preguntas';
 import LandingPage from './components/landingPage/LandingPage';
-
+import "./App.css"
 
 
 const adminEmail = 'admin@admin.admin';
 
-function App() {
 
+function App() {
   return (
     <BrowserRouter>
       <Switch>
+        
       <Route exact path="/" component={LandingPage} />
-        <Route exact path="/home" component={Home} />
+        <Route exact path="/home" component={Home}/>
         <Route exact path="/home/:id" component={Detail} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/identify" component={Identify} />
@@ -50,6 +51,7 @@ function App() {
         <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/> 
         <Route exact path="/contacto" component={Contacto} /> 
         <Route exact path="/admin/preguntas" component={Preguntas}/>
+        
       </Switch>
     </BrowserRouter>
   );

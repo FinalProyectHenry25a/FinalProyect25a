@@ -320,10 +320,10 @@ const Home = () => {
       {/* por precio--------------------------------------------------- */}
 
       <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option  value="null">{homeLang[lan].precio}</option>
-        <option value={[0, 500]}>de u$ 0 a u$ 500</option>
-        <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
-        <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
+        <option  value="null">precio</option>
+        <option value={[0, 115000]}>de u$ 0 a u$ 500</option>
+        <option value={[115000, 230000]}>de u$ 500 a u$ 1000</option>
+        <option value={[230000, 345000]}>de u$ 1000 a u$ 1500</option>
       </select>
 
       {/* por processor--------------------------------------------------- */}

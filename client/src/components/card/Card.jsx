@@ -7,9 +7,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { addToCart, addToCartUser } from "../../Actions";
 import soldOut from "../../images/sold-out.png";
+import { FaHeart } from "react-icons/fa";
+import { FiHeart } from "react-icons/fi";
 
 export default function Card(props) {
   const [user, setUser] = useState(auth.currentUser);
+  const [favs, setFavs] = useState();
+  const [flag, setFlag] = useState(false);
   useEffect(() => {
     userVerificate();
   }, []);
@@ -22,19 +26,58 @@ export default function Card(props) {
   const dispatch = useDispatch();
   const addToFavourites = async () => {
     try {
-      let add = (
-        await axios.put(
-          `http://localhost:3001/favourites/${user.email}/${props.id}`
-        )
-      ).data;
-      alert("Artículo agregado a favoritos.");
-      console.log(user);
+      let algo = await axios.get(`http://localhost:3001/user/${user.email}`);
+      let usuario = algo.data;
+      setUser(usuario);
+
+      console.log(usuario);
+      if (usuario.favourites?.length === 0) {
+        await axios.put(`http://localhost:3001/favourites/${usuario.email}/${props.id}`).data;
+        /* let guardar = localStorage.getItem("favs");
+        console.log(guardar); */
+
+        let obj = props.id;
+
+        localStorage.setItem("favs", JSON.stringify(obj));
+        setFavs(obj);
+        setFlag(true);
+      } else if (usuario.favourites?.find((e) => e.id === props.id)) {
+        console.log("ya esta agregado");
+      } else {
+        console.log(`soy el false ${props.id}`);
+        await axios.put(`http://localhost:3001/favourites/${usuario.email}/${props.id}`).data;
+        let guardar = JSON.parse(localStorage.getItem("favs"));
+        console.log(guardar);
+        let obj = [guardar, props.id];
+        localStorage.setItem("favs", JSON.stringify(obj));
+        setFavs(obj);
+
+        setFlag(true);
+      }
     } catch (error) {
       alert("No se pudo agregar la publicacion a favoritos.");
       console.log(error);
     }
   };
 
+  async function deleteFavourites() {
+    try {
+      await axios.put(
+        `http://localhost:3001/favourites/delete/${user.email}/${props.id}`
+      );
+
+      let guardar = JSON.parse(localStorage.getItem("favs"));
+      
+      let todo = guardar.filter((e) => e !== props.id || e !== null);
+      console.log(todo)
+      localStorage.setItem("favs", JSON.stringify(todo));
+      setFavs(todo)
+    } catch (error) {
+      alert("No se pudo elimino la publicacion a favoritos.");
+      console.log(error);
+    }
+  }
+  console.log(favs);
 
   return (
     <div
@@ -67,10 +110,15 @@ export default function Card(props) {
         justifyContent: "center",
       }}>${props.price}</h2>
         <div className="card-text">
-          {user ? <button onClick={addToFavourites} style={{
-        background: 'transparent',
-        border: 'none'
-      }}>❤️</button> : null}
+          {favs?.find((e) => e.includes(props.id)) ? (
+            <button onClick={deleteFavourites}>
+              <FaHeart />
+            </button>
+          ) : (
+            <button value="vacio" onClick={addToFavourites}>
+              <FiHeart />
+            </button>
+          )}
           <br />
         </div>
         {props.stock > 0 ? (

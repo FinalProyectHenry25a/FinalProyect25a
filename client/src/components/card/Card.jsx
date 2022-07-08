@@ -80,7 +80,7 @@ export default function Card(props) {
       localStorage.setItem("favs", JSON.stringify(removePhoneFromLocalStorage));
       setFavs(JSON.parse(localStorage.getItem("favs")))
 
-        console.log("Se elimino correctamente del localStorage y Favs");
+        window.location.reload()
 
     } catch (error) {
       alert("No se pudo elimino la publicacion a favoritos.");
@@ -119,7 +119,7 @@ export default function Card(props) {
         justifyContent: "center",
       }}>${props.price}</h2>
         <div className="card-text">
-          {favs?.includes(props.id) ? (
+          {user ? favs?.includes(props.id) ? (
             <button onClick={deleteFavourites}>
               <FaHeart />
             </button>
@@ -127,7 +127,7 @@ export default function Card(props) {
             <button onClick={addToFavourites}>
               <FiHeart />
             </button>
-          )}
+          ) : null}
           <br />
         </div>
         {props.stock > 0 ? (

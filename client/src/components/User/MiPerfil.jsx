@@ -4,12 +4,15 @@ import { getAuth, updatePassword,onAuthStateChanged, sendEmailVerification } fro
 import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import UserNavBar from "../UserNavBar/UserNavBar";
-
 import 'bootstrap/dist/css/bootstrap.min.css'; //s
 import { useHistory } from "react-router-dom";
+import { miPerfilLang } from "./styles/miPerfilLang";
+import { useSelector } from "react-redux";
+
 
 export default function MiPerfil() {
   const [user, setUser] = useState();
+  const lan = useSelector((state) => state.language);
 
   const history = useHistory()
 
@@ -139,27 +142,6 @@ export default function MiPerfil() {
     }
   }
 
-  /* 
-  NO BORRAR!!!!!!!!!!! 
-
-  const base64Convert = (archivos) =>{
-
-    Array.from(archivos).forEach( archivo =>{
-      let reader = new FileReader();
-      reader.readAsDataURL(archivo);
-
-      reader.onload = function(){
-        let aux = [];              //corta cadena
-        let base64 = reader.result;
-        //console.log(base64);
-        aux = base64.split(',')
-        console.log(aux);
-      }
-    })
-
-    <input type='file' multiple onChange={ e => base64Convert(e.target.files)}></input>
-  } */
-
   return (
     <div>
       <UserNavBar />
@@ -197,12 +179,12 @@ export default function MiPerfil() {
                       <br />
                       <button className="btn btn-light">
                         <label htmlFor="inputarchivo" id="labelarchivo">
-                          ✏️editar
+                          ✏️{miPerfilLang[lan].editar}
                         </label>
                       </button>
 
                       {user.image? <button className="btn btn-light" onClick={removeImage}>
-                        🗑️quitar
+                        🗑️{miPerfilLang[lan].quitar}
                       </button> : null}
 
                       <h5 className="my-3">{user.username}</h5>
@@ -217,7 +199,7 @@ export default function MiPerfil() {
                     <div className="card-body">
                       <div className="row">
                         <div className="col-sm-3">
-                          <p className="mb-0">Nombre completo</p>
+                          <p className="mb-0">{miPerfilLang[lan].nombreCompleto}</p>
                         </div>
                         <div className="col-sm-9">
                           <p className="text-muted mb-0">
@@ -229,17 +211,17 @@ export default function MiPerfil() {
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <p className="mb-0">Email</p>
+                          <p className="mb-0">{miPerfilLang[lan].correoElectronico}</p>
                         </div>
                         <div className="col-sm-9">
                           {auth.currentUser.emailVerified ? (
-                            <p>Verificado</p>
+                            <p>{miPerfilLang[lan].verificado}</p>
                           ) : (
                             <button
                               className="btn btn-secondary"
                               onClick={verification}
                             >
-                              Verificar
+                              {miPerfilLang[lan].verificar}
                             </button>
                           )}
                         </div>
@@ -248,7 +230,7 @@ export default function MiPerfil() {
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <p className="mb-0">Nombre de usuario</p>
+                          <p className="mb-0">{miPerfilLang[lan].nombreDelUsuario}</p>
                         </div>
                         <div className="row col-sm-9">
                           <p className="text-muted mb-0">
@@ -263,7 +245,7 @@ export default function MiPerfil() {
                               className="btn btn-secondary"
                               onClick={changeUserName}
                             >
-                              modificar
+                              {miPerfilLang[lan].modificar}
                             </button>
                           </p>
                         </div>
@@ -272,7 +254,7 @@ export default function MiPerfil() {
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <p className="mb-0">Dirección</p>
+                          <p className="mb-0">{miPerfilLang[lan].direccion}</p>
                         </div>
                         <div className="col-sm-9">
                           <p className="text-muted mb-0">
@@ -287,7 +269,7 @@ export default function MiPerfil() {
                               className="btn btn-secondary"
                               onClick={changeUserAdress}
                             >
-                              modificar
+                              {miPerfilLang[lan].modificar}
                             </button>
                           </p>
                         </div>
@@ -296,7 +278,7 @@ export default function MiPerfil() {
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <p className="mb-0">Contraseña</p>
+                          <p className="mb-0">{miPerfilLang[lan].contraseña}</p>
                         </div>
                         <div className="col-sm-9">
                           <input
@@ -309,7 +291,7 @@ export default function MiPerfil() {
                             className="btn btn-secondary"
                             onClick={() => changePassword()}
                           >
-                            Cambiar contraseña
+                            {miPerfilLang[lan].cambiarContraseña}
                           </button>
                         </div>
                       </div>
@@ -321,7 +303,7 @@ export default function MiPerfil() {
           </section>
         </div>
       ) : (
-        <h1>No estas logeado</h1>
+        <h1>{miPerfilLang[lan].noEstasLogueado}</h1>
       )}
     </div>
   );

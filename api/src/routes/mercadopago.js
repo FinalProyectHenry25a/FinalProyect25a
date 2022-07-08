@@ -39,9 +39,9 @@ mercadopago.configure({
     items: items_ml,
     external_reference : `${email}`, //`${new Date().valueOf()}`,
     back_urls: {
-      success: 'https://back25ademo.herokuapp.com/mercadopago/pagos',
-      failure: 'https://back25ademo.herokuapp.com/mercadopago/pagos',
-      pending: 'https://back25ademo.herokuapp.com/mercadopago/pagos',
+      success: 'http://localhost:3001/mercadopago/pagos',
+      failure: 'http://localhost:3001/mercadopago/pagos',
+      pending: 'http://localhost:3001/mercadopago/pagos',
     }
   };
 

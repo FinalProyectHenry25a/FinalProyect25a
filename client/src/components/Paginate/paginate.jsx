@@ -1,9 +1,12 @@
 import { parseActionCodeURL } from "firebase/auth";
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import styles from './Paginate.module.css'
+import { paginateLang } from "./paginateLang";
 
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const lan = useSelector((state) => state.language);
   const pageNumbers = [];
 
   useEffect(() => {
@@ -69,14 +72,14 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
       <ul className="pagination justify-content-center">
         <button className={styles.btn} onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
-          Anterior
+        {paginateLang[lan].anterior}
         </button>
         <input className={styles.input} onChange={(e) => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={currentPage} />
         <label className={styles.input}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>
         <button className={styles.btn} onClick={() => nextPage()} disabled={currentPage === Math.ceil(allPhones / phonesPerPage) || currentPage > Math.ceil(allPhones / phonesPerPage) }>
-          Siguiente
+        {paginateLang[lan].siguiente}
         </button>
       </ul>
     </nav>

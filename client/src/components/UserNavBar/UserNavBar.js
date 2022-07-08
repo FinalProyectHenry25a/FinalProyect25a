@@ -109,23 +109,22 @@ export default function UserNavBar({setCurrentPage}) {
           </a>
         </div><div className={styles.search}>
             <SearchBar setCurrentPage={setCurrentPage} className={styles.search} />
-            <Link className={styles.cart} to="/cart">
-              <BsFillCartFill /> {cartCount}
-            </Link>
+            <p className={styles.prf2}>Hola {user.username}!</p>
           </div><a href="#" className={styles.toggleButton} onClick={change}>
             <span className={styles.bar}></span>
             <span className={styles.bar}></span>
             <span className={styles.bar}></span>
           </a><div
             className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
-          >
+            >
+          
+            
             <ul>
               <li>
-              <p className={styles.prf2}>Hola {user.username}!</p>
+             <Link className={styles.cart} to="/cart">
+              <BsFillCartFill /> {cartCount}
+            </Link> 
             </li>
-            </ul>
-            <hr></hr>
-            <ul>
               <li>
                 <Link to="/mi-perfil/" className={styles.links}>
                 {userNavBarLang[lan].Miperfil}
@@ -142,15 +141,17 @@ export default function UserNavBar({setCurrentPage}) {
                 </Link>
               </li>
               <li>
+            {user?.isAdmin ? <Link className="nav-link active m-3" to="admin">
+              Menu de administración
+            </Link> : null}
+            </li>
+              <li>
                 <Link to="/home" className={styles.links} onClick={logout}>
                 {userNavBarLang[lan].CerrarSesion}
                 </Link>
               </li>
             </ul>
 
-            {user?.isAdmin ? <Link className="nav-link active m-3" to="admin">
-              <button>Menu de administración</button>
-            </Link> : null}
           </div></>
     ) : (
          <NavBar />

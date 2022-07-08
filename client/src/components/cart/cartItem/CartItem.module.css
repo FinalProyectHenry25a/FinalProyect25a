@@ -1,13 +1,22 @@
 .cartItem {
-    
+    border: 1px solid black;
     display: flex;
     flex-direction: row;
-    
+    border-radius: 5px;
     margin-top: 20px;
+    height: auto;
+    width: auto;
 }
-
+.image{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.prf {
+    margin-right: 10px;
+}
 .cartItemDetails {
     margin-left: 40px;
+    margin-top: 10px;
 }
 .cartItemQty{
     margin-top: 20px;
@@ -23,4 +32,9 @@
     margin-right: 30px;
     margin-left: 20px;
     padding-left: 12px;
+}
+
+.actions__deleteItemBtn {
+    background: none;
+    border: none;
 }

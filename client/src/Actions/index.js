@@ -261,3 +261,10 @@ export function getQuestions() {
   };
 }
 
+export const language = (leng) => {
+  return {
+    type: "LANGUAGE",
+    payload: leng,
+  };
+};
+

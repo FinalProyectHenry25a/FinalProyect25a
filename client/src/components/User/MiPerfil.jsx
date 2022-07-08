@@ -8,9 +8,13 @@ import BtnBack from '../back/BtnBack'
 import styles from './styles/MiPerfil.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory } from "react-router-dom";
+import { miPerfilLang } from "./styles/miPerfilLang";
+import { useSelector } from "react-redux";
+
 
 export default function MiPerfil() {
   const [user, setUser] = useState();
+  const lan = useSelector((state) => state.language);
 
   const history = useHistory()
 
@@ -140,28 +144,6 @@ export default function MiPerfil() {
     }
   }
 
-  /* 
-  NO BORRAR!!!!!!!!!!! 
-
-  const base64Convert = (archivos) =>{
-
-    Array.from(archivos).forEach( archivo =>{
-      let reader = new FileReader();
-      reader.readAsDataURL(archivo);
-
-      reader.onload = function(){
-        let aux = [];              //corta cadena
-        let base64 = reader.result;
-        //console.log(base64);
-        aux = base64.split(',')
-        console.log(aux);
-      }
-    })
-
-    <input type='file' multiple onChange={ e => base64Convert(e.target.files)}></input>
-  } */
-
-
   return (
     <div>
       <UserNavBar />
@@ -185,20 +167,24 @@ export default function MiPerfil() {
                               />
                             )}
 
-                            <button>
-                              <label htmlFor="inputarchivo" id="labelarchivo" className={styles.container2}>
-                                ✏️ editar
-                              </label>
-                            </button>
-                            <input
-                              type="file"
-                              id="inputarchivo"
-                              name="file"
-                              onChange={(ev) => base64Convert(ev)}
-                              required
-                              className={styles.none}
-                            />
-                            <br />
+                      <input
+                        type="file"
+                        id="inputarchivo"
+                        name="file"
+                        onChange={(ev) => base64Convert(ev)}
+                        className="d-none"
+                        required
+                      />
+                      <br />
+                      <button className="btn btn-light">
+                        <label htmlFor="inputarchivo" id="labelarchivo">
+                          ✏️{miPerfilLang[lan].editar}
+                        </label>
+                      </button>
+
+                      {user.image? <button className="btn btn-light" onClick={removeImage}>
+                        🗑️{miPerfilLang[lan].quitar}
+                      </button> : null}
 
                             {user.image? <button onClick={removeImage}>
                               🗑️ quitar
@@ -218,8 +204,7 @@ export default function MiPerfil() {
                       <div className={styles.container2}>
                       <hr/>
                         <div>
-                          <p className={styles.prf}>Nombre completo:</p>
-                        </div>
+                          <p className={styles.prf}>{miPerfilLang[lan].nombreCompleto}</p>
                         <div>
                           <p>
                             {user.firstname} {user.lastname}
@@ -228,16 +213,16 @@ export default function MiPerfil() {
                       
                       <hr />
                         <div>
-                          <p className={styles.prf}>Email:</p>
+                          <p className={styles.prf}>{miPerfilLang[lan].correoElectronico}</p>
                         </div>
                         <div>
                           {auth.currentUser.emailVerified ? (
-                            <p>Verificado 👌</p>
+                            <p>{miPerfilLang[lan].verificado}👌</p>
                           ) : (
                             <button
                               onClick={verification}
                             >
-                              Verificar ahora
+                              {miPerfilLang[lan].verificar}
                             </button>
                           )}
                         </div>
@@ -247,7 +232,7 @@ export default function MiPerfil() {
                     
                         <div>
                         
-                          <p className={styles.prf}>Nombre de usuario:</p>
+                          <p className={styles.prf}>{miPerfilLang[lan].nombreDelUsuario}</p>
                         </div>
                         <div>
                           <p>
@@ -259,7 +244,7 @@ export default function MiPerfil() {
                               className={styles.input}
                             />
                             <button onClick={changeUserName} className={styles.btn}>
-                              Modificar
+                            {miPerfilLang[lan].modificar}
                             </button>
                           </p>
                         </div>
@@ -268,7 +253,7 @@ export default function MiPerfil() {
                       <hr/>
                       
                         <div>
-                          <p className={styles.prf}>Dirección:</p>
+                          <p className={styles.prf}>{miPerfilLang[lan].direccion}</p>
                         </div>
                         <div className={styles.containerInput}>
                           <p>
@@ -280,7 +265,7 @@ export default function MiPerfil() {
                               className={styles.input}
                             />
                             <button onClick={changeUserAdress} className={styles.btn}>
-                              modificar
+                            {miPerfilLang[lan].modificar}
                             </button>
                           </p>
                         </div>
@@ -288,7 +273,7 @@ export default function MiPerfil() {
 
                         <hr/>
                         <div>
-                          <p className={styles.prf}>Contraseña:</p>
+                          <p className={styles.prf}>{miPerfilLang[lan].contraseña}</p>
                         </div>
 
                         <div>
@@ -299,15 +284,16 @@ export default function MiPerfil() {
                             className={styles.input}
                           />
                           <button onClick={() => changePassword()} className={styles.btn2}>
-                            Modificar
+                          {miPerfilLang[lan].cambiarContraseña}
                           </button>
                         </div>
                       </div>
                     </div>
+                    </div>
           </section>
         
       ) : (
-        <h1>No estas logeado</h1>
+        <h1>{miPerfilLang[lan].noEstasLogueado}</h1>
       )}
     </div>
   );

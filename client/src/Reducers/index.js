@@ -16,7 +16,7 @@ const initialState = {
     user: {},
     count: 1,
     questions:[],
-    language: 'es',
+    language: JSON.parse(localStorage.getItem("l"))? JSON.parse(localStorage.getItem("l")) : 'es'
 }
 
 function rootReducer (state = initialState, action){
@@ -198,6 +198,7 @@ function rootReducer (state = initialState, action){
                   }; 
 
                   case "LANGUAGE" :
+                  localStorage.setItem('l', JSON.stringify(action.payload));
                   return {
                     ...state,
                     language: action.payload

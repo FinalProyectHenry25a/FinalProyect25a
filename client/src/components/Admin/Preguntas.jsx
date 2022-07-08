@@ -61,23 +61,25 @@ return(
              
             return(
                 
-                <div id={e.id} className="border">
-                    <button onClick={(e) => eliminar(e)}>X</button>
+                <div id={e.id} className="border rounded align-items-center justify-content-center w-50">
                     <p>{e.question}</p>
                     <p>{e.user_email}</p>
                    
                    {!e.answer?
-                   <div id={e.id}>
-                   <input onChange={(e) => handlerChange(e)} type="text" placeholder="responder..." />
-                    <button  onClick={(e) => responder(e)}>responder</button>
+                   <div id={e.id} className="w-100 row">
+                   <input className="form-control w-50 me-3" onChange={(e) => handlerChange(e)} type="text" placeholder="responder..." />
+                    <button className="btn btn-secondary w-25" onClick={(e) => responder(e)}>responder</button>
                     </div>
                     :
                     (
-                    <div id={e.id}>
+                        <div id={e.id}>
                     <p>{e.answer}</p>
-                    <button onClick={(e) => editar(e)}>borrar respuesta</button>
+                    <button className="btn btn-secondary" onClick={(e) => editar(e)}>borrar respuesta</button>
                     </div>
                    )}
+                   <br />
+                   <button className="btn btn-danger" onClick={(e) => eliminar(e)}>Eliminar pregunta</button>
+
                 </div>
             )
         // quiero retornar TODAS las preguntas de TODOS los celulars

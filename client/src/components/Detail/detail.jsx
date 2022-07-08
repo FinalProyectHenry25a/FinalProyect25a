@@ -52,7 +52,7 @@ export default function Detail() {
   //   onAuthStateChanged(auth, async (currentUser) => {
   //     if (currentUser) {
   //       let user = await axios.get(
-  //         `http://localhost:3001/user/${currentUser.email}`
+  //         `https://back25ademo.herokuapp.com/user/${currentUser.email}`
   //       );
   //       if(user.data.banned){
 
@@ -93,7 +93,7 @@ export default function Detail() {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
+          `https://back25ademo.herokuapp.com/user/${currentUser.email}`
         );
         setUser(user.data);
       }
@@ -113,7 +113,7 @@ export default function Detail() {
   const publicar = async (e) => {
     // let productID = e.nativeEvent.path[1].id;
     if (input) {
-      await axios.post(`http://localhost:3001/pregunta`, {
+      await axios.post(`https://back25ademo.herokuapp.com/pregunta`, {
         question: input,
         user_email: user.username,
         product_ID: PID.id,

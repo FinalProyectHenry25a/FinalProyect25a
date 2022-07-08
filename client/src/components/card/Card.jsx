@@ -35,12 +35,12 @@ export default function Card(props) {
   const addToFavourites = async () => {
     try {
 
-      let info = await axios.get(`http://localhost:3001/user/${user.email}`);
+      let info = await axios.get(`https://back25ademo.herokuapp.com/user/${user.email}`);
       let userInfo = info.data;
 
       if (userInfo.favourites?.length === 0) {
 
-        await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
+        await axios.put(`https://back25ademo.herokuapp.com/favourites/${userInfo.email}/${props.id}`).data;
 
         let phone = [props.id];
         localStorage.setItem("favs", JSON.stringify(phone));
@@ -52,7 +52,7 @@ export default function Card(props) {
 
       } else {
 
-        await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
+        await axios.put(`https://back25ademo.herokuapp.com/favourites/${userInfo.email}/${props.id}`).data;
 
         let localStorageInfo = JSON.parse(localStorage.getItem("favs"));
         let allPhonesInLocalStorage = [...localStorageInfo, props.id];
@@ -73,7 +73,7 @@ export default function Card(props) {
   async function deleteFavourites() {
     try {
       await axios.put(
-        `http://localhost:3001/favourites/delete/${user.email}/${props.id}`
+        `https://back25ademo.herokuapp.com/favourites/delete/${user.email}/${props.id}`
       );
 
       let localStorageInfo = JSON.parse(localStorage.getItem("favs"));

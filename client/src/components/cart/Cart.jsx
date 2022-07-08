@@ -44,7 +44,7 @@ const Cart = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `http://localhost:3001/user/${currentUser.email}`
+          `https://back25ademo.herokuapp.com/user/${currentUser.email}`
         );
         if(user.data.banned){
 

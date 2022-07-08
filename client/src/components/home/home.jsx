@@ -104,7 +104,7 @@ const Home = () => {
         
         if(currentUser.emailVerified){
           
-          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+          await axios.put(`https://back25ademo.herokuapp.com/verification/${currentUser.email}`)
           
         }
         
@@ -112,7 +112,7 @@ const Home = () => {
           
           correoEmail(currentUser.email)
           
-          await axios.put(`http://localhost:3001/sendEmail/${currentUser.email}`)
+          await axios.put(`https://back25ademo.herokuapp.com/sendEmail/${currentUser.email}`)
           
           
         }

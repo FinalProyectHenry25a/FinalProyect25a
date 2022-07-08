@@ -1,6 +1,7 @@
 import { parseActionCodeURL } from "firebase/auth";
 import React, { useState, useEffect } from "react";
-import styles from './Paginate.module.css'
+import styles from "./Paginate.module.css";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,15 +39,14 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       ) {
         setCurrentPage(1);
         paginado(1);
-      }
-      else {
-        paginado(parseInt(e.target.value))
+      } else {
+        paginado(parseInt(e.target.value));
       }
     }
   }
 
   function onChange(e) {
-    setCurrentPage(e.target.value)
+    setCurrentPage(e.target.value);
   }
 
   function pag(number) {
@@ -68,15 +68,33 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       </ul> */}
 
       <ul className="pagination justify-content-center">
-        <button className={styles.btn} onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
-          Anterior
+        <button
+          className={styles.btn}
+          onClick={() => previousPage()}
+          disabled={currentPage === 1 || currentPage < 1}
+        >
+          <MdNavigateBefore/>
         </button>
-        <input className={styles.input} onChange={(e) => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={currentPage} />
+        <input
+          className={styles.input}
+          onChange={(e) => onChange(e)}
+          onKeyDown={(e) => onKeyDown(e)}
+          name="page"
+          autoComplete="off"
+          value={currentPage}
+        />
         <label className={styles.input}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>
-        <button className={styles.btn} onClick={() => nextPage()} disabled={currentPage === Math.ceil(allPhones / phonesPerPage) || currentPage > Math.ceil(allPhones / phonesPerPage) }>
-          Siguiente
+        <button
+          className={styles.btn}
+          onClick={() => nextPage()}
+          disabled={
+            currentPage === Math.ceil(allPhones / phonesPerPage) ||
+            currentPage > Math.ceil(allPhones / phonesPerPage)
+          }
+        >
+          <MdNavigateNext />
         </button>
       </ul>
     </nav>

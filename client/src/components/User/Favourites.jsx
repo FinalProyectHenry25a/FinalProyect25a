@@ -21,7 +21,7 @@ export default function Favourites(props) {
   let emailUser = "";
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
-  }, []);
+  }, [user]);
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
@@ -46,7 +46,6 @@ export default function Favourites(props) {
         `http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`
       );
       alert("favorito eliminado");
-      window.location.reload();
     } catch (error) {
       console.log(error);
     }

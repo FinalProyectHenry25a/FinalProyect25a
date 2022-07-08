@@ -11,11 +11,15 @@ import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 
 export default function Card(props) {
+
   const [user, setUser] = useState(auth.currentUser);
   const [favs, setFavs] = useState();
-  const [flag, setFlag] = useState(false);
+
   useEffect(() => {
+
+    setFavs(JSON.parse(localStorage.getItem("favs")))
     userVerificate();
+  
   }, []);
 
   const userVerificate = async () => {
@@ -23,41 +27,44 @@ export default function Card(props) {
       setUser(currentUser);
     });
   };
+
   const dispatch = useDispatch();
   const addToFavourites = async () => {
     try {
-      let algo = await axios.get(`http://localhost:3001/user/${user.email}`);
-      let usuario = algo.data;
-      setUser(usuario);
 
-      console.log(usuario);
-      if (usuario.favourites?.length === 0) {
-        await axios.put(`http://localhost:3001/favourites/${usuario.email}/${props.id}`).data;
-        /* let guardar = localStorage.getItem("favs");
-        console.log(guardar); */
+      let info = await axios.get(`http://localhost:3001/user/${user.email}`);
+      let userInfo = info.data;
 
-        let obj = [props.id];
+      if (userInfo.favourites?.length === 0) {
 
-        localStorage.setItem("favs", JSON.stringify(obj));
-        setFavs(obj);
-        setFlag(true);
-      } else if (usuario.favourites?.find((e) => e.id === props.id)) {
-        console.log("ya esta agregado");
+        await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
+
+        let phone = [props.id];
+        localStorage.setItem("favs", JSON.stringify(phone));
+        setFavs(JSON.parse(localStorage.getItem("favs")));
+
+      } else if (userInfo.favourites?.find((e) => e.id === props.id)) {
+
+        return;
+
       } else {
-        console.log(`soy el false ${props.id}`);
-        await axios.put(`http://localhost:3001/favourites/${usuario.email}/${props.id}`).data;
-        let guardar = JSON.parse(localStorage.getItem("favs"));
-        console.log(guardar);
-        let obj = [guardar, props.id];
-        localStorage.setItem("favs", JSON.stringify(obj));
-        setFavs(obj);
 
-        setFlag(true);
+        await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
+
+        let localStorageInfo = JSON.parse(localStorage.getItem("favs"));
+        let allPhonesInLocalStorage = [...localStorageInfo, props.id];
+        localStorage.setItem("favs", JSON.stringify(allPhonesInLocalStorage));
+        setFavs(JSON.parse(localStorage.getItem("favs")))
+
       }
+
     } catch (error) {
+
       alert("No se pudo agregar la publicacion a favoritos.");
       console.log(error);
+
     }
+
   };
 
   async function deleteFavourites() {
@@ -66,18 +73,20 @@ export default function Card(props) {
         `http://localhost:3001/favourites/delete/${user.email}/${props.id}`
       );
 
-      let guardar = JSON.parse(localStorage.getItem("favs"));
+      let localStorageInfo = JSON.parse(localStorage.getItem("favs"));
       
-      let todo = guardar.filter((e) => e !== props.id || e !== null);
-      console.log(todo)
-      localStorage.setItem("favs", JSON.stringify(todo));
-      setFavs(todo)
+      let removePhoneFromLocalStorage = localStorageInfo.filter((e) => e !== props.id)
+
+      localStorage.setItem("favs", JSON.stringify(removePhoneFromLocalStorage));
+      setFavs(JSON.parse(localStorage.getItem("favs")))
+
+        console.log("Se elimino correctamente del localStorage y Favs");
+
     } catch (error) {
       alert("No se pudo elimino la publicacion a favoritos.");
       console.log(error);
     }
   }
-  console.log(favs);
 
   return (
     <div
@@ -110,12 +119,12 @@ export default function Card(props) {
         justifyContent: "center",
       }}>${props.price}</h2>
         <div className="card-text">
-          {favs?.find((e) => e.includes(props.id)) ? (
+          {favs?.includes(props.id) ? (
             <button onClick={deleteFavourites}>
               <FaHeart />
             </button>
           ) : (
-            <button value="vacio" onClick={addToFavourites}>
+            <button onClick={addToFavourites}>
               <FiHeart />
             </button>
           )}

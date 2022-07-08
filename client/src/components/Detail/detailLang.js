@@ -18,7 +18,7 @@ export const detailLang = {
     "Memoria RAM":"Memoria RAM:",
     "Memoria ROM":"Memoria ROM:",
     'Preguntar':'Preguntar',
-    'Pregunta':'Pregunta',
+    'Usuario':'Usuario',
 },
 
 'en':{
@@ -39,7 +39,7 @@ export const detailLang = {
     "Memoria RAM":"RAM memory:",
     "Memoria ROM":"ROM memory:",
     'Preguntar':'Ask',
-    'Pregunta':'Question',
+    'Usuario':'User',
 }
 
 

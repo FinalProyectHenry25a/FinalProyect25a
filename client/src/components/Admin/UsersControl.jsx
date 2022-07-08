@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 import { getAllUsers, becomeAdmin, getUser, usersAdmin, removeAdmin } from "../../Actions/index";
+import style from "./../Admin/Admin.module.css"
 
 export default function UsersControl() {
 
@@ -69,21 +70,26 @@ export default function UsersControl() {
 
   return (
     <div>
-      <h1>Control de Usuarios</h1>
       <Link to="/admin">
-        <button>◀ Back</button>
+        <button className={style.btn}>Volver</button>
       </Link>
+      <h1 className="d-flex justify-content-center">Control de Usuarios</h1>
       <br/>
       <br/>
       {users ? users.map((user) => {
         return (
-          <div className="border rounder w-50" key={user.username}>
-            <h6>
-            {user.email} - {user.username} - {user.firstname} - {user.lastname}
+          <div className="row justify-content-center mt-4">
+          <div className=" border rounder w-75 " key={user.username}>
+            <h6 className="d-flex justify-content-center">
+            {user.email} - {user.username} 
             </h6>
-          {!user.isAdmin ? <button key={user.firstname} value={user.email} className="btn btn-secondary" onClick={() => dispatch(becomeAdmin(user.email))}>Convertir en Admin</button> : null}
-          {user.isAdmin ? <button key={user.firstname} value={user.email} className="btn btn-danger" onClick={() => dispatch(removeAdmin(user.email))}>Quitar privilegio de Admin</button> : null}
+            <div className="d-flex justify-content-center mb-2">
+          {!user.isAdmin ? <button key={user.firstname} value={user.email} className="justify-content-center  btn btn-secondary" onClick={() => dispatch(becomeAdmin(user.email))}>Convertir en Admin</button> : null}
+          {user.isAdmin ? <button key={user.firstname} value={user.email} className="d-flex justify-content-center btn btn-danger" onClick={() => dispatch(removeAdmin(user.email))}>Quitar privilegio de Admin</button> : null}
           </div>
+          </div>
+    </div>
+
         )
       }) : <span>No hay usuarios registrados</span>}
     </div>

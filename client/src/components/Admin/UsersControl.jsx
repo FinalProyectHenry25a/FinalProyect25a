@@ -14,15 +14,18 @@ export default function UsersControl() {
 
   const users = useSelector((state) => state.users);
 
-  const allUsers = users.filter((e) => e.email !== "finalproyect25a@gmail.com")
-
   useEffect(() => {
     
-    dispatch(usersAdmin());
+    dispatch(getAllUsers());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {
+    if(auth.currentUser === null || auth.currentUser.email !== "finalproyect25a@gmail.com"){
+
+      history.push("/home");
+
+    }
     userVerificate();
   }, []);
 
@@ -73,7 +76,7 @@ export default function UsersControl() {
       <h1 className="d-flex justify-content-center">Control de Usuarios</h1>
       <br/>
       <br/>
-      {allUsers ? allUsers.map((user) => {
+      {users ? users.map((user) => {
         return (
           <div className="row justify-content-center mt-4">
           <div className=" border rounder w-75 " key={user.username}>

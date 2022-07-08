@@ -87,7 +87,7 @@ export default function Card(props) {
                   }}
                   onClick={() => dispatch(addToCartUser(user.email, props.id))}
                 >
-                  Agregar al carrito User
+                  Agregar al carrito
                 </button>
               </Link>
             ) : (

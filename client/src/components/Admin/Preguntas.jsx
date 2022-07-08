@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {getQuestions } from "../../Actions";
 
+import style from "./../Admin/Admin.module.css"
 
 export default function Preguntas(){
 const allQuestions = useSelector((state) => state.questions)
@@ -56,14 +58,17 @@ const eliminar = async (e)=>{
 
 return(
     <div>
-            <h1>Preguntas</h1>
+          <Link to="/admin">
+        <button className={style.btn}>Volver</button>
+      </Link>
+            <h1 className="d-flex justify-content-center">Preguntas</h1>
          { allQuestions? allQuestions.map(e=>{      
              
             return(
-                
-                <div id={e.id} className="border rounded align-items-center justify-content-center w-50">
-                    <p>{e.question}</p>
-                    <p>{e.user_email}</p>
+                <div className="row justify-content-center mt-4">
+                <div id={e.id} className="border rounded align-items-center justify-content-center w-75">
+                    <p>Usuario: {e.user_email}</p>
+                    <p>-{e.question}</p>
                    
                    {!e.answer?
                    <div id={e.id} className="w-100 row">
@@ -73,13 +78,16 @@ return(
                     :
                     (
                         <div id={e.id}>
-                    <p>{e.answer}</p>
-                    <button className="btn btn-secondary" onClick={(e) => editar(e)}>borrar respuesta</button>
+                    <p>-{e.answer}</p>
+                    <div className="d-flex justify-content-center">
+                    <button className="btn btn-secondary d-flex justify-content-center align-items-center" onClick={(e) => editar(e)}>borrar respuesta</button>
+                    </div>
                     </div>
                    )}
                    <br />
-                   <button className="btn btn-danger" onClick={(e) => eliminar(e)}>Eliminar pregunta</button>
-
+                   <div></div>
+                   <button className="d-flex justify-content-center btn btn-danger" onClick={(e) => eliminar(e)}>Eliminar pregunta</button>
+                   </div>
                 </div>
             )
         // quiero retornar TODAS las preguntas de TODOS los celulars

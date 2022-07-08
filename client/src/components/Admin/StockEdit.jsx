@@ -14,6 +14,11 @@ export default function StockEdit() {
   const history = useHistory();
 
   useEffect(() => {
+    if(auth.currentUser === null){
+
+      history.push("/home");
+
+    }
 
     userVerificate();
     loadPosts();

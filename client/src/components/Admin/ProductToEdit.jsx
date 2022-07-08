@@ -15,6 +15,11 @@ export default function ProductToEdit() {
   }, [dispatch, id]);
 
   useEffect(() => {
+    if(auth.currentUser === null){
+
+      history.push("/home");
+
+    }
     userVerificate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

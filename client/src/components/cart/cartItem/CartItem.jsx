@@ -19,7 +19,7 @@ const CartItem = (props) => {
   const [input, setInput] = useState(item.qty);
   const [stockView, setStockView] = useState(0);
 
-  useEffect(async () => {
+  useEffect( () => {
 
     axiosPeticionById();
 

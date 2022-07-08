@@ -14,6 +14,7 @@ export default function Admin() {
     await onAuthStateChanged(auth, async (currentUser) => {
       dispatch(getAllUsers());
       try {
+
         let info = await dispatch(getUser(currentUser.email));
 
         if (!info.payload.isAdmin || info.payload.banned) {
@@ -26,6 +27,12 @@ export default function Admin() {
   };
 
   useEffect(() => {
+
+    if(auth.currentUser === null){
+
+      history.push("/home");
+
+    }
     userVerificate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);

@@ -9,12 +9,15 @@ import { addToCart, addToCartUser } from "../../Actions";
 import soldOut from "../../images/sold-out.png";
 import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
+import { cardLang } from "./cardLang";
+
 
 export default function Card(props) {
-
+console.log(cardLang); 
   const [user, setUser] = useState(auth.currentUser);
   const [favs, setFavs] = useState();
-
+  const lan = useSelector((state) => state.language)
+  
   useEffect(() => {
 
     setFavs(JSON.parse(localStorage.getItem("favs")))
@@ -98,6 +101,7 @@ export default function Card(props) {
         justifyContent: "center",
       }}
     >
+      
       <div style={{ height: 300 + "px" }}>
         {props.stock > 0 ? (
           <img src={props.images} style={{ height: 300 + "px" }} alt="..." />
@@ -144,7 +148,7 @@ export default function Card(props) {
                   }}
                   onClick={() => dispatch(addToCartUser(user.email, props.id))}
                 >
-                  Agregar al carrito User
+                  {cardLang[lan].AgregarAlCarrito}
                 </button>
               </Link>
             ) : (
@@ -160,17 +164,17 @@ export default function Card(props) {
                   }}
                   onClick={() => dispatch(addToCart(props.id))}
                 >
-                  Agregar al carrito
+                  {cardLang[lan].AgregarAlCarrito}
                 </button>
               </Link>
             )}
             <p style={{
         textAlign: 'center',
         justifyContent: "center",
-      }}>Disponibles: {props.stock}</p>
+      }}>{cardLang[lan].Disponibles}: {props.stock}</p>
           </div>
         ) : (
-          <p className="">AGOTADO</p>
+          <p className="">{cardLang[lan].AGOTADO}</p>
         )}
 
         <br />
@@ -179,7 +183,7 @@ export default function Card(props) {
                     justifyContent: "center",
                     
                   }} to={"/home/" + props.id}>
-          Detalle
+          {cardLang[lan].Detalle}
         </Link>
       </div>
     </div>

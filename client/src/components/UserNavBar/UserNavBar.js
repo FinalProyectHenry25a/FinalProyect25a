@@ -17,8 +17,11 @@ import styles from '../UserNavBar/usernavbar.module.css'
 export default function UserNavBar({setCurrentPage}) {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
+  const lan = useSelector((state) => state.language);
   const [user, setUser] = useState();
   const [open, setOpen] = useState(false);
+
+  
 
   const dispatch = useDispatch();
 

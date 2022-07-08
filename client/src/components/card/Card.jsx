@@ -13,7 +13,7 @@ import { cardLang } from "./cardLang";
 
 
 export default function Card(props) {
-console.log(cardLang); 
+
   const [user, setUser] = useState(auth.currentUser);
   const [favs, setFavs] = useState();
   const lan = useSelector((state) => state.language)

@@ -1,21 +1,43 @@
 import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getQuestions } from "../../Actions";
+import { useHistory } from "react-router-dom";
+import {getAllUsers, getQuestions, getUser } from "../../Actions";
+import { auth } from "../../firebase/firebase-config";
 
 
 export default function Preguntas(){
 const allQuestions = useSelector((state) => state.questions)
 
-
+const history = useHistory();
 const dispatch = useDispatch()
 const [input, setInput] = useState("");
 
 useEffect(()=>{
+    if(auth.currentUser === null){
+
+        history.push("/home");
+  
+      }
+      userVerificate()
     dispatch(getQuestions())
 },[dispatch])
 
+const userVerificate = async () => {
+    await onAuthStateChanged(auth, async (currentUser) => {
+      try {
 
+        let info = await dispatch(getUser(currentUser.email));
+
+        if (!info.payload.isAdmin || info.payload.banned) {
+          history.push("/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
  
 
     const handlerChange = (e) => {
@@ -27,7 +49,7 @@ useEffect(()=>{
         
         if(input){
     
-        await axios.put(`https://back25ademo.herokuapp.com/pregunta/${questionID}`, {
+        await axios.put(`http://localhost:3001/pregunta/${questionID}`, {
 
           answer: input
         });
@@ -40,7 +62,7 @@ useEffect(()=>{
 const editar = async (e)=>{
     let questionID = e.nativeEvent.path[1].id;
     
-    await axios.put(`https://back25ademo.herokuapp.com/pregunta/${questionID}`, {
+    await axios.put(`http://localhost:3001/pregunta/${questionID}`, {
 
         answer: null
       });
@@ -50,7 +72,7 @@ const editar = async (e)=>{
 const eliminar = async (e)=>{
     let questionID = e.nativeEvent.path[1].id;
    
-    await axios.delete(`https://back25ademo.herokuapp.com/pregunta/${questionID}`);
+    await axios.delete(`http://localhost:3001/pregunta/${questionID}`);
       window.location.reload()
 }
 

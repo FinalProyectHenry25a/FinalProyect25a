@@ -27,7 +27,7 @@ export default function Favourites(props) {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `https://back25ademo.herokuapp.com/user/${currentUser.email}`
+          `http://localhost:3001/user/${currentUser.email}`
         );
         if(user.data.banned){
 
@@ -43,7 +43,7 @@ export default function Favourites(props) {
   // async function deleteFavourites(emailUser, id) {
   //   try {
   //     await axios.put(
-  //       `https://back25ademo.herokuapp.com/favourites/delete/${auth.currentUser.email}/${id}`
+  //       `http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`
   //     );
   //     alert("favorito eliminado");
   //     window.location.reload();

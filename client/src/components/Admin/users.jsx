@@ -20,6 +20,11 @@ export default function Users() {
     }, [dispatch]);
 
     useEffect(() => {
+      if(auth.currentUser === null){
+
+        history.push("/home");
+  
+      }
       userVerificate();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -40,7 +45,7 @@ export default function Users() {
 
     async function deleteUsers(email) {
         try {
-          await axios.delete(`https://back25ademo.herokuapp.com/admin/users/${email}`);
+          await axios.delete(`http://localhost:3001/admin/users/${email}`);
           alert("usuario eliminado");
           window.location.reload();
         } catch (error) {

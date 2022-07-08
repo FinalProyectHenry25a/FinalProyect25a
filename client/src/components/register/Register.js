@@ -90,11 +90,11 @@ const Register = () => {
           lastname: input.lastname,
           address: input.address
         }
-        await axios.post("https://back25ademo.herokuapp.com/user", newUser);
+        await axios.post("http://localhost:3001/user", newUser);
 
         for (let i = 0; i < cart.length; i++) {
           
-          await axios.put(`https://back25ademo.herokuapp.com/cart/${auth.currentUser.email}/${cart[i].id}`)
+          await axios.put(`http://localhost:3001/cart/${auth.currentUser.email}/${cart[i].id}`)
           
         }
 

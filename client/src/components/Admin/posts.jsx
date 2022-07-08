@@ -14,6 +14,11 @@ export default function Posts(props) {
   const history = useHistory();
 
   useEffect( () => {
+    if(auth.currentUser === null){
+
+      history.push("/home");
+
+    }
 
     userVerificate();
     loadPosts();
@@ -45,7 +50,7 @@ export default function Posts(props) {
   
   async function loadPosts() {
     try {
-      const post = (await axios("https://back25ademo.herokuapp.com/admin/posts")).data;
+      const post = (await axios("http://localhost:3001/admin/posts")).data;
       setPostsState(post);
     } catch (error) {
       console.log(error);
@@ -54,7 +59,7 @@ export default function Posts(props) {
 
   async function deletePost(id) {
     try {
-      await axios.delete(`https://back25ademo.herokuapp.com/admin/post/${id}`);
+      await axios.delete(`http://localhost:3001/admin/post/${id}`);
       await loadPosts();
       alert("Publicación borrada");
     } catch (error) {

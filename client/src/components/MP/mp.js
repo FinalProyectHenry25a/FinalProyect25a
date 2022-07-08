@@ -21,7 +21,7 @@ function App() {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
-          `https://back25ademo.herokuapp.com/user/${currentUser.email}`
+          `http://localhost:3001/user/${currentUser.email}`
         );
         if(user.data.banned){
 
@@ -36,7 +36,7 @@ function App() {
 
   //  useEffect(()=>{
   //    axios
-  //    .get("https://back25ademo.herokuapp.com/mercadopago/")
+  //    .get("http://localhost:3001/mercadopago/")
   //    .then((data)=>{
   //      setDatos(data.data)
   //      console.info('Contenido de data:', data)
@@ -54,7 +54,7 @@ function App() {
     pack.push(cart)
     pack.push(auth.currentUser.email)
     axios
-    .post(`https://back25ademo.herokuapp.com/mercadopago`, pack)
+    .post(`http://localhost:3001/mercadopago`, pack)
     .then((data)=>{
       setDatos(data.data)
     }).catch(err => console.error(err))

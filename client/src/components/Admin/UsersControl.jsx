@@ -22,6 +22,11 @@ export default function UsersControl() {
   }, [dispatch]);
 
   useEffect(() => {
+    if(auth.currentUser === null){
+
+      history.push("/home");
+
+    }
     userVerificate();
   }, []);
 

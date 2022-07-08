@@ -52,6 +52,8 @@ export default function Favourites(props) {
     }
   }
 
+  console.log(user?.favourites)
+
   return (
     <div>
       <UserNavBar />

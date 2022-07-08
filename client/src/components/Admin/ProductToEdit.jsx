@@ -58,6 +58,7 @@ export default function ProductToEdit() {
     inches: PID.inches,
     screen: PID.screen,
     resolution: PID.resolution,
+    additionalphotos: PID.additionalphotos
   });
 
   const handleChange = (e) => {

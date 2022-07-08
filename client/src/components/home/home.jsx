@@ -29,7 +29,7 @@ const Home = () => {
   const [loggedUser, setLoggedUser] = useState();
   
   useEffect(() => {
-
+    document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     verificarQueHayaUsuarioLogueado();
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -244,13 +244,13 @@ const Home = () => {
   };
   
   const lang = (e) => {
-    dispatch(language(e.target.value))
+    dispatch(language(e.target.value));
   }
 
   //acá se setea el idioma
   const messages = homeLang[lan]
 
- // console.log(homeLang[lan].Todas);
+ 
 
   return (
     <IntlProvider locale='es' messages={messages}>
@@ -264,7 +264,7 @@ const Home = () => {
 
       <br/>
       
-      <select onChange={lang} className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+      <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
         <option value="es">Español</option>
         <option value="en">English</option>
       </select>

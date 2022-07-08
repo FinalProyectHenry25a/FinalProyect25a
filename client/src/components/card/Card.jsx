@@ -36,7 +36,7 @@ export default function Card(props) {
         /* let guardar = localStorage.getItem("favs");
         console.log(guardar); */
 
-        let obj = props.id;
+        let obj = [props.id];
 
         localStorage.setItem("favs", JSON.stringify(obj));
         setFavs(obj);

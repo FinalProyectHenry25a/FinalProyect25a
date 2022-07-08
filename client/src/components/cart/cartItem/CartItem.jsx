@@ -46,7 +46,7 @@ const CartItem = (props) => {
 
   return (
     <div className={styles.cartItem}>
-      <img src={item.images} alt={item.model} width={200} />
+      <img src={item.images} alt={item.model} width={200} className={styles.image}/>
       <div className={styles.cartItemDetails}>
         <p className={styles.detailsTitle}>{item.brand}</p>
         <p className={styles.detailsTitle}>{item.model}</p>
@@ -67,7 +67,7 @@ const CartItem = (props) => {
             onChange={onChangeHandler}
           />
         </div>
-        <p> ({stockView} unidades disponibles) </p>
+        <p className={styles.prf}> ({stockView} unidades disponibles) </p>
         {auth.currentUser ? (
           <button
             onClick={() =>
@@ -77,7 +77,7 @@ const CartItem = (props) => {
             }
             className={styles.actions__deleteItemBtn}
           >
-            x
+           🗑️
           </button>
         ) : (
           <button

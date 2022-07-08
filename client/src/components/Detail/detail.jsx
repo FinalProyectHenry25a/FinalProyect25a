@@ -125,10 +125,10 @@ export default function Detail() {
 
   return (
     <IntlProvider locale='es' messages={messages}>
-      <NavBar />
-      <hr />
+      {/* <NavBar /> */}
+      
 
-      <hr/>
+      
       <BtnBack/>
       <div className={styles.divContainer}>
         <div className={styles.container1}>

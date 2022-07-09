@@ -297,10 +297,28 @@ export function getLocalFavs() {
   };
 }
 
+export function setPage(number) {
+  console.log(number);
+  return async function (dispatch) {
+    return dispatch({
+      type: "SET_PAGE",
+      payload: number
+    });
+  };
+}
+
+export function pageOne() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "PAGE_ONE",
+      payload: 1
+    });
+  };
+}
+
+
 export const addFav = (email, id) => {
   return async function (dispatch) {
-    console.log(`soy el ${email} de las actions`)
-    console.log(`soy el ${id} de las actions`)
     await axios.put(`http://localhost:3001/favourites/${email}/${id}`)
     return dispatch({
       type: "ADD_FAVS",

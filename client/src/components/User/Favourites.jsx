@@ -5,23 +5,18 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { Link, useHistory } from "react-router-dom";
-import { BsFillCartFill } from "react-icons/bs";
-import { BsPersonCircle } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { addToCartUser, addToCart } from "../../Actions";
-import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Favourites(props) {
+export default function Favourites() {
   const [user, setUser] = useState();
   const history = useHistory()
-  const dispatch = useDispatch();
-  const { id } = useParams();
+  const favs = useSelector(state => state.favs)
 
   let emailUser = "";
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
-  }, []);
+  }, [favs]);
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
@@ -40,29 +35,16 @@ export default function Favourites(props) {
     });
   };
 
-  // async function deleteFavourites(emailUser, id) {
-  //   try {
-  //     await axios.put(
-  //       `http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`
-  //     );
-  //     alert("favorito eliminado");
-  //     window.location.reload();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // console.log(user?.favourites)
-
   return (
     <div>
       <UserNavBar />
       {user ? (
         <div>
-          <h2>Mis favoritos</h2>
+          <h2 style={{textAlign: "center"}}>Mis favoritos</h2>
+          <div style={{display: "inline-flex", justifyContent: "space-evenly"}}>
           {user?.favourites?.map((e) => {
             return (
-              <div key={e.id}>
+              <div style={{display: "inline-flex", margin: 1 + "rem"}} key={e.id}>
                 <Card
                   brand={e.brand}
                   model={e.model}
@@ -74,6 +56,7 @@ export default function Favourites(props) {
               </div>
             );
           })}
+          </div>
         </div>
       ) : (
         <h1>No tienes favoritos</h1>

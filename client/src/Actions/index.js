@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 
 export function getPhones() {
@@ -275,3 +276,38 @@ export const language = (leng) => {
   };
 };
 
+export const deleteFav = (email, id) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`)
+    return dispatch({
+      type: "REMOVE_FAVS",
+      payload: {
+        email,
+        id
+      }
+    })
+  }
+}
+
+export function getLocalFavs() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "GET_LOCAL_FAVS",
+    });
+  };
+}
+
+export const addFav = (email, id) => {
+  return async function (dispatch) {
+    console.log(`soy el ${email} de las actions`)
+    console.log(`soy el ${id} de las actions`)
+    await axios.put(`http://localhost:3001/favourites/${email}/${id}`)
+    return dispatch({
+      type: "ADD_FAVS",
+      payload: {
+        email,
+        id
+      }
+    })
+  }
+}

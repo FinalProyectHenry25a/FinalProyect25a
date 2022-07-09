@@ -3,6 +3,7 @@ import swal from 'sweetalert';
 const initialState = {
     phones : [],
     phonesId : [],
+    currentPage: 1,
     cart: [],
     currentItem: null,
     filtered:{ byRom: null,
@@ -32,6 +33,27 @@ function rootReducer (state = initialState, action){
             ...state,
             phonesId: action.payload
           }
+        case "SET_PAGE":{ 
+          console.log(action.payload);
+
+          localStorage.setItem("currentPage", JSON.stringify(action.payload))
+
+          return{
+            ...state,
+            currentPage: action.payload
+          }
+        }
+
+        case "PAGE_ONE":{ 
+
+          localStorage.setItem("currentPage", JSON.stringify(action.payload))
+
+          return{
+            ...state,
+            currentPage: action.payload
+          }
+        }
+
         case 'GET_USERS':
           let usersWithouthSuperAdmin = action.payload.filter(element => element.email !== "finalproyect25a@gmail.com");
           return{

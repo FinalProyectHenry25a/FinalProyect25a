@@ -17,7 +17,7 @@ export default function ProductToEdit() {
   useEffect(() => {
     if(auth.currentUser === null){
 
-      history.push("/home");
+     // history.push("/home");
 
     }
     userVerificate();
@@ -30,7 +30,7 @@ export default function ProductToEdit() {
         let info = await dispatch(getUser(currentUser.email));
 
         if (!info.payload.isAdmin || info.payload.banned) {
-          history.push("/home");
+        //  history.push("/home");
         }
       } catch (error) {
         console.log(error);
@@ -113,15 +113,11 @@ export default function ProductToEdit() {
       screen: "",
       resolution: "",
     });
-    history.push("/admin")
+   // history.push("/admin")
     window.location.reload()
     
   };
 
-  /* function handlerBrand(e) {
-    e.preventDefault();
-    dispatch(editPost(id, state));
-  } */
 
 
   const base64Convert = (ev) => {
@@ -135,6 +131,28 @@ export default function ProductToEdit() {
 
       //aca en base64 el archivo ya esta convertido a texto
       setState({ ...state, images: base64 });
+    };
+  };
+
+  const editFotosSecundarias = (ev, index) => {
+    let file = ev.target.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = async function () {
+      let base64 = fileReader.result;
+
+      let arr = state.additionalphotos;
+      let arrAux = [];
+
+      for (let i = 0; i < arr.length; i++) {
+        console.log("hola");
+        if (i === index) arrAux.push(base64);
+        else arrAux.push(arr[i]);
+      }
+
+      setState({ ...state, additionalphotos: arrAux });
     };
   };
 
@@ -200,7 +218,7 @@ export default function ProductToEdit() {
         />
       </div>
       <div>
-        <label>Image</label>
+        <label>Imagen principal</label>
         {/*   <input
             placeholder="Image..."
             type="text"
@@ -209,10 +227,28 @@ export default function ProductToEdit() {
             required
             onChange={(e) => handleChange(e)}
           /> */}
-
+        
+        <br/>
+        <img src={state.images} width="50" height="50" alt="no encontrada" />
         <input type="file" onChange={(ev) => base64Convert(ev)} required />
+        <br/>
 
       </div>
+      <div>
+        <label>Imagenes secundarias</label>
+        <br/>
+        {state.additionalphotos?.map( (el,index) => 
+          <div key={index}>
+            <img src={el} width="50" height="50" alt="no encontrada" />
+            
+            <input type="file" onChange={(ev) => editFotosSecundarias(ev,index)} required />
+            <br/>
+            
+          </div> )}
+        
+
+      </div>
+
       <div>
         <label>Color</label>
         <input

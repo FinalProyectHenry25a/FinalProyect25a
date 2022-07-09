@@ -1,10 +1,10 @@
 export const miPerfilLang = {
   es: {
-    'editar': "editar",
-    'quitar':'quitar',
-    'nombreCompleto':'nombre completo',
-    'correoElectronico':'correo electronico',
-    'verificado': 'verificado',
+    'editar': "Editar",
+    'quitar':'Quitar',
+    'nombreCompleto':'Nombre completo',
+    'correoElectronico':'Correo electronico',
+    'verificado': 'Verificado',
     'verificar':'verificar',
     'nombreDelUsuario':'Nombre del usuario',
     'modificar':'Modificar',
@@ -15,11 +15,11 @@ export const miPerfilLang = {
   },
 
   en: {
-    'editar': "edit",
-    'quitar':'take off',
-    'nombreCompleto':'full name',
-    'correoElectronico':'email',
-    'verificado': 'verified',
+    'editar': "Edit",
+    'quitar':'Take off',
+    'nombreCompleto':'Full name',
+    'correoElectronico':'Email',
+    'verificado': 'Verified',
     'verificar':'verify',
     'nombreDelUsuario':'Username',
     'modificar':'Change',

@@ -6,6 +6,9 @@ import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 
+
+import style from "./../Admin/Admin.module.css"
+
 export default function Users() {
 
     const dispatch = useDispatch();
@@ -58,24 +61,27 @@ export default function Users() {
 
     return (
         <div>
-          <h1>Usuarios</h1>
           
           <Link to="/admin">
-            <button>◀ Back</button>
+            <button className={style.btn}>Volver</button>
           </Link>
+          <h1 className="d-flex justify-content-center align-items-center">Usuarios</h1>
     
           <br />
           <br />
     
           {users?.map((el) => {
             return (
-            <div className="border rounded w-50" key={el.email}>
-              <h6 className="mt-2">
-                {el.email} - {el.username} - {el.firstname} - {el.lastname}
+              <div className=" d-flex justify-content-center align-items-center mt-4">
+            <div className=" border rounded w-75" key={el.email}>
+              <h6 className="mt-2  d-flex justify-content-center align-items-center" >
+                {el.email} - {el.username} 
               </h6>
-              <br />
+              <div className=" d-flex justify-content-center align-items-center mt-3 mb-2">
               <button className="btn btn-danger me-2" onClick={() => deleteUsers(el.email)}>Eliminar</button>
               {el.banned ? <button className="btn btn-secondary" onClick={() => dispatch(unbanUser(el.email))}>Desbanear</button> : <button  className="btn btn-danger" onClick={() => dispatch(banUser(el.email))}>Banear</button>}
+            </div>
+            </div>
             </div>
             )
             })}

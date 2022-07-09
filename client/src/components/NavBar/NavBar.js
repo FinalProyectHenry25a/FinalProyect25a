@@ -42,28 +42,28 @@ const NavBar = ({ setCurrentPage }) => {
   };
 
   return (
-    <nav className={style.navContainer}>
+    <nav className={styles.navContainer}>
       
 
-      <div className={style.container}>
+      <div className={styles.container}>
 
-        <a className={style.ancor} href="/home">
-          <img src={logo} alt="logo" className={style.logo} />
+        <a className={styles.ancor} href="/home">
+          <img src={logo} alt="logo" className={styles.logo} />
         </a>
       </div>
          
       
       
 
-        <SearchBar setCurrentPage={setCurrentPage} className={style.search}/>
-            <a href="#" className={style.toggleButton} onClick={change}>
-              <span className={style.bar}></span>
-              <span className={style.bar}></span>
-              <span className={style.bar}></span>
+        <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
+            <a href="#" className={styles.toggleButton} onClick={change}>
+              <span className={styles.bar}></span>
+              <span className={styles.bar}></span>
+              <span className={styles.bar}></span>
             </a>
-      <div className={style.container2}>
-        <Link className={style.links} to="/cart">
-          <BsFillCartFill className={style.cart} /> {cartCount}
+      <div className={styles.container2}>
+        <Link className={styles.links} to="/cart">
+          <BsFillCartFill className={styles.cart} /> {cartCount}
         </Link>
       </div>
 

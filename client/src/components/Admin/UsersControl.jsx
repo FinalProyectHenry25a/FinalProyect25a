@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 import { getAllUsers, becomeAdmin, getUser, usersAdmin, removeAdmin } from "../../Actions/index";
+import style from "./../Admin/Admin.module.css"
 
 export default function UsersControl() {
 
@@ -13,21 +14,26 @@ export default function UsersControl() {
 
   const users = useSelector((state) => state.users);
 
-  const allUsers = users.filter((e) => e.email !== "finalproyect25a@gmail.com")
-
   useEffect(() => {
     
-    dispatch(usersAdmin());
+    dispatch(getAllUsers());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {
+ 
     userVerificate();
   }, []);
 
   const userVerificate = async () => {
 
     await onAuthStateChanged(auth, async (currentUser) => {
+
+      if(auth.currentUser === null || currentUser.email !== "finalproyect25a@gmail.com"){
+
+        history.push("/home");
+  
+      }
 
       try {
 
@@ -67,17 +73,25 @@ export default function UsersControl() {
   return (
     <div>
       <Link to="/admin">
-        <button>◀ Back</button>
+        <button className={style.btn}>Volver</button>
       </Link>
-      {allUsers ? allUsers.map((user) => {
+      <h1 className="d-flex justify-content-center">Control de Usuarios</h1>
+      <br/>
+      <br/>
+      {users ? users.map((user) => {
         return (
-          <div key={user.username}>
-            <h6>
-            {user.email} - {user.username} - {user.firstname} - {user.lastname}
+          <div className="row justify-content-center mt-4">
+          <div className=" border rounder w-75 " key={user.username}>
+            <h6 className="d-flex justify-content-center">
+            {user.email} - {user.username} 
             </h6>
-          {!user.isAdmin ? <button key={user.firstname} value={user.email} onClick={() => dispatch(becomeAdmin(user.email))}>Convertir en Admin</button> : null}
-          {user.isAdmin ? <button key={user.firstname} value={user.email} onClick={() => dispatch(removeAdmin(user.email))}>Quitar privilegio de Admin</button> : null}
+            <div className="d-flex justify-content-center mb-2">
+          {!user.isAdmin ? <button key={user.firstname} value={user.email} className="justify-content-center  btn btn-secondary" onClick={() => dispatch(becomeAdmin(user.email))}>Convertir en Admin</button> : null}
+          {user.isAdmin ? <button key={user.firstname} value={user.email} className="d-flex justify-content-center btn btn-danger" onClick={() => dispatch(removeAdmin(user.email))}>Quitar privilegio de Admin</button> : null}
           </div>
+          </div>
+    </div>
+
         )
       }) : <span>No hay usuarios registrados</span>}
     </div>

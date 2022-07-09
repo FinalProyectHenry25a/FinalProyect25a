@@ -5,9 +5,11 @@ import styles from './BtnBack.module.css'
 const BtnBack = () => {
   return (
     <>
-    <button className={styles.btn}>
-        <Link to='/home' className={styles.link}>Volver</Link>
-    </button>
+        <Link to='/home' className={styles.link}>
+            <button className={styles.btn}>
+              Volver
+            </button>
+        </Link>
     </>
   )
 }

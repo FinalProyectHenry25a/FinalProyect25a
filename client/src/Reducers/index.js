@@ -26,6 +26,12 @@ function rootReducer (state = initialState, action){
                 ...state,
                 phones: action.payload
             }
+        case "CLEAN_UP":
+          return{
+            ...state,
+            phonesId: action.payload
+          }
+
         case 'GET_USERS':
           let usersWithouthSuperAdmin = action.payload.filter(element => element.email !== "finalproyect25a@gmail.com");
               return{

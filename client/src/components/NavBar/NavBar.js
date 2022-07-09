@@ -7,6 +7,7 @@ import { BsFillCartFill } from "react-icons/bs";
 import { getLocalCart } from "../../Actions/index";
 import styles from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
+import { navBarLang } from "./navBarLang";
 
 
 //import style from "./../NavBar/NavBar.module.css";
@@ -16,6 +17,7 @@ const NavBar = ({ setCurrentPage }) => {
   
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
+  const lan = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
@@ -76,17 +78,17 @@ const NavBar = ({ setCurrentPage }) => {
         <ul>
           <li>
             <Link to="/login" className={styles.links}>
-              Ingresá
+            {navBarLang[lan].ingresa}
             </Link>
           </li>
           <li>
             <Link to="/register" className={styles.links}>
-              Creá tu cuenta
+            {navBarLang[lan].creaTuCuenta}
             </Link>
           </li>
           <li>
             <Link to="/contacto" className={styles.links}>
-              Contacto
+            {navBarLang[lan].contacto}
             </Link>
           </li>
         </ul>

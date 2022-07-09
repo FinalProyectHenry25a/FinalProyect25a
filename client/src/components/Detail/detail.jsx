@@ -125,10 +125,10 @@ export default function Detail() {
 
   return (
     <IntlProvider locale='es' messages={messages}>
-      <NavBar />
-      <hr />
+      {/* <NavBar /> */}
+      
 
-      <hr/>
+      
       <BtnBack/>
       <div className={styles.divContainer}>
         <div className={styles.container1}>
@@ -313,13 +313,14 @@ export default function Detail() {
                   if (e.product_ID === PID.id) {
                     return (
                       <>
-                        <div className={styles.question}>
-                          <p>{detailLang[lan].Pregunta}: {e.user_email}</p>
+                        <div className={styles.question} >
+                          <p>{detailLang[lan].Usuario}: {e.user_email}</p>
                           <p>- {e.question}</p>
                         </div>
                         <div className={styles.answer}>
-                          <p>{e.answer}</p>
+                          <p>- {e.answer}</p>
                         </div>
+                          
                       </>
                     );
                   }

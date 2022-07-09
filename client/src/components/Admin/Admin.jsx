@@ -11,9 +11,16 @@ export default function Admin() {
   const history = useHistory();
 
   const userVerificate = async () => {
+ 
     await onAuthStateChanged(auth, async (currentUser) => {
+      if(currentUser === null){
+
+        history.push("/home");
+  
+      }
       dispatch(getAllUsers());
       try {
+
         let info = await dispatch(getUser(currentUser.email));
 
         if (!info.payload.isAdmin || info.payload.banned) {
@@ -26,7 +33,10 @@ export default function Admin() {
   };
 
   useEffect(() => {
+
+  
     userVerificate();
+ 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 

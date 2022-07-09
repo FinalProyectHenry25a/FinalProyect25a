@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import style from './../register/Register.module.css'
 import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -109,7 +109,6 @@ const Register = () => {
 
         });
       
-      // swal('Buen Trabajo','Te registraste correctamente!', "Ver productos");
       
       swal2({
         title: "Buen Trabajo!",
@@ -173,20 +172,10 @@ const handleChange = (e) => {
       })
      }
     
-    // useEffect(() => {
-      
-      //    return function () {
-        
-        //     console.log("ESTOY DESMONTANDO");
-        //      setInput({}); 
-        
-        //    };
-        
-        // },[input])
-        const DOS = (e) => {
-          correoEmail(e);
-          register();
-        }
+    const DOS = (e) => {
+      correoEmail(e);
+      register();
+    }
         
         
         return (

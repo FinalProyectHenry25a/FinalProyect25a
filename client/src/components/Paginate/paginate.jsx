@@ -41,15 +41,14 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       ) {
         setCurrentPage(1);
         paginado(1);
-      }
-      else {
-        paginado(parseInt(e.target.value))
+      } else {
+        paginado(parseInt(e.target.value));
       }
     }
   }
 
   function onChange(e) {
-    setCurrentPage(e.target.value)
+    setCurrentPage(e.target.value);
   }
 
   function pag(number) {
@@ -74,7 +73,14 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
         <button className={styles.btn} onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
         {paginateLang[lan].anterior}
         </button>
-        <input className={styles.input} onChange={(e) => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={currentPage} />
+        <input
+          className={styles.input}
+          onChange={(e) => onChange(e)}
+          onKeyDown={(e) => onKeyDown(e)}
+          name="page"
+          autoComplete="off"
+          value={currentPage}
+        />
         <label className={styles.input}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>

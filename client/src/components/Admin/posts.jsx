@@ -14,20 +14,22 @@ export default function Posts(props) {
   const history = useHistory();
 
   useEffect( () => {
-    if(auth.currentUser === null){
-
-      history.push("/home");
-
-    }
 
     userVerificate();
     loadPosts();
+
 // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
  const userVerificate = async () => {
 
     await onAuthStateChanged(auth, async (currentUser) => {
+
+      if(currentUser === null){
+
+        history.push("/home");
+  
+      }
 
       try {
 

@@ -25,6 +25,12 @@ export default function PhoneCreate() {
 
     await onAuthStateChanged(auth, async (currentUser) => {
 
+      if(currentUser === null){
+
+        history.push("/home");
+  
+      }
+
       try {
 
         let info = await dispatch(getUser(currentUser.email))

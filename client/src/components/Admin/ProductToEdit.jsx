@@ -2,42 +2,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getDetails, editPost, getUser } from "../../Actions";
+import { getDetails, editPost, getUser, cleanUp } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
 export default function ProductToEdit() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-
-  useEffect(() => {
-    dispatch(getDetails(id));
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    if(auth.currentUser === null){
-
-      history.push("/home");
-
-    }
-    userVerificate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const userVerificate = async () => {
-    await onAuthStateChanged(auth, async (currentUser) => {
-      try {
-        let info = await dispatch(getUser(currentUser.email));
-
-        if (!info.payload.isAdmin || info.payload.banned) {
-          history.push("/home");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  };
-
   const PID = useSelector((state) => state.phonesId);
 
   const [state, setState] = useState({
@@ -60,6 +31,45 @@ export default function ProductToEdit() {
     resolution: PID.resolution,
   });
 
+
+ 
+
+  useEffect(() => {
+    dispatch(getDetails(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+   
+    userVerificate();
+
+    return () => {
+  
+      dispatch(cleanUp());
+
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const userVerificate = async () => {
+    await onAuthStateChanged(auth, async (currentUser) => {
+      if(currentUser === null){
+
+        history.push("/home");
+  
+      }
+      try {
+        let info = await dispatch(getUser(currentUser.email));
+
+        if (!info.payload.isAdmin || info.payload.banned) {
+          history.push("/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
+
+ 
   const handleChange = (e) => {
     setState({
       ...state,
@@ -112,17 +122,16 @@ export default function ProductToEdit() {
       screen: "",
       resolution: "",
     });
-    history.push("/admin")
-    window.location.reload()
+
+    history.push("/admin/publicaciones");
     
   };
 
-  /* function handlerBrand(e) {
-    e.preventDefault();
-    dispatch(editPost(id, state));
-  } */
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 6ae3603634cb42659adfa12731b9755fd498119f
   const base64Convert = (ev) => {
     let file = ev.target.files[0];
 
@@ -136,6 +145,32 @@ export default function ProductToEdit() {
       setState({ ...state, images: base64 });
     };
   };
+
+  const addNewPicture = (ev) => {
+    let file = ev.target.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = async function () {
+      let base64 = fileReader.result;
+
+      let array = state.additionalphotos;
+      array.push(base64);
+
+      setState({ ...state, additionalphotos: array });
+    };
+  };
+
+  const takeOut = (index) => {
+    let arr = state.additionalphotos;
+    let arrAux = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      if ( i !== index) arrAux.push(arr[i]);
+    }
+    setState({ ...state, additionalphotos: arrAux });
+  }
 
   return (
     <div>
@@ -199,19 +234,29 @@ export default function ProductToEdit() {
         />
       </div>
       <div>
-        <label>Image</label>
-        {/*   <input
-            placeholder="Image..."
-            type="text"
-            name="images"
-            value={state.images}
-            required
-            onChange={(e) => handleChange(e)}
-          /> */}
+        <label>Imagen principal</label>
 
+        <br />
+        <img src={state.images} width="50" height="50" alt="no encontrada" />
         <input type="file" onChange={(ev) => base64Convert(ev)} required />
-
+        <br />
       </div>
+      <div>
+        <label>Imagenes secundarias-max: 3</label>
+        <br />
+        {state.additionalphotos?.map((el, index) => (
+          <div key={index}>
+            <img src={el} width="50" height="50" alt="no encontrada" />
+
+            <button onClick={() => takeOut(index)}>Quitar</button>
+            <br />
+          </div>
+        ))}
+        {state.additionalphotos?.length < 3 ? (
+          <input type="file" onChange={(ev) => addNewPicture(ev)} required />
+        ) : null}
+      </div>
+
       <div>
         <label>Color</label>
         <input

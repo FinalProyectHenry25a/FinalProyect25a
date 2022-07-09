@@ -14,11 +14,7 @@ export default function StockEdit() {
   const history = useHistory();
 
   useEffect(() => {
-    if(auth.currentUser === null){
-
-      history.push("/home");
-
-    }
+  
 
     userVerificate();
     loadPosts();
@@ -44,6 +40,12 @@ export default function StockEdit() {
  const userVerificate = async () => {
 
     await onAuthStateChanged(auth, async (currentUser) => {
+
+      if(currentUser === null){
+
+        history.push("/home");
+  
+      }
 
       try {
 

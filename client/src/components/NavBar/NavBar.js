@@ -10,7 +10,7 @@ import logo from "../../images/smartworld.jpg";
 import { navBarLang } from "./navBarLang";
 
 
-//import style from "./../NavBar/NavBar.module.css";
+//import styles from "./../NavBar/NavBar.module.css";
 
 
 const NavBar = ({ setCurrentPage }) => {

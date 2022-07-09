@@ -247,7 +247,7 @@ const Home = () => {
     
     localStorage.removeItem("filter")
     dispatch(filters(clear));
-    setCurrentPage(1);
+    // setCurrentPage(1);
     
   };
   
@@ -289,7 +289,7 @@ const Home = () => {
         <option value="en">English</option>
       </select>
 
-      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
+      {/* {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />} */}
       {/* <Carrousel /> */}
       
       <div id="filtros">

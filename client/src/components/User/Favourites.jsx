@@ -8,8 +8,8 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import { Link, useHistory } from "react-router-dom";
 import { BsFillCartFill } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { addToCartUser, addToCart, addFav } from "../../Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCartUser, addToCart, addFav, getLocalFavs } from "../../Actions";
 import { useParams } from "react-router-dom";
 
 export default function Favourites(props) {
@@ -17,12 +17,12 @@ export default function Favourites(props) {
   const history = useHistory()
   const dispatch = useDispatch();
   const { id } = useParams();
+  const favs = useSelector(state => state.favs)
 
   let emailUser = "";
   useEffect(() => {
-    dispatch(addFav())
     verificarQueHayaUsuarioLogueado();
-  }, []);
+  }, [favs]);
 
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {

@@ -40,6 +40,15 @@ export function getDetails(id) {
   };
 }
 
+export const cleanUp = () => {
+  return async function (dispatch) {
+    return dispatch({
+      type: "CLEAN_UP",
+      payload: {}
+    });
+  };
+};
+
 export const filters = (setters) => (dispatch) => {
   
   return axios
@@ -185,8 +194,6 @@ export function postAdmin() {
 
 export function editPost(id, payload) {
   return async function (dispatch) {
-    console.log(id);
-    console.log(payload);
     var json = await axios.put(
       `http://localhost:3001/admin/posts/${id}`,
       payload
@@ -271,20 +278,36 @@ export const language = (leng) => {
 
 export const deleteFav = (email, id) => {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`)
+    await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`)
     return dispatch({
       type: "REMOVE_FAVS",
-      payload: json.data
+      payload: {
+        email,
+        id
+      }
     })
   }
 }
 
+export function getLocalFavs() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "GET_LOCAL_FAVS",
+    });
+  };
+}
+
 export const addFav = (email, id) => {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/favourites/${email}/${id}`)
+    console.log(`soy el ${email} de las actions`)
+    console.log(`soy el ${id} de las actions`)
+    await axios.put(`http://localhost:3001/favourites/${email}/${id}`)
     return dispatch({
       type: "ADD_FAVS",
-      payload: json.data
+      payload: {
+        email,
+        id
+      }
     })
   }
 }

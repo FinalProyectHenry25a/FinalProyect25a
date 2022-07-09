@@ -5,22 +5,26 @@ import { auth } from "../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { addToCart, addToCartUser, deleteFav, addFav, getUser } from "../../Actions";
+import { addToCart, addToCartUser, deleteFav, addFav, getLocalFavs } from "../../Actions";
 import soldOut from "../../images/sold-out.png";
 import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
+import { cardLang } from "./cardLang";
+
 
 export default function Card(props) {
 
   const [user, setUser] = useState(auth.currentUser);
-  //const [favs, setFavs] = useState();
-  const favs = useSelector((state) => state.favs)
-
+  const [favs, setFavs] = useState();
+  const favslocal = useSelector((state) => state.favs)
+  const lan = useSelector((state) => state.language)
+  
   useEffect(() => {
 
-    setFavs(JSON.parse(localStorage.getItem("favs")))
+    //setFavs(JSON.parse(localStorage.getItem("favs")))
     userVerificate();
-  
+    dispatch(getLocalFavs())
+
   }, []);
 
   const userVerificate = async () => {
@@ -33,15 +37,17 @@ export default function Card(props) {
   const addToFavourites = async () => {
     try {
 
-      /* await axios.get(`http://localhost:3001/user/${user.email}`); */
-      let info = dispatch(getUser(user.email))
-      /* let userInfo = info.data; */
+      let info = await axios.get(`http://localhost:3001/user/${user.email}`);
+      
+      let userInfo = info.data;
 
       //if (info.favourites?.length === 0) {
-        console.log(info.email)
+        console.log(userInfo.email)
         console.log(props.id)
+        console.log(favslocal)
         //await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
-        dispatch(addFav(info.email, props.id))
+        dispatch(addFav(userInfo.email, props.id))
+        
 
         /* let phone = [props.id];
         localStorage.setItem("favs", JSON.stringify(phone));
@@ -102,6 +108,7 @@ export default function Card(props) {
         justifyContent: "center",
       }}
     >
+      
       <div style={{ height: 300 + "px" }}>
         {props.stock > 0 ? (
           <img src={props.images} style={{ height: 300 + "px" }} alt="..." />
@@ -123,7 +130,7 @@ export default function Card(props) {
         justifyContent: "center",
       }}>${props.price}</h2>
         <div className="card-text">
-          {user ? favs?.includes(props.id) ? (
+          {user ? favslocal?.includes(props.id) ? (
             <button style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
               <FaHeart />
             </button>
@@ -148,7 +155,7 @@ export default function Card(props) {
                   }}
                   onClick={() => dispatch(addToCartUser(user.email, props.id))}
                 >
-                  Agregar al carrito User
+                  {cardLang[lan].AgregarAlCarrito}
                 </button>
               </Link>
             ) : (
@@ -164,17 +171,17 @@ export default function Card(props) {
                   }}
                   onClick={() => dispatch(addToCart(props.id))}
                 >
-                  Agregar al carrito
+                  {cardLang[lan].AgregarAlCarrito}
                 </button>
               </Link>
             )}
             <p style={{
         textAlign: 'center',
         justifyContent: "center",
-      }}>Disponibles: {props.stock}</p>
+      }}>{cardLang[lan].Disponibles}: {props.stock}</p>
           </div>
         ) : (
-          <p className="">AGOTADO</p>
+          <p className="">{cardLang[lan].AGOTADO}</p>
         )}
 
         <br />
@@ -183,7 +190,7 @@ export default function Card(props) {
                     justifyContent: "center",
                     
                   }} to={"/home/" + props.id}>
-          Detalle
+          {cardLang[lan].Detalle}
         </Link>
       </div>
     </div>

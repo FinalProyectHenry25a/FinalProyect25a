@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser, language } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -35,11 +35,13 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    
+    dispatch(getLocalFavs())
     dispatch(getLocalCart())
-    
+    console.log(favs)
   }, [])
   
+  
+
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
@@ -137,6 +139,7 @@ const Home = () => {
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
   
   const cart = useSelector(state => state.cart)
+  const favs = useSelector(state => state.favs)
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
   
   const paginado = (pageNumber) => {
@@ -196,7 +199,8 @@ const Home = () => {
   }
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart])
+    localStorage.setItem('favs', JSON.stringify(favs));
+  }, [cart, favs])
   
   // useEffect(()=>{
     //   let prueba=localStorage.getItem("filter")

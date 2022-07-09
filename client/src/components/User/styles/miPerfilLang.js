@@ -1,0 +1,31 @@
+export const miPerfilLang = {
+  es: {
+    'editar': "Editar",
+    'quitar':'Quitar',
+    'nombreCompleto':'Nombre completo',
+    'correoElectronico':'Correo electronico',
+    'verificado': 'Verificado',
+    'verificar':'verificar',
+    'nombreDelUsuario':'Nombre del usuario',
+    'modificar':'Modificar',
+    'direccion':'Direccion',
+    'contraseña':'Contraseña',
+    'cambiarContraseña':'Cambiar contraseña',
+    'noEstasLogueado':'No estas logueado',
+  },
+
+  en: {
+    'editar': "Edit",
+    'quitar':'Take off',
+    'nombreCompleto':'Full name',
+    'correoElectronico':'Email',
+    'verificado': 'Verified',
+    'verificar':'verify',
+    'nombreDelUsuario':'Username',
+    'modificar':'Change',
+    'direccion':'Address',
+    'contraseña':'Password',
+    'cambiarContraseña':'Change password',
+    'noEstasLogueado':'You are not logged in',
+  },
+};

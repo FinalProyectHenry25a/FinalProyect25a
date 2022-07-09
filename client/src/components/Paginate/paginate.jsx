@@ -1,10 +1,12 @@
 import { parseActionCodeURL } from "firebase/auth";
 import React, { useState, useEffect } from "react";
-import styles from "./Paginate.module.css";
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import { useSelector } from "react-redux";
+import styles from './Paginate.module.css'
+import { paginateLang } from "./paginateLang";
 
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const lan = useSelector((state) => state.language);
   const pageNumbers = [];
 
   useEffect(() => {
@@ -68,12 +70,8 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       </ul> */}
 
       <ul className="pagination justify-content-center">
-        <button
-          className={styles.btn}
-          onClick={() => previousPage()}
-          disabled={currentPage === 1 || currentPage < 1}
-        >
-          <MdNavigateBefore/>
+        <button className={styles.btn} onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
+        {paginateLang[lan].anterior}
         </button>
         <input
           className={styles.input}
@@ -86,15 +84,8 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
         <label className={styles.input}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>
-        <button
-          className={styles.btn}
-          onClick={() => nextPage()}
-          disabled={
-            currentPage === Math.ceil(allPhones / phonesPerPage) ||
-            currentPage > Math.ceil(allPhones / phonesPerPage)
-          }
-        >
-          <MdNavigateNext />
+        <button className={styles.btn} onClick={() => nextPage()} disabled={currentPage === Math.ceil(allPhones / phonesPerPage) || currentPage > Math.ceil(allPhones / phonesPerPage) }>
+        {paginateLang[lan].siguiente}
         </button>
       </ul>
     </nav>

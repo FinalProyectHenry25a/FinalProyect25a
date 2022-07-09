@@ -43,12 +43,13 @@ export const filters = (setters) => (dispatch) => {
   
   return axios
     .post("http://localhost:3001/filtersAndOrders", setters)
-    .then((response)=>{localStorage.setItem("filter",JSON.stringify(response.data)) 
+    .then((response)=>{localStorage.setItem("filter",JSON.stringify(setters)) 
   return response})
     .then((response) => {
       dispatch({
         type: "FILTERS",
         payload: response.data,
+        maxifiltros: setters,
       });
     })
     
@@ -82,16 +83,14 @@ export const addToCart = (itemID) => {
 
 export const addToCartUser = (email, itemID) => {
   return async function (dispatch) {
-    console.log(email);
-    console.log(itemID)
-    await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
+    let json = await axios.put((`http://localhost:3001/cart/${email}/${itemID}`))
     return dispatch({
       type: "ADD_TO_CART_USER",
       payload: {
         id: itemID,
       },
     });
-  };
+  }
 };
 
 export const removeFromCart = (itemID) => {
@@ -104,12 +103,35 @@ export const removeFromCart = (itemID) => {
     });
   };
 };
+ 
 
 export const clearCart = (email) => {
   return async function (dispatch) {
     await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
     return dispatch({
       type: "CLEAR_CART_POST_BUY",
+      payload: [],
+    });
+  };
+};
+
+export const banUser = (email) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/banned/${email}`)
+    window.location.reload()
+    return dispatch({
+      type: "BAN_USER",
+      payload: []
+    });
+  };
+};
+
+export const unbanUser = (email) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/banned/unban/${email}`)
+    window.location.reload()
+    return dispatch({
+      type: "UNBAN_USER",
       payload: []
     });
   };
@@ -196,6 +218,15 @@ export function getAllUsers() {
 export function becomeAdmin(email) {
   return async function () {
     const json = await axios.put(`http://localhost:3001/admin/${email}`);
+    window.location.reload();
+    return json;
+  };
+}
+
+export function removeAdmin(email) {
+  return async function () {
+    const json = await axios.put(`http://localhost:3001/admin/removeAdmin/${email}`);
+    window.location.reload();
     return json;
   };
 }
@@ -229,3 +260,11 @@ export function getQuestions() {
     });
   };
 }
+
+export const language = (leng) => {
+  return {
+    type: "LANGUAGE",
+    payload: leng,
+  };
+};
+

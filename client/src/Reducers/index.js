@@ -1,14 +1,22 @@
+import swal from 'sweetalert';
+
 const initialState = {
     phones : [],
     phonesId : [],
     cart: [],
     currentItem: null,
-    filtered:[],
+    filtered:{ byRom: null,
+      byRam: null,
+      byBrand: null,
+      byPrice: null,
+      byNetwork: null,
+      byProcessor: null,
+      byOrder: null,},
     users: [],
     user: {},
     count: 1,
     questions:[],
-    
+    language: JSON.parse(localStorage.getItem("l"))? JSON.parse(localStorage.getItem("l")) : 'es'
 }
 
 function rootReducer (state = initialState, action){
@@ -47,7 +55,7 @@ function rootReducer (state = initialState, action){
               let currentFilter = JSON.parse(localStorage.getItem("filter")) || []
               return{
                 ...state,
-                phones:currentFilter,
+//                phones:currentFilter,
                 filtered:currentFilter
               }
             
@@ -57,7 +65,7 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 phones: action.payload,
-                filtered:action.payload
+               filtered:action.maxifiltros
             }
             case 'ADD_TO_CART':
                 // Great Item data from products array
@@ -80,6 +88,7 @@ function rootReducer (state = initialState, action){
                 : [...state.cart, { ...item, qty: 1 }]
                   
                 localStorage.setItem("cart", JSON.stringify(newCart))
+                swal('Agregaste correctamente el producto al carrito')
 
                 return {
                   ...state,
@@ -100,13 +109,14 @@ function rootReducer (state = initialState, action){
                 
                 const newCartUser = inCartUser
                 ? state.cart.map((item) =>
-                    item.id === action.payload.id
-                      ? { ...itemUser, qty: item.qty + 1 }
-                      : item
-                  )
+                item.id === action.payload.id
+                ? { ...itemUser, qty: item.qty + 1 }
+                : item
+                )
                 : [...state.cart, { ...itemUser, qty: 1 }]
-                  
+                
                 localStorage.setItem("cart", JSON.stringify(newCartUser))
+                
 
                 return {
                   ...state,
@@ -118,7 +128,7 @@ function rootReducer (state = initialState, action){
                   let removeCartUser = state.cart.filter((item) => item.id !== action.payload.id)
   
                   localStorage.setItem("cart", JSON.stringify(removeCartUser));
-                   
+                    
                   return {
                     ...state,
                     cart: removeCartUser
@@ -129,7 +139,7 @@ function rootReducer (state = initialState, action){
                 let removeCart = state.cart.filter((item) => item.id !== action.payload.id)
   
                 localStorage.setItem("cart", JSON.stringify(removeCart));
-                 
+                
                 return {
                   ...state,
                   cart: removeCart
@@ -146,13 +156,19 @@ function rootReducer (state = initialState, action){
 
 
               case 'ADJUST_ITEM_QTY':
+
+
+              let newQtyCart =  state.cart.map((item) =>
+              item.id === action.payload.id
+                ? { ...item, qty: + action.payload.qty }
+                : item
+            )
+
+                localStorage.setItem("cart", JSON.stringify(newQtyCart))
+
                 return {
                   ...state,
-                  cart: state.cart.map((item) =>
-                    item.id === action.payload.id
-                      ? { ...item, qty: +action.payload.qty }
-                      : item
-                  ),
+                  cart: newQtyCart
                 };
               case 'LOAD_CURRENT_ITEM':
                 return {
@@ -180,6 +196,14 @@ function rootReducer (state = initialState, action){
                     ...state,
                     questions: action.payload,
                   }; 
+
+                  case "LANGUAGE" :
+                  localStorage.setItem('l', JSON.stringify(action.payload));
+                  return {
+                    ...state,
+                    language: action.payload
+                  }  
+
             default:
                 return state;
         }      

@@ -1,11 +1,9 @@
-import { async } from "@firebase/util";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   adjustItemQty,
   removeFromCart,
-  adjustQty,
   removeFromCartUser,
 } from "../../../Actions/index";
 import { auth } from "../../../firebase/firebase-config";
@@ -14,25 +12,31 @@ import styles from "./CartItem.module.css";
 
 const CartItem = (props) => {
 
-  const {item} = props
-  console.log(item)
+  const {item} = props;
+
+  const dispatch = useDispatch();
 
   const [input, setInput] = useState(item.qty);
   const [stockView, setStockView] = useState(0);
 
   useEffect(async () => {
-    let st = (await axios.get(`http://localhost:3001/home/${item.id}`));
-    setStockView(st.data.stock);
+
+    axiosPeticionById();
+
   }, []);
 
-/*   const adjustQty = (id, value) => {
-    dispatch(adjustItemQty(id, value));
-  }; */
+  const axiosPeticionById = async () => {
+
+    let st = (await axios.get(`http://localhost:3001/home/${item.id}`));
+    setStockView(st.data.stock);
+
+  }
 
   const onChangeHandler = async (e) => {
-    setInput(e.target.value);
 
-    let post = (await axios.get(`http://localhost:3001/home/${item.id}`))
+    setInput(e.target.value);
+    dispatch(adjustItemQty(props.item.id, e.target.value));
+    let post = (await axios.get(`http://localhost:3001/home/${props.item.id}`))
       .data;
 
     if (e.target.value > post.stock) {
@@ -40,9 +44,6 @@ const CartItem = (props) => {
     }
   };
 
-  console.log(props)
-
-  const dispatch = useDispatch();
   return (
     <div className={styles.cartItem}>
       <img src={item.images} alt={item.model} width={200} />

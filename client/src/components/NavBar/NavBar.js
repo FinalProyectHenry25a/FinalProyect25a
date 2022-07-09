@@ -5,7 +5,7 @@ import SearchBar from "../SearchBar/Searchbar";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
 import { getLocalCart } from "../../Actions/index";
-import style from "./../NavBar/NavBar.module.css";
+import styles from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
 
 
@@ -17,7 +17,6 @@ const NavBar = ({ setCurrentPage }) => {
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  console.log(cart);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -65,31 +64,32 @@ const NavBar = ({ setCurrentPage }) => {
           <BsFillCartFill className={style.cart} /> {cartCount}
         </Link>
       </div>
-      <div
-        className={`${open ? style.navbarLinksActive : style.containerCuentas}`}
-      >
-        <div>
-          <p className={style.prf}>Envíos gratis a partir de $2000.</p>
-        </div>
-        <div className={style.containerCuentas2}>
-          <div>
 
-            <Link className={style.links} to="/login">
+      <a href="#" className={styles.toggleButton} onClick={change}>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+      </a> 
+      <div
+        className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
+      >
+        <ul>
+          <li>
+            <Link to="/login" className={styles.links}>
               Ingresá
             </Link>
-          </div>
-
-          <div>
-            <Link className={style.links} to="/register">
+          </li>
+          <li>
+            <Link to="/register" className={styles.links}>
               Creá tu cuenta
             </Link>
-          </div>
-          <div>
-            <Link className={style.links} to="/contacto">
+          </li>
+          <li>
+            <Link to="/contacto" className={styles.links}>
               Contacto
             </Link>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </nav>
   );

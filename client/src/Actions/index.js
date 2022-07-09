@@ -39,6 +39,15 @@ export function getDetails(id) {
   };
 }
 
+export const cleanUp = () => {
+  return async function (dispatch) {
+    return dispatch({
+      type: "CLEAN_UP",
+      payload: {}
+    });
+  };
+};
+
 export const filters = (setters) => (dispatch) => {
   
   return axios
@@ -184,8 +193,6 @@ export function postAdmin() {
 
 export function editPost(id, payload) {
   return async function (dispatch) {
-    console.log(id);
-    console.log(payload);
     var json = await axios.put(
       `http://localhost:3001/admin/posts/${id}`,
       payload

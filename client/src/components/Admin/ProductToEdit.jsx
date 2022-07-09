@@ -127,11 +127,8 @@ export default function ProductToEdit() {
     
   };
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 6ae3603634cb42659adfa12731b9755fd498119f
   const base64Convert = (ev) => {
     let file = ev.target.files[0];
 

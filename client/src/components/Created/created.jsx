@@ -6,7 +6,6 @@ import { getUser, postPhone } from "../../Actions/index";
 import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import Swal from 'sweetalert2';
-import style from "./../home/Home.module.css";
 
 export default function PhoneCreate() {
 
@@ -24,12 +23,6 @@ export default function PhoneCreate() {
   const userVerificate = async () => {
 
     await onAuthStateChanged(auth, async (currentUser) => {
-
-      if(currentUser === null){
-
-        history.push("/home");
-  
-      }
 
       try {
 
@@ -237,7 +230,7 @@ export default function PhoneCreate() {
   return (
     <div className=" row y justify-content-center">
       <Link to="/admin">
-        <button className={style.btn}>◀ Volver</button>
+        <button>◀ Volver</button>
       </Link>
       <div className=" border border-sky-500 col-4 center">
         <h1 className=" row justify-content-center shadow py-2 px-4 rounded bg-primary text-white">Crea una Publicación</h1>

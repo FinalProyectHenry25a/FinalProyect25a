@@ -5,18 +5,12 @@ import { auth } from "../../firebase/firebase-config";
 import axios from "axios";
 import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { Link, useHistory } from "react-router-dom";
-import { BsFillCartFill } from "react-icons/bs";
-import { BsPersonCircle } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCartUser, addToCart, addFav, getLocalFavs } from "../../Actions";
-import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Favourites(props) {
+export default function Favourites() {
   const [user, setUser] = useState();
   const history = useHistory()
-  const dispatch = useDispatch();
-  const { id } = useParams();
   const favs = useSelector(state => state.favs)
 
   let emailUser = "";
@@ -40,20 +34,6 @@ export default function Favourites(props) {
       }
     });
   };
-
-  // async function deleteFavourites(emailUser, id) {
-  //   try {
-  //     await axios.put(
-  //       `http://localhost:3001/favourites/delete/${auth.currentUser.email}/${id}`
-  //     );
-  //     alert("favorito eliminado");
-  //     window.location.reload();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // console.log(user?.favourites)
 
   return (
     <div>

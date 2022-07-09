@@ -15,13 +15,11 @@ import { cardLang } from "./cardLang";
 export default function Card(props) {
 
   const [user, setUser] = useState(auth.currentUser);
-  const [favs, setFavs] = useState();
   const favslocal = useSelector((state) => state.favs)
   const lan = useSelector((state) => state.language)
   
   useEffect(() => {
 
-    //setFavs(JSON.parse(localStorage.getItem("favs")))
     userVerificate();
     dispatch(getLocalFavs())
 
@@ -34,6 +32,7 @@ export default function Card(props) {
   };
 
   const dispatch = useDispatch();
+
   const addToFavourites = async () => {
     try {
 
@@ -41,34 +40,7 @@ export default function Card(props) {
       
       let userInfo = info.data;
 
-      //if (info.favourites?.length === 0) {
-        console.log(userInfo.email)
-        console.log(props.id)
-        console.log(favslocal)
-        //await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
-        dispatch(addFav(userInfo.email, props.id))
-        
-
-        /* let phone = [props.id];
-        localStorage.setItem("favs", JSON.stringify(phone));
-        setFavs(JSON.parse(localStorage.getItem("favs"))); */
-
-      /* } else if (info.favourites?.find((e) => e.id === props.id)) {
-
-        return;
-
-      } else {
-
-        dispatch(addFav(info.email, props.id)) */
-
-        /* await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
-
-        let localStorageInfo = JSON.parse(localStorage.getItem("favs"));
-        let allPhonesInLocalStorage = [...localStorageInfo, props.id];
-        localStorage.setItem("favs", JSON.stringify(allPhonesInLocalStorage));
-        setFavs(JSON.parse(localStorage.getItem("favs"))) */
-
-      //}
+      dispatch(addFav(userInfo.email, props.id))
 
     } catch (error) {
 
@@ -81,17 +53,9 @@ export default function Card(props) {
 
   async function deleteFavourites() {
     try {
-      /* await axios.put(`http://localhost:3001/favourites/delete/${user.email}/${props.id}`); */
 
-      dispatch(deleteFav(user.email, props.id))
+    dispatch(deleteFav(user.email, props.id))
 
-  /*     let localStorageInfo = JSON.parse(localStorage.getItem("favs"));
-      
-      let removePhoneFromLocalStorage = localStorageInfo.filter((e) => e !== props.id)
-
-      localStorage.setItem("favs", JSON.stringify(removePhoneFromLocalStorage));
-      setFavs(JSON.parse(localStorage.getItem("favs")))
- */
     } catch (error) {
       alert("No se pudo elimino la publicacion a favoritos.");
       console.log(error);

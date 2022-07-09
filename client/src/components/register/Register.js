@@ -109,7 +109,6 @@ const Register = () => {
 
         });
       
-      // swal('Buen Trabajo','Te registraste correctamente!', "Ver productos");
       
       swal2({
         title: "Buen Trabajo!",
@@ -173,20 +172,10 @@ const handleChange = (e) => {
       })
      }
     
-    // useEffect(() => {
-      
-      //    return function () {
-        
-        //     console.log("ESTOY DESMONTANDO");
-        //      setInput({}); 
-        
-        //    };
-        
-        // },[input])
-        const DOS = (e) => {
-          correoEmail(e);
-          register();
-        }
+    const DOS = (e) => {
+      correoEmail(e);
+      register();
+    }
         
         
         return (

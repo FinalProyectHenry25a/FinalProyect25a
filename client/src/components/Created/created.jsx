@@ -279,7 +279,7 @@ export default function PhoneCreate() {
                 <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 <input
-                  className="w-75 row justify-content-center col-auto appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="row justify-content-center col-auto appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white w-75"
                   type="number"
                   value={input.price}
                   name="price"
@@ -290,7 +290,7 @@ export default function PhoneCreate() {
                   </div>
             </div>
             <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <h5 className="row justify-content-center col-auto"> Stock </h5>
+                <h5 className="row justify-content-center col-auto"> Stock</h5>
                 <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 <input

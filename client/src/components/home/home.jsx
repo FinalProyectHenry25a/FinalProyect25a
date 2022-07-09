@@ -22,10 +22,18 @@ import {FormattedMessage, IntlProvider} from 'react-intl'
 //import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
+const initialTheme = "light"
 
 const Home = () => {
-
-
+  const [theme, setTheme] = useState(initialTheme)
+  const handleTheme = (e) => {
+    console.log(e.target.value)
+    if(e.target.value === "light"){
+      setTheme("light");
+    }else{
+      setTheme("dark");
+    }
+  }
   const [loggedUser, setLoggedUser] = useState();
   
   useEffect(() => {
@@ -257,8 +265,11 @@ const Home = () => {
  
 
   return (
-    <IntlProvider locale='es' messages={messages}>
+      <IntlProvider locale='es' messages={messages}>
+    <div className={theme}>
+      <div className={style.facu}>
     <div>
+
    
       <button onClick={logout}>desloguear</button>
 
@@ -266,6 +277,11 @@ const Home = () => {
         <button>Agregar Phone</button>
       </Link> */}
 
+      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar  setCurrentPage={setCurrentPage} />}
+      <input type="radio" name="theme" id="light" onClick={handleTheme} value="light"/>
+     <label htmlFor="light">Claro</label>
+     <input type="radio" name="theme" id="dark" onClick={handleTheme} value="dark"/>
+     <label htmlFor="dark">Oscuro</label>
       <br/>
       
       <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
@@ -376,6 +392,8 @@ const Home = () => {
         allPhones={allPhones.length}
         paginado={paginado}
       />
+      </div>
+    </div>
     </div>
     </IntlProvider>
   );

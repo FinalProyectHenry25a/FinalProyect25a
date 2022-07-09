@@ -9,9 +9,12 @@ import styles from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
 import { navBarLang } from "./navBarLang";
 
+
 //import style from "./../NavBar/NavBar.module.css";
 
+
 const NavBar = ({ setCurrentPage }) => {
+  
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const lan = useSelector((state) => state.language);
@@ -39,17 +42,29 @@ const NavBar = ({ setCurrentPage }) => {
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.brandLogo}>
-      <a href="/home">
-           <img src={logo} alt="logo" className={styles.logo} />
-         </a>
+    <nav className={style.navContainer}>
+      
+
+      <div className={style.container}>
+
+        <a className={style.ancor} href="/home">
+          <img src={logo} alt="logo" className={style.logo} />
+        </a>
       </div>
-      <div className={styles.search}>
-        <SearchBar setCurrentPage={setCurrentPage} className={styles.search} />
-        <Link className={styles.cart} to="/cart">
-           <BsFillCartFill/> {cartCount}
-         </Link>
+         
+      
+      
+
+        <SearchBar setCurrentPage={setCurrentPage} className={style.search}/>
+            <a href="#" className={style.toggleButton} onClick={change}>
+              <span className={style.bar}></span>
+              <span className={style.bar}></span>
+              <span className={style.bar}></span>
+            </a>
+      <div className={style.container2}>
+        <Link className={style.links} to="/cart">
+          <BsFillCartFill className={style.cart} /> {cartCount}
+        </Link>
       </div>
 
       <a href="#" className={styles.toggleButton} onClick={change}>

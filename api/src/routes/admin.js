@@ -160,6 +160,7 @@ router.put("/posts/:id", async (req, res) => {
     inches,
     screen,
     resolution,
+    additionalphotos,
   } = req.body;
 
 
@@ -190,6 +191,7 @@ router.put("/posts/:id", async (req, res) => {
           inches,
           screen,
           resolution,
+          additionalphotos,
         },
         { where: { id: id } }
       );

@@ -12,6 +12,7 @@ const initialState = {
       byNetwork: null,
       byProcessor: null,
       byOrder: null,},
+    favs: [],  
     users: [],
     user: {},
     count: 1,
@@ -202,7 +203,33 @@ function rootReducer (state = initialState, action){
                   return {
                     ...state,
                     language: action.payload
-                  }  
+                  } 
+                case "REMOVE_FAVS": 
+                let removePhoneFromLocalStorage = state.favs.filter((e) => e.id !== action.payload.id)
+                localStorage.setItem("favs", JSON.stringify(removePhoneFromLocalStorage));         
+                return {
+                  ...state,
+                  favs: removePhoneFromLocalStorage
+                }
+                case "ADD_FAVS":
+                  const fav = state.phones.find((product) => product.id === action.payload.id);
+                  
+                  const inFavs = state.favs.find((item) =>
+                    item === action.payload.id ? true : false
+                  );
+
+                  const newFav = inFavs 
+                  ? state.favs.map((e) => e !== action.payload.id)
+                    ? [...state.favs, fav]
+                    : null
+                  : [fav]
+                  
+                  localStorage.setItem("favs", JSON.stringify(newFav))
+                  return {
+                    ...state,
+                    favs: newFav
+                  }
+
 
             default:
                 return state;

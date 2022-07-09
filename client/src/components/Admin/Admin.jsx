@@ -11,7 +11,13 @@ export default function Admin() {
   const history = useHistory();
 
   const userVerificate = async () => {
+ 
     await onAuthStateChanged(auth, async (currentUser) => {
+      if(currentUser === null){
+
+        history.push("/home");
+  
+      }
       dispatch(getAllUsers());
       try {
 
@@ -28,12 +34,9 @@ export default function Admin() {
 
   useEffect(() => {
 
-    if(auth.currentUser === null){
-
-      history.push("/home");
-
-    }
+  
     userVerificate();
+ 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 

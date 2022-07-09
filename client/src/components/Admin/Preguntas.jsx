@@ -15,18 +15,21 @@ const dispatch = useDispatch()
 const [input, setInput] = useState("");
 
 useEffect(()=>{
-    if(auth.currentUser === null){
 
-        history.push("/home");
-  
-      }
       userVerificate()
     dispatch(getQuestions())
+    
 },[dispatch])
 
 const userVerificate = async () => {
     await onAuthStateChanged(auth, async (currentUser) => {
       try {
+
+        if(currentUser === null){
+
+          history.push("/home");
+    
+        }
 
         let info = await dispatch(getUser(currentUser.email));
 

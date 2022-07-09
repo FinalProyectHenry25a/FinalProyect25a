@@ -20,17 +20,20 @@ export default function Users() {
     }, [dispatch]);
 
     useEffect(() => {
-      if(auth.currentUser === null){
 
-        history.push("/home");
-  
-      }
       userVerificate();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   
     const userVerificate = async () => {
       await onAuthStateChanged(auth, async (currentUser) => {
+
+        if(currentUser === null){
+
+          history.push("/home");
+    
+        }
+
         try {
           let info = await dispatch(getUser(currentUser.email));
   

@@ -101,6 +101,7 @@ export default function UserNavBar({setCurrentPage}) {
     //     <NavBar />
     //   )}
     // </nav>
+    
     <nav className={styles.navbar}>
     {user ? (
       <><div className={styles.brandLogo}>

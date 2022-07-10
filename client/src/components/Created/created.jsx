@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getUser, postPhone } from "../../Actions/index";
 import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+import Swal from 'sweetalert2';
 
 export default function PhoneCreate() {
 
@@ -161,7 +162,13 @@ export default function PhoneCreate() {
     error.screen ||
     error.stock ||
     error.resolution
- ){alert ("No se creo la publicacion, revisa bien los campos weon")
+ ){Swal.fire({
+  position: 'top-end',
+  icon: 'error',
+  title: 'No pudo crearse la publicación, revisa bien los campos',
+  showConfirmButton: false,
+  timer: 1500
+})
 } else {
 
   //console.log(input);
@@ -221,23 +228,25 @@ export default function PhoneCreate() {
   };
 
   return (
-    <div>
+    <div className=" row y justify-content-center">
       <Link to="/admin">
-        <button>◀ Back</button>
+        <button>◀ Volver</button>
       </Link>
-      <div className="border border-sky-500 w-50 center">
-        <form className="w-full max-w-lg" onSubmit={(e) => handleSubmit(e)}>
-          <div className="flex flex-wrap-mx-3 mb-6">
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+      <div className=" border border-sky-500 col-4 center">
+        <h1 className=" row justify-content-center shadow py-2 px-4 rounded bg-primary text-white">Crea una Publicación</h1>
+        <form className="col-auto row justify-content-center w-full max-w-lg" onSubmit={(e) => handleSubmit(e)}>
+            <div className="col-auto row justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 {" "}
-                <h5>Brand</h5>
+                <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="row justify-content-center col-auto">Brand</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 <select
-                  defaultValue="select Brand"
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  defaultValue="selecciona Marca"
+                  className="col-auto row y justify-content-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-75"
                   onChange={(e) => handleBrand(e)}
-                >
-                  <option disabled> select Brand </option>
+                  >
+                  <option disabled> selecciona Marca </option>
                   <option value="Samsung">Samsung</option>
                   <option value="Apple">Apple</option>
                   <option value="Huawei">Huawei</option>
@@ -245,55 +254,59 @@ export default function PhoneCreate() {
                   <option value="Motorola">Motorola</option>
                   <option value="Xiaomi">Xiaomi</option>
                 </select>
-                {error.brand && <p>{error.brand}</p>}
               </label>
+                {error.brand && <p className="col-auto row y justify-content-center">{error.brand}</p>}
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                {" "}
-                <h5>Model</h5>
+            </div>
+                  </div>
+                  <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="row justify-content-center col-auto">Modelo</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-75"
                   type="text"
                   value={input.model}
                   name="model"
                   onChange={(e) => handleOnChange(e)}
-                />{error.model && <p>{error.model}</p>}
+                />{error.model && <p className="col-auto row y justify-content-center">{error.model}</p>}
               </label>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-wrap -mx-0 mb-6">
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                <h5> Price in $</h5>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="row justify-content-center col-auto"> Precio en $</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="row justify-content-center col-auto appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white w-75"
                   type="number"
                   value={input.price}
                   name="price"
                   onChange={(e) => handleOnChange(e)}
-                />{error.price && <p>{error.price}</p>}
+                />
               </label>
+                {error.price && <p className="col-auto row y justify-content-center">{error.price}</p>}
+                  </div>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                {" "}
-                <h5>Stock</h5>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="row justify-content-center col-auto"> Stock</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  type="number"
+                  className="row justify-content-center col-auto appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white w-75"                  type="number"
                   value={input.stock}
                   name="stock"
                   onChange={(e) => handleOnChange(e)}
-                />{error.stock && <p>{error.stock}</p>}
+                  />{error.stock && <p className="col-auto row y justify-content-center">{error.stock}</p>}
               </label>
-            </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+              </div>
+                  </div>
+            <div className="col-auto row justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className=" block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Imagen principal</h5>
+                <h5 className="col-auto row justify-content-center">Imagen principal</h5>
 
-                      <input
+                      <input class="form-control form-control-sm"
                         type="file"
                         onChange={(ev) => base64Convert(ev)}
                         required
@@ -301,9 +314,9 @@ export default function PhoneCreate() {
                       <br/>
                       {fotoP !== '' ? <img src={fotoP} width="50" height="60" alt="no se pudo cargar la imagen" /> : null}
 
-                <h5>Imagenes secundarias (máximo 3)</h5>  
+                <h5 className="col-auto row justify-content-center">Imagenes secundarias (máximo 3)</h5>  
                       {fotosSec?.length <= 2 ?
-                        <input
+                        <input class="form-control form-control-sm"
                         type="file"
                         onChange={(ev) => base64Multiple(ev)}
                         required
@@ -314,55 +327,16 @@ export default function PhoneCreate() {
                       :null}
   
                   
-                {error.images && <p>{error.images}</p>}
+                {error.images && <p className="col-auto row y justify-content-center">{error.images}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                {" "}
-                <h5>Color</h5>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  type="text"
-                  value={input.color}
-                  name="color"
-                  onChange={(e) => handleOnChange(e)}
-                />{error.color && <p>{error.color}</p>}
-              </label>
-            </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                {" "}
-                <h5>Rating</h5>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  type="number"
-                  value={input.rating}
-                  name="rating"
-                  onChange={(e) => handleOnChange(e)}
-                />{error.rating && <p>{error.rating}</p>}
-              </label>
-            </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                {" "}
-                <h5>Inches</h5>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  type="number"
-                  value={input.inches}
-                  name="inches"
-                  onChange={(e) => handleOnChange(e)}
-                />{error.inches && <p>{error.inches}</p>}
-              </label>
-            </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                {" "}
-                <h5>RAM</h5>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">RAM</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 <select
                   defaultValue="select RAM"
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="w-75 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   onChange={(e) => handleRAM(e)}
                 >
                   <option disabled> select RAM </option>
@@ -370,16 +344,18 @@ export default function PhoneCreate() {
                   <option value="6Gb">6Gb</option>
                   <option value="8Gb">8Gb</option>
                   <option value="12Gb">12Gb</option>
-                </select>{error.ram && <p>{error.ram}</p>}
+                </select>{error.ram && <p className="col-auto row y justify-content-center">{error.ram}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">ROM</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>ROM</h5>
                 <select
                   defaultValue="select ROM"
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   onChange={(e) => handleROM(e)}
                 >
                   <option disabled> select ROM </option>
@@ -387,26 +363,75 @@ export default function PhoneCreate() {
                   <option value="64Gb">64Gb</option>
                   <option value="128Gb">128Gb</option>
                   <option value="256Gb">256Gb</option>
-                </select>{error.rom && <p>{error.rom}</p>}
+                </select>{error.rom && <p className="col-auto row y justify-content-center">{error.rom}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">Color</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Processor</h5>
+                <input 
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  type="text"
+                  value={input.color}
+                  name="color"
+                  onChange={(e) => handleOnChange(e)}
+                />{error.color && <p className="col-auto row y justify-content-center">{error.color}</p>}
+              </label>
+            </div>
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">Rating</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                {" "}
+                <input
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  type="number"
+                  value={input.rating}
+                  name="rating"
+                  onChange={(e) => handleOnChange(e)}
+                />{error.rating && <p className="col-auto row y justify-content-center">{error.rating}</p>}
+              </label>
+            </div>
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center" >Inches</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                {" "}
+                <input
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  type="number"
+                  value={input.inches}
+                  name="inches"
+                  onChange={(e) => handleOnChange(e)}
+                />{error.inches && <p className="col-auto row y justify-content-center">{error.inches}</p>}
+              </label>
+            </div>
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                {" "}
+                <h5 className="col-auto row justify-content-center">Processor</h5>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   type="text"
                   value={input.processor}
                   name="processor"
                   onChange={(e) => handleOnChange(e)}
-                />{error.processor && <p>{error.processor}</p>}
+                />{error.processor && <p className="col-auto row y justify-content-center">{error.processor}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Resolution</h5>
+                <h5 className="col-auto row justify-content-center">Resolution</h5>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   type="text"
@@ -414,13 +439,15 @@ export default function PhoneCreate() {
                   value={input.resolution}
                   name="resolution"
                   onChange={(e) => handleOnChange(e)}
-                />{error.resolution && <p>{error.resolution}</p>}
+                />{error.resolution && <p className="col-auto row y justify-content-center">{error.resolution}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">Network</h5> 
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Network</h5>
                 <select
                   defaultValue="select Network"
                   className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -430,77 +457,87 @@ export default function PhoneCreate() {
                   <option value="3G">3G</option>
                   <option value="4G">4G</option>
                   <option value="5G">5G</option>
-                </select>{error.network && <p>{error.network}</p>}
+                </select>{error.network && <p className="col-auto row y justify-content-center">{error.network}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Batery</h5>
+                <h5 className="col-auto row justify-content-center">Batery</h5>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   type="number"
                   value={input.batery}
                   name="batery"
                   onChange={(e) => handleOnChange(e)}
-                />{error.batery && <p>{error.batery}</p>}
+                />{error.batery && <p className="col-auto row y justify-content-center">{error.batery}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">Frontal Camera</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Frontal Camera</h5>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   type="number"
                   value={input.frontal_cam}
                   name="frontal_cam"
                   onChange={(e) => handleOnChange(e)}
-                />{error.frontal_cam && <p>{error.frontal_cam}</p>}
+                />{error.frontal_cam && <p className="col-auto row y justify-content-center">{error.frontal_cam}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">Main Camera</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Main Camera</h5>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   type="number"
                   value={input.main_cam}
                   name="main_cam"
                   onChange={(e) => handleOnChange(e)}
-                />{error.main_cam && <p>{error.main_cam}</p>}
+                />{error.main_cam && <p className="col-auto row y justify-content-center">{error.main_cam}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">Screen</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Screen</h5>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   type="text"
                   value={input.screen}
                   name="screen"
                   onChange={(e) => handleOnChange(e)}
-                />{error.screen && <p>{error.screen}</p>}
+                />{error.screen && <p className="col-auto row y justify-content-center">{error.screen}</p>}
               </label>
             </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+            </div>
+            <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h5 className="col-auto row justify-content-center">Release Date</h5>
+                <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <h5>Release Date</h5>
                 <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-5 mb-3 leading-tight focus:outline-none focus:bg-white"
                   type="date"
                   value={input.releaseDate}
                   name="releaseDate"
                   onChange={(e) => handleOnChange(e)}
-                />{error.releaseDate && <p>{error.releaseDate}</p>}
+                />{error.releaseDate && <p className="col-auto row y justify-content-center">{error.releaseDate}</p>}
               </label>
             </div>
-          </div>
+            </div>
           <button
-            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            className="row justify-content-center shadow py-2 px-4 rounded w-50 mt-5 mb-5 btn btn-primary "
             type="submit"
           >
             Crear

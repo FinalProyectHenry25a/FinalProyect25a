@@ -2,42 +2,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getDetails, editPost, getUser } from "../../Actions";
+import { getDetails, editPost, getUser, cleanUp } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
 export default function ProductToEdit() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-
-  useEffect(() => {
-    dispatch(getDetails(id));
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    if(auth.currentUser === null){
-
-      history.push("/home");
-
-    }
-    userVerificate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const userVerificate = async () => {
-    await onAuthStateChanged(auth, async (currentUser) => {
-      try {
-        let info = await dispatch(getUser(currentUser.email));
-
-        if (!info.payload.isAdmin || info.payload.banned) {
-          history.push("/home");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  };
-
   const PID = useSelector((state) => state.phonesId);
 
   const [state, setState] = useState({
@@ -58,9 +29,47 @@ export default function ProductToEdit() {
     inches: PID.inches,
     screen: PID.screen,
     resolution: PID.resolution,
-    additionalphotos: PID.additionalphotos
   });
 
+
+ 
+
+  useEffect(() => {
+    dispatch(getDetails(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+   
+    userVerificate();
+
+    return () => {
+  
+      dispatch(cleanUp());
+
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const userVerificate = async () => {
+    await onAuthStateChanged(auth, async (currentUser) => {
+      if(currentUser === null){
+
+        history.push("/home");
+  
+      }
+      try {
+        let info = await dispatch(getUser(currentUser.email));
+
+        if (!info.payload.isAdmin || info.payload.banned) {
+          history.push("/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
+
+ 
   const handleChange = (e) => {
     setState({
       ...state,
@@ -113,8 +122,8 @@ export default function ProductToEdit() {
       screen: "",
       resolution: "",
     });
-    history.push("/admin")
-    window.location.reload()
+
+    history.push("/admin/publicaciones");
     
   };
 

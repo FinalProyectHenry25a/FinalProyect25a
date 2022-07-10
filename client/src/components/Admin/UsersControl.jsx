@@ -21,17 +21,19 @@ export default function UsersControl() {
   }, [dispatch]);
 
   useEffect(() => {
-    if(auth.currentUser === null || auth.currentUser.email !== "finalproyect25a@gmail.com"){
-
-      history.push("/home");
-
-    }
+ 
     userVerificate();
   }, []);
 
   const userVerificate = async () => {
 
     await onAuthStateChanged(auth, async (currentUser) => {
+
+      if(auth.currentUser === null || currentUser.email !== "finalproyect25a@gmail.com"){
+
+        history.push("/home");
+  
+      }
 
       try {
 

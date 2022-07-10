@@ -7,11 +7,14 @@ import { BsFillCartFill } from "react-icons/bs";
 import { getLocalCart } from "../../Actions/index";
 import styles from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
+
 import { navBarLang } from "./navBarLang";
 
-//import style from "./../NavBar/NavBar.module.css";
+//import styles from "./../NavBar/NavBar.module.css";
+
 
 const NavBar = ({ setCurrentPage }) => {
+  
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const lan = useSelector((state) => state.language);
@@ -39,19 +42,23 @@ const NavBar = ({ setCurrentPage }) => {
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.brandLogo}>
-      <a href="/home">
-           <img src={logo} alt="logo" className={styles.logo} />
-         </a>
-      </div>
-      <div className={styles.search}>
-        <SearchBar setCurrentPage={setCurrentPage} className={styles.search} />
-        <Link className={styles.cart} to="/cart">
-           <BsFillCartFill/> {cartCount}
-         </Link>
-      </div>
+    <nav className={styles.navContainer}>
+      
 
+      <div className={styles.container}>
+
+        <a className={styles.ancor} href="/home">
+          <img src={logo} alt="logo" className={styles.logo} />
+        </a>
+      </div>
+      <div>
+        <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
+        </div>
+            <a href="#" className={styles.toggleButton} onClick={change}>
+              <span className={styles.bar}></span>
+              <span className={styles.bar}></span>
+              <span className={styles.bar}></span>
+            </a>
       <a href="#" className={styles.toggleButton} onClick={change}>
         <span className={styles.bar}></span>
         <span className={styles.bar}></span>
@@ -61,6 +68,11 @@ const NavBar = ({ setCurrentPage }) => {
         className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
       >
         <ul>
+        <li>
+             <Link className={styles.cart} to="/cart">
+              <BsFillCartFill /> {cartCount}
+            </Link> 
+            </li>
           <li>
             <Link to="/login" className={styles.links}>
             {navBarLang[lan].ingresa}

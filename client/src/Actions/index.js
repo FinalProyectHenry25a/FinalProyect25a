@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 
 export function getPhones() {
@@ -38,6 +39,15 @@ export function getDetails(id) {
     }
   };
 }
+
+export const cleanUp = () => {
+  return async function (dispatch) {
+    return dispatch({
+      type: "CLEAN_UP",
+      payload: {}
+    });
+  };
+};
 
 export const filters = (setters) => (dispatch) => {
   
@@ -184,8 +194,6 @@ export function postAdmin() {
 
 export function editPost(id, payload) {
   return async function (dispatch) {
-    console.log(id);
-    console.log(payload);
     var json = await axios.put(
       `http://localhost:3001/admin/posts/${id}`,
       payload
@@ -268,3 +276,56 @@ export const language = (leng) => {
   };
 };
 
+export const deleteFav = (email, id) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`)
+    return dispatch({
+      type: "REMOVE_FAVS",
+      payload: {
+        email,
+        id
+      }
+    })
+  }
+}
+
+export function getLocalFavs() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "GET_LOCAL_FAVS",
+    });
+  };
+}
+
+export function setPage(number) {
+  console.log(number);
+  return async function (dispatch) {
+    return dispatch({
+      type: "SET_PAGE",
+      payload: number
+    });
+  };
+}
+
+export function pageOne() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "PAGE_ONE",
+      payload: 1
+    });
+  };
+}
+
+
+export const addFav = (email, id) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/favourites/${email}/${id}`)
+    return dispatch({
+      type: "ADD_FAVS",
+      payload: {
+        email,
+        id
+      }
+    })
+  }
+}

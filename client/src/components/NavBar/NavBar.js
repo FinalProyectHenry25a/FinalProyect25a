@@ -54,11 +54,7 @@ const NavBar = ({ setCurrentPage }) => {
       <div>
         <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
         </div>
-            <a href="#" className={styles.toggleButton} onClick={change}>
-              <span className={styles.bar}></span>
-              <span className={styles.bar}></span>
-              <span className={styles.bar}></span>
-            </a>
+            
       <a href="#" className={styles.toggleButton} onClick={change}>
         <span className={styles.bar}></span>
         <span className={styles.bar}></span>

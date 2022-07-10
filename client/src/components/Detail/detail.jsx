@@ -141,7 +141,7 @@ export default function Detail() {
             <h1>{PID.model}</h1>
             {PID.additionalphotos?.length >= 1
               ? PID.additionalphotos.map((el) => (
-                  <img src={el} width="50" height="60" alt="No encontrada" />
+                  <img src={el} width="150" alt="No encontrada" />
                 ))
               : null}
             <h3>${PID.price}</h3>

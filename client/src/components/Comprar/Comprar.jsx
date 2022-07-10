@@ -47,12 +47,12 @@ export default function Comprar({ productos, data }){
         {productos.map((producto, i) => {
             return(
               <>
-                <li key={i}>{producto.brand} - {producto.price} - {producto.qty}</li>
+                <li key={i}>{producto.brand} - {producto.model}- {producto.price} - {producto.qty}</li>
                 </>
             )
           })} </ul>  
         
-          <p>Total: {totalPrice}</p>  
+          <p>Total: $ {totalPrice}</p>  
       </form>
 
      </div>

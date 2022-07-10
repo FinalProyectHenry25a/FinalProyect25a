@@ -77,14 +77,15 @@ const Cart = () => {
         ))}
       </div>
       <div className={styles.cartSummary}>
-        <h4 className={styles.summary__title}>Total</h4>
+        <h4 className={styles.summary__title}>Total:</h4>
         <div className={styles.summary__price}>
-          <span>TOTAL: ({totalItems} productos)</span>
-          <span>$ {totalPrice}</span>
+          <span className={styles.span}>({totalItems} productos añadido)</span>
+          <br/>
+          <span>  $ {totalPrice}</span>
         </div>
-{auth.currentUser?.emailVerified ? <Link to="/mercadopago">
+      {auth.currentUser?.emailVerified ? <Link to="/mercadopago">
         <button  className={styles.summary__checkoutBtn}>
-        Confirmar Pedido <img src={mercadopago} />
+        Confirmar Pedido <br/><img src={mercadopago} />
         </button>
         </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
       </div>

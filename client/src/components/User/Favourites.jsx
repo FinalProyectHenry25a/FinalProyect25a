@@ -41,10 +41,10 @@ export default function Favourites() {
       {user ? (
         <div>
           <h2 style={{textAlign: "center"}}>Mis favoritos</h2>
-          <div style={{display: "inline-flex", justifyContent: "space-evenly"}}>
+          <div style={{display: "inline-flex", justifyContent: "space-evenly", width: "100%"}}>
           {user?.favourites?.map((e) => {
             return (
-              <div style={{display: "inline-flex", margin: 1 + "rem"}} key={e.id}>
+              <div style={{display: "inline-flex", margin: "1rem"}} key={e.id}>
                 <Card
                   brand={e.brand}
                   model={e.model}

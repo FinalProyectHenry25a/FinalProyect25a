@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom'
 function App() {
   
   const [datos, setDatos] = useState("");
+  const [user, setUser] = useState({}) 
   const cart = useSelector(state => state.cart);
   const history = useHistory();
 
@@ -23,6 +24,7 @@ function App() {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        setUser(user);
         if(user.data.banned){
 
           history.push("/banned")
@@ -32,7 +34,7 @@ function App() {
     });
   };
   
-  
+  console.log(user.data)
 
   //  useEffect(()=>{
   //    axios
@@ -64,7 +66,14 @@ function App() {
     <div className="App">
        { !datos
         ? <p>Aguarde un momento....</p>  
-        : <Comprar productos={cart} data={datos}/>
+        : <>
+          <div>
+            <h2>Nombre: {user.data.username}</h2>
+            <h2>Email: {user.data.email}</h2>
+            <h2>Dirección de entrega: {user.data.address}</h2>
+            </div> 
+          <Comprar productos={cart} data={datos}/>
+          </>
        } 
     </div>
   );

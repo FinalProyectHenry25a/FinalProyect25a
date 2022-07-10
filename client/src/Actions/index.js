@@ -308,7 +308,6 @@ export function getLocalFavs() {
 }
 
 export function setPage(number) {
-  console.log(number);
   return async function (dispatch) {
     return dispatch({
       type: "SET_PAGE",

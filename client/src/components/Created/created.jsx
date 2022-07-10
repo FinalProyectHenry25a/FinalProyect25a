@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUser, postPhone } from "../../Actions/index";
+import { getUser, postPhone, setSelects } from "../../Actions/index";
 import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import Swal from 'sweetalert2';
@@ -143,6 +143,8 @@ export default function PhoneCreate() {
   }
 
   function handleSubmit(e) {
+    console.log(input.images);
+    console.log(input.images);
     e.preventDefault();
     if (
     error.model ||
@@ -174,6 +176,7 @@ export default function PhoneCreate() {
   //console.log(input);
 
     dispatch(postPhone(input));
+    dispatch(setSelects());
     alert("La publicacion se creo exitosamente");
     setInput({
       brand: "",
@@ -241,7 +244,8 @@ export default function PhoneCreate() {
                 <h5 className="row justify-content-center col-auto">Brand</h5>
                 <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                <select
+                <input type="text" onChange={(e) => handleBrand(e)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-75"/>
+                {/* <select
                   defaultValue="selecciona Marca"
                   className="col-auto row y justify-content-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-75"
                   onChange={(e) => handleBrand(e)}
@@ -253,7 +257,7 @@ export default function PhoneCreate() {
                   <option value="Oppo">Oppo</option>
                   <option value="Motorola">Motorola</option>
                   <option value="Xiaomi">Xiaomi</option>
-                </select>
+                </select> */}
               </label>
                 {error.brand && <p className="col-auto row y justify-content-center">{error.brand}</p>}
             </div>
@@ -306,7 +310,7 @@ export default function PhoneCreate() {
                 {" "}
                 <h5 className="col-auto row justify-content-center">Imagen principal</h5>
 
-                      <input class="form-control form-control-sm"
+                      <input className="form-control form-control-sm"
                         type="file"
                         onChange={(ev) => base64Convert(ev)}
                         required
@@ -316,7 +320,7 @@ export default function PhoneCreate() {
 
                 <h5 className="col-auto row justify-content-center">Imagenes secundarias (máximo 3)</h5>  
                       {fotosSec?.length <= 2 ?
-                        <input class="form-control form-control-sm"
+                        <input className="form-control form-control-sm"
                         type="file"
                         onChange={(ev) => base64Multiple(ev)}
                         required
@@ -334,7 +338,8 @@ export default function PhoneCreate() {
                 <h5 className="col-auto row justify-content-center">RAM</h5>
                 <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                <select
+              <input type="text" onChange={(e) => handleRAM(e)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-75"/>
+                {/* <select
                   defaultValue="select RAM"
                   className="w-75 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   onChange={(e) => handleRAM(e)}
@@ -344,7 +349,8 @@ export default function PhoneCreate() {
                   <option value="6Gb">6Gb</option>
                   <option value="8Gb">8Gb</option>
                   <option value="12Gb">12Gb</option>
-                </select>{error.ram && <p className="col-auto row y justify-content-center">{error.ram}</p>}
+                </select> */}
+                {error.ram && <p className="col-auto row y justify-content-center">{error.ram}</p>} 
               </label>
             </div>
             </div>
@@ -353,7 +359,8 @@ export default function PhoneCreate() {
                 <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <select
+                <input type="text" onChange={(e) => handleROM(e)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-75"/>
+                {/* <select
                   defaultValue="select ROM"
                   className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   onChange={(e) => handleROM(e)}
@@ -363,7 +370,8 @@ export default function PhoneCreate() {
                   <option value="64Gb">64Gb</option>
                   <option value="128Gb">128Gb</option>
                   <option value="256Gb">256Gb</option>
-                </select>{error.rom && <p className="col-auto row y justify-content-center">{error.rom}</p>}
+                </select> */}
+                {error.rom && <p className="col-auto row y justify-content-center">{error.rom}</p>}
               </label>
             </div>
             </div>
@@ -448,7 +456,8 @@ export default function PhoneCreate() {
                 <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">
                 {" "}
-                <select
+                <input type="text" onChange={(e) => handleNetwork(e)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"/>
+                {/* <select
                   defaultValue="select Network"
                   className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   onChange={(e) => handleNetwork(e)}
@@ -457,7 +466,8 @@ export default function PhoneCreate() {
                   <option value="3G">3G</option>
                   <option value="4G">4G</option>
                   <option value="5G">5G</option>
-                </select>{error.network && <p className="col-auto row y justify-content-center">{error.network}</p>}
+                </select> */}
+                {error.network && <p className="col-auto row y justify-content-center">{error.network}</p>}
               </label>
             </div>
             </div>

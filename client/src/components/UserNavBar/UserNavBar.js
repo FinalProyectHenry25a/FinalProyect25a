@@ -157,7 +157,7 @@ export default function UserNavBar({setCurrentPage}) {
     // </nav>
     
     <nav className={styles.navbar}>
-    {user ? (user.isAdmin ? ( <nav className={styles.navbar}>
+    {user ? (auth.currentUser.email === "finalproyect25a@gmail.com" ? ( <nav className={styles.navbar}>
         <div className={styles.brandLogo}>
           <Link to="/home">
             <img src={logo} alt="logo" className={styles.logo} />
@@ -211,16 +211,6 @@ export default function UserNavBar({setCurrentPage}) {
               CerrarSesion
               </MenuItem>
             </StyledMenu>
-            {/* <ul className="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><Link className="dropdown-item" to="/admin/users">Usuarios</Link></li>
-              <li><Link className="dropdown-item" to="/admin/publicaciones">Productos</Link></li>
-              <li><Link className="dropdown-item" to="/admin/editar-stock">Editar Stock</Link></li>
-              <li><Link className="dropdown-item" to="/admin/agregar-publicacion">Crear Publicacion</Link></li>
-              <li><Link className="dropdown-item" to="/admin/control-de-usuarios"></Link>Administrar Usuarios</li>
-              <li><Link className="dropdown-item" to="/admin/preguntas"></Link>Preguntas</li>
-              <li><Link to="/home" className={styles.links} onClick={logout}>CerrarSesion</Link>
-              </li>
-            </ul> */}
         </div>
     </nav>) : (
       <><div className={styles.brandLogo}>
@@ -234,13 +224,15 @@ export default function UserNavBar({setCurrentPage}) {
             <span className={styles.bar}></span>
             <span className={styles.bar}></span>
             <span className={styles.bar}></span>
-          </Link><div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}>      
+          </Link>
+          <div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}>      
           <ul>
             <li>
              <Link className={styles.cart} to="/cart">
               <BsFillCartFill /> {cartCount}
-            </Link> 
-            </li>
+            </Link>
+            </li> 
+            {/* </li>
               <li>
                 <Link to="/mi-perfil/" className={styles.links}>
                 {userNavBarLang[lan].Miperfil}
@@ -255,7 +247,74 @@ export default function UserNavBar({setCurrentPage}) {
                 <Link to="/favoritos" className={styles.links}>
                 {userNavBarLang[lan].Favoritos}
                 </Link>
-              </li>
+              </li> */}
+          {/* <div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}> */}
+          <li>
+            <button style={{border: "none", background: "transparent"}} id="demo-customized-button" aria-controls={menuOpen ? 'demo-customized-menu' : undefined} aria-haspopup="true" aria-expanded={menuOpen ? 'true' : undefined} variant="contained" disableElevation onClick={handleClick}>
+              <BsPersonCircle /> {user.username}
+            </button>
+            <StyledMenu id="demo-customized-menu" MenuListProps={{'aria-labelledby': 'demo-customized-button'}} anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link to="/mi-perfil/" className={styles.links}>
+                  {userNavBarLang[lan].Miperfil}
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link to="/mis-compras" className={styles.links}>
+                  {userNavBarLang[lan].MisCompras}
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link to="/favoritos" className={styles.links}>
+                  {userNavBarLang[lan].Favoritos}
+                </Link>
+              </MenuItem>
+              <Divider sx={{ my: 0.5 }} />
+              <MenuItem onClick={logout} disableRipple>
+                {userNavBarLang[lan].CerrarSesion}
+              </MenuItem>
+            </StyledMenu>
+          </li>
+        {/* </div> */}
+              {/* <div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}> */}
+              <li>
+            <button style={{border: "none", background: "transparent"}} id="demo-customized-button" aria-controls={menuOpen ? 'demo-customized-menu' : undefined} aria-haspopup="true" aria-expanded={menuOpen ? 'true' : undefined} variant="contained" disableElevation onClick={handleClick}>
+              Menu de admin
+            </button>
+            <StyledMenu id="demo-customized-menu" MenuListProps={{'aria-labelledby': 'demo-customized-button'}} anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/publicaciones">
+                  Productos
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/agregar-publicacion">
+                  Crear Publicacion
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/editar-stock">
+                  Editar Stock
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item"  to="/admin/users">
+                  Usuarios
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/control-de-usuarios">
+                  Administrar Usuarios
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+              <Link className="dropdown-item" to="/admin/preguntas">
+                Preguntas
+              </Link>
+              </MenuItem>
+            </StyledMenu>
+            </li>
+        {/* </div> */}
               {/* <li>
             {user?.isAdmin ? 
             <div>
@@ -272,11 +331,11 @@ export default function UserNavBar({setCurrentPage}) {
           </ul>
           </div>: null}
             </li> */}
-              <li>
+              {/* <li>
                 <Link to="/home" className={styles.links} onClick={logout}>
                 {userNavBarLang[lan].CerrarSesion}
                 </Link>
-              </li>
+              </li> */}
             </ul>
 
           </div></>)

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -26,6 +26,7 @@ const initialTheme = "light"
 
 const Home = () => {
   const [theme, setTheme] = useState(initialTheme)
+  const [currentPage, setCurrentPage] = useState(initialTheme)
   const handleTheme = (e) => {
     console.log(e.target.value)
     if(e.target.value === "light"){
@@ -55,6 +56,7 @@ const Home = () => {
   const allPhones = useSelector((state) => state.phones);
   const filtrados = useSelector((state) => state.filtered);
   const lan = useSelector((state) => state.language)
+  const page = useSelector(state => state.currentPage)
   
   const correoEmail = async(email) =>{
     
@@ -141,9 +143,9 @@ const Home = () => {
     byOrder: null,
   });
   
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [phonesPerPage] = useState(4);
-  const indexOfLastPhones = currentPage * phonesPerPage;
+  const indexOfLastPhones = page * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
   
   const cart = useSelector(state => state.cart)
@@ -151,7 +153,7 @@ const Home = () => {
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
   
   const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    dispatch(setPage(pageNumber));
   };
   
   
@@ -221,7 +223,7 @@ const Home = () => {
       const send = async (e) => {
         dispatch(filters(filtered));
         localStorage.setItem('filter', JSON.stringify(filtered));
-        setCurrentPage(1);   
+        dispatch(pageOne());  
         
       };
       
@@ -277,7 +279,7 @@ const Home = () => {
         <button>Agregar Phone</button>
       </Link> */}
 
-      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar  setCurrentPage={setCurrentPage} />}
+      {loggedUser ? <UserNavBar  /> : <NavBar   />}
       <input type="radio" name="theme" id="light" onClick={handleTheme} value="light"/>
      <label htmlFor="light">Claro</label>
      <input type="radio" name="theme" id="dark" onClick={handleTheme} value="dark"/>

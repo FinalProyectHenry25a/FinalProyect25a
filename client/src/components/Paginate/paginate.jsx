@@ -14,7 +14,8 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   const page = useSelector((state) => state.currentPage);
 
   useEffect(() => {
-    // setCurrentPage(1);
+
+    console.log(page);
 
   }, [allPhones]);
 
@@ -56,10 +57,10 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   //   setCurrentPage(e.target.value);
   // }
 
-  function pag(number) {
-    paginado(number);
-    // setCurrentPage(number);
-  }
+  // function pag(number) {
+  //   paginado(number);
+  //   // setCurrentPage(number);
+  // }
 
   return (
     <nav aria-label="...">

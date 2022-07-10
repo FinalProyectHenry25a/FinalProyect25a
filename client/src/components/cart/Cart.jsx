@@ -79,7 +79,7 @@ const Cart = () => {
       <div className={styles.cartSummary}>
         <h4 className={styles.summary__title}>Total:</h4>
         <div className={styles.summary__price}>
-          <span className={styles.span}>({totalItems} productos añadido)</span>
+          {totalItems === 1 ? <span className={styles.span}>{totalItems} producto añadido</span> : <span className={styles.span}>{totalItems} productos añadidos</span>}
           <br/>
           <span>  $ {totalPrice}</span>
         </div>

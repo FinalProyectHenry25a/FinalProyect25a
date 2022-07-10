@@ -43,7 +43,7 @@ export default function Comprar({ productos, data }){
 
   <form id='form1' className={styles.ul}>
 
-        <h4>Listado de Compras</h4>
+        <h2>Listado de Compras</h2>
         <ul >
         {productos.map((producto, i) => {
             return(
@@ -53,7 +53,7 @@ export default function Comprar({ productos, data }){
             )
           })} </ul>  
         
-          <p>Total: $ {totalPrice}</p>  
+          <h2>Total: $ {totalPrice}</h2>  
       </form>
 
      </div>

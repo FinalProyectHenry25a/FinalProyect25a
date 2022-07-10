@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 100px;
+    gap: 50px;
 }
 
 .container h1 {
@@ -17,9 +17,8 @@
     border: 1px solid black;
     width: 400px;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     padding-bottom: 60px;
-    
     border-radius: 7px;
 }
 
@@ -27,6 +26,16 @@
     margin-bottom: 50px;
 }
 
+
+
 .comprar {
     margin-bottom: 30px;
+}
+
+@media (max-width: 500px) {
+    .containerDatos{
+        width: 350px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }

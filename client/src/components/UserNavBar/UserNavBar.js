@@ -10,9 +10,56 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocalCart } from "../../Actions";
 import logo from "../../images/smartworld.jpg";
-
 import styles from '../UserNavBar/usernavbar.module.css'
 import { userNavBarLang } from "./userNavBarLang";
+import { styled, alpha } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Divider from '@mui/material/Divider';
+
+
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'right',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  '& .MuiPaper-root': {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 180,
+    color:
+      theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+    '& .MuiMenu-list': {
+      padding: '4px 0',
+    },
+    '& .MuiMenuItem-root': {
+      '& .MuiSvgIcon-root': {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      '&:active': {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity,
+        ),
+      },
+    },
+  },
+}));
+
 
 export default function UserNavBar({setCurrentPage}) {
   const [cartCount, setCartCount] = useState(0);
@@ -20,8 +67,6 @@ export default function UserNavBar({setCurrentPage}) {
   const lan = useSelector((state) => state.language);
   const [user, setUser] = useState();
   const [open, setOpen] = useState(false);
-
-  
 
   const dispatch = useDispatch();
 
@@ -64,6 +109,15 @@ export default function UserNavBar({setCurrentPage}) {
     setUser(false);
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const menuOpen = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     // <nav className="navbar navbar-expand-lg bg-light">
     //   {user ? (
@@ -103,25 +157,86 @@ export default function UserNavBar({setCurrentPage}) {
     // </nav>
     
     <nav className={styles.navbar}>
-    {user ? (
-      <><div className={styles.brandLogo}>
-          <a href="/home">
+    {user ? (user.isAdmin ? ( <nav className={styles.navbar}>
+        <div className={styles.brandLogo}>
+          <Link to="/home">
             <img src={logo} alt="logo" className={styles.logo} />
-          </a>
+          </Link>
+        </div>
+        <div className={styles.search}>
+            <SearchBar setCurrentPage={setCurrentPage} className={styles.search} />
+        </div>
+          <Link to="#" className={styles.toggleButton} onClick={change}>
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
+          </Link>
+          <div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}>
+            <button style={{border: "none", background: "transparent"}} id="demo-customized-button" aria-controls={menuOpen ? 'demo-customized-menu' : undefined} aria-haspopup="true" aria-expanded={menuOpen ? 'true' : undefined} variant="contained" disableElevation onClick={handleClick}>
+              Menu de admin
+            </button>
+            <StyledMenu id="demo-customized-menu" MenuListProps={{'aria-labelledby': 'demo-customized-button'}} anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/publicaciones">
+                  Productos
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/agregar-publicacion">
+                  Crear Publicacion
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/editar-stock">
+                  Editar Stock
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item"  to="/admin/users">
+                  Usuarios
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/control-de-usuarios">
+                  Administrar Usuarios
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+              <Link className="dropdown-item" to="/admin/preguntas">
+                Preguntas
+              </Link>
+              </MenuItem>
+              <Divider sx={{ my: 0.5 }} />
+              <MenuItem onClick={logout} disableRipple>
+              CerrarSesion
+              </MenuItem>
+            </StyledMenu>
+            {/* <ul className="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><Link className="dropdown-item" to="/admin/users">Usuarios</Link></li>
+              <li><Link className="dropdown-item" to="/admin/publicaciones">Productos</Link></li>
+              <li><Link className="dropdown-item" to="/admin/editar-stock">Editar Stock</Link></li>
+              <li><Link className="dropdown-item" to="/admin/agregar-publicacion">Crear Publicacion</Link></li>
+              <li><Link className="dropdown-item" to="/admin/control-de-usuarios"></Link>Administrar Usuarios</li>
+              <li><Link className="dropdown-item" to="/admin/preguntas"></Link>Preguntas</li>
+              <li><Link to="/home" className={styles.links} onClick={logout}>CerrarSesion</Link>
+              </li>
+            </ul> */}
+        </div>
+    </nav>) : (
+      <><div className={styles.brandLogo}>
+          <Link to="/home">
+            <img src={logo} alt="logo" className={styles.logo} />
+          </Link>
         </div><div className={styles.search}>
             <SearchBar setCurrentPage={setCurrentPage} className={styles.search} />
             <p className={styles.prf2}>Hola {user.username}!</p>
-          </div><a href="#" className={styles.toggleButton} onClick={change}>
+          </div><Link to="#" className={styles.toggleButton} onClick={change}>
             <span className={styles.bar}></span>
             <span className={styles.bar}></span>
             <span className={styles.bar}></span>
-          </a><div
-            className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
-            >
-          
-            
-            <ul>
-              <li>
+          </Link><div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}>      
+          <ul>
+            <li>
              <Link className={styles.cart} to="/cart">
               <BsFillCartFill /> {cartCount}
             </Link> 
@@ -141,11 +256,22 @@ export default function UserNavBar({setCurrentPage}) {
                 {userNavBarLang[lan].Favoritos}
                 </Link>
               </li>
-              <li>
-            {user?.isAdmin ? <Link className="nav-link active m-3" to="admin">
-              Menu de administración
-            </Link> : null}
-            </li>
+              {/* <li>
+            {user?.isAdmin ? 
+            <div>
+            <Link className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Menu de admin
+            </Link>
+            <ul className="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><Link className="dropdown-item" to="/admin/users">Usuarios</Link></li>
+            <li><Link className="dropdown-item" to="/admin/publicaciones">Productos</Link></li>
+            <li><Link className="dropdown-item" to="/admin/editar-stock">Editar Stock</Link></li>
+            <li><Link className="dropdown-item" to="/admin/agregar-publicacion">Crear Publicacion</Link></li>
+            <li><Link className="dropdown-item" to="/admin/control-de-usuarios"></Link>Administrar Usuarios</li>
+            <li><Link className="dropdown-item" to="/admin/preguntas"></Link>Preguntas</li>
+          </ul>
+          </div>: null}
+            </li> */}
               <li>
                 <Link to="/home" className={styles.links} onClick={logout}>
                 {userNavBarLang[lan].CerrarSesion}
@@ -153,7 +279,7 @@ export default function UserNavBar({setCurrentPage}) {
               </li>
             </ul>
 
-          </div></>
+          </div></>)
     ) : (
          <NavBar />
        )}

@@ -72,7 +72,7 @@ export default function UsersControl() {
 
   return (
     <div>
-      <Link to="/admin">
+      <Link to="/home">
         <button className={style.btn}>Volver</button>
       </Link>
       <h1 className="d-flex justify-content-center">Control de Usuarios</h1>

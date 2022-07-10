@@ -16,11 +16,13 @@ import logo from '../../images/smartworld.jpg'
 
 import { useSelector } from "react-redux";
 import { BsGoogle, BsWindowSidebar } from "react-icons/bs";
+import { loginLang } from "./loginLang";
 
 
 const Login = () => {
-
+  
   const cart = useSelector(state => state.cart)
+  const lan = useSelector((state) => state.language);
 
   const history = useHistory();
 
@@ -123,13 +125,13 @@ const Login = () => {
 
   return (
      <div className={style.login}>
-      {user ? <p>Ya estas logueado weon</p> : <div className={style.container}>
+      {user ? <p>Ya estas logueado</p> : <div className={style.container}>
         <div className={style.containerImage}>
           <div>
           <img src={logo} className={style.image} alt='logo'/>
           </div>
           <div>
-          <h2>!Hola otra vez! 👋</h2>
+          <h2>{loginLang[lan].holaOtraVez}</h2>
           </div>
         </div>
         <div>
@@ -137,7 +139,7 @@ const Login = () => {
             autoFocus
             value={loginEmail}
             name="loginEmail"
-            placeholder='Email'
+            placeholder={loginLang[lan].correoElectronico}
             type="email"
             id="email"
             className={style.input}
@@ -147,23 +149,23 @@ const Login = () => {
           <input
             value={loginPassword}
             name="loginPassword"
-            placeholder='Contraseña'
+            placeholder={loginLang[lan].contraseña}
             type="password"
             id='password'
             className={style.input}
             onChange={(e) => setLoginPassword(e.target.value)} />
         </div>
-        <a href="/identify" className={style.ancor}>Olvide mi contraseña</a>
+        <a href="/identify" className={style.ancor}>{loginLang[lan].olvideMiContraseña}</a>
         <div className={style.register}>
-          <button onClick={login} type="submit" className={style.btn}>Ingresar</button>
+          <button onClick={login} type="submit" className={style.btn}>{loginLang[lan].ingresar}</button>
           <br/><br/>
-          <button onClick={loginWithGoogle} type="submit" className={style.btn}>Ingresar con Google <img src={google} alt='google' className={style.google}/></button>
+          <button onClick={loginWithGoogle} type="submit" className={style.btn}>{loginLang[lan].ingresarConGoogle}<img src={google} alt='google' className={style.google}/></button>
           <br/><br/>
           <Link to="register">
-            <p className={style.ancor2}>Registrarme</p>
+            <p className={style.ancor2}>{loginLang[lan].registrarme}</p>
           </Link>
           <Link to="home">
-            <p className={style.ancor2}>Volver</p>
+            <p className={style.ancor2}>{loginLang[lan].volver}</p>
           </Link>
         </div>
       </div>}

@@ -80,6 +80,16 @@ export function postPhone(payload) {
   };
 }
 
+export function setSelects(phones) {
+  return async function (dispatch) {
+    return dispatch({
+      type: "SET_SELECTS",
+      payload: phones
+    });
+  };
+}
+
+
 export const addToCart = (itemID) => {
   return async function (dispatch) {
     return dispatch({
@@ -298,7 +308,6 @@ export function getLocalFavs() {
 }
 
 export function setPage(number) {
-  console.log(number);
   return async function (dispatch) {
     return dispatch({
       type: "SET_PAGE",

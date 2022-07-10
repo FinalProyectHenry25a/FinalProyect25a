@@ -10,8 +10,16 @@
     margin: auto;
 }
 
+.divChange {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  align-items: center;
+  justify-content: left;
+  margin-left: 20px;
+}
+
 .dark{
-  
   filter:invert(1)
 }
 

@@ -9,6 +9,7 @@ import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
 import swal2 from 'sweetalert'
 import {Link} from 'react-router-dom';
+import { registerLang } from './registerLang';
 
 
 
@@ -16,6 +17,7 @@ import {Link} from 'react-router-dom';
 const Register = () => {
 
   const cart = useSelector(state => state.cart)
+  const lan = useSelector((state) => state.language);
   
   const history = useHistory();
   
@@ -182,40 +184,40 @@ const handleChange = (e) => {
           <div className={style.login}>
       <div className={style.container}>
         <div className={style.image}>
-          <h1>Formulario de registro</h1>
+          <h1>{registerLang[lan].formularioDeRegistro}</h1>
         </div>
         <div>
-          <input placeholder="Nombre de usuario" type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
+          <input placeholder={registerLang[lan].nombreDeUsuario} type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
         {error.username && <p>{error.username}</p>}</div>
         <div>
-          <input placeholder="Nombre" type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder={registerLang[lan].nombre} type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
         {error.firstname && <p>{error.firstname}</p>}</div>
         <div>
-          <input placeholder="Apellido" type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
+          <input placeholder={registerLang[lan].apellido} type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
         {error.lastname && <p>{error.lastname}</p>}</div>
         <div>
-          <input placeholder="Dirección" type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
+          <input placeholder={registerLang[lan].direccion} type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
         {error.address && <p>{error.address}</p>}</div>
         {/* <div>
           <input placeholder="Email..." autoFocus type="email" id='email' name="email" required onChange={handleChange}></input>
           {error.email && <p>{error.email}</p>}</div> */}
         <div>
-        <input type='email' name="correo_user" placeholder="Email" className={style.input} value={correo.correo_user} onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }/>
+        <input type='email' name="correo_user" placeholder={registerLang[lan].correoElectronico} className={style.input} value={correo.correo_user} onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }/>
         </div>
         <div>
-          <input placeholder="Contraseña" type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
+          <input placeholder={registerLang[lan].contraseña} type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
         {error.password && <p>{error.password}</p>}</div>
         {/* <div>
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
         </div> */}
         <div className={style.register}>
-          <button onClick={DOS} type='submit' className={style.btn}>Registrarse</button>
+          <button onClick={DOS} type='submit' className={style.btn}>{registerLang[lan].registrarse}</button>
         </div>
 
 
         
         <Link to="home">
-            <p className={style.ancor}>Volver</p>
+            <p className={style.ancor}>{registerLang[lan].volver}</p>
           
           </Link>
         {/* <div className={style.register}>

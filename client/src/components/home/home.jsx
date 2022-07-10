@@ -280,23 +280,30 @@ const Home = () => {
       </Link> */}
 
       {loggedUser ? <UserNavBar  /> : <NavBar   />}
+
+      <div className={style.divChange}>
+        <div>
       <input type="radio" name="theme" id="light" onClick={handleTheme} value="light"/>
      <label htmlFor="light">Claro</label>
+     </div>
+     <div>
      <input type="radio" name="theme" id="dark" onClick={handleTheme} value="dark"/>
      <label htmlFor="dark">Oscuro</label>
-      <br/>
-      
+     </div>
+     <div>
       <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
         <option value="es">Español</option>
         <option value="en">English</option>
       </select>
+      </div>
+      </div>
 
       {/* {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />} */}
       {/* <Carrousel /> */}
       
       <div id="filtros">
 
-      <select id='brand' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+      <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">{homeLang[lan].Todas}</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>
@@ -342,7 +349,7 @@ const Home = () => {
       {/* por precio--------------------------------------------------- */}
 
       <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option  value="null">precio</option>
+        <option  value="null">{homeLang[lan].precio}</option>
         <option value={[0, 115000]}>de u$ 0 a u$ 500</option>
         <option value={[115000, 230000]}>de u$ 500 a u$ 1000</option>
         <option value={[230000, 345000]}>de u$ 1000 a u$ 1500</option>

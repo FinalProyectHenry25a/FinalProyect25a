@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser, language } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -22,10 +22,19 @@ import {FormattedMessage, IntlProvider} from 'react-intl'
 //import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
+const initialTheme = "light"
 
 const Home = () => {
-
-
+  const [theme, setTheme] = useState(initialTheme)
+  const [currentPage, setCurrentPage] = useState(initialTheme)
+  const handleTheme = (e) => {
+    console.log(e.target.value)
+    if(e.target.value === "light"){
+      setTheme("light");
+    }else{
+      setTheme("dark");
+    }
+  }
   const [loggedUser, setLoggedUser] = useState();
   
   useEffect(() => {
@@ -35,16 +44,19 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    
+    dispatch(getLocalFavs())
     dispatch(getLocalCart())
-    
+    console.log(favs)
   }, [])
   
+  
+
   const dispatch = useDispatch();
 
   const allPhones = useSelector((state) => state.phones);
   const filtrados = useSelector((state) => state.filtered);
   const lan = useSelector((state) => state.language)
+  const page = useSelector(state => state.currentPage)
   
   const correoEmail = async(email) =>{
     
@@ -131,16 +143,17 @@ const Home = () => {
     byOrder: null,
   });
   
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [phonesPerPage] = useState(4);
-  const indexOfLastPhones = currentPage * phonesPerPage;
+  const indexOfLastPhones = page * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
   
   const cart = useSelector(state => state.cart)
+  const favs = useSelector(state => state.favs)
   const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
   
   const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    dispatch(setPage(pageNumber));
   };
   
   
@@ -196,7 +209,8 @@ const Home = () => {
   }
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart])
+    localStorage.setItem('favs', JSON.stringify(favs));
+  }, [cart, favs])
   
   // useEffect(()=>{
     //   let prueba=localStorage.getItem("filter")
@@ -209,7 +223,7 @@ const Home = () => {
       const send = async (e) => {
         dispatch(filters(filtered));
         localStorage.setItem('filter', JSON.stringify(filtered));
-        setCurrentPage(1);   
+        dispatch(pageOne());  
         
       };
       
@@ -235,7 +249,7 @@ const Home = () => {
     
     localStorage.removeItem("filter")
     dispatch(filters(clear));
-    setCurrentPage(1);
+    // setCurrentPage(1);
     
   };
   
@@ -253,8 +267,11 @@ const Home = () => {
  
 
   return (
-    <IntlProvider locale='es' messages={messages}>
+      <IntlProvider locale='es' messages={messages}>
+    <div className={theme}>
+      <div className={style.facu}>
     <div>
+
    
       <button onClick={logout}>desloguear</button>
 
@@ -262,19 +279,31 @@ const Home = () => {
         <button>Agregar Phone</button>
       </Link> */}
 
-      <br/>
-      
+      {loggedUser ? <UserNavBar  /> : <NavBar   />}
+
+      <div className={style.divChange}>
+        <div>
+      <input type="radio" name="theme" id="light" onClick={handleTheme} value="light"/>
+     <label htmlFor="light">Claro</label>
+     </div>
+     <div>
+     <input type="radio" name="theme" id="dark" onClick={handleTheme} value="dark"/>
+     <label htmlFor="dark">Oscuro</label>
+     </div>
+     <div>
       <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
         <option value="es">Español</option>
         <option value="en">English</option>
       </select>
+      </div>
+      </div>
 
-      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />}
+      {/* {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />} */}
       {/* <Carrousel /> */}
       
       <div id="filtros">
 
-      <select id='brand' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+      <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
         <option value="null">{homeLang[lan].Todas}</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>
@@ -320,7 +349,7 @@ const Home = () => {
       {/* por precio--------------------------------------------------- */}
 
       <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option  value="null">precio</option>
+        <option  value="null">{homeLang[lan].precio}</option>
         <option value={[0, 115000]}>de u$ 0 a u$ 500</option>
         <option value={[115000, 230000]}>de u$ 500 a u$ 1000</option>
         <option value={[230000, 345000]}>de u$ 1000 a u$ 1500</option>
@@ -372,6 +401,8 @@ const Home = () => {
         allPhones={allPhones.length}
         paginado={paginado}
       />
+      </div>
+    </div>
     </div>
     </IntlProvider>
   );

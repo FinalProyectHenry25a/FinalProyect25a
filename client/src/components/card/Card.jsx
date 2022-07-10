@@ -5,7 +5,7 @@ import { auth } from "../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { addToCart, addToCartUser } from "../../Actions";
+import { addToCart, addToCartUser, deleteFav, addFav, getLocalFavs } from "../../Actions";
 import soldOut from "../../images/sold-out.png";
 import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
@@ -15,14 +15,14 @@ import { cardLang } from "./cardLang";
 export default function Card(props) {
 
   const [user, setUser] = useState(auth.currentUser);
-  const [favs, setFavs] = useState();
+  const favslocal = useSelector((state) => state.favs)
   const lan = useSelector((state) => state.language)
   
   useEffect(() => {
 
-    setFavs(JSON.parse(localStorage.getItem("favs")))
     userVerificate();
-  
+    dispatch(getLocalFavs())
+
   }, []);
 
   const userVerificate = async () => {
@@ -32,34 +32,15 @@ export default function Card(props) {
   };
 
   const dispatch = useDispatch();
+
   const addToFavourites = async () => {
     try {
 
       let info = await axios.get(`http://localhost:3001/user/${user.email}`);
+      
       let userInfo = info.data;
 
-      if (userInfo.favourites?.length === 0) {
-
-        await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
-
-        let phone = [props.id];
-        localStorage.setItem("favs", JSON.stringify(phone));
-        setFavs(JSON.parse(localStorage.getItem("favs")));
-
-      } else if (userInfo.favourites?.find((e) => e.id === props.id)) {
-
-        return;
-
-      } else {
-
-        await axios.put(`http://localhost:3001/favourites/${userInfo.email}/${props.id}`).data;
-
-        let localStorageInfo = JSON.parse(localStorage.getItem("favs"));
-        let allPhonesInLocalStorage = [...localStorageInfo, props.id];
-        localStorage.setItem("favs", JSON.stringify(allPhonesInLocalStorage));
-        setFavs(JSON.parse(localStorage.getItem("favs")))
-
-      }
+      dispatch(addFav(userInfo.email, props.id))
 
     } catch (error) {
 
@@ -72,18 +53,8 @@ export default function Card(props) {
 
   async function deleteFavourites() {
     try {
-      await axios.put(
-        `http://localhost:3001/favourites/delete/${user.email}/${props.id}`
-      );
 
-      let localStorageInfo = JSON.parse(localStorage.getItem("favs"));
-      
-      let removePhoneFromLocalStorage = localStorageInfo.filter((e) => e !== props.id)
-
-      localStorage.setItem("favs", JSON.stringify(removePhoneFromLocalStorage));
-      setFavs(JSON.parse(localStorage.getItem("favs")))
-
-        window.location.reload()
+    dispatch(deleteFav(user.email, props.id))
 
     } catch (error) {
       alert("No se pudo elimino la publicacion a favoritos.");
@@ -123,12 +94,12 @@ export default function Card(props) {
         justifyContent: "center",
       }}>${props.price}</h2>
         <div className="card-text">
-          {user ? favs?.includes(props.id) ? (
-            <button onClick={deleteFavourites}>
+          {user ? favslocal?.includes(props.id) ? (
+            <button style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
               <FaHeart />
             </button>
           ) : (
-            <button onClick={addToFavourites}>
+            <button style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
               <FiHeart />
             </button>
           ) : null}

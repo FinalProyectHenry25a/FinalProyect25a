@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './components/login/Login';
 import Register from './components/register/Register';
@@ -21,10 +21,9 @@ import Users from './components/Admin/users';
 import BannedUser from './components/User/BannedUser';
 import Preguntas from './components/Admin/Preguntas';
 import LandingPage from './components/landingPage/LandingPage';
-
+import "./App.css"
 
 function App() {
-
   return (
 
     <BrowserRouter>
@@ -50,6 +49,7 @@ function App() {
         <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/> 
         <Route exact path="/contacto" component={Contacto} /> 
         <Route exact path="/admin/preguntas" component={Preguntas}/>
+        
       </Switch>
     </BrowserRouter>
   );

@@ -8,12 +8,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import styles from './Contacto.module.css'
 import UserNavBar from "../UserNavBar/UserNavBar";
 import BtnBack from "../back/BtnBack";
+import { useSelector } from "react-redux";
+import { constactoLang } from "./contactoLang";
 
 
 
 export default function Contacto () {
 
     const history = useHistory()
+    const lan = useSelector((state) => state.language);
 
     const [correo, SetCorreo] = useState({
       contact_user: "",
@@ -95,27 +98,27 @@ return(
     <div className={styles.containerContact}>
 
       <div className={styles.info}>
-        <h1>información de contacto</h1>
-        <h3>Llamanos: </h3>
+        <h1> {constactoLang[lan].informacionDeContacto}</h1>
+        <h3>{constactoLang[lan].llamanos}</h3>
         <p>+54 9 236 470-3985</p>
-        <h3>Ubicacion:</h3>
+        <h3>{constactoLang[lan].ubicacion}</h3>
         <p>Av. del Libertador 3724, CABA</p>
-        <h3>Horarios de Trabajo: </h3>
-        <p>Lunes a Viernes, 8 A.M - 6 P.M</p>
+        <h3>{constactoLang[lan].horariosDeTrabajo}</h3>
+        <p>{constactoLang[lan].lunesAViernes}, 8 A.M - 6 P.M</p>
       </div>
       
 
       <form name="formulario-contacto" onSubmit={correoEmail} className={styles.formContainer}>
-        <h1>Formulario de contacto</h1>
-        <label name='nombre'>Nombre:</label>
-        <input type='text' name="contact_user" placeholder="Ingresa tu Nombre" value={correo.contact_user} onChange={onChangeCorreo} className={styles.input}/>
-        <label>Correo Electronico:</label>
-        <input type='email' name="correo_user" placeholder="Ingresa tu Correo" value={correo.correo_user} onChange={onChangeCorreo} className={styles.input}/>
-        <label>Asunto:</label>
-        <input type='text' name="asunto_user" placeholder="Asunto" value={correo.asunto_user} onChange={onChangeCorreo} className={styles.input}/>
-        <label>Descripcion:</label>
-        <textarea name="descripcion_user" placeholder="Descripcion" value={correo.descripcion_user} onChange={onChangeCorreo} className={styles.input}/>
-        <button type='submit' className={styles.btn}>Enviar</button>
+        <h1>{constactoLang[lan].formularioDeContacto}</h1>
+        <label name='nombre'>{constactoLang[lan].nombre}</label>
+        <input type='text' name="contact_user" placeholder={constactoLang[lan].ingresaTuNombre} value={correo.contact_user} onChange={onChangeCorreo} className={styles.input}/>
+        <label>{constactoLang[lan].correoElectronico}</label>
+        <input type='email' name="correo_user" placeholder={constactoLang[lan].ingresaTuCorreo} value={correo.correo_user} onChange={onChangeCorreo} className={styles.input}/>
+        <label>{constactoLang[lan].asunto}</label>
+        <input type='text' name="asunto_user" placeholder={constactoLang[lan].asunto2} value={correo.asunto_user} onChange={onChangeCorreo} className={styles.input}/>
+        <label>{constactoLang[lan].descripcion}</label>
+        <textarea name="descripcion_user" placeholder={constactoLang[lan].descripcion2} value={correo.descripcion_user} onChange={onChangeCorreo} className={styles.input}/>
+        <button type='submit' className={styles.btn}>{constactoLang[lan].enviar}</button>
       </form>
     </div>
     </>

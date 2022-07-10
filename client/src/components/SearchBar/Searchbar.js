@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getPhonesByModel } from "../../Actions";
+import { getPhonesByModel, pageOne } from "../../Actions";
 import style from "./../SearchBar/SearchBar.module.css";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ const SearchBar = ({setCurrentPage}) => {
   const history = useHistory();
   const [model, setModel] = useState("");
   const lan = useSelector ((state) => state.language);
+  const page = useSelector((state) => state.currentPage);
 
   function handleSearch(e) {
     setModel(e.target.value);
@@ -20,7 +21,7 @@ const SearchBar = ({setCurrentPage}) => {
     e.preventDefault();
     history.push("/home")
     dispatch(getPhonesByModel(model));
-    setCurrentPage(1)
+    dispatch(pageOne())
   }
   return (
     <form className={style.container}>

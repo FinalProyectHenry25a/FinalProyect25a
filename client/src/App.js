@@ -23,10 +23,6 @@ import Preguntas from './components/Admin/Preguntas';
 import LandingPage from './components/landingPage/LandingPage';
 import "./App.css"
 
-
-const adminEmail = 'admin@admin.admin';
-
-
 function App() {
   return (
 

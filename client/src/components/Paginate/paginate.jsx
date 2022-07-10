@@ -105,7 +105,7 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
  }
 
   return (
-    <nav aria-label="...">
+    <nav aria-label="..." style={{marginBottom: '40px'}}>
       {/* <ul className="pagination justify-content-center">
         {pageNumbers &&
           pageNumbers.map((number) => (
@@ -129,7 +129,7 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
           autoComplete="off"
           value={page}
         />
-        <label className={styles.input}>
+        <label className={styles.input2}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>
         <button className={styles.btn} onClick={() => nextPage()} disabled={page === Math.ceil(allPhones / phonesPerPage) || page > Math.ceil(allPhones / phonesPerPage) }>

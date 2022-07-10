@@ -32,8 +32,18 @@ const CartItem = (props) => {
 
   }
 
-  const onChangeHandler = async (e) => {
+  const mas = () => {
+    console.log('mas')
+    setInput(input + 1);
+  }
 
+  const menos = () => {
+    console.log('menos')
+    setInput(input - 1);
+    
+  }
+  const onChangeHandler = async (e) => {
+  console.log('entre')
     setInput(e.target.value);
     dispatch(adjustItemQty(props.item.id, e.target.value));
     let post = (await axios.get(`http://localhost:3001/home/${props.item.id}`))
@@ -42,8 +52,8 @@ const CartItem = (props) => {
     if (e.target.value > post.stock) {
       e.target.value = post.stock;
     }
-  };
 
+  };
   return (
     <div className={styles.cartItem}>
       <img src={item.images} alt={item.model} width={200} className={styles.image}/>
@@ -66,8 +76,13 @@ const CartItem = (props) => {
             value={input}
             onChange={onChangeHandler}
           />
+          <div className={styles.count}>
+            <button className={styles.countMas} onClick={mas}>+</button>
+            <button className={styles.countMenos} onClick={menos}>-</button>
+          </div>
+          
         </div>
-        <p className={styles.prf}> ({stockView} unidades disponibles) </p>
+        <p className={styles.prf}> ({stockView} U.) </p>
         {auth.currentUser ? (
           <button
             onClick={() =>
@@ -84,7 +99,7 @@ const CartItem = (props) => {
             onClick={() => dispatch(removeFromCart(item.id))}
             className={styles.actions__deleteItemBtn}
           >
-            x
+            🗑️
           </button>
         )}
       </div>

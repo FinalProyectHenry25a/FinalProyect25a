@@ -178,7 +178,7 @@ export default function Detail() {
                           dispatch(addToCartUser(user.email, PID.id))
                         }
                       >
-                        <p>Agregar al carito User</p>
+                        <p>Agregar al carrito</p>
                       </button>
                     </Link>
                   ) : (
@@ -202,7 +202,7 @@ export default function Detail() {
                   {PID.stock}
                 </div>
               ) : (
-                <p>AGOTADO</p>
+                <p>AGOTADO!</p>
               )}
               {/* <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
               Agregar al Carrito

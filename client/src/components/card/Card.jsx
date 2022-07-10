@@ -70,6 +70,7 @@ export default function Card(props) {
         display: "inline-flex",
         flexFlow: "row wrap",
         justifyContent: "center",
+        marginBottom: '20px'
       }}
     >
       

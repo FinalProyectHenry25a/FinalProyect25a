@@ -10,7 +10,7 @@ export const homeLang = {
     precio: "Precio",
     Procesador: "Procesador",
     Buscar: "Buscar",
-    Limpiarfiltros: "Limpiar filtros",
+    Limpiar: "Limpiar",
   },
 
   en: {
@@ -24,6 +24,6 @@ export const homeLang = {
     precio: "Price",
     Procesador: "Processor",
     Buscar: "Find",
-    Limpiarfiltros: "Clear filters",
+    Limpiar: "Clear",
   },
 };

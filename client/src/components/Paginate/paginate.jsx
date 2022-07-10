@@ -14,7 +14,7 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   const page = useSelector((state) => state.currentPage);
 
   useEffect(() => {
-    // setCurrentPage(1);
+
 
   }, [allPhones]);
 
@@ -36,30 +36,73 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
     }
   }
 
-  function onKeyDown(e) {
-    if (e.keyCode == 13) {
-      dispatch(setPage(parseInt(e.target.value)));
-      if (
-        parseInt(e.target.value) < 1 ||
-        parseInt(e.target.value) > Math.ceil(allPhones / phonesPerPage) ||
-        isNaN(parseInt(e.target.value))
-      ) {
-        dispatch(setPage(1));
-        paginado(1);
-      } else {
-        paginado(parseInt(e.target.value));
-      }
-    }
-  }
+  // function onKeyDown(e) {
+  //   if (e.keyCode == 13) {
+  //     dispatch(setPage(parseInt(e.target.value)));
+  //     if (
+  //       parseInt(e.target.value) < 1 ||
+  //       parseInt(e.target.value) > Math.ceil(allPhones / phonesPerPage) ||
+  //       isNaN(parseInt(e.target.value))
+  //     ) {
+  //       dispatch(setPage(1));
+  //       paginado(1);
+  //     } else {
+  //       paginado(parseInt(e.target.value));
+  //     }
+  //   }
+  // }
 
   // function onChange(e) {
   //   setCurrentPage(e.target.value);
   // }
 
-  function pag(number) {
-    paginado(number);
-    // setCurrentPage(number);
+  // function pag(number) {
+  //   paginado(number);
+  //   // setCurrentPage(number);
+  // }
+
+ const pageInput = (e) => {
+
+  if (e.target.value > 5) {
+
+    let pageNumStr = String(e.target.value);
+
+    let pageNum = pageNumStr.split("");
+
+    console.log(pageNum[1]);
+
+    console.log(parseInt(pageNum[1]));
+
+    if(parseInt(pageNum[1]) < 1 || parseInt(pageNum[1]) > Math.ceil(allPhones / phonesPerPage) ||     isNaN(parseInt(pageNum[1]))) {
+
+      dispatch(pageOne());
+
+    } else {
+
+      dispatch(setPage(parseInt(pageNum[1])));
+
+    }
+
+  } 
+
+  else if (
+
+    parseInt(e.target.value) < 1 ||
+    parseInt(e.target.value) > Math.ceil(allPhones / phonesPerPage) ||
+    isNaN(parseInt(e.target.value))
+
+  ) 
+  
+  {
+    dispatch(pageOne());
+
+  } else {
+
+    dispatch(setPage(parseInt(e.target.value)));
+
   }
+
+ }
 
   return (
     <nav aria-label="...">
@@ -79,9 +122,9 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
         {paginateLang[lan].anterior}
         </button>
         <input
+          id="pageInput"
           className={styles.input}
-          onChange={(e) => dispatch(setPage(parseInt(e.nativeEvent.data)))}
-          onKeyDown={(e) => onKeyDown(e)}
+          onChange={pageInput}
           name="page"
           autoComplete="off"
           value={page}

@@ -53,11 +53,6 @@ const NavBar = ({ setCurrentPage }) => {
           <span className={styles.bar}></span>
           <span className={styles.bar}></span>
           <span className={styles.bar}></span>
-        </Link>
-        <Link to="#" className={styles.toggleButton} onClick={change}>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
         </Link> 
       <div className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}>
         <ul>

@@ -291,7 +291,7 @@ const Home = () => {
      <label htmlFor="dark">Oscuro</label>
      </div>
      <div>
-      <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+      <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: '140px', display: "flex" }}>
         <option value="es">Español</option>
         <option value="en">English</option>
       </select>
@@ -301,9 +301,9 @@ const Home = () => {
       {/* {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />} */}
       {/* <Carrousel /> */}
       
-      <div id="filtros">
-
-      <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+      <div id="filtros" className={style.divContainer}>
+      <div className={style.divSelect}>
+      <select id='brand' className={style.select} onChange={e => filtersSetters(e)}>
         <option value="null">{homeLang[lan].Todas}</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">Apple</option>
@@ -312,9 +312,9 @@ const Home = () => {
         <option value="Huawei">Huawei</option>
       </select>
       
-
+      
       {/* por Ram--------------------------------------------------- */}
-      <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <select id="ram" className={style.select}  onChange={(e) => filtersSetters(e)}>
         <option value="null">Ram</option>
         <option  value="4Gb">4Gb</option>
         <option value="6Gb">6Gb</option>
@@ -322,42 +322,45 @@ const Home = () => {
         <option value="12Gb">12Gb</option>
       </select>
       {/* por network----------------------------------------------- */}
-
-      <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      </div>
+      <div className={style.divSelect}>
+      <select id="network" className={style.select} onChange={(e) => filtersSetters(e)}>
         <option  value="null">{homeLang[lan].Red}</option>
         <option value="4G">4G</option>
         <option value="5G">5G</option>
       </select>
-
+      
       {/* por Rom--------------------------------------------------- */}
-      <select id="rom" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      
+      <select id="rom" className={style.select} onChange={(e) => filtersSetters(e)}>
         <option  value="null">Rom</option>
         <option value="64Gb">64Gb</option>
         <option value="128Gb">128Gb</option>
         <option value="256Gb">256Gb</option>
       </select>
-
+      </div>
       {/* por orden--------------------------------------------------- */}
-
-      <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <div className={style.divSelect}>
+      <select id="order" className={style.select} onChange={(e) => filtersSetters(e)}>
         <option  value="null">{homeLang[lan].Pordefecto}</option>
         <option value="rating">{homeLang[lan].Porpuntuacion}</option>
         <option value="ascendingPrice">{homeLang[lan].Ordenascendiente}</option>
         <option value="descendingPrice">{homeLang[lan].Ordendescendiente}</option>
       </select>
-
+      
       {/* por precio--------------------------------------------------- */}
-
-      <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      
+      <select id="price" className={style.select} onChange={(e) => filtersSetters(e)}>
         <option  value="null">{homeLang[lan].precio}</option>
         <option value={[0, 115000]}>de u$ 0 a u$ 500</option>
         <option value={[115000, 230000]}>de u$ 500 a u$ 1000</option>
         <option value={[230000, 345000]}>de u$ 1000 a u$ 1500</option>
       </select>
-
+      </div>
       {/* por processor--------------------------------------------------- */}
       {/* <div style={{ display: "inline-flex", margin: 3 + "px" }}> */}
-        <select id="processor" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+      <div className={style.divSelect}>
+        <select id="processor" className={style.select} onChange={(e) => filtersSetters(e)}>
         <option  value= "null" >{homeLang[lan].Procesador}</option>
         <option value="Snapdragon">Snapdragon</option>
         <option value="Exynos">Exynos</option>
@@ -365,10 +368,12 @@ const Home = () => {
         <option value="Kirin">Kirin</option>
         <option value="Apple">Apple</option>
         </select>
-
-
+</div>
+        <div className={style.divSelect}>
         <button className={style.btn} onClick={() => send()}>{homeLang[lan].Buscar}</button>
-        <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
+        
+        <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiar}</button>
+        </div>
         </div>
       {/* </div> */}
       {/* filtrado************************************ */}

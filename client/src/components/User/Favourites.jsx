@@ -7,6 +7,8 @@ import Card from "../card/Card";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import BtnBack from "../back/BtnBack";
+import styles from './styles/Favourites.module.css'
 
 export default function Favourites() {
   const [user, setUser] = useState();
@@ -40,11 +42,12 @@ export default function Favourites() {
       <UserNavBar />
       {user ? (
         <div>
-          <h2 style={{textAlign: "center"}}>Mis favoritos</h2>
-          <div style={{display: "inline-flex", justifyContent: "space-evenly", width: "100%"}}>
+          <BtnBack/>
+          <h2 style={{textAlign: "center", marginBottom: "30px"}}>Mis favoritos</h2>
+          <div className={styles.containerCard}>
           {user?.favourites?.map((e) => {
             return (
-              <div style={{display: "inline-flex", margin: "1rem"}} key={e.id}>
+              <div key={e.id}>
                 <Card
                   brand={e.brand}
                   model={e.model}

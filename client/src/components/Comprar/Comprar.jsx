@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useSelector } from "react-redux";
+import styles from './Comprar.module.css'
 
 //import axios from 'axios'
 
@@ -40,14 +41,14 @@ export default function Comprar({ productos, data }){
     return(
         <div>
 
-  <form id='form1'>
+  <form id='form1' className={styles.ul}>
 
         <h4>Listado de Compras</h4>
-        <ul>
+        <ul >
         {productos.map((producto, i) => {
             return(
               <>
-                <li key={i}>{producto.brand} - {producto.model}- {producto.price} - {producto.qty}</li>
+                <li key={i} className={styles.li}>{producto.brand}  {producto.model} ${producto.price} - cantidad: {producto.qty}</li>
                 </>
             )
           })} </ul>  

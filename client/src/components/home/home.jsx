@@ -365,7 +365,7 @@ const Home = () => {
 
 
         <button className={style.btn} onClick={() => send()}>{homeLang[lan].Buscar}</button>
-        <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
+        <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiar}</button>
         </div>
       {/* </div> */}
       {/* filtrado************************************ */}

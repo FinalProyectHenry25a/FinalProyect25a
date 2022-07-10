@@ -6,7 +6,8 @@ import {getLocalCart} from '../../Actions'
 import { auth } from '../../firebase/firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useHistory } from 'react-router-dom'
-
+import styles from './MP.module.css'
+import BtnBack from '../back/BtnBack'
 function App() {
   
   const [datos, setDatos] = useState("");
@@ -67,12 +68,17 @@ function App() {
        { !datos
         ? <p>Aguarde un momento....</p>  
         : <>
-          <div>
-            <h2>Nombre: {user.data.username}</h2>
-            <h2>Email: {user.data.email}</h2>
-            <h2>Dirección de entrega: {user.data.address}</h2>
+        <BtnBack/>
+          <div className={styles.container}>
+            <h1>Información de la Compra</h1>
+            <div className={styles.containerDatos}>
+            <h1>Información de entrega:</h1>
+                <h3>Nombre: {user.data.username}</h3>
+                <h3>Email: {user.data.email}</h3>
+                <h3>Dirección de entrega: {user.data.address}</h3>
+            </div>
+              <Comprar productos={cart} data={datos} className={styles.comprar} />
             </div> 
-          <Comprar productos={cart} data={datos}/>
           </>
        } 
     </div>

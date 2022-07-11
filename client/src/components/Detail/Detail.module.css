@@ -1,3 +1,6 @@
+.fondo{
+    background-color: #fff;
+  }
 .divContainer {
     display: flex;
     flex-direction: row;

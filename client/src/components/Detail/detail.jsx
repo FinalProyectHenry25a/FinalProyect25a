@@ -127,7 +127,8 @@ export default function Detail() {
   };
 
   return (
-    <IntlProvider locale="es" messages={messages}>
+    <div className={styles.fondo}>
+    <IntlProvider locale='es' messages={messages}>
       {/* <NavBar /> */}
 
       <BtnBack />
@@ -192,7 +193,7 @@ export default function Detail() {
                   src={PID.additionalphotos?.[0]}
                   width={500}
                   height="100%"
-                  alt="..."
+                  alt=""
                 />
               </div>
               <div className="carousel-item">
@@ -200,7 +201,7 @@ export default function Detail() {
                   src={PID.additionalphotos?.[1]}
                   width={500}
                   height="100%"
-                  alt="..."
+                  alt=""
                 />
               </div>
               <div className="carousel-item">
@@ -208,7 +209,7 @@ export default function Detail() {
                   src={PID.additionalphotos?.[2]}
                   width={500}
                   height="100%"
-                  alt="..."
+                  alt=""
                 />
               </div>
             </div>
@@ -452,5 +453,6 @@ export default function Detail() {
         )}
       </div>
     </IntlProvider>
+    </div>
   );
 }

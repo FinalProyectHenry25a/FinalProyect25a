@@ -5,8 +5,7 @@ module.exports = [
     model: "Galaxy S21+",
     price: 1000,
     rating: 5,
-    images:
-      "https://www.vodafone.it/content/dam/digitalexp/commerce/catalog/prodotti_innovativi/Innovativi_MS_S21_plus.png",
+    images:"https://i.ibb.co/vdwdg2X/galaxy-s21-plus-front.webp",
     color: "Green",
     processor: "Exynos 2100",
     ram: "8Gb",
@@ -20,9 +19,9 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp64aR2nAoazuqvvFRTYO2iHLlKQpDFiLjbDwc-J2ufvGk3SL7WJUs9zlYDZ_VWihsbyU&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4hApycIeZRUHILjUcYP0-9xH77yhVU9sixfOE2YmXoCZym8eYWIlgDYFdbb25C7elq20&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPkNmCJJ3y_2zr6GryrF0PoT-WpxwGVOCo8A&usqp=CAU",
+      "https://i.ibb.co/QD9Yx5C/galaxy-s21-plus-front2.webp",
+      "https://i.ibb.co/MB5tfnT/galaxy-s21-plus-back.webp",
+      "https://i.ibb.co/gjytdTv/galaxy-s21-plus-back2.webp",
     ],
   },
   {
@@ -31,9 +30,8 @@ module.exports = [
     model: "Galaxy Note 20",
     price: 1000,
     rating: 4.5,
-    images:
-      "https://tienda.claro.com.ar/wcsstore/Claro/images/catalog/productos/646x1000/70008528.jpg",
-    color: "Violet",
+    images:"https://i.ibb.co/tmkysS7/galaxy-note20-front.webp",
+    color: "Marron",
     processor: "Snapdragon 865+",
     ram: "8Gb",
     rom: "256Gb",
@@ -46,7 +44,7 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.blogs.es/caba0d/samsung-galaxy-note-20--note-20-ultra-00/1366_2000.jpg",
+      "https://i.ibb.co/Q8Yb0Qp/galaxy-note20-back.webp",
       "https://i.blogs.es/39af2f/galaxy-note20-ultra_back_mystic-bronze/original.jpeg",
       "https://images.samsung.com/is/image/samsung/sa-en-galaxy-note20-5g-n981-sm-n981bzgwksa-frontmysticgreen-320813468",
     ],
@@ -57,9 +55,8 @@ module.exports = [
     model: "Galaxy A51",
     price: 500,
     rating: 3.5,
-    images:
-      "https://images.samsung.com/is/image/samsung/ar-galaxy-a51-a515-sm-a515fzklaro-front-299685233?$1300_1038_PNG$",
-    color: "Mauv",
+    images:"https://i.ibb.co/HrP099j/galaxy-a51.webp",
+    color: "black",
     processor: "Exynos 9611",
     ram: "6Gb",
     rom: "128Gb",
@@ -72,9 +69,8 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://images.fravega.com/f1000/77cb4cf98ab39fe4e3157c44d2dced2a.jpg",
-      "https://cdn.shopify.com/s/files/1/0510/9760/0159/products/A51VARIETY_600x_2x_6d7c6299-f258-4fd2-b72d-bd6ed2d7d778_1200x1200.jpg?v=1645136700",
-      "https://i.blogs.es/227525/samsung-galaxy-a51-06/1366_2000.jpeg",
+      "https://i.ibb.co/zF1r38B/galaxy-a51-back.webp",
+      "https://i.ibb.co/2cSffH5/galaxy-a51-back2.webp",
     ],
   },
   {
@@ -159,7 +155,7 @@ module.exports = [
     model: "Iphone 11 Pro",
     price: 999,
     rating: 5,
-    images: "https://tienda.claro.com.ar/wcsstore/Claro/images/catalog/productos/646x1000/70007759.jpg",
+    images: "https://i.ibb.co/pxgM2pw/iphone-11-pro-front2.webp",
     color: "Goldenrod",
     processor: "Apple A13 Bionic",
     ram: "4Gb",
@@ -173,8 +169,8 @@ module.exports = [
     resolution: "1125 x 2436",
     stock: 100,
     additionalphotos: [
-      "https://media.takealot.com/covers_tsins/59156811/iphone%2011%20pro%20grey-pdpxl.jpg",
-      "https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/09/10225628/iphone-11-003.jpg",
+      "https://i.ibb.co/tYdnPP4/iphone-11-pro-cam.png",
+      "https://i.ibb.co/2tSkZLQ/iphone-11-pro-front.png",
       "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_max_gold_new_4_3.jpg",
     ],
   },

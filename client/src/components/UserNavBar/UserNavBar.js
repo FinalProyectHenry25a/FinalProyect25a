@@ -424,14 +424,14 @@ export default function UserNavBar({ setCurrentPage }) {
                           Usuarios
                         </Link>
                       </MenuItem>
-                      <MenuItem onClick={handleClose} disableRipple>
+                      {/* <MenuItem onClick={handleClose} disableRipple>
                         <Link
                           className="dropdown-item"
                           to="/admin/control-de-usuarios"
                         >
                           Administrar Usuarios
                         </Link>
-                      </MenuItem>
+                      </MenuItem> */}
                       <MenuItem onClick={handleClose} disableRipple>
                         <Link className="dropdown-item" to="/admin/preguntas">
                           Preguntas

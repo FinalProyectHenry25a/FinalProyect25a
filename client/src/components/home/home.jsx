@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, pageOne, setPage, setSelects} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -16,13 +16,14 @@ import Swal from 'sweetalert2';
 
 import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
+import Carrousel from "../carrousel/Carrousel";
 
 
 //import { right } from "@popperjs/core";
 //import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
-const initialTheme = "light"
+
 
 const Home = () => {
 
@@ -37,8 +38,6 @@ const Home = () => {
   const roms = useSelector((state) => state.roms);
   const networks = useSelector((state) => state.networks);
   const processors = useSelector((state) => state.processors);
-  const [theme, setTheme] = useState(initialTheme)
-  const [currentPage, setCurrentPage] = useState(initialTheme)
   const [phonesPerPage] = useState(4);
   const indexOfLastPhones = page * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
@@ -56,15 +55,6 @@ const Home = () => {
     byOrder: null,
   });
 
-
-  const handleTheme = (e) => {
-    console.log(e.target.value)
-    if (e.target.value === "light") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  }
   const [loggedUser, setLoggedUser] = useState();
 
  
@@ -74,8 +64,9 @@ const Home = () => {
 
     await dispatch(getPhones());
      
-    document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
+    //document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     verificarQueHayaUsuarioLogueado();
+    document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))
 
     // dispatch(getLocalFavs());
     // dispatch(getLocalCart());
@@ -272,49 +263,22 @@ const Home = () => {
     await signOut(auth);
   };
 
-  const lang = (e) => {
-    dispatch(language(e.target.value));
-  }
-
   //acá se setea el idioma
   const messages = homeLang[lan]
 
 
 
   return (
-    <IntlProvider locale='es' messages={messages}>
-      <div className={theme}>
-        <div className={style.facu}>
-          <div>
+      <IntlProvider locale='es' messages={messages}>
+    
+      <div className={style.fondo}>
+    <div>
 
 
             <button onClick={logout}>desloguear</button>
 
-            {/* <Link to="/agregado">
-        <button>Agregar Phone</button>
-      </Link> */}
-
             {loggedUser ? <UserNavBar /> : <NavBar />}
-
-            <div className={style.divChange}>
-              <div>
-                <input type="radio" name="theme" id="light" onClick={handleTheme} value="light" />
-                <label htmlFor="light">Claro</label>
-              </div>
-              <div>
-                <input type="radio" name="theme" id="dark" onClick={handleTheme} value="dark" />
-                <label htmlFor="dark">Oscuro</label>
-              </div>
-              <div>
-                <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
-                  <option value="es">Español</option>
-                  <option value="en">English</option>
-                </select>
-              </div>
-            </div>
-
-            {/* {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar setCurrentPage={setCurrentPage} />} */}
-            {/* <Carrousel /> */}
+            <Carrousel/>
 
             <div id="filtros">
 
@@ -323,12 +287,7 @@ const Home = () => {
                 {brands?.map((brand) =>
                   <option key={brand} value={brand}>{brand}</option>
                 )}
-                {/* <option value="Samsung">Samsung</option>
-        <option value="Apple">Apple</option>
-        <option value="Motorola">Motorola</option>
-        <option value="Xiaomi">Xiaomi</option>
-        <option value="Huawei">Huawei</option> */}
-              </select>
+                  </select>
 
 
               {/* por Ram--------------------------------------------------- */}
@@ -337,20 +296,14 @@ const Home = () => {
                 {rams?.map((ram) =>
                   <option key={ram} value={ram}>{ram}</option>
                 )}
-                {/* <option  value="4Gb">4Gb</option>
-        <option value="6Gb">6Gb</option>
-        <option value="8Gb">8Gb</option>
-        <option value="12Gb">12Gb</option> */}
               </select>
-              {/* por network----------------------------------------------- */}
 
+              {/* por network----------------------------------------------- */}
               <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].Red}</option>
                 {networks?.map((network) =>
                   <option key={network} value={network}>{network}</option>
                 )}
-                {/* <option value="4G">4G</option>
-        <option value="5G">5G</option> */}
               </select>
 
               {/* por Rom--------------------------------------------------- */}
@@ -359,13 +312,9 @@ const Home = () => {
                 {roms?.map((rom) =>
                   <option key={rom} value={rom}>{rom}</option>
                 )}
-                {/* <option value="64Gb">64Gb</option>
-        <option value="128Gb">128Gb</option>
-        <option value="256Gb">256Gb</option> */}
               </select>
 
               {/* por orden--------------------------------------------------- */}
-
               <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].Pordefecto}</option>
                 <option value="rating">{homeLang[lan].Porpuntuacion}</option>
@@ -374,7 +323,6 @@ const Home = () => {
               </select>
 
               {/* por precio--------------------------------------------------- */}
-
               <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].precio}</option>
                 <option value={[0, 115000]}>de u$ 0 a u$ 500</option>
@@ -383,24 +331,18 @@ const Home = () => {
               </select>
 
               {/* por processor--------------------------------------------------- */}
-              {/* <div style={{ display: "inline-flex", margin: 3 + "px" }}> */}
               <select id="processor" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
                 <option value="null" >{homeLang[lan].Procesador}</option>
                 {processors?.map((processors) =>
                   <option key={processors} value={processors}>{processors}</option>
                 )}
-                {/* <option value="Snapdragon">Snapdragon</option>
-        <option value="Exynos">Exynos</option>
-        <option value="Mediatek">Mediatek</option>
-        <option value="Kirin">Kirin</option>
-        <option value="Apple">Apple</option> */}
               </select>
 
 
               <button className={style.btn} onClick={() => send()}>{homeLang[lan].Buscar}</button>
               <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
             </div>
-            {/* </div> */}
+
             {/* filtrado************************************ */}
             <div className={style.flex}>
               {currentPhones && allPhones.length ? (
@@ -433,7 +375,6 @@ const Home = () => {
             />
           </div>
         </div>
-      </div>
     </IntlProvider>
   );
 };

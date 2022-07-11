@@ -10,10 +10,11 @@ import soldOut from "../../images/sold-out.png";
 import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { cardLang } from "./cardLang";
+import "./Card.module.css"
 
 
 export default function Card(props) {
-
+  const modo = useSelector(state => state.modo)
   const [user, setUser] = useState(auth.currentUser);
   const favslocal = useSelector((state) => state.favs)
   const lan = useSelector((state) => state.language)
@@ -76,9 +77,15 @@ export default function Card(props) {
       
       <div style={{ height: 300 + "px" }}>
         {props.stock > 0 ? (
+          <div className={modo}>
+            <div className='negro'>
           <img src={props.images} style={{ height: 300 + "px" }} alt="..." />
+           </div>
+          </div>
         ) : (
-          <img src={soldOut} style={{ height: 200 + "px" }} alt="..." />
+          <div className={modo}>
+          <img src={soldOut} style={{ height: 200 + "px" }} alt="..."  />
+          </div>
         )}
       </div>
       <div className="card-body">
@@ -95,17 +102,6 @@ export default function Card(props) {
         justifyContent: "center",
       }}>${props.price}</h2>
         <div className="card-text">
-          {user ? favslocal?.includes(props.id) ? (
-            <button style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
-              <FaHeart />
-            </button>
-          ) : (
-            <button style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
-              <FiHeart />
-            </button>
-          ) : null}
-          <br />
-        </div>
         {props.stock > 0 ? (
           <div>
             {auth.currentUser ? (
@@ -157,6 +153,17 @@ export default function Card(props) {
                   }} to={"/home/" + props.id}>
           {cardLang[lan].Detalle}
         </Link>
+        {user ? favslocal?.includes(props.id) ? (
+            <button style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
+              <FaHeart />
+            </button>
+          ) : (
+            <button style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
+              <FiHeart />
+            </button>
+          ) : null}
+          <br />
+          </div>
       </div>
     </div>
   );

@@ -84,6 +84,7 @@ server.get("/pagos", async  (req, res)=>{
   const payment_status= req.query.status // ESTADO DE LA OPERACION
   const external_reference = req.query.external_reference // MAIL DE USUARIO
   const merchant_order_id= req.query.merchant_order_id
+  // console.log(req.query);
 
   try {
 

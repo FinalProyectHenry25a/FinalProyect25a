@@ -7,10 +7,10 @@ import { BsFillCartFill } from "react-icons/bs";
 import { getLocalCart } from "../../Actions/index";
 import styles from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
+
 import { navBarLang } from "./navBarLang";
 
-
-//import style from "./../NavBar/NavBar.module.css";
+//import styles from "./../NavBar/NavBar.module.css";
 
 
 const NavBar = ({ setCurrentPage }) => {
@@ -51,22 +51,10 @@ const NavBar = ({ setCurrentPage }) => {
           <img src={logo} alt="logo" className={styles.logo} />
         </a>
       </div>
-         
-      
-      
-
+      <div>
         <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
-            <a href="#" className={styles.toggleButton} onClick={change}>
-              <span className={styles.bar}></span>
-              <span className={styles.bar}></span>
-              <span className={styles.bar}></span>
-            </a>
-      <div className={styles.container2}>
-        <Link className={styles.links} to="/cart">
-          <BsFillCartFill className={styles.cart} /> {cartCount}
-        </Link>
-      </div>
-
+        </div>
+            
       <a href="#" className={styles.toggleButton} onClick={change}>
         <span className={styles.bar}></span>
         <span className={styles.bar}></span>
@@ -76,6 +64,11 @@ const NavBar = ({ setCurrentPage }) => {
         className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
       >
         <ul>
+        <li>
+             <Link className={styles.cart} to="/cart">
+              <BsFillCartFill /> {cartCount}
+            </Link> 
+            </li>
           <li>
             <Link to="/login" className={styles.links}>
             {navBarLang[lan].ingresa}

@@ -24,10 +24,6 @@ import LandingPage from './components/landingPage/LandingPage';
 import "./App.css"
 import { useSelector } from 'react-redux';
 
-
-const adminEmail = 'admin@admin.admin';
-
-
 function App() {
   const modo = useSelector(state => state.modo)
   return (

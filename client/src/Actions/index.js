@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 
 export function getPhones() {
@@ -78,6 +79,16 @@ export function postPhone(payload) {
     return json;
   };
 }
+
+export function setSelects(phones) {
+  return async function (dispatch) {
+    return dispatch({
+      type: "SET_SELECTS",
+      payload: phones
+    });
+  };
+}
+
 
 export const addToCart = (itemID) => {
   return async function (dispatch) {
@@ -282,3 +293,55 @@ export const modoOscuro = (modo) => {
   };
 };
 
+export const deleteFav = (email, id) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`)
+    return dispatch({
+      type: "REMOVE_FAVS",
+      payload: {
+        email,
+        id
+      }
+    })
+  }
+}
+
+export function getLocalFavs() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "GET_LOCAL_FAVS",
+    });
+  };
+}
+
+export function setPage(number) {
+  return async function (dispatch) {
+    return dispatch({
+      type: "SET_PAGE",
+      payload: number
+    });
+  };
+}
+
+export function pageOne() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "PAGE_ONE",
+      payload: 1
+    });
+  };
+}
+
+
+export const addFav = (email, id) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/favourites/${email}/${id}`)
+    return dispatch({
+      type: "ADD_FAVS",
+      payload: {
+        email,
+        id
+      }
+    })
+  }
+}

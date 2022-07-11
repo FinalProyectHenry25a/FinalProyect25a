@@ -1,16 +1,21 @@
 import { parseActionCodeURL } from "firebase/auth";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { pageOne, setPage } from "../../Actions";
 import styles from './Paginate.module.css'
 import { paginateLang } from "./paginateLang";
 
 export default function Paginado({ phonesPerPage, allPhones, paginado }) {
-  const [currentPage, setCurrentPage] = useState(1);
+
   const lan = useSelector((state) => state.language);
   const pageNumbers = [];
+  const dispatch = useDispatch();
+
+  const page = useSelector((state) => state.currentPage);
 
   useEffect(() => {
-    setCurrentPage(1);
+
+
   }, [allPhones]);
 
   for (let i = 0; i < Math.ceil(allPhones / phonesPerPage); i++) {
@@ -18,47 +23,85 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
   }
 
   function nextPage() {
-    if (!(currentPage >= Math.ceil(allPhones / phonesPerPage))) {
-      paginado(parseInt(currentPage) + 1);
-      setCurrentPage(parseInt(currentPage) + 1);
+    if (!(page >= Math.ceil(allPhones / phonesPerPage))) {
+      paginado(parseInt(page) + 1);
+      dispatch(setPage(parseInt(page) + 1));
     }
   }
 
   function previousPage() {
-    if (currentPage - 1 > 0) {
-      paginado(parseInt(currentPage) - 1);
-      setCurrentPage(parseInt(currentPage) - 1);
+    if (page - 1 > 0) {
+      paginado(parseInt(page) - 1);
+      dispatch(setPage(parseInt(page) - 1));
     }
   }
 
-  function onKeyDown(e) {
-    if (e.keyCode == 13) {
-      setCurrentPage(parseInt(e.target.value));
-      if (
-        parseInt(e.target.value) < 1 ||
-        parseInt(e.target.value) > Math.ceil(allPhones / phonesPerPage) ||
-        isNaN(parseInt(e.target.value))
-      ) {
-        setCurrentPage(1);
-        paginado(1);
-      }
-      else {
-        paginado(parseInt(e.target.value))
-      }
+  // function onKeyDown(e) {
+  //   if (e.keyCode == 13) {
+  //     dispatch(setPage(parseInt(e.target.value)));
+  //     if (
+  //       parseInt(e.target.value) < 1 ||
+  //       parseInt(e.target.value) > Math.ceil(allPhones / phonesPerPage) ||
+  //       isNaN(parseInt(e.target.value))
+  //     ) {
+  //       dispatch(setPage(1));
+  //       paginado(1);
+  //     } else {
+  //       paginado(parseInt(e.target.value));
+  //     }
+  //   }
+  // }
+
+  // function onChange(e) {
+  //   setCurrentPage(e.target.value);
+  // }
+
+  // function pag(number) {
+  //   paginado(number);
+  //   // setCurrentPage(number);
+  // }
+
+ const pageInput = (e) => {
+
+  if (e.target.value > 5) {
+
+    let pageNumStr = String(e.target.value);
+
+    let pageNum = pageNumStr.split("");
+
+    if(parseInt(pageNum[1]) < 1 || parseInt(pageNum[1]) > Math.ceil(allPhones / phonesPerPage) ||     isNaN(parseInt(pageNum[1]))) {
+
+      dispatch(pageOne());
+
+    } else {
+
+      dispatch(setPage(parseInt(pageNum[1])));
+
     }
+
+  } 
+
+  else if (
+
+    parseInt(e.target.value) < 1 ||
+    parseInt(e.target.value) > Math.ceil(allPhones / phonesPerPage) ||
+    isNaN(parseInt(e.target.value))
+
+  ) 
+  
+  {
+    dispatch(pageOne());
+
+  } else {
+
+    dispatch(setPage(parseInt(e.target.value)));
+
   }
 
-  function onChange(e) {
-    setCurrentPage(e.target.value)
-  }
-
-  function pag(number) {
-    paginado(number);
-    setCurrentPage(number);
-  }
+ }
 
   return (
-    <nav aria-label="...">
+    <nav aria-label="..." style={{marginBottom: '40px'}}>
       {/* <ul className="pagination justify-content-center">
         {pageNumbers &&
           pageNumbers.map((number) => (
@@ -71,14 +114,21 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       </ul> */}
 
       <ul className="pagination justify-content-center">
-        <button className={styles.btn} onClick={() => previousPage()} disabled={currentPage === 1 || currentPage < 1}>
+        <button className={styles.btn} onClick={() => previousPage()} disabled={page === 1 || page < 1}>
         {paginateLang[lan].anterior}
         </button>
-        <input className={styles.input} onChange={(e) => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={currentPage} />
-        <label className={styles.input}>
+        <input
+          id="pageInput"
+          className={styles.input}
+          onChange={pageInput}
+          name="page"
+          autoComplete="off"
+          value={page}
+        />
+        <label className={styles.input2}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>
-        <button className={styles.btn} onClick={() => nextPage()} disabled={currentPage === Math.ceil(allPhones / phonesPerPage) || currentPage > Math.ceil(allPhones / phonesPerPage) }>
+        <button className={styles.btn} onClick={() => nextPage()} disabled={page === Math.ceil(allPhones / phonesPerPage) || page > Math.ceil(allPhones / phonesPerPage) }>
         {paginateLang[lan].siguiente}
         </button>
       </ul>

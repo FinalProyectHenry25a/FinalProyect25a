@@ -142,7 +142,7 @@ export default function Detail() {
             <h1>{PID.model}</h1>
             {PID.additionalphotos?.length >= 1
               ? PID.additionalphotos.map((el) => (
-                  <img src={el} width="50" height="60" alt="No encontrada" />
+                  <img src={el} width="150" alt="No encontrada" />
                 ))
               : null}
             <h3>${PID.price}</h3>
@@ -179,7 +179,7 @@ export default function Detail() {
                           dispatch(addToCartUser(user.email, PID.id))
                         }
                       >
-                        <p>Agregar al carito User</p>
+                        <p>Agregar al carrito</p>
                       </button>
                     </Link>
                   ) : (
@@ -203,7 +203,7 @@ export default function Detail() {
                   {PID.stock}
                 </div>
               ) : (
-                <p>AGOTADO</p>
+                <p>AGOTADO!</p>
               )}
               {/* <button type="submit" className="btn btn-outline-dark"  onClick={e => dispatch(addToCart(PID.id))}>
               Agregar al Carrito

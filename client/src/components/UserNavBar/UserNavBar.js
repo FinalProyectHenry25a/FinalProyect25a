@@ -101,6 +101,7 @@ export default function UserNavBar({setCurrentPage}) {
     //     <NavBar />
     //   )}
     // </nav>
+    
     <nav className={styles.navbar}>
     {user ? (
       <><div className={styles.brandLogo}>
@@ -118,7 +119,7 @@ export default function UserNavBar({setCurrentPage}) {
             className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
             >
           
-            
+             
             <ul>
               <li>
              <Link className={styles.cart} to="/cart">
@@ -139,8 +140,8 @@ export default function UserNavBar({setCurrentPage}) {
                 <Link to="/favoritos" className={styles.links}>
                 {userNavBarLang[lan].Favoritos}
                 </Link>
-              </li>
-              <li>
+              </li> 
+              <li> 
             {user?.isAdmin ? <Link className="nav-link active m-3" to="admin">
               Menu de administración
             </Link> : null}
@@ -150,9 +151,10 @@ export default function UserNavBar({setCurrentPage}) {
                 {userNavBarLang[lan].CerrarSesion}
                 </Link>
               </li>
+           
             </ul>
-
-          </div></>
+          </div>
+          </>
     ) : (
          <NavBar />
        )}

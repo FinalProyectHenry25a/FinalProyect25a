@@ -32,6 +32,35 @@ const CartItem = (props) => {
 
   }
 
+  const mas = async (e) => {
+   
+    dispatch(adjustItemQty(props.item.id, input + 1));
+    setInput(parseInt(input + 1));
+    let post = await axios.get(`http://localhost:3001/home/${props.item.id}`)
+    if (parseInt(input) > post.data.stock - 1) {
+      setInput(post.data.stock)
+    }
+  }
+
+  const menos = async (e) => {
+
+    if (parseInt(input) < 1) {
+
+      setInput(parseInt(0))
+      dispatch(adjustItemQty(props.item.id, input));
+
+    } else {
+
+      dispatch(adjustItemQty(props.item.id, input - 1));
+      setInput(parseInt(input - 1));
+
+    }
+
+    
+
+    //let post = await axios.get(`http://localhost:3001/home/${props.item.id}`)
+
+  }
   const onChangeHandler = async (e) => {
 
     setInput(e.target.value);
@@ -41,9 +70,14 @@ const CartItem = (props) => {
 
     if (e.target.value > post.stock) {
       e.target.value = post.stock;
-    }
-  };
+    } else if(isNaN(e.target.value)) {
 
+      setInput(1)
+      dispatch(adjustItemQty(props.item.id, input));
+
+    }
+
+  };
   return (
     <div className={styles.cartItem}>
       <img src={item.images} alt={item.model} width={200} className={styles.image}/>
@@ -59,15 +93,20 @@ const CartItem = (props) => {
           <label htmlFor="qty">Cantidad:</label>
           <input
             min="1"
-            type="number"
+            type="text"
             id="qty"
             name="qty"
             className={styles.input}
             value={input}
             onChange={onChangeHandler}
           />
+          <div className={styles.count}>
+            <button className={styles.countMas} onClick={mas}>+</button>
+            <button className={styles.countMenos} onClick={menos}>-</button>
+          </div>
+          
         </div>
-        <p className={styles.prf}> ({stockView} unidades disponibles) </p>
+        <p className={styles.prf}> ({stockView} U.) </p>
         {auth.currentUser ? (
           <button
             onClick={() =>
@@ -84,7 +123,7 @@ const CartItem = (props) => {
             onClick={() => dispatch(removeFromCart(item.id))}
             className={styles.actions__deleteItemBtn}
           >
-            x
+            🗑️
           </button>
         )}
       </div>

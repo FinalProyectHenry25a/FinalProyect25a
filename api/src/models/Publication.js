@@ -51,17 +51,17 @@ module.exports = (sequelize) => {
     },
 
     ram: {
-      type: DataTypes.ENUM("4Gb", "6Gb", "8Gb", "12Gb"),
+      type: DataTypes.STRING,
       allowNull: true
     },
 
     rom: {
-      type: DataTypes.ENUM("32Gb", "64Gb", "128Gb", "256Gb"),
+      type: DataTypes.STRING,
       allowNull: true
     },
 
     network: {
-      type: DataTypes.ENUM("3G", "4G", "5G"),
+      type: DataTypes.STRING,
       allowNull: true
     },
 

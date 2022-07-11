@@ -21,6 +21,7 @@
 @media (max-width: 1150px) {
     .input {
         width: 300px;
+        margin-left: 5px;
     }
     .btn {
         width: 60px;

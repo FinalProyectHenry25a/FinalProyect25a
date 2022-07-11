@@ -29,17 +29,18 @@ export default function Identify() {
 
     return (
 
-        <div>
+        <div className=" row y justify-content-center">
+        <div className="display-flex justify-content-center row border border-sky-500 col-4 center d-grid gap-2 row shadow py-2 px-4 rounded">
 
-            <h2>Recupera tu Cuenta</h2>
+            <h2 className="col-auto row justify-content-center py-2 px-4 rounded">Recupera tu Cuenta</h2>
             <br /><br />
-            <h3>Ingresa tu correo electrónico para recuperar contraseña</h3>
+            <h4>Ingresa tu correo electrónico para recuperar contraseña</h4>
             <br />
-            <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico"></input>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-100" type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico"></input>
+            <button className=' justify-content-center col-auto btn btn-primary btn-sm' onClick={resetPassword} type="submit">Enviar mail de recuperacion</button>
             <br /><br />
-            <Link to="/login"><button type="submit">Volver atras</button></Link>
-            <button onClick={resetPassword} type="submit">Enviar mail de recuperacion</button>
-
+            <Link className="row justify-content-center" to="/login"><button className=' justify-content-center col-auto btn btn-secondary btn-sm' type="submit">Volver atras</button></Link>
+            </div>
         </div>
 
     )

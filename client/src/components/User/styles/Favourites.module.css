@@ -1,0 +1,13 @@
+.containerCard{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 500px) {
+    .containerCard{
+        flex-direction:column;
+    }
+}

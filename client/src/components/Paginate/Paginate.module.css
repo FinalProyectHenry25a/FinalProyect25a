@@ -1,0 +1,22 @@
+.btn {
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  background-color: rgb(80, 95, 214);
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.input{
+  width: 40px;
+  padding-left: 12px;
+}
+
+.input2 {
+  font-size: 17px;
+  margin-left: 10px;
+  margin-top: 7px;
+  margin-right: 10px;
+}

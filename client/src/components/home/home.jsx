@@ -13,6 +13,7 @@ import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
 
 import { homeLang } from "./homeLang";
 import {FormattedMessage, IntlProvider} from 'react-intl'
@@ -270,7 +271,7 @@ const Home = () => {
       <IntlProvider locale='es' messages={messages}>
     <div className={theme}>
       <div className={style.facu}>
-    <div>
+    <div className="display-flex row y justify-content-center">
 
    
       <button onClick={logout}>desloguear</button>
@@ -401,6 +402,11 @@ const Home = () => {
         allPhones={allPhones.length}
         paginado={paginado}
       />
+    <div class="display-flex align-items-center justify-content-center col-auto">
+      <Link to='/about'>
+      <button class="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
+      </Link>
+    </div>
       </div>
     </div>
     </div>

@@ -22,12 +22,14 @@ import BannedUser from './components/User/BannedUser';
 import Preguntas from './components/Admin/Preguntas';
 import LandingPage from './components/landingPage/LandingPage';
 import "./App.css"
+import { useSelector } from 'react-redux';
 
 function App() {
+  const modo = useSelector(state => state.modo)
   return (
-
     <BrowserRouter>
       <Switch>
+    <div className={modo}>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/banned" component={BannedUser} />
         <Route exact path="/home" component={Home} />
@@ -49,6 +51,7 @@ function App() {
         <Route exact path="/admin/ProductToEdit/:id" component={ProductToEdit}/> 
         <Route exact path="/contacto" component={Contacto} /> 
         <Route exact path="/admin/preguntas" component={Preguntas}/>
+    </div>
         
       </Switch>
     </BrowserRouter>

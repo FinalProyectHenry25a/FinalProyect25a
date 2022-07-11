@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -22,7 +22,7 @@ import { FormattedMessage, IntlProvider } from 'react-intl'
 //import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
-const initialTheme = "light"
+
 
 const Home = () => {
 
@@ -37,8 +37,6 @@ const Home = () => {
   const roms = useSelector((state) => state.roms);
   const networks = useSelector((state) => state.networks);
   const processors = useSelector((state) => state.processors);
-  const [theme, setTheme] = useState(initialTheme)
-  const [currentPage, setCurrentPage] = useState(initialTheme)
   const [phonesPerPage] = useState(4);
   const indexOfLastPhones = page * phonesPerPage;
   const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
@@ -76,6 +74,7 @@ const Home = () => {
      
     document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     verificarQueHayaUsuarioLogueado();
+    document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))
 
     // dispatch(getLocalFavs());
     // dispatch(getLocalCart());
@@ -282,10 +281,10 @@ const Home = () => {
 
 
   return (
-    <IntlProvider locale='es' messages={messages}>
-      <div className={theme}>
-        <div className={style.facu}>
-          <div>
+      <IntlProvider locale='es' messages={messages}>
+    
+      <div className={style.fondo}>
+    <div>
 
 
             <button onClick={logout}>desloguear</button>
@@ -294,6 +293,22 @@ const Home = () => {
         <button>Agregar Phone</button>
       </Link> */}
 
+      
+      <input type="radio" name="theme" id="light" onClick={(e) => dispatch(modoOscuro(e.target.value))} value="light"/>
+     <label htmlFor="light">Claro</label>
+     <input type="radio" name="theme" id="dark" onClick={(e) => dispatch(modoOscuro(e.target.value))} value="dark"/>
+     <label htmlFor="dark">Oscuro</label>
+      <br/>
+
+      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
             {loggedUser ? <UserNavBar /> : <NavBar />}
 
             <div className={style.divChange}>

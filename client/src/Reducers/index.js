@@ -4,6 +4,7 @@ const initialState = {
   phones: [],
   phonesForSelect: [],
   phonesId: [],
+  modo: JSON.parse(localStorage.getItem("modoOscuro"))? JSON.parse(localStorage.getItem("modoOscuro")) : 'light',
   currentPage: JSON.parse(localStorage.getItem("currentPage")) || 1,
   brands: [],
   rams: [],
@@ -328,6 +329,17 @@ function rootReducer(state = initialState, action) {
     ...state,
     favs: newFav
   }
+  case "MODO_OSCURO" :
+                    if(action.payload === "light"){
+                      localStorage.setItem('modoOscuro', JSON.stringify('light'));
+                    }else{
+                      localStorage.setItem('modoOscuro', JSON.stringify('dark'));
+                    }
+                    console.log(action.payload)
+                  return {
+                    ...state,
+                    modo: JSON.parse(localStorage.getItem("modoOscuro"))
+                  }
     default:
   return state;
 }

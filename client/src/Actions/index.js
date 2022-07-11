@@ -286,6 +286,13 @@ export const language = (leng) => {
   };
 };
 
+export const modoOscuro = (modo) => {
+  return {
+    type: "MODO_OSCURO",
+    payload: modo
+  };
+};
+
 export const deleteFav = (email, id) => {
   return async function (dispatch) {
     await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`)

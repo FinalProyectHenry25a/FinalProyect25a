@@ -84,7 +84,7 @@ const eliminar = async (e)=>{
 
 return(
     <div>
-          <Link to="/admin">
+          <Link to="/home">
         <button className={style.btn}>Volver</button>
       </Link>
             <h1 className="d-flex justify-content-center">Preguntas</h1>

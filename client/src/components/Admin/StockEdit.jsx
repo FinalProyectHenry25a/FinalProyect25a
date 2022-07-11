@@ -107,7 +107,7 @@ export default function StockEdit() {
   return (
     <div>
       <h1>Cambio de stock</h1>
-      <Link to="/admin">
+      <Link to="/home">
         <button>◀ Back</button>
       </Link>
 

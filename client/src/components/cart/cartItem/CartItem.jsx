@@ -33,8 +33,9 @@ const CartItem = (props) => {
   }
 
   const mas = async (e) => {
-    setInput(parseInt(input + 1));
+   
     dispatch(adjustItemQty(props.item.id, input + 1));
+    setInput(parseInt(input + 1));
     let post = await axios.get(`http://localhost:3001/home/${props.item.id}`)
     if (parseInt(input) > post.data.stock - 1) {
       setInput(post.data.stock)
@@ -43,14 +44,22 @@ const CartItem = (props) => {
 
   const menos = async (e) => {
 
-    setInput(parseInt(input - 1));
-    dispatch(adjustItemQty(props.item.id, input - 1));
-    let post = await axios.get(`http://localhost:3001/home/${props.item.id}`)
+    if (parseInt(input) < 1) {
 
-    if (input > post.data.stock) {
-      setInput(post.data.stock - 1)
+      setInput(parseInt(0))
+      dispatch(adjustItemQty(props.item.id, input));
+
+    } else {
+
+      dispatch(adjustItemQty(props.item.id, input - 1));
+      setInput(parseInt(input - 1));
+
     }
+
     
+
+    //let post = await axios.get(`http://localhost:3001/home/${props.item.id}`)
+
   }
   const onChangeHandler = async (e) => {
 

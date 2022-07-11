@@ -14,6 +14,28 @@
 .prf {
     margin-right: 10px;
 }
+
+.count {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.countMas {
+    width: 27px;
+    border-radius: 5px;
+    background-color: rgb(80, 95, 214);
+    color: white;
+}
+.countMenos {
+    width: 27px;
+    background-color: rgb(80, 95, 214);
+    color: white;
+    border-radius: 5px;  
+}
 .cartItemDetails {
     margin-left: 40px;
     margin-top: 10px;
@@ -37,4 +59,12 @@
 .actions__deleteItemBtn {
     background: none;
     border: none;
+}
+
+@media (max-width: 500px) {
+    .cartItem{
+        width: 380px;
+        margin-left:17px;
+        flex-direction: column;
+    }
 }

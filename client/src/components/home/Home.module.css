@@ -1,4 +1,4 @@
-.facu{
+.fondo{
   background-color: #fff;
 }
 
@@ -9,16 +9,27 @@
     justify-content: space-around;
     margin: auto;
 }
+.divContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 27px;
+}
 
 .divChange {
   display: flex;
   flex-direction: row;
-  gap: 100px;
+  gap: 60px;
   align-items: center;
   justify-content: left;
   margin-left: 20px;
 }
-
+.select {
+  width: 170px;
+  border-radius: 7px;
+  height: 35px;
+}
 .dark{
   filter:invert(1)
 }
@@ -34,7 +45,11 @@
   background-color: #282c34;
 }
 
-
+.divSelect {
+  display: flex;
+  justify-content: center;
+  gap: 50px
+}
 .btn {
   color: white;
   border: none;
@@ -43,4 +58,20 @@
   height: 50px;
   background-color: rgb(80, 95, 214);
   border-radius: 5px;
+}
+
+@media (max-width: 1300px) {
+  .divContainer {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .divSelect {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+  }
+  .select {
+    height: 35px;
+    padding-left: 5px;
+  }
 }

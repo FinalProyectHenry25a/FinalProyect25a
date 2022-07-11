@@ -6,10 +6,12 @@ import {getLocalCart} from '../../Actions'
 import { auth } from '../../firebase/firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useHistory } from 'react-router-dom'
-
+import styles from './MP.module.css'
+import BtnBack from '../back/BtnBack'
 function App() {
   
   const [datos, setDatos] = useState("");
+  const [user, setUser] = useState({}) 
   const cart = useSelector(state => state.cart);
   const history = useHistory();
 
@@ -23,6 +25,7 @@ function App() {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
+        setUser(user);
         if(user.data.banned){
 
           history.push("/banned")
@@ -32,7 +35,7 @@ function App() {
     });
   };
   
-  
+
 
   //  useEffect(()=>{
   //    axios
@@ -64,7 +67,19 @@ function App() {
     <div className="App">
        { !datos
         ? <p>Aguarde un momento....</p>  
-        : <Comprar productos={cart} data={datos}/>
+        : <>
+        <BtnBack/>
+          <div className={styles.container}>
+            <h1>Información de la Compra</h1>
+            <div className={styles.containerDatos}>
+            <h1>Información de entrega:</h1>
+                <h3>Nombre: {user.data.username}</h3>
+                <h3>Email: {user.data.email}</h3>
+                <h3>Dirección de entrega: {user.data.address}</h3>
+            </div>
+              <Comprar productos={cart} data={datos} className={styles.comprar} />
+            </div> 
+          </>
        } 
     </div>
   );

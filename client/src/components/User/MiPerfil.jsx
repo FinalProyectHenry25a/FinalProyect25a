@@ -30,6 +30,7 @@ export default function MiPerfil() {
     verificarQueHayaUsuarioLogueado();
   }, []);
 
+  
   const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
@@ -206,7 +207,7 @@ export default function MiPerfil() {
                         <div>
                           <p className={styles.prf}>{miPerfilLang[lan].nombreCompleto}</p>
                         <div>
-                          <p>
+                          <p className={styles.prf}>
                             {user.firstname} {user.lastname}
                           </p>
                         </div>
@@ -217,7 +218,7 @@ export default function MiPerfil() {
                         </div>
                         <div>
                           {auth.currentUser.emailVerified ? (
-                            <p>{miPerfilLang[lan].verificado}👌</p>
+                            <p className={styles.prf}>{miPerfilLang[lan].verificado}👌</p>
                           ) : (
                             <button
                               onClick={verification}

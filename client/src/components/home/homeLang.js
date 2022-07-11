@@ -24,6 +24,6 @@ export const homeLang = {
     precio: "Price",
     Procesador: "Processor",
     Buscar: "Find",
-    Limpiarfiltros: "Clear filters",
+    Limpiarfiltros: "Clear filter",
   },
 };

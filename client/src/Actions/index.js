@@ -80,6 +80,16 @@ export function postPhone(payload) {
   };
 }
 
+export function setSelects(phones) {
+  return async function (dispatch) {
+    return dispatch({
+      type: "SET_SELECTS",
+      payload: phones
+    });
+  };
+}
+
+
 export const addToCart = (itemID) => {
   return async function (dispatch) {
     return dispatch({
@@ -276,6 +286,13 @@ export const language = (leng) => {
   };
 };
 
+export const modoOscuro = (modo) => {
+  return {
+    type: "MODO_OSCURO",
+    payload: modo
+  };
+};
+
 export const deleteFav = (email, id) => {
   return async function (dispatch) {
     await axios.put(`http://localhost:3001/favourites/delete/${email}/${id}`)
@@ -298,7 +315,6 @@ export function getLocalFavs() {
 }
 
 export function setPage(number) {
-  console.log(number);
   return async function (dispatch) {
     return dispatch({
       type: "SET_PAGE",

@@ -74,11 +74,11 @@ export default function Posts(props) {
       <Link to="/home">
         <button className="btn btn-secondary m-3">Volver</button>
       </Link>
-      <br />
+      
       
 
       {postsState?.map((el) => (
-        <div classNameName="border rounded p-3 m-2" key={el.id}>
+        <div className="p-2 m-1" key={el.id}>
           <h4 className="m-4">
             {el.brand} - {el.model}
           </h4>
@@ -118,8 +118,8 @@ export default function Posts(props) {
 
             <div className="border rounded col-3 d-flex flex-row justify-content-around align-items-center">
               {el.additionalphotos?.length >= 1
-                ? el.additionalphotos.map((elem) => (
-                    <div>
+                ? el.additionalphotos.map((elem, index) => (
+                    <div key={index}>
                       <img className="img-fluid" src={elem} alt="" />
                     </div>
                   ))

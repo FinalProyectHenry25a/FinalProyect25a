@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { getDetails, editPost, getUser, cleanUp } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
@@ -171,6 +171,9 @@ export default function ProductToEdit() {
 
   return (
     <div>
+      <Link to="/home">
+        <button>Volver</button>
+      </Link>
       <div>
         <label>brand</label>
         <input

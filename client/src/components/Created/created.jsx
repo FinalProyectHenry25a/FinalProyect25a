@@ -233,7 +233,7 @@ export default function PhoneCreate() {
 
   return (
     <div className=" row y justify-content-center">
-      <Link to="/admin">
+      <Link to="/home">
         <button className={style.btn}>◀ Volver</button>
       </Link>
       <div className=" border border-sky-500 col-4 center">

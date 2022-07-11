@@ -71,7 +71,7 @@ export default function Posts(props) {
 
   return (
     <div>
-      <Link to="/admin">
+      <Link to="/home">
         <button>◀ Back</button>
       </Link>
       <br />

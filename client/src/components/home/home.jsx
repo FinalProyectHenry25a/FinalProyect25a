@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, pageOne, setPage, setSelects} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -13,8 +13,10 @@ import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
 import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
+import Carrousel from "../carrousel/Carrousel";
 
 
 const Home = () => {
@@ -71,7 +73,7 @@ const Home = () => {
     
     await dispatch(getPhones());
      
-    document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
+    //document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     verificarQueHayaUsuarioLogueado();
     document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))
 
@@ -276,16 +278,7 @@ const Home = () => {
 
   };
 
-  const lang = (e) => {
-
-    dispatch(language(e.target.value));
-
-  }
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-
+  //acá se setea el idioma
   
 
   /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
@@ -296,21 +289,13 @@ const Home = () => {
       <IntlProvider locale='es' messages={messages}>
     
       <div className={style.fondo}>
-    <div>
+      <div className="display-flex row y justify-content-center">
 
 
             <button onClick={logout}>desloguear</button>
 
-      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-
-      <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
-        <option value="es">Español</option>
-        <option value="en">English</option>
-      </select>
             {loggedUser ? <UserNavBar /> : <NavBar />}
+            <Carrousel/>
 
             <div id="filtros">
 
@@ -405,6 +390,11 @@ const Home = () => {
               allPhones={allPhones.length}
               paginado={paginado}
             />
+            <div class="display-flex align-items-center justify-content-center col-auto">
+      <Link to='/about'>
+      <button class="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
+      </Link>
+    </div>
           </div>
         </div>
     </IntlProvider>

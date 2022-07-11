@@ -69,27 +69,164 @@ router.post("/post", async (req, res) => {
     res.status(404).send(error);
   }
 });
-/*
-para probar y como ejemplo del body:
-{
-    "brand": "santi",
-    "releaseDate": "alguna fecha",
-    "model": "ssdcs",
-    "price": 250,
-    "rating": 5,
-    "images": "slksdmlcsmk",
-    "color": "rojo",
-    "processor": "sdsfds",
-    "ram":"4Gb",
-    "rom":"32Gb",
-    "network":"3G",
-    "batery":6,
-    "frontal_cam":5,
-    "main_cam":7,
-    "inches": 10,
-    "screen": 11,
-    "resolution":"sdsdf",
-    "stock":5
-} */
+
+//RUTA PARA MODIFICAR STOCK
+router.put("/modifica-stock", async (req, res) => {
+  try {
+    let post = await Publication.findByPk(req.body.id);
+
+    if (req.body.do === "add") {
+      await Publication.update(
+        { stock: post.dataValues.stock + parseInt(req.body.amount) },
+        { where: { id: req.body.id } }
+      );
+    } else if (req.body.do === "remove") {
+      await Publication.update(
+        { stock: post.dataValues.stock - parseInt(req.body.amount) },
+        { where: { id: req.body.id } }
+      );
+    }
+
+    res.send(post);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+});
+
+router.put("/:email", async (req, res) => {
+
+  const { email } = req.params;
+
+  try {
+
+    await User.update( 
+      
+      { isAdmin: true } ,
+      { where: { email: email } }
+       
+       );
+
+    res.status(200).json("Conversion a Admin satisfactoria!");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+
+router.put("/removeAdmin/:email", async (req, res) => {
+
+  const { email } = req.params;
+
+  try {
+
+    await User.update( 
+      
+      { isAdmin: false } ,
+      { where: { email: email } }
+       
+       );
+
+    res.status(200).json("Se quito el admin satisfactoriamente!");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+
+router.put("/posts/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const {
+    brand,
+    releaseDate,
+    model,
+    price,
+    rating,
+    images,
+    color,
+    processor,
+    ram,
+    rom,
+    network,
+    batery,
+    frontal_cam,
+    main_cam,
+    inches,
+    screen,
+    resolution,
+    additionalphotos,
+  } = req.body;
+
+
+  try {
+    let publicacion = await Publication.findOne({
+      where: {
+        id: id,
+      },
+    });
+  
+    if (publicacion) {
+      await Publication.update(
+        {
+          brand,
+          releaseDate,
+          model,
+          price,
+          rating,
+          images,
+          color,
+          processor,
+          ram,
+          rom,
+          network,
+          batery,
+          frontal_cam,
+          main_cam,
+          inches,
+          screen,
+          resolution,
+          additionalphotos,
+        },
+        { where: { id: id } }
+      );
+      
+    }
+    else {
+      await Publication.update(
+        {
+          brand,
+          releaseDate,
+          model,
+          price,
+          rating,
+          images,
+          color,
+          processor,
+          ram,
+          rom,
+          network,
+          batery,
+          frontal_cam,
+          main_cam,
+          inches,
+          screen,
+          resolution,
+        },
+        { where: { id: id } }
+      );
+
+    }
+
+    res.status(200).send("se edito con exito");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;

@@ -1,65 +1,93 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
-//import style from "./../NavBar/NavBar.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { BsFillCartFill } from "react-icons/bs";
+import { getLocalCart } from "../../Actions/index";
+import styles from "./../NavBar/NavBar.module.css";
+import logo from "../../images/smartworld.jpg";
 
-const NavBar = () => {
+import { navBarLang } from "./navBarLang";
+
+//import styles from "./../NavBar/NavBar.module.css";
+
+
+const NavBar = ({ setCurrentPage }) => {
+  
+  const [cartCount, setCartCount] = useState(0);
+  const cart = useSelector((state) => state.cart);
+  const lan = useSelector((state) => state.language);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    let count = 0;
+    cart.forEach((item) => {
+      count += item.qty;
+    });
+
+    setCartCount(count);
+  }, [cart, cartCount, setCartCount]);
+  useEffect(() => {
+    dispatch(getLocalCart());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getLocalCart());
+  }, []);
+
+  const change = () => {
+    setOpen(!open);
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Henry Store
+    <nav className={styles.navContainer}>
+      
+
+      <div className={styles.container}>
+
+        <a className={styles.ancor} href="/home">
+          <img src={logo} alt="logo" className={styles.logo} />
         </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link active" to="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link active" to="/agregado">
-                Agregar Celular
-              </Link>
-            </li>
-          </ul>
-          <SearchBar />
+      </div>
+      <div>
+        <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
         </div>
+            
+      <a href="#" className={styles.toggleButton} onClick={change}>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+      </a> 
+      <div
+        className={`${open ? styles.navbarLinksActive : styles.navbarLinks}`}
+      >
+        <ul>
+        <li>
+             <Link className={styles.cart} to="/cart">
+              <BsFillCartFill /> {cartCount}
+            </Link> 
+            </li>
+          <li>
+            <Link to="/login" className={styles.links}>
+            {navBarLang[lan].ingresa}
+            </Link>
+          </li>
+          <li>
+            <Link to="/register" className={styles.links}>
+            {navBarLang[lan].creaTuCuenta}
+            </Link>
+          </li>
+          <li>
+            <Link to="/contacto" className={styles.links}>
+            {navBarLang[lan].contacto}
+            </Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );
 };
-{
-  /* <div className={style.flex}>
-
-      <div>
-
-        <h1>Logo</h1>
-
-      </div><div className={style.carrito}>
-
-          <Link to="/login">
-
-            <button className={style.btn}>Login</button>
-
-          </Link>
-
-          <h2>CARRITO</h2>
-
-        </div>
-
-    </div> */
-}
 
 export default NavBar;

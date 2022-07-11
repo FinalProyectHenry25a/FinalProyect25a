@@ -1,4 +1,5 @@
-const { DataTypes } = require("sequelize");
+const { text } = require("body-parser");
+const { DataTypes, TEXT } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("publication", {
@@ -35,7 +36,7 @@ module.exports = (sequelize) => {
     },
 
     images: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
 
@@ -50,17 +51,17 @@ module.exports = (sequelize) => {
     },
 
     ram: {
-      type: DataTypes.ENUM("4Gb", "6Gb", "8Gb", "12Gb"),
+      type: DataTypes.STRING,
       allowNull: true
     },
 
     rom: {
-      type: DataTypes.ENUM("32Gb", "64Gb", "128Gb", "256Gb"),
+      type: DataTypes.STRING,
       allowNull: true
     },
 
     network: {
-      type: DataTypes.ENUM("3G", "4G", "5G"),
+      type: DataTypes.STRING,
       allowNull: true
     },
 
@@ -97,7 +98,22 @@ module.exports = (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+
+    review:{
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true
+    },
+
+    qty: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+
+    additionalphotos:{
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: true
+    },
 
   });
 };

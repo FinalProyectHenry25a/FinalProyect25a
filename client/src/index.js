@@ -10,11 +10,14 @@ import {store} from './Store/index';
 //import * as bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-        <App />
+       
+          <App />
+        
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,

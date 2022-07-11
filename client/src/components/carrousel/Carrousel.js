@@ -53,19 +53,19 @@ const Carrousel = () => {
   <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner">
     <div className="carousel-item active" data-bs-interval="2000">
-      <img src={iphone2} style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
+      <img src={iphone2} style={{display: "block", width: 100 + "%", height: 340 + "px"}} alt="..."/>
     </div>
     <div className="carousel-item" data-bs-interval="2000">
-      <img src={moto} style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
+      <img src={moto} style={{display: "block", width: 100 + "%", height: 340 + "px"}} alt="..."/>
     </div>
     <div className="carousel-item" data-bs-interval="2000">
-      <img src={huawei}  style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
+      <img src={huawei}  style={{display: "block", width: 100 + "%", height: 340 + "px"}} alt="..."/>
     </div>
     <div className="carousel-item" data-bs-interval="2000">
-      <img src={samsung} style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
+      <img src={samsung} style={{display: "block", width: 100 + "%", height: 340 + "px"}} alt="..."/>
     </div>
     <div className="carousel-item">
-      <img src={note} style={{display: "block", width: 100 + "%", height: 500 + "px"}} alt="..."/>
+      <img src={note} style={{display: "block", width: 100 + "%", height: 340 + "px"}} alt="..."/>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">

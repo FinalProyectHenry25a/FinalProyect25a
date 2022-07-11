@@ -2,39 +2,44 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Card from "../card/Card";
 import { useDispatch, useSelector } from "react-redux";
-import Carrousel from "../carrousel/Carrousel";
+//import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getPhones } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
-import { Link } from "react-router-dom";
 import UserNavBar from "../UserNavBar/UserNavBar";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
+import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import axios from "axios";
-import { right } from "@popperjs/core";
+import { auth } from "../../firebase/firebase-config";
+import { fetchstoken } from "../Contacto/fetchmetod";
+import Swal from 'sweetalert2';
+import { homeLang } from "./homeLang";
+import { FormattedMessage, IntlProvider } from 'react-intl'
+
 
 const Home = () => {
-  const [loggedUser, setLoggedUser] = useState();
 
-  useEffect(() => {
-    verificarQueHayaUsuarioLogueado();
-  }, []);
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
-
   const allPhones = useSelector((state) => state.phones);
-
-  const verificarQueHayaUsuarioLogueado = () => {
-    onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        let user = await axios.get(
-          `http://localhost:3001/userCreator/${currentUser.email}`
-        );
-        setLoggedUser(user.data);
-      }
-    });
-  };
+  const allPhonesForSelect = useSelector((state) => state.phonesForSelect)
+  const filtrados = useSelector((state) => state.filtered);
+  const lan = useSelector((state) => state.language)
+  const page = useSelector(state => state.currentPage)
+  const brands = useSelector((state) => state.brands);
+  const rams = useSelector((state) => state.rams);
+  const roms = useSelector((state) => state.roms);
+  const networks = useSelector((state) => state.networks);
+  const processors = useSelector((state) => state.processors);
+  const [phonesPerPage] = useState(4);
+  const indexOfLastPhones = page * phonesPerPage;
+  const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
+  const cart = useSelector(state => state.cart)
+  const favs = useSelector(state => state.favs)
+  const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
 
   const [filtered, setFiltered] = useState({
     byRom: null,
@@ -46,20 +51,147 @@ const Home = () => {
     byOrder: null,
   });
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [phonesPerPage] = useState(4);
-  const indexOfLastPhones = currentPage * phonesPerPage;
-  const indexOfFirstPhones = indexOfLastPhones - phonesPerPage;
+  const [loggedUser, setLoggedUser] = useState();
 
-  const currentPhones = allPhones.slice(indexOfFirstPhones, indexOfLastPhones);
+    //acá se setea el idioma
+    const messages = homeLang[lan]
 
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(async () => {
+    
+    await dispatch(getPhones());
+     
+    document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
+    verificarQueHayaUsuarioLogueado();
+    document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))
+
+    // dispatch(getLocalFavs());
+    // dispatch(getLocalCart());
+    dispatch(setSelects())
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allPhones]);
 
   useEffect(() => {
-    dispatch(getPhones());
-  }, [dispatch]);
+
+    dispatch(getLocalFavs());
+    dispatch(getLocalCart());
+
+  }, [])
+
+  useEffect(() => {
+    dispatch(getLocalFilter())
+    let localfilter = JSON.parse(localStorage.getItem("filter"))
+    localfilter !== null ?
+      dispatch(filters(localfilter)) :
+      dispatch(filters(filtered))
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('favs', JSON.stringify(favs));
+  }, [cart, favs])
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+
+  const correoEmail = async (email) => {
+
+    let obj = {
+      contact_user: "MercadoPago",
+      correo_user: email,
+      asunto_user: "Compra realizada",
+      descripcion_user: "Gracias por elegirnos!!! su producto fue despachado, estara llegando en un lapso de entre 7 a 21 dias.",
+    }
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
+
+    try {
+
+      const resultCorreo = await fetchstoken('correo', obj, "POST");
+
+      if (!resultCorreo.ok) {
+
+        throw Error(resultCorreo.errors.msg);
+
+      }
+      Toast.fire({
+        icon: 'success',
+        title: 'El correo se envio con exito'
+      });
+
+    } catch (error) {
+      Toast.fire({
+        icon: 'error',
+        title: error.message
+      })
+    }
+  }
+
+
+  const verificarQueHayaUsuarioLogueado = () => {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+
+        let info = await dispatch(getUser(currentUser.email))
+
+        if (info.payload.emptyCart) {
+
+          dispatch(clearCart(info.payload.email));
+
+        }
+
+        if (currentUser.emailVerified) {
+
+          await axios.put(`http://localhost:3001/verification/${currentUser.email}`)
+
+        }
+
+        if (info.payload.sendEmail) {
+
+          correoEmail(currentUser.email)
+
+          await axios.put(`http://localhost:3001/sendEmail/${currentUser.email}`)
+
+
+        }
+        setLoggedUser(info.payload);
+      }
+    });
+  };
+
+  const paginado = (pageNumber) => {
+    dispatch(setPage(pageNumber));
+  };
+
+
 
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
@@ -96,119 +228,186 @@ const Home = () => {
           : document.getElementById("order").value,
       byPrice: price,
       byProcessor:
-        document.getElementById("processor").value === ""
+        document.getElementById("processor").value === "null"
           ? null
           : document.getElementById("processor").value,
     }));
 
-   
+
   }
+
 
   const send = async (e) => {
     dispatch(filters(filtered));
-    setCurrentPage(1);
+    localStorage.setItem('filter', JSON.stringify(filtered));
+    dispatch(pageOne());
+
+  };
+
+  const clearFilter = (e) => {
+
+    document.getElementById("brand").value = "null"
+    document.getElementById("rom").value = "null"
+    document.getElementById("price").value = "null"
+    document.getElementById("ram").value = "null"
+    document.getElementById("network").value = "null"
+    document.getElementById("order").value = "null"
+    document.getElementById("processor").value = "null"
+
+    let clear = {
+      byBrand: null,
+      byRom: null,
+      byRam: null,
+      byNetwork: null,
+      byOrder: null,
+      byPrice: null,
+      byProcessor: null,
+    }
+
+    localStorage.removeItem("filter")
+    dispatch(filters(clear));
+    // setCurrentPage(1);
+
   };
 
   const logout = async () => {
+
     await signOut(auth);
+
   };
 
+  const lang = (e) => {
+
+    dispatch(language(e.target.value));
+
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  
+
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
+
   return (
+      <IntlProvider locale='es' messages={messages}>
+    
+      <div className={style.fondo}>
     <div>
-      {/* <button onClick={logout}>desloguear</button> */}
 
-      {/* <Link to="/agregado">
-        <button>Agregar Phone</button>
-      </Link> */}
 
-      {loggedUser ? <UserNavBar /> : <NavBar />}
-      <Carrousel />
+            <button onClick={logout}>desloguear</button>
 
-      <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
-        <option value="null">Todas</option>
-        <option value="Samsung">Samsung</option>
-        <option value="Apple">Apple</option>
-        <option value="Motorola">Motorola</option>
-        <option value="Xiaomi">Xiaomi</option>
-        <option value="Huawei">Huawei</option>
+      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
       </select>
 
-      {/* por Ram--------------------------------------------------- */}
-      <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option value="null">Ram</option>
-        <option value="4Gb">4Gb</option>
-        <option value="6Gb">6Gb</option>
-        <option value="8Gb">8Gb</option>
-        <option value="12Gb">12Gb</option>
+      <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+        <option value="es">Español</option>
+        <option value="en">English</option>
       </select>
-      {/* por network----------------------------------------------- */}
+            {loggedUser ? <UserNavBar /> : <NavBar />}
 
-      <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option value="null">Network</option>
-        <option value="4G">4G</option>
-        <option value="5G">5G</option>
-      </select>
+            <div id="filtros">
 
-      {/* por Rom--------------------------------------------------- */}
-      <select id="rom" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option value="null">Rom</option>
-        <option value="64Gb">64Gb</option>
-        <option value="128Gb">128Gb</option>
-        <option value="256Gb">256Gb</option>
-      </select>
+              <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+                <option value="null">{homeLang[lan].Todas}</option>
+                {brands?.map((brand) =>
+                  <option key={brand} value={brand}>{brand}</option>
+                )}
+                  </select>
 
-      {/* por orden--------------------------------------------------- */}
 
-      <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option value="null">Por defecto</option>
-        <option value="rating">Por puntuación</option>
-        <option value="ascendingPrice">Orden ascendiente</option>
-        <option value="descendingPrice">Orden descendiente</option>
-      </select>
+              {/* por Ram--------------------------------------------------- */}
+              <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+                <option value="null">Ram</option>
+                {rams?.map((ram) =>
+                  <option key={ram} value={ram}>{ram}</option>
+                )}
+              </select>
 
-      {/* por precio--------------------------------------------------- */}
+              {/* por network----------------------------------------------- */}
+              <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+                <option value="null">{homeLang[lan].Red}</option>
+                {networks?.map((network) =>
+                  <option key={network} value={network}>{network}</option>
+                )}
+              </select>
 
-      <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
-        <option value="null">precio</option>
-        <option value={[0, 500]}>de u$ 0 a u$ 500</option>
-        <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
-        <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
-      </select>
+              {/* por Rom--------------------------------------------------- */}
+              <select id="rom" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+                <option value="null">Rom</option>
+                {roms?.map((rom) =>
+                  <option key={rom} value={rom}>{rom}</option>
+                )}
+              </select>
 
-      {/* por processor--------------------------------------------------- */}
-      <div style={{ display: "inline-flex", margin: 3 + "px" }}>
-        <input id="processor" className="form-control me-3" placeholder="busca por procesador" type="search" style={{ width: 100 + "%" }} onChange={(e) => filtersSetters(e)}></input>
-        <button className="btn btn-outline-dark" onClick={() => send()}>Buscar</button>
-      </div>
-      {/* filtrado************************************ */}
-      <div className={style.flex}>
-        {currentPhones && allPhones.length ? (
-          currentPhones?.map((e) => {
-            return (
-              <div key={e.id}>
-                <Card
-                  brand={e.brand}
-                  model={e.model}
-                  images={e.images}
-                  price={e.price}
-                  id={e.id}
-                />
-              </div>
-            );
-          })
-        ) : (
-          <div>
-            <h1>No se encontraron artículos con esas características</h1>
+              {/* por orden--------------------------------------------------- */}
+              <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+                <option value="null">{homeLang[lan].Pordefecto}</option>
+                <option value="rating">{homeLang[lan].Porpuntuacion}</option>
+                <option value="ascendingPrice">{homeLang[lan].Ordenascendiente}</option>
+                <option value="descendingPrice">{homeLang[lan].Ordendescendiente}</option>
+              </select>
+
+              {/* por precio--------------------------------------------------- */}
+              <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+                <option value="null">{homeLang[lan].precio}</option>
+                <option value={[0, 115000]}>de u$ 0 a u$ 500</option>
+                <option value={[115000, 230000]}>de u$ 500 a u$ 1000</option>
+                <option value={[230000, 345000]}>de u$ 1000 a u$ 1500</option>
+              </select>
+
+              {/* por processor--------------------------------------------------- */}
+              <select id="processor" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+                <option value="null" >{homeLang[lan].Procesador}</option>
+                {processors?.map((processors) =>
+                  <option key={processors} value={processors}>{processors}</option>
+                )}
+              </select>
+
+
+              <button className={style.btn} onClick={() => send()}>{homeLang[lan].Buscar}</button>
+              <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
+            </div>
+
+            {/* filtrado************************************ */}
+            <div className={style.flex}>
+              {currentPhones && allPhones.length ? (
+                currentPhones?.map((e) => {
+                  return (
+                    <div key={e.id}>
+                      <Card
+                        brand={e.brand}
+                        model={e.model}
+                        images={e.images}
+                        price={e.price}
+                        id={e.id}
+                        stock={e.stock}
+                      />
+
+                    </div>
+                  );
+                })
+              ) : (
+                <div>
+                  <h1>No se encontraron artículos con esas características</h1>
+                </div>
+              )}
+            </div>
+            <br />
+            <Paginado
+              phonesPerPage={phonesPerPage}
+              allPhones={allPhones.length}
+              paginado={paginado}
+            />
           </div>
-        )}      
-      </div>
-      <br />
-      <Paginado
-        phonesPerPage={phonesPerPage}
-        allPhones={allPhones.length}
-        paginado={paginado}
-      />
-    </div>
+        </div>
+    </IntlProvider>
   );
 };
 

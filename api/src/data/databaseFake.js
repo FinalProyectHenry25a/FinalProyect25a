@@ -2,11 +2,11 @@ module.exports = [
   {
     brand: "Samsung",
     releaseDate: "7/22/2021",
-    model: "Galaxy S21",
+    model: "Galaxy S21+",
     price: 1000,
     rating: 5,
     images:
-      "https://medias.musimundo.com/medias/00490005-145096-145096-01-145096-01.jpg-size515?context=bWFzdGVyfGltYWdlc3w3NjU3NnxpbWFnZS9qcGVnfGgzNC9oM2EvMTAzODEzMDUwODU5ODIvMDA0OTAwMDUtMTQ1MDk2LTE0NTA5Nl8wMS0xNDUwOTZfMDEuanBnX3NpemU1MTV8M2ZkZjI3MDAzY2Y2ZWIyNWY1ZWY1YjZiOGQ2ZTI1MGViM2Q3YWNjMTdkYjQxOGUxNTgwYzQ0YzVmMDBkNjFkMA",
+      "https://www.vodafone.it/content/dam/digitalexp/commerce/catalog/prodotti_innovativi/Innovativi_MS_S21_plus.png",
     color: "Green",
     processor: "Exynos 2100",
     ram: "8Gb",
@@ -131,10 +131,10 @@ module.exports = [
   {
     brand: "Motorola",
     releaseDate: "9/10/2021",
-    model: "Moto G42",
+    model: "Moto G41",
     price: 300,
     rating: 3,
-    images: "https://cdn1.smart-gsm.com/picture/motorola-moto-g42.jpg",
+    images: "https://armoto.vtexassets.com/arquivos/ids/161725-800-auto?v=637810639346870000&width=800&height=auto&aspect=true",
     color: "Maroon",
     processor: "Snapdragon 680",
     ram: "4Gb",

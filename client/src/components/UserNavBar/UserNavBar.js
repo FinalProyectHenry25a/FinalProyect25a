@@ -469,6 +469,11 @@ export default function UserNavBar({ setCurrentPage }) {
             >
               <ul>
                 <li>
+                  <Link className={styles.cart} to="/cart">
+                    <BsFillCartFill /> {cartCount}
+                  </Link>
+                </li> 
+                <li>
                   <Tooltip title="Account settings">
                     <IconButton onClick={handleClickk} size="small" sx={{ ml: 2 }} aria-controls={profileOpen ? "account-menu" : undefined} aria-haspopup="true" aria-expanded={profileOpen ? "true" : undefined}>
                       <Avatar sx={{ width: 32, height: 32 }}>

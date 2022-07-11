@@ -3,6 +3,7 @@ import swal from 'sweetalert';
 const initialState = {
     phones : [],
     phonesId : [],
+    modo: JSON.parse(localStorage.getItem("modoOscuro"))? JSON.parse(localStorage.getItem("modoOscuro")) : 'light',
     cart: [],
     currentItem: null,
     filtered:{ byRom: null,
@@ -209,10 +210,19 @@ function rootReducer (state = initialState, action){
                     ...state,
                     language: action.payload
                   }  
-
+                  case "MODO_OSCURO" :
+                    if(action.payload === "light"){
+                      localStorage.setItem('modoOscuro', JSON.stringify('light'));
+                    }else{
+                      localStorage.setItem('modoOscuro', JSON.stringify('dark'));
+                    }
+                    console.log(action.payload)
+                  return {
+                    ...state,
+                    modo: JSON.parse(localStorage.getItem("modoOscuro"))
+                  }  
             default:
                 return state;
         }      
     }
-
 export default rootReducer ;

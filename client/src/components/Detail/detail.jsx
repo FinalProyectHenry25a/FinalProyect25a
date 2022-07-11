@@ -124,6 +124,7 @@ export default function Detail() {
   };
 
   return (
+    <div className={styles.fondo}>
     <IntlProvider locale='es' messages={messages}>
       {/* <NavBar /> */}
       
@@ -354,5 +355,6 @@ export default function Detail() {
       
 
     </IntlProvider>
+    </div>
   );
 }

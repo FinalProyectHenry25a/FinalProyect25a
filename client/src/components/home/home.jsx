@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser, language } from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFilter, getPhones, getUser, language, modoOscuro } from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -22,24 +22,19 @@ import {FormattedMessage, IntlProvider} from 'react-intl'
 //import SearchBar from "../SearchBar/Searchbar";
 
 // const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
-const initialTheme = "light"
+
 
 const Home = () => {
-  const [theme, setTheme] = useState(initialTheme)
-  const handleTheme = (e) => {
-    console.log(e.target.value)
-    if(e.target.value === "light"){
-      setTheme("light");
-    }else{
-      setTheme("dark");
-    }
-  }
+  
+  const modo = useSelector(state => state.modo)
+  
+
   const [loggedUser, setLoggedUser] = useState();
   
   useEffect(() => {
     document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     verificarQueHayaUsuarioLogueado();
-    
+    document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
@@ -262,8 +257,8 @@ const Home = () => {
 
   return (
       <IntlProvider locale='es' messages={messages}>
-    <div className={theme}>
-      <div className={style.facu}>
+    
+      <div className={style.fondo}>
     <div>
 
    
@@ -273,13 +268,18 @@ const Home = () => {
         <button>Agregar Phone</button>
       </Link> */}
 
-      {loggedUser ? <UserNavBar setCurrentPage={setCurrentPage} /> : <NavBar  setCurrentPage={setCurrentPage} />}
-      <input type="radio" name="theme" id="light" onClick={handleTheme} value="light"/>
+      
+      <input type="radio" name="theme" id="light" onClick={(e) => dispatch(modoOscuro(e.target.value))} value="light"/>
      <label htmlFor="light">Claro</label>
-     <input type="radio" name="theme" id="dark" onClick={handleTheme} value="dark"/>
+     <input type="radio" name="theme" id="dark" onClick={(e) => dispatch(modoOscuro(e.target.value))} value="dark"/>
      <label htmlFor="dark">Oscuro</label>
       <br/>
-      
+
+      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
       <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
         <option value="es">Español</option>
         <option value="en">English</option>
@@ -367,6 +367,7 @@ const Home = () => {
                 <Card
                   brand={e.brand}
                   model={e.model}
+                  
                   images={e.images}
                   price={e.price}
                   id={e.id}
@@ -390,7 +391,7 @@ const Home = () => {
       />
       </div>
     </div>
-    </div>
+    
     </IntlProvider>
   );
 };

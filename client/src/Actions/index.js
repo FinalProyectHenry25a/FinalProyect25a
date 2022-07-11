@@ -275,3 +275,10 @@ export const language = (leng) => {
   };
 };
 
+export const modoOscuro = (modo) => {
+  return {
+    type: "MODO_OSCURO",
+    payload: modo
+  };
+};
+

@@ -1,4 +1,4 @@
-const { Order_detail , Order , User, Publication } = require('../db.js');
+const { User, Publication } = require('../db.js');
 
 const {
     PROD_ACCESS_TOKEN,
@@ -44,6 +44,7 @@ mercadopago.configure({
       pending: 'http://localhost:3001/mercadopago/pagos',
     }
   };
+  console.log(preference);
 
   mercadopago.preferences.create(preference)
 

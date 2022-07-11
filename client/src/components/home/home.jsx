@@ -13,19 +13,17 @@ import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
-
+import { Link } from "react-router-dom";
 import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import Carrousel from "../carrousel/Carrousel";
 
 
-//import { right } from "@popperjs/core";
-//import SearchBar from "../SearchBar/Searchbar";
-
-// const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
-
-
 const Home = () => {
+
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
   const allPhones = useSelector((state) => state.phones);
@@ -57,11 +55,22 @@ const Home = () => {
 
   const [loggedUser, setLoggedUser] = useState();
 
- 
+    //acá se setea el idioma
+    const messages = homeLang[lan]
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
 
   useEffect(async () => {
     
-
     await dispatch(getPhones());
      
     //document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
@@ -94,6 +103,16 @@ const Home = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
     localStorage.setItem('favs', JSON.stringify(favs));
   }, [cart, favs])
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
 
   const correoEmail = async (email) => {
 
@@ -174,6 +193,8 @@ const Home = () => {
     dispatch(setPage(pageNumber));
   };
 
+
+
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
     if (price === "null") {
@@ -216,14 +237,6 @@ const Home = () => {
 
 
   }
- 
-
-  // useEffect(()=>{
-  //   let prueba=localStorage.getItem("filter")
-  //   prueba?(
-  //     dispatch(getLocalFilter())
-  // ):(dispatch(getPhones()))},[])
-
 
 
   const send = async (e) => {
@@ -260,19 +273,23 @@ const Home = () => {
   };
 
   const logout = async () => {
+
     await signOut(auth);
+
   };
 
   //acá se setea el idioma
-  const messages = homeLang[lan]
+  
 
-
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
 
   return (
       <IntlProvider locale='es' messages={messages}>
     
       <div className={style.fondo}>
-    <div>
+      <div className="display-flex row y justify-content-center">
 
 
             <button onClick={logout}>desloguear</button>
@@ -373,6 +390,11 @@ const Home = () => {
               allPhones={allPhones.length}
               paginado={paginado}
             />
+            <div class="display-flex align-items-center justify-content-center col-auto">
+      <Link to='/about'>
+      <button class="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
+      </Link>
+    </div>
           </div>
         </div>
     </IntlProvider>

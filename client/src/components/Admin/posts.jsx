@@ -72,23 +72,21 @@ export default function Posts(props) {
   return (
     <div>
       <Link to="/home">
-        <button>◀ Back</button>
+        <button className="btn btn-secondary m-3">Volver</button>
       </Link>
       <br />
-      <br />
+      
 
       {postsState?.map((el) => (
         <div classNameName="border rounded p-3 m-2" key={el.id}>
-          <Link to={`/admin/ProductToEdit/${el.id}`}>
-            <button>editar</button>
-          </Link>
-          <button onClick={() => deletePost(el.id)}> Borrar </button>
-          <h5>
+          <h4 className="m-4">
             {el.brand} - {el.model}
-          </h5>
+          </h4>
 
-          <div className="d-flex flex-row m-3" /* style={{ height: "40em" }} */>
-            <ul className="list-group p-3 col-3">
+          <div
+            className="d-flex flex-row justify-content-around" /* style={{ height: "40em" }} */
+          >
+            <ul className="list-group col-3">
               <li className="list-group-item">Lanzamiento: {el.releaseDate}</li>
               <li className="list-group-item">Precio: ${el.price}</li>
               <li className="list-group-item">Procesador: {el.processor}</li>
@@ -98,7 +96,7 @@ export default function Posts(props) {
               <li className="list-group-item">Batería: {el.batery}</li>
             </ul>
 
-            <ul className="list-group p-3 col-3">
+            <ul className="list-group col-3">
               <li className="list-group-item">
                 Cámara frontal: {el.frontal_cam}
               </li>
@@ -112,27 +110,33 @@ export default function Posts(props) {
               <li className="list-group-item">Puntuación: {el.rating}</li>
             </ul>
 
-            <div className="border rounded col-2 p-5">
-              <img src={el.images} className="img-fluid" alt="" />
+            <div className="border rounded col-1 d-flex justify-content-center align-items-center p-2 ">
+              <div>
+                <img src={el.images} className="img-fluid" alt="" />
+              </div>
             </div>
 
-            <div className="border rounded col-3 p-5 d-flex justify-content-between">
+            <div className="border rounded col-3 d-flex flex-row justify-content-around align-items-center">
               {el.additionalphotos?.length >= 1
                 ? el.additionalphotos.map((elem) => (
-                    <img
-                      className="img-fluid"
-                      src={elem}
-                      alt=""
-                    />
+                    <div>
+                      <img className="img-fluid" src={elem} alt="" />
+                    </div>
                   ))
                 : null}
             </div>
           </div>
 
+          <div className="m-3">
+            <Link to={`/admin/ProductToEdit/${el.id}`}>
+              <button className="btn btn-secondary m-2">Editar</button>
+            </Link>
+            <button className="btn btn-secondary m-2" onClick={() => deletePost(el.id)}> Borrar </button>
+          </div>
+
           <div className="d-flex flex-row m-3 p-3"></div>
 
-          <br />
-          <br />
+          
         </div>
       ))}
     </div>

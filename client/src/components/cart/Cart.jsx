@@ -83,11 +83,13 @@ const Cart = () => {
           <br/>
           <span>  $ {totalPrice}</span>
         </div>
+        {totalItems ? <div>
       {auth.currentUser?.emailVerified ? <Link to="/mercadopago">
         <button  className={styles.summary__checkoutBtn}>
         Confirmar Pedido <br/><img src={mercadopago} />
         </button>
         </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
+        </div> : <span>Debes ingresar algun producto en el carrito para comprar</span>}
       </div>
     </div>
     </>

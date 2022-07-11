@@ -32,18 +32,28 @@ const CartItem = (props) => {
 
   }
 
-  const mas = () => {
-    console.log('mas')
-    setInput(input + 1);
+  const mas = async (e) => {
+    setInput(parseInt(input + 1));
+    dispatch(adjustItemQty(props.item.id, input + 1));
+    let post = await axios.get(`http://localhost:3001/home/${props.item.id}`)
+    if (parseInt(input) > post.data.stock - 1) {
+      setInput(post.data.stock)
+    }
   }
 
-  const menos = () => {
-    console.log('menos')
-    setInput(input - 1);
+  const menos = async (e) => {
+
+    setInput(parseInt(input - 1));
+    dispatch(adjustItemQty(props.item.id, input - 1));
+    let post = await axios.get(`http://localhost:3001/home/${props.item.id}`)
+
+    if (input > post.data.stock) {
+      setInput(post.data.stock - 1)
+    }
     
   }
   const onChangeHandler = async (e) => {
-  console.log('entre')
+
     setInput(e.target.value);
     dispatch(adjustItemQty(props.item.id, e.target.value));
     let post = (await axios.get(`http://localhost:3001/home/${props.item.id}`))
@@ -51,6 +61,11 @@ const CartItem = (props) => {
 
     if (e.target.value > post.stock) {
       e.target.value = post.stock;
+    } else if(isNaN(e.target.value)) {
+
+      setInput(1)
+      dispatch(adjustItemQty(props.item.id, input));
+
     }
 
   };
@@ -69,7 +84,7 @@ const CartItem = (props) => {
           <label htmlFor="qty">Cantidad:</label>
           <input
             min="1"
-            type="number"
+            type="text"
             id="qty"
             name="qty"
             className={styles.input}

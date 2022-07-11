@@ -35,7 +35,7 @@ function App() {
     });
   };
   
-  console.log(user.data)
+
 
   //  useEffect(()=>{
   //    axios

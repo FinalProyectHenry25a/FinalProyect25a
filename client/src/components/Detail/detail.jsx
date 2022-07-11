@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails, addToCart, getUser, getQuestions, addToCartUser } from "../../Actions/index";
+import {
+  getDetails,
+  addToCart,
+  getUser,
+  getQuestions,
+  addToCartUser,
+} from "../../Actions/index";
 import { Link, useParams } from "react-router-dom";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
@@ -11,12 +17,9 @@ import NavBar from "../NavBar/NavBar";
 import BtnBack from "../back/BtnBack";
 
 import { detailLang } from "./detailLang";
-import {FormattedMessage, IntlProvider} from 'react-intl'
-
+import { FormattedMessage, IntlProvider } from "react-intl";
 
 export default function Detail() {
- 
-
   const [user, setUser] = useState(auth.currentUser);
   useEffect(() => {
     userVerificate();
@@ -66,10 +69,10 @@ export default function Detail() {
   const PID = useSelector((state) => state.phonesId);
 
   const allQuestions = useSelector((state) => state.questions);
-  const lan = useSelector((state) => state.language)
+  const lan = useSelector((state) => state.language);
 
-   //aca se setea el idioma
-   const messages = detailLang[lan];
+  //aca se setea el idioma
+  const messages = detailLang[lan];
 
   function promedio() {
     if (PID.review) {
@@ -124,26 +127,122 @@ export default function Detail() {
   };
 
   return (
-    <IntlProvider locale='es' messages={messages}>
+    <IntlProvider locale="es" messages={messages}>
       {/* <NavBar /> */}
-      
 
-      
-      <BtnBack/>
+      <BtnBack />
       <div className={styles.divContainer}>
+        {/* <div className="ui-pdp-thumbnail__picture" style={{display: "inline-flex", flexFlow: "column wrap"}}>
+        {PID.additionalphotos?.length >= 1
+          ? PID.additionalphotos.map((el) => (
+              <img
+                src={el}
+                width="44"
+                height="44"
+                style={{border: "solid black 1px", marginBottom: "8px"}}
+                decoding="async"
+                alt="No encontrada"
+              />
+            ))
+          : null}
+          </div>
         <div className={styles.container1}>
-          <img src={PID.images} alt="marcas" width={300} />
+          <img src={PID.images} alt="marcas" width={500} />
+        </div> */}
+        <div className="content">
+          <div
+            id="carouselExampleIndicators"
+            className="carousel carousel-dark slide"
+            data-bs-ride="true"
+          >
+            <div className="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="0"
+                className="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="3"
+                aria-label="Slide 4"
+              ></button>
+            </div>
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img src={PID.images} width={500} height="100%" alt="..." />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src={PID.additionalphotos?.[0]}
+                  width={500}
+                  height="100%"
+                  alt="..."
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src={PID.additionalphotos?.[1]}
+                  width={500}
+                  height="100%"
+                  alt="..."
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src={PID.additionalphotos?.[2]}
+                  width={500}
+                  height="100%"
+                  alt="..."
+                />
+              </div>
+            </div>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
-
         <hr />
         <div className={styles.container2}>
           <div>
             <h1>{PID.model}</h1>
-            {PID.additionalphotos?.length >= 1
-              ? PID.additionalphotos.map((el) => (
-                  <img src={el} width="150" alt="No encontrada" />
-                ))
-              : null}
+
             <h3>${PID.price}</h3>
             <h3>Rating</h3>
             <div>
@@ -300,7 +399,7 @@ export default function Detail() {
                   placeholder="Escribinos tu pregunta"
                 />
                 <button onClick={(e) => publicar(e)} className={styles.btn2}>
-                {detailLang[lan].Preguntar}
+                  {detailLang[lan].Preguntar}
                 </button>
               </div>
             ) : (
@@ -313,14 +412,15 @@ export default function Detail() {
                   if (e.product_ID === PID.id) {
                     return (
                       <>
-                        <div className={styles.question} >
-                          <p>{detailLang[lan].Usuario}: {e.user_email}</p>
+                        <div className={styles.question}>
+                          <p>
+                            {detailLang[lan].Usuario}: {e.user_email}
+                          </p>
                           <p>- {e.question}</p>
                         </div>
                         <div className={styles.answer}>
                           <p>- {e.answer}</p>
                         </div>
-                          
                       </>
                     );
                   }
@@ -351,8 +451,6 @@ export default function Detail() {
           </FormattedMessage>
         )}
       </div>
-      
-
     </IntlProvider>
   );
 }

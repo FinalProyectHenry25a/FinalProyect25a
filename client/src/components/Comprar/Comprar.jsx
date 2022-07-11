@@ -45,10 +45,10 @@ export default function Comprar({ productos, data }){
 
         <h2>Listado de Compras</h2>
         <ul >
-        {productos.map((producto, i) => {
+        {productos.map((producto) => {
             return(
               <>
-                <li key={i} className={styles.li}>{producto.brand}  {producto.model} ${producto.price} - cantidad: {producto.qty}</li>
+                <li key={producto.id} className={styles.li}>{producto.brand}  {producto.model} ${producto.price} - cantidad: {producto.qty}</li>
                 </>
             )
           })} </ul>  

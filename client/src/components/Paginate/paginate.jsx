@@ -69,10 +69,6 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
 
     let pageNum = pageNumStr.split("");
 
-    console.log(pageNum[1]);
-
-    console.log(parseInt(pageNum[1]));
-
     if(parseInt(pageNum[1]) < 1 || parseInt(pageNum[1]) > Math.ceil(allPhones / phonesPerPage) ||     isNaN(parseInt(pageNum[1]))) {
 
       dispatch(pageOne());

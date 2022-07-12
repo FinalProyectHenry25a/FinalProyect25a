@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
 import { getLocalCart, modoOscuro, language } from "../../Actions/index";
 import styles from "./../NavBar/NavBar.module.css";
-import logo from "../../images/logo-removebg.webp";
+import SmartifyFinal from "../../images/SmartifyFinal.png";
 import { navBarLang } from "./navBarLang";
 import { BsFillMoonFill } from "react-icons/bs";
 import { BsFillSunFill } from "react-icons/bs";
@@ -101,7 +101,7 @@ const NavBar = ({ setCurrentPage }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid" style={{ margin: "10px" }}>
-        <img src={logo} className={styles.logo} />
+        <img src={SmartifyFinal} className={styles.logo} />
         <button
           className="navbar-toggler"
           type="button"

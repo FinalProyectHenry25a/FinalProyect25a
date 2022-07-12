@@ -3,19 +3,22 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import style from "./../home/Home.module.css";
+import { aboutLang } from "./aboutLang";
+
 
 
     const About = () => {
         const modo = useSelector(state => state.modo)
+        const lan = useSelector((state) => state.language)
         return(
             <div className={style.fondo}>
             <div className=" row y justify-content-center">
               <Link to="/home">
-                <button className={style.btn}>◀ Volver</button>
+                <button className={style.btn}>◀ {aboutLang[lan].volver}</button>
               </Link>
               <div className=" border border-sky-500 col-4 center d-grid gap-5">
-                <h1 className=" row justify-content-center shadow py-2 px-4 rounded">Conocenos</h1>
-                <h5 className="row justify-content-center col-auto">📲Integrantes del proyecto</h5>
+                <h1 className=" row justify-content-center shadow py-2 px-4 rounded">{aboutLang[lan].conocenos}</h1>
+                <h5 className="row justify-content-center col-auto">📲{aboutLang[lan].int}</h5>
                 <div className="">
                     <div className="col-auto row justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -176,7 +179,6 @@ import style from "./../home/Home.module.css";
                     </a>
                 </div>
                 </div>
-
               </div>
             </div>
             </div>

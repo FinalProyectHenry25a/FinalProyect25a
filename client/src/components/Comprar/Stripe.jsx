@@ -63,7 +63,7 @@ const CheckoutForm = () => {
     const correoEmail = async () => {
 
         let obj = {
-          contact_user: "SmartWorld",
+          contact_user: "Smartify",
           correo_user: auth.currentUser.email,
           asunto_user: "Compra realizada",
           descripcion_user: "Gracias por elegirnos!!! su producto fue despachado, estara llegando en un lapso de entre 7 a 21 dias.",

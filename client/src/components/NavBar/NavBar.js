@@ -14,6 +14,7 @@ import { BsFillSunFill } from "react-icons/bs";
 //import styles from "./../NavBar/NavBar.module.css";
 
 const NavBar = ({ setCurrentPage }) => {
+  
   const modo = useSelector((state) => state.modo);
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
@@ -123,15 +124,12 @@ const NavBar = ({ setCurrentPage }) => {
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
             : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
           </li>
+          <div className={modo}>
           <li style={{margin: "9px"}}>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link active" to="/cart">
-              <BsFillCartFill /> {cartCount}
-            </Link> 
-          </li>
+          </div>
           <li className="nav-item">
           <Link to="/login" className="nav-link active">
             {navBarLang[lan].ingresa}
@@ -140,13 +138,18 @@ const NavBar = ({ setCurrentPage }) => {
           {/* <li className="nav-item">
           <Link to="/register" className="nav-link active">
             {navBarLang[lan].creaTuCuenta}
-          </Link>
+            </Link>
           </li> */}
           <li className="nav-item">
           <Link to="/contacto" className="nav-link active">
             {navBarLang[lan].contacto}
           </Link>
           </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/cart">
+                <BsFillCartFill /> {cartCount}
+              </Link> 
+            </li>
           </ul>
         </div>
       </div>

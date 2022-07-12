@@ -20,7 +20,7 @@ import { loginLang } from "./loginLang";
 
 
 const Login = () => {
-  
+  const modo = useSelector(state => state.modo)
   const cart = useSelector(state => state.cart)
   const lan = useSelector((state) => state.language);
 
@@ -160,7 +160,9 @@ const Login = () => {
         <div className={style.register}>
           <button onClick={login} type="submit" className={style.btn}>{loginLang[lan].ingresar}</button>
           <br/><br/>
+          <div className={modo}>
           <button onClick={loginWithGoogle} type="submit" className={style.btn}>{loginLang[lan].ingresarConGoogle}<img src={google} alt='google' className={style.google}/></button>
+          </div>
           <br/><br/>
           <Link to="register">
             <p className={style.ancor2}>{loginLang[lan].registrarme}</p>

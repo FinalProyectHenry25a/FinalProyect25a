@@ -27,6 +27,8 @@ import { BsFillMoonFill } from "react-icons/bs";
 import { BsFillSunFill } from "react-icons/bs";
 
 const StyledMenu = styled((props) => (
+  
+
   <Menu
     elevation={0}
     anchorOrigin={{
@@ -200,10 +202,12 @@ export default function UserNavBar({ setCurrentPage }) {
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
             : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
           </li>
+          <div className={modo}>
           <li style={{margin: "6px"}}>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
           </li>
+          </div>
             <li className="nav-item">
             <Button
                   style={{
@@ -301,10 +305,12 @@ export default function UserNavBar({ setCurrentPage }) {
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
             : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
           </li>
+          <div className={modo}>
           <li style={{margin: "6px"}}>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
           </li>
+          </div>
           <li>
             <Tooltip title="Account settings">
               <IconButton
@@ -481,10 +487,12 @@ export default function UserNavBar({ setCurrentPage }) {
               ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
               : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
             </li>
+            <div className={modo}>
             <li style={{margin: "8px"}}>
               <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
               <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
             </li>
+            </div>
             <li className="nav-item" style={{margin: "-1px"}}>
                     <Link className="nav-link active" to="/cart">
                       <BsFillCartFill /> {cartCount}

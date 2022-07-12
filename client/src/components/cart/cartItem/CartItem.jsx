@@ -81,7 +81,7 @@ const CartItem = (props) => {
   return (
     <div className={styles.cartItem}>
       <div className={modo}>
-      <img src={item.images} alt={item.model} width={200} className={styles.image}/>
+      <img src={item.images} alt={item.model} width={80} className={styles.image}/>
       </div>
       <div className={styles.cartItemDetails}>
         <p className={styles.detailsTitle}>{item.brand}</p>

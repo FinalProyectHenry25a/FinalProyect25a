@@ -5,12 +5,14 @@ import huawei from "../../images/huawei.png";
 // import iphone from "../../images/iphone.jpg";
 import moto from "../../images/motoedge30.png";
 import note from "../../images/galaxy.jpg"
+import { useSelector } from "react-redux";
 // import { BsLock } from "react-icons/bs";
 //import styles from "../carrousel/Carrousel.module.css";
 //import IconLeft from "../icons/IconsLeft";
 //import IconRight from "../icons/IconsRight";
 
 const Carrousel = () => {
+  const modo = useSelector(state => state.modo)
  //const slideShow = { current: null };
   // const slideShow = useRef(null)
   /* const next = () => {
@@ -53,6 +55,7 @@ const Carrousel = () => {
   <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner">
     <div className="carousel-item active" data-bs-interval="2000">
+    <div className={modo}>
       <img src={iphone2} style={{display: "block", width: 100 + "%", height: 340 + "px"}} alt="..."/>
     </div>
     <div className="carousel-item" data-bs-interval="2000">
@@ -67,6 +70,7 @@ const Carrousel = () => {
     <div className="carousel-item">
       <img src={note} style={{display: "block", width: 100 + "%", height: 340 + "px"}} alt="..."/>
     </div>
+  </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
     <span className="carousel-control-prev-icon" aria-hidden="true"></span>

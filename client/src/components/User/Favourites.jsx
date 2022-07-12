@@ -38,7 +38,7 @@ export default function Favourites() {
   };
 
   return (
-    <div>
+    <div className={styles.fondo}>
       <UserNavBar />
       {user ? (
         <div>

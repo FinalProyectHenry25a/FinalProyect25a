@@ -11,6 +11,8 @@ export const homeLang = {
     Procesador: "Procesador",
     Buscar: "Buscar",
     Limpiarfiltros: "Limpiar filtros",
+    noseenc: "No se encontraron artículos con esas características",
+    conocenos: "conocenos",
   },
 
   en: {
@@ -25,5 +27,7 @@ export const homeLang = {
     Procesador: "Processor",
     Buscar: "Find",
     Limpiarfiltros: "Clear filter",
+    noseenc: "No articles with these characteristics were found",
+    conocenos: "know us",
   },
 };

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import style from "./../Admin/Admin.module.css"
+import { banLang } from "./styles/bannedUserLang";
+import { useSelector } from "react-redux";
 
 const BannedUser = () => {
+  const lan = useSelector((state) => state.language)
   return (
     <div d-flex justify-content-center align-items-center>
       <Link to="/home">
@@ -12,8 +15,7 @@ const BannedUser = () => {
       </Link>
       <div className="container-fluid border rounded w-75  'd-flex justify-content-center align-items-center' ">
         <h6 className="p-4  d-flex justify-content-center align-items-center">
-          Lo sentimos, ha sido inhabilitado por no cumplir nuestras normas de
-          convivencia, en caso de reclamo dirigirse a información de contacto.
+        {banLang[lan].ban}
         </h6>
       </div>
     </div>

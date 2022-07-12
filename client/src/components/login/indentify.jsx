@@ -2,11 +2,14 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
+import { idLang } from "./indetifyLang";
+import { useSelector } from "react-redux";
 
 export default function Identify() {
 
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
+    const lan = useSelector((state) => state.language)
 
     const resetPassword = async (e) => {
 
@@ -32,14 +35,14 @@ export default function Identify() {
         <div className=" row y justify-content-center">
         <div className="display-flex justify-content-center row border border-sky-500 col-4 center d-grid gap-2 row shadow py-2 px-4 rounded">
 
-            <h2 className="col-auto row justify-content-center py-2 px-4 rounded">Recupera tu Cuenta</h2>
+            <h2 className="col-auto row justify-content-center py-2 px-4 rounded">{idLang[lan].rec}</h2>
             <br /><br />
-            <h4>Ingresa tu correo electrónico para recuperar contraseña</h4>
+            <h4>{idLang[lan].ing}</h4>
             <br />
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-100" type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico"></input>
-            <button className=' justify-content-center col-auto btn btn-primary btn-sm' onClick={resetPassword} type="submit">Enviar mail de recuperacion</button>
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-100" type="email" onChange={(e) => setEmail(e.target.value)} placeholder={idLang[lan].plc}></input>
+            <button className=' justify-content-center col-auto btn btn-primary btn-sm' onClick={resetPassword} type="submit">{idLang[lan].env}</button>
             <br /><br />
-            <Link className="row justify-content-center" to="/login"><button className=' justify-content-center col-auto btn btn-secondary btn-sm' type="submit">Volver atras</button></Link>
+            <Link className="row justify-content-center" to="/login"><button className=' justify-content-center col-auto btn btn-secondary btn-sm' type="submit">{idLang[lan].atras}</button></Link>
             </div>
         </div>
 

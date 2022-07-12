@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
+import { filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -15,7 +15,6 @@ import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
 import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
-
 
 const Home = () => {
 
@@ -60,8 +59,6 @@ const Home = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
   //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
   //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
   //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
@@ -72,11 +69,9 @@ const Home = () => {
     await dispatch(getPhones());
      
     document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
-    verificarQueHayaUsuarioLogueado();
+    userVerificate();
     document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))
 
-    // dispatch(getLocalFavs());
-    // dispatch(getLocalCart());
     dispatch(setSelects())
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,61 +107,13 @@ const Home = () => {
   /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
   /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
 
-  const correoEmail = async (email) => {
+  const userVerificate = () => {
 
-    let obj = {
-      contact_user: "MercadoPago",
-      correo_user: email,
-      asunto_user: "Compra realizada",
-      descripcion_user: "Gracias por elegirnos!!! su producto fue despachado, estara llegando en un lapso de entre 7 a 21 dias.",
-    }
-
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    });
-
-    try {
-
-      const resultCorreo = await fetchstoken('correo', obj, "POST");
-
-      if (!resultCorreo.ok) {
-
-        throw Error(resultCorreo.errors.msg);
-
-      }
-      Toast.fire({
-        icon: 'success',
-        title: 'El correo se envio con exito'
-      });
-
-    } catch (error) {
-      Toast.fire({
-        icon: 'error',
-        title: error.message
-      })
-    }
-  }
-
-
-  const verificarQueHayaUsuarioLogueado = () => {
     onAuthStateChanged(auth, async (currentUser) => {
+
       if (currentUser) {
 
         let info = await dispatch(getUser(currentUser.email))
-
-        if (info.payload.emptyCart) {
-
-          dispatch(clearCart(info.payload.email));
-
-        }
 
         if (currentUser.emailVerified) {
 
@@ -174,21 +121,16 @@ const Home = () => {
 
         }
 
-        if (info.payload.sendEmail) {
-
-          correoEmail(currentUser.email)
-
-          await axios.put(`http://localhost:3001/sendEmail/${currentUser.email}`)
-
-
-        }
         setLoggedUser(info.payload);
+
       }
     });
   };
 
   const paginado = (pageNumber) => {
+
     dispatch(setPage(pageNumber));
+
   };
 
 
@@ -286,7 +228,7 @@ const Home = () => {
   /////////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
 
-  
+
 
   /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
   /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////

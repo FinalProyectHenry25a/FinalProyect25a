@@ -83,15 +83,10 @@ const Cart = () => {
   
   return (
     <>
-<<<<<<< HEAD
-      {user ? <UserNavBar /> : <NavBar />}
-      <BtnBack/>
-=======
     <div className={styles.fondo}>
       {user ? <UserNavBar /> : <NavBar />}
       <BtnBack className/>
     <div className="col-auto justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0 border border-sky-500 center d-grid">
->>>>>>> d1f8e7e76379b690322e46f1022d741744165495
     <div className={styles.cart}>
       <div className={styles.cartItems}>
         {cart.map((item, i) => (

@@ -2,10 +2,10 @@ import React from "react";
 import samsung from "../../images/samsung.png";
 import iphone2 from "../../images/iphone2.webp";
 import huawei from "../../images/huawei.png";
-import iphone from "../../images/iphone.jpg";
+// import iphone from "../../images/iphone.jpg";
 import moto from "../../images/motoedge30.png";
 import note from "../../images/galaxy.jpg"
-import { BsLock } from "react-icons/bs";
+// import { BsLock } from "react-icons/bs";
 //import styles from "../carrousel/Carrousel.module.css";
 //import IconLeft from "../icons/IconsLeft";
 //import IconRight from "../icons/IconsRight";

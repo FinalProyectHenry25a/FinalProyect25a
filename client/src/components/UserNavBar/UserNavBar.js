@@ -8,8 +8,8 @@ import axios from "axios";
 import SearchBar from "../SearchBar/Searchbar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getLocalCart } from "../../Actions";
-import logo from "../../images/smartworld.jpg";
+import { getLocalCart, modoOscuro, language } from "../../Actions";
+import logo from "../../images/logo-removebg.webp";
 import styles from "../UserNavBar/usernavbar.module.css";
 import { userNavBarLang } from "./userNavBarLang";
 import { styled, alpha } from "@mui/material/styles";
@@ -23,6 +23,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { FiLogOut } from "react-icons/fi";
+import { BsFillMoonFill } from "react-icons/bs";
+import { BsFillSunFill } from "react-icons/bs";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -68,6 +70,7 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function UserNavBar({ setCurrentPage }) {
+  const modo = useSelector((state) => state.modo);
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
   const lan = useSelector((state) => state.language);
@@ -110,6 +113,7 @@ export default function UserNavBar({ setCurrentPage }) {
   const logout = async () => {
     await signOut(auth);
     setUser(false);
+    window.location.reload()
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -130,52 +134,442 @@ export default function UserNavBar({ setCurrentPage }) {
     setAnchorElP(null);
   };
 
-  return (
-    // <nav className="navbar navbar-expand-lg bg-light">
-    //   {user ? (
-    //     <div className="container-fluid">
-    //       <Link className="navbar-brand" to="/home">
-    //         Henry Store
-    //       </Link>
-    //       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    //         <span className="navbar-toggler-icon"></span>
-    //       </button>
-    //       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    //         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-    //         <li className="nav-item dropdown">
-    //       <Link className="nav-link dropdown-toggle active m-3" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    //               <BsPersonCircle /> {user.username}
-    //             </Link>
-    //       <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-    //         <li><Link className="dropdown-item" to="/mi-perfil/">Mi perfil</Link></li>
-    //         <li><Link className="dropdown-item" to="/mis-compras">Mis compras</Link></li>
-    //         <li><Link className="dropdown-item" to="/favoritos">Favoritos</Link></li>
-    //         <li><hr className="dropdown-divider"/></li>
-    //         <li><Link className="dropdown-item" to="/home" onClick={logout}>Cerrar Sesion</Link></li>
-    //       </ul>
-    //     </li>
-    //         </ul>
-    //         {user.isAdmin ? <Link className="nav-link active m-3" to="admin">
-    //           <button>Admin Menu</button>
-    //         </Link> : null}
-    //         <Link className="nav-link active m-3" to="cart">
-    //           <BsFillCartFill /> {cartCount}
-    //         </Link>
-    //       </div>
-    //     </div>
-    //   ) : (
-    //     <NavBar />
-    //   )}
-    // </nav>
+ 
+    {/* <nav className="navbar navbar-expand-lg bg-light">
+      {user ? (
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/home">
+            Henry Store
+          </Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item dropdown">
+          <Link className="nav-link dropdown-toggle active m-3" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <BsPersonCircle /> {user.username}
+                </Link>
+          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><Link className="dropdown-item" to="/mi-perfil/">Mi perfil</Link></li>
+            <li><Link className="dropdown-item" to="/mis-compras">Mis compras</Link></li>
+            <li><Link className="dropdown-item" to="/favoritos">Favoritos</Link></li>
+            <li><hr className="dropdown-divider"/></li>
+            <li><Link className="dropdown-item" to="/home" onClick={logout}>Cerrar Sesion</Link></li>
+          </ul>
+        </li>
+            </ul>
+            {user.isAdmin ? <Link className="nav-link active m-3" to="admin">
+              <button>Admin Menu</button>
+            </Link> : null}
+            <Link className="nav-link active m-3" to="cart">
+              <BsFillCartFill /> {cartCount}
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <NavBar />
+      )}
+    </nav> */}
+   return (
+    <nav className="navbar navbar-expand-lg bg-light">
+      {user ? (
+        user.isAdmin ? (
+          auth.currentUser.email === "finalproyect25a@gmail.com" ? (
+      <div className="container-fluid" style={{ margin: "10px" }}>
+        <img src={logo} className={styles.logo} />
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-    <nav className={styles.navbar}>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
+            <SearchBar/>
+          </ul>
+          <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
+          <li className="nav-item" style={{margin: "6px"}}>
+            {modo === 'dark' 
+            ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
+            : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
+          </li>
+          <li style={{margin: "6px"}}>
+            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
+            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
+          </li>
+            <li className="nav-item">
+            <Button
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    color: "black",
+                  }}
+                  id="demo-customized-button"
+                  aria-controls={menuOpen ? "demo-customized-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={menuOpen ? "true" : undefined}
+                  variant="contained"
+                  disableElevation
+                  onClick={handleClick}
+                >
+                  Menu de admin
+                </Button>
+                <StyledMenu
+                  id="demo-customized-menu"
+                  MenuListProps={{
+                    "aria-labelledby": "demo-customized-button",
+                  }}
+                  anchorEl={anchorEl}
+                  open={menuOpen}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <Link className="dropdown-item" to="/admin/publicaciones">
+                      Productos
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <Link
+                      className="dropdown-item"
+                      to="/admin/agregar-publicacion"
+                    >
+                      Crear Publicacion
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <Link className="dropdown-item" to="/admin/editar-stock">
+                      Editar Stock
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <Link className="dropdown-item" to="/admin/users">
+                      Usuarios
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <Link
+                      className="dropdown-item"
+                      to="/admin/control-de-usuarios"
+                    >
+                      Administrar Usuarios
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <Link className="dropdown-item" to="/admin/preguntas">
+                      Preguntas
+                    </Link>
+                  </MenuItem>
+                  <Divider sx={{ my: 0.5 }} />
+                  <MenuItem onClick={logout} disableRipple>
+                    CerrarSesion
+                  </MenuItem>
+                </StyledMenu>
+            </li>
+          </ul>
+        </div>
+      </div>
+      ) : (
+      <>
+      <div className="container-fluid" style={{ margin: "10px" }}>
+        <img src={logo} className={styles.logo} />
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
+            <SearchBar style={{width: "100%"}}/>
+          </ul>
+          <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
+          <li className="nav-item" style={{margin: "6px"}}>
+            {modo === 'dark' 
+            ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
+            : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
+          </li>
+          <li style={{margin: "6px"}}>
+            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
+            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
+          </li>
+          <li>
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleClickk}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={profileOpen ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={profileOpen ? "true" : undefined}
+              >
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {user.username[0]}
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={profileOpen}
+              onClose={handleClosee}
+              onClick={handleClosee}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  mt: 1.5,
+                  "& .MuiAvatar-root": {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  "&:before": {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: "background.paper",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+              <MenuItem>
+                <Avatar />
+                <Link to="/mi-perfil" className={styles.links}>
+                  {userNavBarLang[lan].Miperfil}
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/mis-compras" className={styles.links}>
+                  {userNavBarLang[lan].MisCompras}
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/favoritos" className={styles.links}>
+                  {userNavBarLang[lan].Favoritos}
+                </Link>
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={logout} disableRipple>
+                <ListItemIcon>
+                  <FiLogOut fontSize="small" />
+                </ListItemIcon>
+                {userNavBarLang[lan].CerrarSesion}
+              </MenuItem>
+            </Menu>
+          </li>
+          <li>
+            <Button
+              style={{
+                border: "none",
+                background: "transparent",
+                color: "black",
+              }}
+              id="demo-customized-button"
+              aria-controls={
+                menuOpen ? "demo-customized-menu" : undefined
+              }
+              aria-haspopup="true"
+              aria-expanded={menuOpen ? "true" : undefined}
+              variant="contained"
+              disableElevation
+              onClick={handleClick}
+            >
+              Menu de admin
+            </Button>
+            <StyledMenu
+              id="demo-customized-menu"
+              MenuListProps={{
+                "aria-labelledby": "demo-customized-button",
+              }}
+              anchorEl={anchorEl}
+              open={menuOpen}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link
+                  className="dropdown-item"
+                  to="/admin/publicaciones"
+                >
+                  Productos
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link
+                  className="dropdown-item"
+                  to="/admin/agregar-publicacion"
+                >
+                  Crear Publicacion
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link
+                  className="dropdown-item"
+                  to="/admin/editar-stock"
+                >
+                  Editar Stock
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/users">
+                  Usuarios
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link
+                  className="dropdown-item"
+                  to="/admin/control-de-usuarios"
+                >
+                  Administrar Usuarios
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <Link className="dropdown-item" to="/admin/preguntas">
+                  Preguntas
+                </Link>
+              </MenuItem>
+            </StyledMenu>
+          </li>
+        </ul>
+        </div>
+      </div>
+      </>
+      )) : (
+        <div className="container-fluid" style={{ margin: "10px" }}>
+          <img src={logo} className={styles.logo} />
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+  
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
+              <SearchBar/>
+            </ul>
+            <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
+            <li className="nav-item" style={{margin: "6px"}}>
+              {modo === 'dark' 
+              ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
+              : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
+            </li>
+            <li style={{margin: "8px"}}>
+              <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
+              <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
+            </li>
+            <li className="nav-item" style={{margin: "-1px"}}>
+                    <Link className="nav-link active" to="/cart">
+                      <BsFillCartFill /> {cartCount}
+                    </Link> 
+                  </li>
+            <li style={{marginInlineEnd: "58px"}}>
+                  <Tooltip title="Account settings">
+                    <IconButton onClick={handleClickk} size="small" sx={{ ml: 2 }} aria-controls={profileOpen ? "account-menu" : undefined} aria-haspopup="true" aria-expanded={profileOpen ? "true" : undefined}>
+                      <Avatar sx={{ width: 32, height: 32 }}>
+                        {user.username[0]}
+                      </Avatar>
+                    </IconButton>
+                  </Tooltip>
+                  <Menu anchorEl={anchorEl} id="account-menu" open={profileOpen} onClose={handleClosee} onClick={handleClosee}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        "& .MuiAvatar-root": {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        "&:before": {
+                          content: '""',
+                          display: "block",
+                          position: "absolute",
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: "background.paper",
+                          transform: "translateY(-50%) rotate(45deg)",
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  >
+                    <MenuItem>
+                      <Avatar />
+                      <Link to="/mi-perfil" className={styles.links}>
+                        {userNavBarLang[lan].Miperfil}
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link to="/mis-compras" className={styles.links}>
+                        {userNavBarLang[lan].MisCompras}
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link to="/favoritos" className={styles.links}>
+                        {userNavBarLang[lan].Favoritos}
+                      </Link>
+                    </MenuItem>
+                    <Divider />
+                    <MenuItem onClick={logout} disableRipple>
+                      <ListItemIcon>
+                        <FiLogOut fontSize="small" />
+                      </ListItemIcon>
+                      {userNavBarLang[lan].CerrarSesion}
+                    </MenuItem>
+                  </Menu>
+                </li>
+              </ul>
+            </div>
+          </div>
+          )) : (
+          <NavBar/>)}
+    </nav>
+    );
+}
+
+/*  <nav className={styles.navbar}>
       {user ? (
         user.isAdmin ? (
           auth.currentUser.email === "finalproyect25a@gmail.com" ? (
             <nav className={styles.navbar}>
               <div className={styles.brandLogo}>
                 <Link to="/home">
-                  <img src={logo} alt="logo" className={styles.logo} />
+                  <img src="https://i.ibb.co/1nF48KZ/logo-removebg.webp" alt="logo" className={styles.logo} />
                 </Link>
               </div>
               <div className={styles.search}>
@@ -266,7 +660,7 @@ export default function UserNavBar({ setCurrentPage }) {
             <>
               <div className={styles.brandLogo}>
                 <Link to="/home">
-                  <img src={logo} alt="logo" className={styles.logo} />
+                  <img src="https://i.ibb.co/1nF48KZ/logo-removebg.webp" alt="logo" className={styles.logo} />
                 </Link>
               </div>
               <div className={styles.search}>
@@ -431,7 +825,7 @@ export default function UserNavBar({ setCurrentPage }) {
                         >
                           Administrar Usuarios
                         </Link>
-                      </MenuItem> */}
+                      </MenuItem> 
                       <MenuItem onClick={handleClose} disableRipple>
                         <Link className="dropdown-item" to="/admin/preguntas">
                           Preguntas
@@ -447,7 +841,7 @@ export default function UserNavBar({ setCurrentPage }) {
           <>
             <div className={styles.brandLogo}>
               <Link to="/home">
-                <img src={logo} alt="logo" className={styles.logo} />
+                <img src="https://i.ibb.co/1nF48KZ/logo-removebg.webp" alt="logo" className={styles.logo} />
               </Link>
             </div>
             <div className={styles.search}>
@@ -543,6 +937,5 @@ export default function UserNavBar({ setCurrentPage }) {
       ) : (
         <NavBar />
       )}
-    </nav>
-  );
-}
+      </nav> */
+  

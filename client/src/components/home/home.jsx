@@ -71,7 +71,6 @@ const Home = () => {
     
     await dispatch(getPhones());
      
-    document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     userVerificate();
     //document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))

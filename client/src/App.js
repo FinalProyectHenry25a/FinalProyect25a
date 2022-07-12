@@ -23,6 +23,7 @@ import Preguntas from './components/Admin/Preguntas';
 import LandingPage from './components/landingPage/LandingPage';
 import About from './components/About/About';
 import "./App.css"
+import bootstrap from "bootstrap"
 import { useSelector } from 'react-redux';
 import Stripe from './components/Comprar/Stripe';
 

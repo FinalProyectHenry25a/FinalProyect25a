@@ -11,12 +11,9 @@ export default function ProductToEdit() {
   const { id } = useParams();
 
   
-  useEffect(() => {
-    dispatch(getDetails(id));
-  }, [dispatch, id]);
-  
-  
   const PID = useSelector((state) => state.phonesId);
+  
+ 
   
   const [state, setState] = useState({
     brand: PID.brand,
@@ -40,6 +37,15 @@ export default function ProductToEdit() {
   });
   
   
+    
+    useEffect(() => {
+      algo()
+    }, [dispatch, id, state]);
+    
+    async function algo(){
+      await dispatch(getDetails(id))
+    }
+  
   console.log('soy el estado', state);
   
 
@@ -47,16 +53,23 @@ export default function ProductToEdit() {
    
     userVerificate();
 
-    return () => {
+    /* return () => {
   
       dispatch(cleanUp());
 
-    }
+    } */
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const userVerificate = async () => {
+   
+
+
     await onAuthStateChanged(auth, async (currentUser) => {
+
+      let producto = await dispatch(getDetails(id))
+
+      setState (producto.payload)
       if(currentUser === null){
 
         history.push("/home");

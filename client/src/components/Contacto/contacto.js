@@ -7,6 +7,8 @@ import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import styles from './Contacto.module.css'
 import UserNavBar from "../UserNavBar/UserNavBar";
+import NavBar from "../NavBar/NavBar";
+import Carrousel from "../carrousel/Carrousel"
 import BtnBack from "../back/BtnBack";
 import { useSelector } from "react-redux";
 import { constactoLang } from "./contactoLang";
@@ -17,6 +19,7 @@ export default function Contacto () {
 
     const history = useHistory()
     const lan = useSelector((state) => state.language);
+    const [user, setUser] = useState()
 
     const [correo, SetCorreo] = useState({
       contact_user: "",
@@ -93,7 +96,8 @@ const correoEmail = async(e) =>{
 
 return(
   <>
-    <UserNavBar/>
+    {user ? <UserNavBar /> : <NavBar />}
+    <Carrousel/>
     <BtnBack/>
     <div className={styles.containerContact}>
 
@@ -121,5 +125,9 @@ return(
         <button type='submit' className={styles.btn}>{constactoLang[lan].enviar}</button>
       </form>
     </div>
+    <footer>
+      <br/>
+      <br/>
+    </footer>
     </>
 )}

@@ -295,6 +295,7 @@ const Home = () => {
             <button onClick={logout}>desloguear</button>
 
             {loggedUser ? <UserNavBar /> : <NavBar />}
+            
             <Carrousel/>
 
             <div id="filtros">
@@ -390,9 +391,9 @@ const Home = () => {
               allPhones={allPhones.length}
               paginado={paginado}
             />
-            <div class="display-flex align-items-center justify-content-center col-auto">
+            <div className="display-flex align-items-center justify-content-center col-auto">
       <Link to='/about'>
-      <button class="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
+      <button className="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
       </Link>
     </div>
           </div>

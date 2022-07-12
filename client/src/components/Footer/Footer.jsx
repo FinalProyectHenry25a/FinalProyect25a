@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import github from "../../images/GitHub.png";
 import styles from "./Footer.module.css";
+import { footerLang } from "./footerLang";
+import { useSelector } from "react-redux";
 
 
 export default function Footer(){
+  const lan = useSelector((state) => state.language)
     return(
         <div className={styles.contorno} >
         <footer className="d-flex align-items-center justify-content-center ">
@@ -11,7 +14,7 @@ export default function Footer(){
             <div className=" row align-items-center justify-content-center">
 <div className="col-5 align-items-center justify-content-center">
       <Link to='/about' className=" align-items-center justify-content-center text-decoration-none">
-      <a className="text-decoration-none align-items-center justify-content-center"><h4 className={styles.facu}>Sobre nosotros</h4></a>
+      <a className="text-decoration-none align-items-center justify-content-center"><h4 className={styles.facu}>{footerLang[lan].nosotros}</h4></a>
       </Link>
     </div>
       <div className="align-items-center justify-content-center col-2">
@@ -24,7 +27,7 @@ export default function Footer(){
             <Link to="/contacto" className="col-6 row justify-content-center align-items-center text-decoration-none">
       <a className="align-items-center justify-content-center text-decoration-none">
         <h4 className={styles.facu}>
-              Contacto
+        {footerLang[lan].contacto}
               {/* {navBarLang[lan].contacto} */}
             </h4>
           </a>

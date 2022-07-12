@@ -84,16 +84,19 @@ const Cart = () => {
   return (
     <>
     <div className={styles.fondo}>
-      
       {user ? <UserNavBar /> : <NavBar />}
-      <BtnBack/>
+      <BtnBack className/>
+    <div className="col-auto justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0 border border-sky-500 center d-grid">
     <div className={styles.cart}>
       <div className={styles.cartItems}>
         {cart.map((item, i) => (
           <CartItem key={i} item={item} />
-        ))}
+          ))}
       </div>
-      <div className={styles.cartSummary}>
+          </div>
+          <br /><br />
+      <div className="col-auto justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div className={styles.cartSummary}>
         <h4 className={styles.summary__title}>Total:</h4>
         <div className={styles.summary__price}>
           {totalItems === 1 ? <span className={styles.span}>{totalItems} producto añadido</span> : <span className={styles.span}>{totalItems} productos añadidos</span>}
@@ -108,6 +111,8 @@ const Cart = () => {
          : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
         </div> : <span>Debes ingresar algun producto en el carrito para comprar</span>}
       </div>
+      </div>
+      <br /><br />
     </div>
     </div>
     </>

@@ -124,6 +124,7 @@ const Login = () => {
   }, []);
 
   return (
+    <div className={style.fondo}>
      <div className={style.login}>
       {user ? <p>Ya estas logueado</p> : <div className={style.container}>
         <div className={style.containerImage}>
@@ -169,6 +170,7 @@ const Login = () => {
           </Link>
         </div>
       </div>}
+    </div>
     </div>
 
     

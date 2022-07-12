@@ -78,9 +78,9 @@ export default function Card(props) {
       <div style={{ height: 300 + "px" }}>
         {props.stock > 0 ? (
           <div className={modo}>
-            <div className='negro'>
+          
           <img src={props.images} style={{ height: 300 + "px" }} alt="..." />
-           </div>
+           
           </div>
         ) : (
           <div className={modo}>

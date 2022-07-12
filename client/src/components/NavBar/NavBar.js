@@ -4,14 +4,10 @@ import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
-import { getLocalCart } from "../../Actions/index";
+import { getLocalCart, modoOscuro, lenguaje } from "../../Actions/index";
 import styles from "./../NavBar/NavBar.module.css";
 import logo from "../../images/smartworld.jpg";
-
 import { navBarLang } from "./navBarLang";
-
-//import styles from "./../NavBar/NavBar.module.css";
-
 
 const NavBar = ({ setCurrentPage }) => {
   
@@ -40,6 +36,7 @@ const NavBar = ({ setCurrentPage }) => {
   const change = () => {
     setOpen(!open);
   };
+  
 
   return (
     <nav className={styles.navContainer}>
@@ -51,6 +48,11 @@ const NavBar = ({ setCurrentPage }) => {
           <img src={logo} alt="logo" className={styles.logo} />
         </a>
       </div>
+      
+      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro'  >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
       <div>
         <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
         </div>

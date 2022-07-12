@@ -15,6 +15,7 @@ import {FormattedMessage, IntlProvider} from 'react-intl'
 
 
 export default function Detail() {
+  const modo = useSelector(state => state.modo)
  
 
   const [user, setUser] = useState(auth.currentUser);
@@ -133,7 +134,9 @@ export default function Detail() {
       <BtnBack/>
       <div className={styles.divContainer}>
         <div className={styles.container1}>
+        <div className={modo}>
           <img src={PID.images} alt="marcas" width={300} />
+          </div>
         </div>
 
         <hr />
@@ -142,7 +145,9 @@ export default function Detail() {
             <h1>{PID.model}</h1>
             {PID.additionalphotos?.length >= 1
               ? PID.additionalphotos.map((el) => (
+                <div className={modo}>
                   <img src={el} width="150" alt="No encontrada" />
+                  </div>
                 ))
               : null}
             <h3>${PID.price}</h3>

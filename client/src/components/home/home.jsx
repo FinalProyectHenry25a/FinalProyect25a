@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
+import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -280,10 +280,7 @@ const Home = () => {
 
             <button onClick={logout}>desloguear</button>
 
-      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
+    
 
       <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
         <option value="es">Español</option>

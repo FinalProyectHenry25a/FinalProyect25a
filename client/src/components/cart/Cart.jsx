@@ -68,6 +68,7 @@ const Cart = () => {
   
   return (
     <>
+    <div className={styles.fondo}>
       <UserNavBar />
       <BtnBack/>
     <div className={styles.cart}>
@@ -91,6 +92,7 @@ const Cart = () => {
         </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
         </div> : <span>Debes ingresar algun producto en el carrito para comprar</span>}
       </div>
+    </div>
     </div>
     </>
   );

@@ -100,7 +100,7 @@ return(
   <div className={styles.fondo}>
     
     {user ? <UserNavBar /> : <NavBar />}
-    <Carrousel/>
+  
     <BtnBack/>
     <div className={styles.containerContact}>
 

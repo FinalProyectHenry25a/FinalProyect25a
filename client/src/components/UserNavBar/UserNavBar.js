@@ -113,6 +113,7 @@ export default function UserNavBar({ setCurrentPage }) {
   const logout = async () => {
     await signOut(auth);
     setUser(false);
+    window.location.reload()
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);

@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import mercadopago from "../../images/mercadopago.png";
 import { auth } from "../../firebase/firebase-config";
 import SearchBar from "../SearchBar/Searchbar";
+import NavBar from "../NavBar/NavBar";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
@@ -68,7 +69,7 @@ const Cart = () => {
   
   return (
     <>
-      <UserNavBar />
+      {user ? <UserNavBar /> : <NavBar />}
       <BtnBack/>
     <div className={styles.cart}>
       <div className={styles.cartItems}>

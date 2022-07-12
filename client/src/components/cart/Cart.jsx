@@ -13,6 +13,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import BtnBack from "../back/BtnBack";
 
 const Cart = () => {
+  const modo = useSelector(state => state.modo)
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const cart = useSelector(state => state.cart);
@@ -86,9 +87,11 @@ const Cart = () => {
         </div>
         {totalItems ? <div>
       {auth.currentUser?.emailVerified ? <Link to="/mercadopago">
+      <div className={modo}>
         <button  className={styles.summary__checkoutBtn}>
         Confirmar Pedido <br/><img src={mercadopago} />
         </button>
+        </div>
         </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
         </div> : <span>Debes ingresar algun producto en el carrito para comprar</span>}
       </div>

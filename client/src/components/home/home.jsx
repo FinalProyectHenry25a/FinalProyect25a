@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import Carrousel from "../carrousel/Carrousel";
+import Footer from "../Footer/Footer";
 
 
 const Home = () => {
@@ -398,6 +399,8 @@ const Home = () => {
     </div>
           </div>
         </div>
+
+        <Footer/>
     </IntlProvider>
   );
 };

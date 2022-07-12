@@ -44,7 +44,7 @@
   }
   .logo {
     width: 250px;
-    margin-top: 25px;
+    margin-top: 2px;
   }
   .navbarLinks li a {
      display: block;
@@ -97,7 +97,6 @@
     color: black;
   }
   .search {
-    margin-left: 120px;
     margin-top: 30px;
   }
   

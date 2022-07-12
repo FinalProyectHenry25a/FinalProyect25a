@@ -24,9 +24,9 @@ const SearchBar = ({setCurrentPage}) => {
     dispatch(pageOne())
   }
   return (
-    <form className={style.container}>
-      <input className={style.input} onChange={(e) => handleSearch(e)}/>
-      <button className={style.btn} type="submit" onClick={(e) => handleSubmit(e)}>{searchBarLang [lan].buscar}</button>
+    <form className="d-flex" style={{width: "90%"}}>
+      <input className="form-control me-2" onChange={(e) => handleSearch(e)}/>
+      <button className="btn btn-outline-dark" type="submit" onClick={(e) => handleSubmit(e)}>{searchBarLang [lan].buscar}</button>
     </form>
   );
 };

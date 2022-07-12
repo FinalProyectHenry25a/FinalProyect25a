@@ -46,7 +46,7 @@ function rootReducer(state = initialState, action) {
         let rom = [];
         let network = [];
         let processor = [];
-  
+
         let allBrands = new Set();
         let allRams = new Set();
         let allRoms = new Set();
@@ -155,17 +155,19 @@ function rootReducer(state = initialState, action) {
     }
   }
 
+  case 'GET_USER':
+    return {
+      ...state,
+      user: action.payload
+    }
+
     case 'GET_USERS':
   let usersWithouthSuperAdmin = action.payload.filter(element => element.email !== "finalproyect25a@gmail.com");
   return {
     ...state,
     users: usersWithouthSuperAdmin
   }
-    case 'GET_USER':
-  return {
-    ...state,
-    user: action.payload
-  }
+
     case 'GET_PHONES_BY_NAME':
   return {
     ...state,
@@ -250,7 +252,7 @@ function rootReducer(state = initialState, action) {
     cart: removeCart
   };
     case "CLEAR_CART_POST_BUY":
-  localStorage.clear()
+    localStorage.removeItem('cart');
   return {
     ...state,
     cart: []

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { clearCart, emptyCart, filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects} from "../../Actions/index";
+import { filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -13,18 +13,17 @@ import axios from "axios";
 import { auth } from "../../firebase/firebase-config";
 import { fetchstoken } from "../Contacto/fetchmetod";
 import Swal from 'sweetalert2';
-
+import { Link } from "react-router-dom";
 import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
-
-
-//import { right } from "@popperjs/core";
-//import SearchBar from "../SearchBar/Searchbar";
-
-// const cartFromLocalStore = JSON.parse(localStorage.getItem("cart") || "[]")
-
+import Carrousel from "../carrousel/Carrousel";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
+
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
+  //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
   const allPhones = useSelector((state) => state.phones);
@@ -56,19 +55,26 @@ const Home = () => {
 
   const [loggedUser, setLoggedUser] = useState();
 
- 
+    //acá se setea el idioma
+    const messages = homeLang[lan]
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
+  //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
 
   useEffect(async () => {
     
-
     await dispatch(getPhones());
      
-    document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
-    verificarQueHayaUsuarioLogueado();
+    userVerificate();
+    //document.getElementById('langu').value = JSON.parse(localStorage.getItem("l"))
     document.getElementById('modoOscuro').value = JSON.parse(localStorage.getItem("modoOscuro"))
 
-    // dispatch(getLocalFavs());
-    // dispatch(getLocalCart());
     dispatch(setSelects())
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -94,61 +100,23 @@ const Home = () => {
     localStorage.setItem('favs', JSON.stringify(favs));
   }, [cart, favs])
 
-  const correoEmail = async (email) => {
-
-    let obj = {
-      contact_user: "MercadoPago",
-      correo_user: email,
-      asunto_user: "Compra realizada",
-      descripcion_user: "Gracias por elegirnos!!! su producto fue despachado, estara llegando en un lapso de entre 7 a 21 dias.",
-    }
-
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    });
-
-    try {
-
-      const resultCorreo = await fetchstoken('correo', obj, "POST");
-
-      if (!resultCorreo.ok) {
-
-        throw Error(resultCorreo.errors.msg);
-
-      }
-      Toast.fire({
-        icon: 'success',
-        title: 'El correo se envio con exito'
-      });
-
-    } catch (error) {
-      Toast.fire({
-        icon: 'error',
-        title: error.message
-      })
-    }
-  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-  const verificarQueHayaUsuarioLogueado = () => {
+
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+  /////////////////////////// FUNCIONES ///////////////////////////////////////////////////////////
+
+  const userVerificate = () => {
+
     onAuthStateChanged(auth, async (currentUser) => {
+
       if (currentUser) {
 
         let info = await dispatch(getUser(currentUser.email))
-
-        if (info.payload.emptyCart) {
-
-          dispatch(clearCart(info.payload.email));
-
-        }
 
         if (currentUser.emailVerified) {
 
@@ -156,22 +124,19 @@ const Home = () => {
 
         }
 
-        if (info.payload.sendEmail) {
-
-          correoEmail(currentUser.email)
-
-          await axios.put(`http://localhost:3001/sendEmail/${currentUser.email}`)
-
-
-        }
         setLoggedUser(info.payload);
+
       }
     });
   };
 
   const paginado = (pageNumber) => {
+
     dispatch(setPage(pageNumber));
+
   };
+
+
 
   function filtersSetters(e) {
     let price = document.getElementById("price").value;
@@ -215,14 +180,6 @@ const Home = () => {
 
 
   }
- 
-
-  // useEffect(()=>{
-  //   let prueba=localStorage.getItem("filter")
-  //   prueba?(
-  //     dispatch(getLocalFilter())
-  // ):(dispatch(getPhones()))},[])
-
 
 
   const send = async (e) => {
@@ -259,34 +216,37 @@ const Home = () => {
   };
 
   const logout = async () => {
+
     await signOut(auth);
+
   };
 
-  const lang = (e) => {
-    dispatch(language(e.target.value));
-  }
+  // const lang = (e) => {
 
-  //acá se setea el idioma
-  const messages = homeLang[lan]
+  //   dispatch(language(e.target.value));
 
+  // }
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
+  /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
 
   return (
       <IntlProvider locale='es' messages={messages}>
     
       <div className={style.fondo}>
-    <div>
+      <div className="display-flex row y justify-content-center">
 
 
             <button onClick={logout}>desloguear</button>
 
-    
-
-      <select onChange={lang} id='langu' className="form-select form-select-m mb-3 mt-5 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} >
-        <option value="es">Español</option>
-        <option value="en">English</option>
-      </select>
             {loggedUser ? <UserNavBar /> : <NavBar />}
+            
+            <Carrousel/>
 
             <div id="filtros">
 
@@ -381,8 +341,15 @@ const Home = () => {
               allPhones={allPhones.length}
               paginado={paginado}
             />
+            <div className="display-flex align-items-center justify-content-center col-auto">
+      <Link to='/about'>
+      <button className="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
+      </Link>
+    </div>
           </div>
         </div>
+
+        <Footer/>
     </IntlProvider>
   );
 };

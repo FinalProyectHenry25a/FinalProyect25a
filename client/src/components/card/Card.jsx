@@ -102,17 +102,6 @@ export default function Card(props) {
         justifyContent: "center",
       }}>${props.price}</h2>
         <div className="card-text">
-          {user ? favslocal?.includes(props.id) ? (
-            <button style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
-              <FaHeart />
-            </button>
-          ) : (
-            <button style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
-              <FiHeart />
-            </button>
-          ) : null}
-          <br />
-        </div>
         {props.stock > 0 ? (
           <div>
             {auth.currentUser ? (
@@ -153,7 +142,10 @@ export default function Card(props) {
       }}>{cardLang[lan].Disponibles}: {props.stock}</p>
           </div>
         ) : (
-          <p className="">{cardLang[lan].AGOTADO}</p>
+          <div>
+          <p className="btn w-100 mb-2 ">{cardLang[lan].AGOTADO}</p>
+          <p className="btn w-100 mb-0">{cardLang[lan].NoDisponible}</p>
+          </div>
         )}
 
         <br />
@@ -164,6 +156,17 @@ export default function Card(props) {
                   }} to={"/home/" + props.id}>
           {cardLang[lan].Detalle}
         </Link>
+        {user ? favslocal?.includes(props.id) ? (
+            <button style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
+              <FaHeart />
+            </button>
+          ) : (
+            <button style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
+              <FiHeart />
+            </button>
+          ) : null}
+          <br />
+          </div>
       </div>
     </div>
   );

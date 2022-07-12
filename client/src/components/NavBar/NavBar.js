@@ -115,9 +115,6 @@ const NavBar = ({ setCurrentPage }) => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
-            <SearchBar/>
-          </ul>
           <ul className="navbar-nav ml-auto" style={{marginLeft: "auto", marginInlineEnd: "40px"}}>
           <li className="nav-item" style={{margin: "8px"}}>
             {modo === 'dark' 

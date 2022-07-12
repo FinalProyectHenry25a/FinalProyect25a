@@ -25,6 +25,8 @@ import IconButton from "@mui/material/IconButton";
 import { FiLogOut } from "react-icons/fi";
 import { BsFillMoonFill } from "react-icons/bs";
 import { BsFillSunFill } from "react-icons/bs";
+import { BsGearWideConnected } from "react-icons/bs";
+
 
 const StyledMenu = styled((props) => (
   
@@ -193,22 +195,32 @@ export default function UserNavBar({ setCurrentPage }) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
-            <SearchBar/>
-          </ul>
           <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
+          <li className="nav-item dropdown">
+            <Link className="nav-link active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <BsGearWideConnected/>
+            </Link>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><Link className="dropdown-item" to="/admin/publicaciones">Productos</Link></li>
+              <li><Link className="dropdown-item" to="/admin/agregar-publicacion">Crear Publicacion</Link></li>
+              <li><Link className="dropdown-item" to="/admin/editar-stock">Editar Stock</Link></li>
+              <li><Link className="dropdown-item" to="/admin/users">Usuarios</Link></li>
+              <li><Link className="dropdown-item" to="/admin/preguntas">Preguntas</Link></li>
+              <li><Link className="dropdown-item" to="/admin/control-de-usuarios">Administrar Usuarios</Link></li>
+              <li><hr className="dropdown-divider"/></li>
+              <li><Link className="dropdown-item" onClick={logout}><FiLogOut style={{marginInlineEnd: "10px"}}/>{userNavBarLang[lan].CerrarSesion}</Link></li>
+              </ul>
+            </li>
           <li className="nav-item" style={{margin: "6px"}}>
             {modo === 'dark' 
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
             : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
           </li>
-          <div className={modo}>
-          <li style={{margin: "6px"}}>
+          <li style={{margin: "6px", marginInlineEnd: "100px"}}>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
           </li>
-          </div>
-            <li className="nav-item">
+            {/* <li className="nav-item">
             <Button
                   style={{
                     border: "none",
@@ -275,7 +287,7 @@ export default function UserNavBar({ setCurrentPage }) {
                     CerrarSesion
                   </MenuItem>
                 </StyledMenu>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
@@ -296,10 +308,19 @@ export default function UserNavBar({ setCurrentPage }) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
-            <SearchBar style={{width: "100%"}}/>
-          </ul>
           <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
+          <li className="nav-item dropdown">
+            <Link className="nav-link active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <BsGearWideConnected/>
+            </Link>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><Link className="dropdown-item" to="/admin/publicaciones">Productos</Link></li>
+              <li><Link className="dropdown-item" to="/admin/agregar-publicacion">Crear Publicacion</Link></li>
+              <li><Link className="dropdown-item" to="/admin/editar-stock">Editar Stock</Link></li>
+              <li><Link className="dropdown-item" to="/admin/users">Usuarios</Link></li>
+              <li><Link className="dropdown-item" to="/admin/preguntas">Preguntas</Link></li>
+              </ul>
+            </li>
           <li className="nav-item" style={{margin: "6px"}}>
             {modo === 'dark' 
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
@@ -311,88 +332,26 @@ export default function UserNavBar({ setCurrentPage }) {
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
           </li>
           </div>
-          <li>
-            <Tooltip title="Account settings">
-              <IconButton
-                onClick={handleClickk}
-                size="small"
-                sx={{ ml: 2 }}
-                aria-controls={profileOpen ? "account-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={profileOpen ? "true" : undefined}
-                style={{"background-color": "#AFD5EB"}}
-              >
-                <Avatar sx={{ width: 32, height: 32 }}>
-                  {user.username[0]}
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              anchorEl={anchorEl}
-              id="account-menu"
-              open={profileOpen}
-              onClose={handleClosee}
-              onClick={handleClosee}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  "& .MuiAvatar-root": {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                  },
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-              >
-              <MenuItem>
-                <Avatar />
-                <Link to="/mi-perfil" className={styles.links}>
-                  {userNavBarLang[lan].Miperfil}
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/mis-compras" className={styles.links}>
-                  {userNavBarLang[lan].MisCompras}
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/favoritos" className={styles.links}>
-                  {userNavBarLang[lan].Favoritos}
-                </Link>
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={logout} disableRipple>
-                <ListItemIcon>
-                  <FiLogOut fontSize="small" />
-                </ListItemIcon>
-                {userNavBarLang[lan].CerrarSesion}
-              </MenuItem>
-            </Menu>
+          <li className="nav-item dropdown">
+            <Link className="nav-link dropdown-toggle active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <BsPersonCircle /> {user.username}
+            </Link>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><Link className="dropdown-item" to="/mi-perfil/">{userNavBarLang[lan].Miperfil}</Link></li>
+              <li><Link className="dropdown-item" to="/mis-compras">{userNavBarLang[lan].MisCompras}</Link></li>
+              <li><Link className="dropdown-item" to="/favoritos">{userNavBarLang[lan].Favoritos}</Link></li>
+              <li><hr className="dropdown-divider"/></li>
+              <li><Link className="dropdown-item" onClick={logout}><FiLogOut style={{marginInlineEnd: "10px"}}/>{userNavBarLang[lan].CerrarSesion}</Link></li>
+            </ul>
           </li>
-          <li>
+          
+          {/* <li>
             <Button
               style={{
                 border: "none",
                 background: "transparent",
                 color: "black",
+                marginBlock: "4px"
               }}
               id="demo-customized-button"
               aria-controls={
@@ -404,7 +363,7 @@ export default function UserNavBar({ setCurrentPage }) {
               disableElevation
               onClick={handleClick}
             >
-              Menu de admin
+              <BsGearWideConnected/>
             </Button>
             <StyledMenu
               id="demo-customized-menu"
@@ -444,21 +403,26 @@ export default function UserNavBar({ setCurrentPage }) {
                   Usuarios
                 </Link>
               </MenuItem>
-              <MenuItem onClick={handleClose} disableRipple>
+              {/* <MenuItem onClick={handleClose} disableRipple>
                 <Link
                   className="dropdown-item"
                   to="/admin/control-de-usuarios"
                 >
                   Administrar Usuarios
                 </Link>
-              </MenuItem>
+              </MenuItem> 
               <MenuItem onClick={handleClose} disableRipple>
                 <Link className="dropdown-item" to="/admin/preguntas">
                   Preguntas
                 </Link>
               </MenuItem>
             </StyledMenu>
-          </li>
+          </li> */}
+          <li className="nav-item" style={{margin: "-1px"}}>
+              <Link className="nav-link active" to="/cart">
+                <BsFillCartFill /> {cartCount}
+              </Link> 
+            </li>
         </ul>
         </div>
       </div>
@@ -479,9 +443,6 @@ export default function UserNavBar({ setCurrentPage }) {
           </button>
   
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
-              <SearchBar/>
-            </ul>
             <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
             <li className="nav-item" style={{margin: "6px"}}>
               {modo === 'dark' 
@@ -494,20 +455,27 @@ export default function UserNavBar({ setCurrentPage }) {
               <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
             </li>
             </div>
+            <li className="nav-item dropdown">
+          <Link className="nav-link dropdown-toggle active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <BsPersonCircle /> {user.username}
+                </Link>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><Link className="dropdown-item" to="/mi-perfil/">{userNavBarLang[lan].Miperfil}</Link></li>
+                <li><Link className="dropdown-item" to="/mis-compras">{userNavBarLang[lan].MisCompras}</Link></li>
+                <li><Link className="dropdown-item" to="/favoritos">{userNavBarLang[lan].Favoritos}</Link></li>
+                <li><hr className="dropdown-divider"/></li>
+                <li><Link className="dropdown-item" onClick={logout}><FiLogOut style={{marginInlineEnd: "10px"}}/>{userNavBarLang[lan].CerrarSesion}</Link></li>
+              </ul>
+            </li>
             <li className="nav-item" style={{margin: "-1px"}}>
                     <Link className="nav-link active" to="/cart">
                       <BsFillCartFill /> {cartCount}
                     </Link> 
                   </li>
-            <li style={{marginInlineEnd: "58px"}}>
-                  <Tooltip title="Account settings">
-                    <IconButton onClick={handleClickk} size="small" sx={{ ml: 2 }} aria-controls={profileOpen ? "account-menu" : undefined} aria-haspopup="true" aria-expanded={profileOpen ? "true" : undefined}>
-                      <Avatar sx={{ width: 32, height: 32 }}>
-                        {user.username[0]}
-                      </Avatar>
-                    </IconButton>
-                  </Tooltip>
-                  <Menu anchorEl={anchorEl} id="account-menu" open={profileOpen} onClose={handleClosee} onClick={handleClosee}
+            </ul>
+          </div>
+                 
+                  {/* <Menu anchorEl={anchorEl} id="account-menu" open={profileOpen} onClose={handleClosee} onClick={handleClosee}
                     PaperProps={{
                       elevation: 0,
                       sx: {
@@ -563,8 +531,8 @@ export default function UserNavBar({ setCurrentPage }) {
                   </Menu>
                 </li>
               </ul>
-            </div>
-          </div>
+            </div> */}
+        </div>
           )) : (
           <NavBar/>)}
     </nav>

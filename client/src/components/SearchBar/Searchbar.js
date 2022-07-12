@@ -5,12 +5,13 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { searchBarLang } from "./searchBarLang";
+import {BsSearch} from "react-icons/bs"
 
-const SearchBar = ({setCurrentPage}) => {
+const SearchBar = ({ setCurrentPage }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [model, setModel] = useState("");
-  const lan = useSelector ((state) => state.language);
+  const lan = useSelector((state) => state.language);
   const page = useSelector((state) => state.currentPage);
 
   function handleSearch(e) {
@@ -19,15 +20,19 @@ const SearchBar = ({setCurrentPage}) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    history.push("/home")
+    history.push("/home");
     dispatch(getPhonesByModel(model));
-    dispatch(pageOne())
+    dispatch(pageOne());
   }
   return (
-    <form className="d-flex" style={{width: "90%"}}>
-      <input className="form-control me-2" onChange={(e) => handleSearch(e)}/>
-      <button className="btn btn-outline-dark" type="submit" onClick={(e) => handleSubmit(e)}>{searchBarLang [lan].buscar}</button>
-    </form>
+    <div className="input-group" style={{width: "40%", marginInline: "auto"}}>
+  <div className="form-outline" style={{width: "90%"}}>
+    <input id="search-input" type="search" className="form-control" style={{height: "100%"}} onChange={handleSearch}/>
+  </div>
+  <button id="search-button" type="button" style={{borderRadius: "10px", width: "8%", marginInlineStart1: "5px"}} className="btn btn-primary" onClick={handleSubmit}>
+    <BsSearch/>
+  </button>
+</div>
   );
 };
 export default SearchBar;

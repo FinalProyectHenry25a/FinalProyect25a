@@ -177,6 +177,7 @@ function rootReducer(state = initialState, action) {
   var currentCart = JSON.parse(localStorage.getItem("cart")) || []
   return { ...state, cart: currentCart }
     case 'GET_DETAILS':
+      console.log( action.payload);
   return {
     ...state,
     phonesId: action.payload

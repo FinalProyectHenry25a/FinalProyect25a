@@ -331,7 +331,7 @@ const Home = () => {
                 })
               ) : (
                 <div>
-                  <h1>No se encontraron artículos con esas características</h1>
+                  <h1>{homeLang[lan].noseenc}</h1>
                 </div>
               )}
             </div>
@@ -348,6 +348,7 @@ const Home = () => {
     </div>
           </div>
         </div>
+        <br></br>
 
         <Footer/>
     </IntlProvider>

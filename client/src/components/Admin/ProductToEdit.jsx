@@ -6,56 +6,25 @@ import { getDetails, editPost, getUser, cleanUp } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
 export default function ProductToEdit() {
+
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
   const PID = useSelector((state) => state.phonesId);
-
-  const [state, setState] = useState({
-    brand: PID.brand,
-    releaseDate: PID.releaseDate,
-    model: PID.model,
-    price: PID.price,
-    rating: PID.rating,
-    images: PID.images,
-    color: PID.color,
-    processor: PID.processor,
-    ram: PID.ram,
-    rom: PID.rom,
-    network: PID.network,
-    batery: PID.batery,
-    frontal_cam: PID.frontal_cam,
-    main_cam: PID.main_cam,
-    inches: PID.inches,
-    screen: PID.screen,
-    resolution: PID.resolution,
-  });
-
-
- 
-
-  useEffect(() => {
-    dispatch(getDetails(id));
-  }, [dispatch, id]);
-
-  useEffect(() => {
-   
-    userVerificate();
-
-    return () => {
+  const [state, setState] = useState({});
   
-      dispatch(cleanUp());
 
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    userVerificate();
   }, []);
 
   const userVerificate = async () => {
     await onAuthStateChanged(auth, async (currentUser) => {
-      if(currentUser === null){
+      let producto = await dispatch(getDetails(id));
 
+      setState(producto.payload);
+      if (currentUser === null) {
         history.push("/home");
-  
       }
       try {
         let info = await dispatch(getUser(currentUser.email));
@@ -99,35 +68,11 @@ export default function ProductToEdit() {
   }
 
   const handleSubmit = async(e) => {
-    e.preventDefault();
     console.log(state);
     dispatch(editPost(id, state));
-    alert("successfully");
-    setState({
-      brand: "",
-      releaseDate: "",
-      model: "",
-      price: "",
-      rating: "",
-      images: "",
-      color: "",
-      processor: "",
-      ram: "",
-      rom: "",
-      network: "",
-      batery: "",
-      frontal_cam: "",
-      main_cam: "",
-      inches: "",
-      screen: "",
-      resolution: "",
-    });
-
+    alert("Cambios guardados exitosamente");
     history.push("/admin/publicaciones");
-    
   };
-
-
 
   const base64Convert = (ev) => {
     let file = ev.target.files[0];
@@ -163,19 +108,20 @@ export default function ProductToEdit() {
     let arr = state.additionalphotos;
     let arrAux = [];
 
-    for (let i = 0; i < arr.length; i++) {
-      if ( i !== index) arrAux.push(arr[i]);
+    for (let i = 0; i < arr?.length; i++) {
+      if (i !== index) arrAux.push(arr[i]);
     }
-    setState({ ...state, additionalphotos: arrAux });
-  }
+
+    setState(() => ({ ...state, additionalphotos: arrAux }));
+  };
 
   return (
     <div>
-      <Link to="/home">
+      <Link to="/admin/publicaciones">
         <button>Volver</button>
       </Link>
       <div>
-        <label>brand</label>
+        <label>Marca</label>
         <input
           placeholder="Brand..."
           type="text"
@@ -185,9 +131,6 @@ export default function ProductToEdit() {
           required
           onChange={(e) => handleChange(e)}
         />
-        {/*  <button type="submit" onClick={handlerBrand}>
-            cambiar brand
-          </button> */}
       </div>
       <div>
         <label>Release Date</label>
@@ -199,14 +142,15 @@ export default function ProductToEdit() {
           required
           onChange={(e) => handleChange(e)}
         />
+       
       </div>
       <div>
         <label>Model</label>
         <input
-          placeholder="Model..."
+          placeholder={state.model}
           type="text"
           name="model"
-          value={state.model}
+          //value={state.model}
           required
           onChange={(e) => handleChange(e)}
         />
@@ -233,6 +177,7 @@ export default function ProductToEdit() {
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
         <label>Imagen principal</label>
 
@@ -241,9 +186,11 @@ export default function ProductToEdit() {
         <input type="file" onChange={(ev) => base64Convert(ev)} required />
         <br />
       </div>
+
       <div>
         <label>Imagenes secundarias-max: 3</label>
         <br />
+
         {state.additionalphotos?.map((el, index) => (
           <div key={index}>
             <img src={el} width="50" height="50" alt="no encontrada" />
@@ -252,6 +199,7 @@ export default function ProductToEdit() {
             <br />
           </div>
         ))}
+
         {state.additionalphotos?.length < 3 ? (
           <input type="file" onChange={(ev) => addNewPicture(ev)} required />
         ) : null}

@@ -179,7 +179,7 @@ const CheckoutForm = () => {
 
                history.push("/home");
 
-               window.location.reload()
+              // window.location.reload()
     
             }
 

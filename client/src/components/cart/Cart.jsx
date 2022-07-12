@@ -37,7 +37,6 @@ const Cart = () => {
   useEffect(() => {
 
     dispatch(getLocalCart())
-    dispatch(getUser(auth.currentUser.email))
 
   }, [])
 

@@ -25,8 +25,8 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
 import style from "./../Admin/Admin.module.css";
+import BtnBack from "../back/BtnBack";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -109,8 +109,8 @@ export default function Users() {
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="center">Fecha</TableCell>
-                      <TableCell align="center">Producto</TableCell>
+                      <TableCell align="center">Marca</TableCell>
+                      <TableCell align="center">Modelo</TableCell>
                       <TableCell align="center">Monto</TableCell>
                       <TableCell align="center">Cantidad</TableCell>
                       <TableCell align="center">Precio Total ($)</TableCell>
@@ -118,15 +118,15 @@ export default function Users() {
                   </TableHead>
                   <TableBody>
                     {row?.shopping?.map((historyRow) => (
-                      <TableRow key={historyRow.model}>
-                        <TableCell component="th" scope="row">
+                      <TableRow key={historyRow.id}>
+                        <TableCell align="center">
                           {historyRow.brand}
                         </TableCell>
-                        <TableCell>{`${historyRow.brand} ${historyRow.model}`}</TableCell>
-                        <TableCell align="right">{historyRow.price}</TableCell>
-                        <TableCell align="right">{historyRow.qty}</TableCell>
-                        <TableCell align="right">
-                          {Math.round(((historyRow.price * historyRow.qty )* 100) / 100)}
+                        <TableCell align="center">{`${historyRow.model}`}</TableCell>
+                        <TableCell align="center">${historyRow.price}</TableCell>
+                        <TableCell align="center">{historyRow.qty}</TableCell>
+                        <TableCell align="center">
+                          ${Math.round(((historyRow.price * historyRow.qty )* 100) / 100)}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -141,6 +141,7 @@ export default function Users() {
   }
 
   return (
+
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -159,7 +160,9 @@ export default function Users() {
           ))}
         </TableBody>
       </Table>
+      <BtnBack></BtnBack>
     </TableContainer>
+
   );
 }
 {

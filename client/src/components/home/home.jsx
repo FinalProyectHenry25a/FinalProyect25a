@@ -342,9 +342,9 @@ const Home = () => {
               paginado={paginado}
             />
             <div className="display-flex align-items-center justify-content-center col-auto">
-      <Link to='/about'>
+      {/* <Link to='/about'>
       <button className="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
-      </Link>
+      </Link> */}
     </div>
           </div>
         </div>

@@ -371,7 +371,7 @@ export default function UserNavBar({ setCurrentPage }) {
                 </Link>
               </MenuItem>
               <Divider />
-              <MenuItem>
+              <MenuItem onClick={logout} disableRipple>
                 <ListItemIcon>
                   <FiLogOut fontSize="small" />
                 </ListItemIcon>
@@ -544,7 +544,7 @@ export default function UserNavBar({ setCurrentPage }) {
                       </Link>
                     </MenuItem>
                     <Divider />
-                    <MenuItem>
+                    <MenuItem onClick={logout} disableRipple>
                       <ListItemIcon>
                         <FiLogOut fontSize="small" />
                       </ListItemIcon>

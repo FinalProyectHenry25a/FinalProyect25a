@@ -68,12 +68,10 @@ export default function ProductToEdit() {
   }
 
   const handleSubmit = async(e) => {
-   // e.preventDefault();
     console.log(state);
     dispatch(editPost(id, state));
-    alert("successfully");
-    
-
+    alert("Cambios guardados exitosamente");
+    history.push("/admin/publicaciones");
   };
 
   const base64Convert = (ev) => {

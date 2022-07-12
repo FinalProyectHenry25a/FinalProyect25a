@@ -132,9 +132,5 @@ return(
       </form>
     </div>
     </div>
-    <footer>
-      <br/>
-      <br/>
-    </footer>
     </>
 )}

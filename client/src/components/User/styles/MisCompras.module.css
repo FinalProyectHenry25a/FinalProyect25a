@@ -3,9 +3,7 @@
     place-content: center;
 
 }
-.prf {
-    margin-top: 10px;
-}
+
 .input{
     margin: 0;
     width: 322px;
@@ -14,8 +12,12 @@
     border-radius: 5px;
     background-color: white;
     padding-left: 5px;
-    margin-top: 20px;
+    
 }
+.fondo{
+    background-color: rgb(207, 204, 204);
+    height: 100%;
+  }
 
 .containerCard {
     display: flex;
@@ -28,7 +30,7 @@
     cursor: pointer;
     width: 320px;
     height: 40px;
-    margin-top: 30px;
+    
     background-color: rgb(80, 95, 214);
     border-radius: 5px;
 }

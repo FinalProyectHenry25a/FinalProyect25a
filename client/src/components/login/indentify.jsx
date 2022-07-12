@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 import { idLang } from "./indetifyLang";
 import { useSelector } from "react-redux";
+import styles from "./Login.module.css"
 
 export default function Identify() {
 
@@ -31,7 +32,7 @@ export default function Identify() {
     }
 
     return (
-
+        <div className={styles.fondo}>
         <div className=" row y justify-content-center">
         <div className="display-flex justify-content-center row border border-sky-500 col-4 center d-grid gap-2 row shadow py-2 px-4 rounded">
  
@@ -44,6 +45,7 @@ export default function Identify() {
             <br /><br />
             <Link className="row justify-content-center" to="/login"><button className=' justify-content-center col-auto btn btn-secondary btn-sm' type="submit">{idLang[lan].atras}</button></Link>
             </div>
+        </div>
         </div>
 
     )

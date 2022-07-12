@@ -235,6 +235,7 @@ history.push('/home');
   };
 
   return (
+    <div className={style.fondo}>
     <div className=" row y justify-content-center">
       <Link to="/home">
         <button className={style.btn}>◀ Volver</button>
@@ -571,6 +572,7 @@ history.push('/home');
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }

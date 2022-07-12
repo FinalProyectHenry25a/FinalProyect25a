@@ -98,6 +98,7 @@ export default function MisCompras() {
 
   return (
     <>
+    <div className={styles.fondo}>
       <UserNavBar />
       <BtnBack/>
       {user ? (
@@ -163,6 +164,7 @@ export default function MisCompras() {
       ) : (
         <h1>no estas logeado</h1>
       )}
+      </div>
     </>
   );
 }

@@ -146,6 +146,7 @@ export default function MiPerfil() {
   }
 
   return (
+    <div className={styles.fondo}>
     <div>
       <UserNavBar />
       <BtnBack/>
@@ -296,6 +297,7 @@ export default function MiPerfil() {
       ) : (
         <h1>{miPerfilLang[lan].noEstasLogueado}</h1>
       )}
+    </div>
     </div>
   );
 }

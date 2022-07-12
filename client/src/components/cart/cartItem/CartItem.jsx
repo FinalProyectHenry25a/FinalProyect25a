@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   adjustItemQty,
   removeFromCart,
@@ -11,7 +11,7 @@ import styles from "./CartItem.module.css";
 
 
 const CartItem = (props) => {
-
+  const modo = useSelector(state => state.modo)
   const {item} = props;
 
   const dispatch = useDispatch();
@@ -80,7 +80,9 @@ const CartItem = (props) => {
   };
   return (
     <div className={styles.cartItem}>
-      <img src={item.images} alt={item.model} width={200} className={styles.image}/>
+      <div className={modo}>
+      <img src={item.images} alt={item.model} class="img-rounded" width="200"/>
+      </div>
       <div className={styles.cartItemDetails}>
         <p className={styles.detailsTitle}>{item.brand}</p>
         <p className={styles.detailsTitle}>{item.model}</p>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-//import style from "./../card/Card.module.css";
+import style from "./../card/Card.module.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import soldOut from "../../images/sold-out.png";
 import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { cardLang } from "./cardLang";
-import "./Card.module.css"
+
 
 
 export default function Card(props) {
@@ -65,22 +65,15 @@ export default function Card(props) {
 
   return (
     <div
-      className="card"
-      style={{
-        width: 18 + "rem",
-        display: "inline-flex",
-        flexFlow: "row wrap",
-        justifyContent: "center",
-        marginBottom: '20px'
-      }}
-    >
       
+    >
+      <div className={style.card}>
       <div style={{ height: 300 + "px" }}>
         {props.stock > 0 ? (
           <div className={modo}>
-            <div className='negro'>
+          
           <img src={props.images} style={{ height: 300 + "px" }} alt="..." />
-           </div>
+           
           </div>
         ) : (
           <div className={modo}>
@@ -127,7 +120,7 @@ export default function Card(props) {
                   style={{
                     border: '1px solid black',
                     justifyContent: "center",
-                    marginLeft: '52px',
+                    
                     marginBottom: '10px'
                   }}
                   onClick={() => dispatch(addToCart(props.id))}
@@ -136,18 +129,21 @@ export default function Card(props) {
                 </button>
               </Link>
             )}
-            <p style={{
+            {/* <p style={{
         textAlign: 'center',
         justifyContent: "center",
-      }}>{cardLang[lan].Disponibles}: {props.stock}</p>
+      }}>{cardLang[lan].Disponibles}: {props.stock}</p> */}
           </div>
         ) : (
-          <p className="">{cardLang[lan].AGOTADO}</p>
+          <div>
+          {/* <p className="btn w-100 mb-2 ">{cardLang[lan].AGOTADO}</p>
+          <p className="btn w-100 mb-0">{cardLang[lan].NoDisponible}</p> */}
+          </div>
         )}
 
-        <br />
-        <Link className="btn btn-outline-dark, w-100" style={{
-                    border: '1px solid black',
+        
+        <Link className="btn btn-outline-dark, w-80 mb-4" style={{
+                    
                     justifyContent: "center",
                     
                   }} to={"/home/" + props.id}>
@@ -164,6 +160,8 @@ export default function Card(props) {
           ) : null}
           <br />
           </div>
+          
+    </div>
       </div>
     </div>
   );

@@ -1,25 +1,24 @@
 .card{
-    margin-left: 20px;
-    margin-top: 25px;
-    width: 310px;
-    background-color:rgb(95, 86, 86);
+    margin-left: 1px;
+    margin-top: 50px;
+    margin-block-end: 50px;
+    margin-right: 1px;
+    width: 280px;
+    background-color: #fff;
     backdrop-filter: blur(6px);
-    border-radius: 18px;
+    border-radius: 6px;
     overflow: hidden;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border: 1px solid black;
+    
     text-align: center;
+    align-items: center;
 }
 .card:hover {
-    background: rgb(134, 97, 81);
-    background: linear-gradient(
-      63deg,
-      rgba(255, 79, 5, 1) 4%,
-      rgba(254, 85, 7, 1) 9%,
-      rgb(35, 192, 29) 86%,
-      rgba(116, 105, 100, 1) 98%
-    );
-    cursor: pointer;
+  cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 16px rgba(50, 50, 50, 1);
+    transition: all 0.25s;
+    
   }
 
 .image {
@@ -32,6 +31,25 @@
     text-align: center;
 }
 
-.negro{
-  background-color: red;
+.btn {
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 380px;
+  height: 40px;
+  margin-top: 30px;
+  background-color: rgb(80, 95, 214);
+  border-radius: 5px;
 }
+.btn:hover {
+  animation: pulsate 1.5s ease-in-out;
+  cursor: pointer;
+}
+@keyframes pulsate {
+  0% {
+      box-shadow:
+      0 0 25px #5ddcff,
+      0 0 50px #4e00c2;
+  }
+}
+

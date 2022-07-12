@@ -24,7 +24,9 @@ import Preguntas from './components/Admin/Preguntas';
 import LandingPage from './components/landingPage/LandingPage';
 import About from './components/About/About';
 import "./App.css"
+import bootstrap from "bootstrap"
 import { useSelector } from 'react-redux';
+import Stripe from './components/Comprar/Stripe';
 
 function App() {
   const modo = useSelector(state => state.modo)
@@ -45,6 +47,7 @@ function App() {
         <Route exact path="/mis-compras" component={MisCompras} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/mercadopago" component={mp}/>
+        <Route exact path="/stripe" component={Stripe}/>
         <Route exact path="/admin/agregar-publicacion" component={Created} />
         <Route exact path="/admin/publicaciones" component={Posts} />
         <Route exact path="/admin/editar-stock" component={StockEdit}/>

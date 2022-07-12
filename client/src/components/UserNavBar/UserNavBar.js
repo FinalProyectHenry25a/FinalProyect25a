@@ -9,7 +9,7 @@ import SearchBar from "../SearchBar/Searchbar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocalCart, modoOscuro, language } from "../../Actions";
-import logo from "../../images/logo-removebg.webp";
+import SmartifyFinal from "../../images/SmartifyFinal.png";
 import styles from "../UserNavBar/usernavbar.module.css";
 import { userNavBarLang } from "./userNavBarLang";
 import { styled, alpha } from "@mui/material/styles";
@@ -29,6 +29,8 @@ import { BsGearWideConnected } from "react-icons/bs";
 
 
 const StyledMenu = styled((props) => (
+  
+
   <Menu
     elevation={0}
     anchorOrigin={{
@@ -174,12 +176,12 @@ export default function UserNavBar({ setCurrentPage }) {
       )}
     </nav> */}
    return (
-    <nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar navbar-expand-lg">
       {user ? (
         user.isAdmin ? (
           auth.currentUser.email === "finalproyect25a@gmail.com" ? (
       <div className="container-fluid" style={{ margin: "10px" }}>
-        <img src={logo} className={styles.logo} />
+        <img src={SmartifyFinal} className={styles.logo} />
         <button
           className="navbar-toggler"
           type="button"
@@ -292,7 +294,7 @@ export default function UserNavBar({ setCurrentPage }) {
       ) : (
       <>
       <div className="container-fluid" style={{ margin: "10px" }}>
-        <img src={logo} className={styles.logo} />
+        <img src={SmartifyFinal} className={styles.logo} />
         <button
           className="navbar-toggler"
           type="button"
@@ -324,10 +326,12 @@ export default function UserNavBar({ setCurrentPage }) {
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
             : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
           </li>
+          <div className={modo}>
           <li style={{margin: "6px"}}>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
           </li>
+          </div>
           <li className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <BsPersonCircle /> {user.username}
@@ -425,7 +429,7 @@ export default function UserNavBar({ setCurrentPage }) {
       </>
       )) : (
         <div className="container-fluid" style={{ margin: "10px" }}>
-          <img src={logo} className={styles.logo} />
+          <img src={SmartifyFinal} className={styles.logo} />
           <button
             className="navbar-toggler"
             type="button"
@@ -445,10 +449,12 @@ export default function UserNavBar({ setCurrentPage }) {
               ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
               : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
             </li>
+            <div className={modo}>
             <li style={{margin: "8px"}}>
               <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
               <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
             </li>
+            </div>
             <li className="nav-item dropdown">
           <Link className="nav-link dropdown-toggle active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <BsPersonCircle /> {user.username}

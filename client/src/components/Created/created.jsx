@@ -22,25 +22,16 @@ export default function PhoneCreate() {
   }, []);
 
   const userVerificate = async () => {
-
     await onAuthStateChanged(auth, async (currentUser) => {
-
       try {
+        let info = await dispatch(getUser(currentUser.email));
 
-        let info = await dispatch(getUser(currentUser.email))
-
-        if(!info.payload.isAdmin){
-
+        if (!info.payload.isAdmin) {
           history.push("/home");
-
         }
-    
       } catch (error) {
-
         console.log(error);
-        
       }
-
     });
   };
 
@@ -144,8 +135,7 @@ export default function PhoneCreate() {
   }
 
   function handleSubmit(e) {
-    console.log(input.images);
-    console.log(input.images);
+    
     e.preventDefault();
     if (
     error.model ||
@@ -179,6 +169,7 @@ export default function PhoneCreate() {
     dispatch(postPhone(input));
     dispatch(setSelects());
     alert("La publicacion se creo exitosamente");
+    
     setInput({
       brand: "",
       model: "",
@@ -198,7 +189,12 @@ export default function PhoneCreate() {
       screen: "",
       resolution: "",
       stock: "",
- });}
+ });
+
+history.push('/home');
+
+
+}
   }
 
 
@@ -211,7 +207,7 @@ export default function PhoneCreate() {
     fileReader.onload = async function () {
       let base64 = fileReader.result;
       setFotoP(base64);
-      setInput({ ...input, images: base64 }); 
+      setInput({ ...input, images: base64 });
     };
   };
 
@@ -231,7 +227,15 @@ export default function PhoneCreate() {
     };
   };
 
+  const takeOut = (index) => {
+    let aux2 = fotosSec.filter((elem, ind) => ind !== index);
+
+    setFotosSec(aux2);
+    setInput({ ...input, additionalphotos: aux2 });
+  };
+
   return (
+    <div className={style.fondo}>
     <div className=" row y justify-content-center">
       <Link to="/home">
         <button className={style.btn}>◀ Volver</button>
@@ -314,25 +318,38 @@ export default function PhoneCreate() {
                       <input className="form-control form-control-sm"
                         type="file"
                         onChange={(ev) => base64Convert(ev)}
-                        required
+                        
                       />
                       <br/>
                       {fotoP !== '' ? <img src={fotoP} width="50" height="60" alt="no se pudo cargar la imagen" /> : null}
+
+                {error.images && <p className="col-auto row y justify-content-center">{error.images}</p>}
+
+                </label>
+                <label className=" block tracking-wide text-gray-700 text-xs font-bold mb-2">
 
                 <h5 className="col-auto row justify-content-center">Imagenes secundarias (máximo 3)</h5>  
                       {fotosSec?.length <= 2 ?
                         <input className="form-control form-control-sm"
                         type="file"
                         onChange={(ev) => base64Multiple(ev)}
-                        required
-                      /> : null }
+                        
+                        /> : null }
+
                
                       {fotosSec?.length >= 1?
-                      <div> {fotosSec.map( (el, index) => <img key={index} src={el} width="50" height="60" alt="no se pudo cargar la imagen" />)} </div>       
+                      <div> {fotosSec.map( (el, index) =>
+
+                        <div key={index}>    
+                          <img src={el} width="50" height="60" alt="no se pudo cargar la imagen" />
+                          <button onClick={ () => takeOut(index)}>X</button>
+                        </div>
+
+
+                        )} </div>       
                       :null}
   
                   
-                {error.images && <p className="col-auto row y justify-content-center">{error.images}</p>}
               </label>
             </div>
             <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -555,6 +572,7 @@ export default function PhoneCreate() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }

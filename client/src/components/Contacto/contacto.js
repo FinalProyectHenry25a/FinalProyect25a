@@ -12,11 +12,12 @@ import Carrousel from "../carrousel/Carrousel"
 import BtnBack from "../back/BtnBack";
 import { useSelector } from "react-redux";
 import { constactoLang } from "./contactoLang";
+import mapa from '../../images/mapa.jpg'
 
 
 
 export default function Contacto () {
-
+  const modo = useSelector(state => state.modo)
     const history = useHistory()
     const lan = useSelector((state) => state.language);
     const [user, setUser] = useState()
@@ -96,8 +97,10 @@ const correoEmail = async(e) =>{
 
 return(
   <>
+  <div className={styles.fondo}>
+    
     {user ? <UserNavBar /> : <NavBar />}
-    <Carrousel/>
+  
     <BtnBack/>
     <div className={styles.containerContact}>
 
@@ -109,6 +112,9 @@ return(
         <p>Av. del Libertador 3724, CABA</p>
         <h3>{constactoLang[lan].horariosDeTrabajo}</h3>
         <p>{constactoLang[lan].lunesAViernes}, 8 A.M - 6 P.M</p>
+        <div className={modo}>
+        <img src={mapa} alt='google'  className={styles.mapa}></img>
+        </div>
       </div>
       
 
@@ -125,9 +131,6 @@ return(
         <button type='submit' className={styles.btn}>{constactoLang[lan].enviar}</button>
       </form>
     </div>
-    <footer>
-      <br/>
-      <br/>
-    </footer>
+    </div>
     </>
 )}

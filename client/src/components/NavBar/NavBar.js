@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
 import { getLocalCart, modoOscuro, language } from "../../Actions/index";
 import styles from "./../NavBar/NavBar.module.css";
-import logo from "../../images/logo-removebg.webp";
+import SmartifyFinal from "../../images/SmartifyFinal.png";
 import { navBarLang } from "./navBarLang";
 import { BsFillMoonFill } from "react-icons/bs";
 import { BsFillSunFill } from "react-icons/bs";
@@ -14,6 +14,7 @@ import { BsFillSunFill } from "react-icons/bs";
 //import styles from "./../NavBar/NavBar.module.css";
 
 const NavBar = ({ setCurrentPage }) => {
+  
   const modo = useSelector((state) => state.modo);
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
@@ -40,6 +41,7 @@ const NavBar = ({ setCurrentPage }) => {
   const change = () => {
     setOpen(!open);
   };
+  
 
   {
     /* <nav className={styles.navContainer}>
@@ -48,6 +50,11 @@ const NavBar = ({ setCurrentPage }) => {
           <img src="https://i.ibb.co/1nF48KZ/logo-removebg.webp" alt="logo" className={styles.logo} />
         </Link>
       </div>
+      
+      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro'  >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
       <div>
         <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
       </div>
@@ -94,7 +101,7 @@ const NavBar = ({ setCurrentPage }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid" style={{ margin: "10px" }}>
-        <img src={logo} className={styles.logo} />
+        <img src={SmartifyFinal} className={styles.logo} />
         <button
           className="navbar-toggler"
           type="button"
@@ -114,15 +121,12 @@ const NavBar = ({ setCurrentPage }) => {
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
             : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
           </li>
+          <div className={modo}>
           <li style={{margin: "9px"}}>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
             <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link active" to="/cart">
-              <BsFillCartFill /> {cartCount}
-            </Link> 
-          </li>
+          </div>
           <li className="nav-item">
           <Link to="/login" className="nav-link active">
             {navBarLang[lan].ingresa}
@@ -131,13 +135,18 @@ const NavBar = ({ setCurrentPage }) => {
           {/* <li className="nav-item">
           <Link to="/register" className="nav-link active">
             {navBarLang[lan].creaTuCuenta}
-          </Link>
+            </Link>
           </li> */}
           <li className="nav-item">
           <Link to="/contacto" className="nav-link active">
             {navBarLang[lan].contacto}
           </Link>
           </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/cart">
+                <BsFillCartFill /> {cartCount}
+              </Link> 
+            </li>
           </ul>
         </div>
       </div>

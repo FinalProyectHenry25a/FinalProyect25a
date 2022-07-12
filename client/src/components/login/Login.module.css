@@ -1,8 +1,9 @@
+.fondo{
+    background-color: rgb(255, 250, 250);
+  }
 .container {
     display: grid;
     width: 100%;
-    height: 500px;
-    margin-top: 50px;
     border-radius: 10px;
     grid-template-rows: repeat(2, 150px);
     align-items: center;

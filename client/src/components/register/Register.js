@@ -38,10 +38,10 @@ const Register = () => {
     
   });
   const [correo, SetCorreo] = useState({
-    contact_user: "Henry Commerse",
+    contact_user: "Smartify",
     correo_user: "",
     asunto_user:"Estas registrado",
-    descripcion_user:"Bienvenido a Henry Commerse, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.",
+    descripcion_user:"Bienvenido a Smartify, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.",
   })  
 
   const [error,setError] = useState({}) 
@@ -60,15 +60,14 @@ const Register = () => {
     });
     try{
       const resultCorreo = await fetchstoken('correo', correo , "POST");
-      console.log(resultCorreo);
       if(!resultCorreo.ok){
         throw Error(resultCorreo.errors.msg);
       };
       SetCorreo({
-        contact_user: "Henry Commerse",
+        contact_user: "Smartify",
         correo_user:"",
         asunto_user:"Estas registrado",
-        descripcion_user:"Bienvenido a Henry Commerse, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.", 
+        descripcion_user:"Bienvenido a Smartify, ya estas registrado. Dirigete a mi perfil y solicita el mail de verificación para verificar tu cuenta y poder comprar en nuestra pagina.", 
       });
     } catch (error) {
     }
@@ -187,6 +186,7 @@ const handleChange = (e) => {
         
         
         return (
+          <div className={style.fondo}>
           <div className={style.login}>
       <div className={style.container}>
         <div className={style.image}>
@@ -322,7 +322,7 @@ const handleChange = (e) => {
         <div>
           <button className={style.btn}>Ingresar con Github</button>
         </div> */}
-
+      </div>
       </div>
     </div>
     </div>

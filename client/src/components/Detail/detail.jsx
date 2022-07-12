@@ -18,6 +18,7 @@ import BtnBack from "../back/BtnBack";
 
 import { detailLang } from "./detailLang";
 import { FormattedMessage, IntlProvider } from "react-intl";
+import Footer from "../Footer/Footer";
 
 export default function Detail() {
   const [user, setUser] = useState(auth.currentUser);
@@ -452,6 +453,7 @@ export default function Detail() {
           </FormattedMessage>
         )}
       </div>
+      <Footer/>
     </IntlProvider>
     </div>
   );

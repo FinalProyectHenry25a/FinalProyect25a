@@ -6,13 +6,11 @@ import { getDetails, editPost, getUser, cleanUp } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
 export default function ProductToEdit() {
-
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
   const PID = useSelector((state) => state.phonesId);
   const [state, setState] = useState({});
-  
 
   useEffect(() => {
     userVerificate();
@@ -38,7 +36,6 @@ export default function ProductToEdit() {
     });
   };
 
- 
   const handleChange = (e) => {
     setState({
       ...state,
@@ -67,7 +64,7 @@ export default function ProductToEdit() {
     });
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     console.log(state);
     dispatch(editPost(id, state));
     alert("Cambios guardados exitosamente");
@@ -120,59 +117,58 @@ export default function ProductToEdit() {
       <Link to="/admin/publicaciones">
         <button>Volver</button>
       </Link>
+
       <div>
         <label>Marca</label>
         <input
-          placeholder="Brand..."
+          placeholder={state.brand}
           type="text"
           name="brand"
           id="brand"
-          value={state.brand}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Release Date</label>
+        <label>Fecha de lanzamiento</label>
         <input
-          placeholder="Release Date..."
+          placeholder={state.releaseDate}
           type="text"
           name="releaseDate"
-          value={state.releaseDate}
           required
           onChange={(e) => handleChange(e)}
         />
-       
       </div>
+
       <div>
-        <label>Model</label>
+        <label>Modelo</label>
         <input
           placeholder={state.model}
           type="text"
           name="model"
-          //value={state.model}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Price</label>
+        <label>Precio</label>
         <input
-          placeholder="500..."
+          placeholder={state.price}
           type="number"
           name="price"
-          value={state.price}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Rating</label>
+        <label>Puntuación</label>
         <input
-          placeholder="4..."
+          placeholder={state.rating}
           type="number"
           name="rating"
-          value={state.rating}
           required
           onChange={(e) => handleChange(e)}
         />
@@ -208,27 +204,27 @@ export default function ProductToEdit() {
       <div>
         <label>Color</label>
         <input
-          placeholder="Midnight Blue..."
+          placeholder={state.color}
           type="text"
           name="color"
-          value={state.color}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Processor</label>
+        <label>Procesador</label>
         <input
-          placeholder="Snapdragon..."
+          placeholder={state.processor}
           type="text"
           name="processor"
-          value={state.processor}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>RAM</label>
+        <label>Memoria RAM</label>
         <select onChange={(e) => handleRAM(e)}>
           <option disabled> select RAM </option>
           <option value="4Gb">4Gb</option>
@@ -237,8 +233,9 @@ export default function ProductToEdit() {
           <option value="12Gb">12Gb</option>
         </select>
       </div>
+
       <div>
-        <label>ROM</label>
+        <label>Memoria ROM</label>
         <select onChange={(e) => handleROM(e)}>
           <option disabled> select ROM </option>
           <option value="32Gb">32Gb</option>
@@ -247,8 +244,9 @@ export default function ProductToEdit() {
           <option value="256Gb">256Gb</option>
         </select>
       </div>
+
       <div>
-        <label>Network</label>
+        <label>Red</label>
         <select onChange={(e) => handleNetwork(e)}>
           <option disabled> select Network </option>
           <option value="3G">3G</option>
@@ -256,73 +254,74 @@ export default function ProductToEdit() {
           <option value="5G">5G</option>
         </select>
       </div>
+
       <div>
-        <label>Batery(mAh)</label>
+        <label>Batería(mAh)</label>
         <input
-          placeholder="4000..."
+          placeholder={state.batery}
           type="number"
           name="batery"
-          value={state.batery}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Frontal Camera</label>
+        <label>Cámara principal</label>
         <input
-          placeholder="48..."
-          type="number"
-          name="frontal_cam"
-          value={state.frontal_cam}
-          required
-          onChange={(e) => handleChange(e)}
-        />
-      </div>
-      <div>
-        <label>Main Camera</label>
-        <input
-          placeholder="13..."
+          placeholder={state.main_cam}
           type="number"
           name="main_cam"
-          value={state.main_cam}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Inches (for screen)</label>
+        <label>Camara frontal</label>
         <input
-          placeholder="6.4..."
+          placeholder={state.frontal_cam}
+          type="number"
+          name="frontal_cam"
+          required
+          onChange={(e) => handleChange(e)}
+        />
+      </div>
+
+      <div>
+        <label>Pulgadas (for screen)</label>
+        <input
+          placeholder={state.inches}
           type="number"
           name="inches"
-          value={state.inches}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Screen (type)</label>
+        <label>Pantalla (type)</label>
         <input
-          placeholder="AMOLED..."
+          placeholder={state.screen}
           type="text"
           name="screen"
-          value={state.screen}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div>
-        <label>Resolution</label>
+        <label>Resolución</label>
         <input
-          placeholder="1080 x 2400..."
+          placeholder={state.resolution}
           type="text"
           name="resolution"
-          value={state.resolution}
           required
           onChange={(e) => handleChange(e)}
         />
       </div>
-      <button onClick={handleSubmit}>Aceptar</button>
+
+      <button onClick={handleSubmit}>Guardar cambios</button>
     </div>
   );
 }

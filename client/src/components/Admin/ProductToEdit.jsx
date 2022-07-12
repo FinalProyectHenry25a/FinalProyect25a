@@ -9,8 +9,15 @@ export default function ProductToEdit() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  const PID = useSelector((state) => state.phonesId);
 
+  
+  useEffect(() => {
+    dispatch(getDetails(id));
+  }, [dispatch, id]);
+  
+  
+  const PID = useSelector((state) => state.phonesId);
+  
   const [state, setState] = useState({
     brand: PID.brand,
     releaseDate: PID.releaseDate,
@@ -29,14 +36,12 @@ export default function ProductToEdit() {
     inches: PID.inches,
     screen: PID.screen,
     resolution: PID.resolution,
+    additionalphotos: PID.additionalphotos
   });
-
-
- 
-
-  useEffect(() => {
-    dispatch(getDetails(id));
-  }, [dispatch, id]);
+  
+  
+  console.log('soy el estado', state);
+  
 
   useEffect(() => {
    
@@ -99,32 +104,12 @@ export default function ProductToEdit() {
   }
 
   const handleSubmit = async(e) => {
-    e.preventDefault();
+   // e.preventDefault();
     console.log(state);
     dispatch(editPost(id, state));
     alert("successfully");
-    setState({
-      brand: "",
-      releaseDate: "",
-      model: "",
-      price: "",
-      rating: "",
-      images: "",
-      color: "",
-      processor: "",
-      ram: "",
-      rom: "",
-      network: "",
-      batery: "",
-      frontal_cam: "",
-      main_cam: "",
-      inches: "",
-      screen: "",
-      resolution: "",
-    });
-
-    history.push("/admin/publicaciones");
     
+
   };
 
 
@@ -160,18 +145,22 @@ export default function ProductToEdit() {
   };
 
   const takeOut = (index) => {
+    
+    setState( () => ({ ...state, additionalphotos: PID.additionalphotos }));
+
+    console.log('soy el index a sacar', index);
+    console.log('soy el estado local', state.additionalphotos);
     let arr = state.additionalphotos;
     let arrAux = [];
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr?.length; i++) {
       if ( i !== index) arrAux.push(arr[i]);
     }
-    setState({ ...state, additionalphotos: arrAux });
   }
 
   return (
     <div>
-      <Link to="/home">
+      <Link to="/admin/publicaciones">
         <button>Volver</button>
       </Link>
       <div>
@@ -184,7 +173,7 @@ export default function ProductToEdit() {
           value={state.brand}
           required
           onChange={(e) => handleChange(e)}
-        />
+          />
         {/*  <button type="submit" onClick={handlerBrand}>
             cambiar brand
           </button> */}
@@ -198,12 +187,14 @@ export default function ProductToEdit() {
           value={state.releaseDate}
           required
           onChange={(e) => handleChange(e)}
-        />
+          />
+          <h1>soy PID {PID.brand}</h1>
+          <h1>soy el STATE: {state.brand}</h1>
       </div>
       <div>
         <label>Model</label>
         <input
-          placeholder="Model..."
+          placeholder={PID.model}
           type="text"
           name="model"
           value={state.model}
@@ -220,7 +211,7 @@ export default function ProductToEdit() {
           value={state.price}
           required
           onChange={(e) => handleChange(e)}
-        />
+          />
       </div>
       <div>
         <label>Rating</label>
@@ -237,27 +228,57 @@ export default function ProductToEdit() {
         <label>Imagen principal</label>
 
         <br />
-        <img src={state.images} width="50" height="50" alt="no encontrada" />
+        {state.images? <img src={state.images} width="50" height="50" alt="no encontrada" /> : <img src={PID.images} width="50" height="50" alt="no encontrada" />}
         <input type="file" onChange={(ev) => base64Convert(ev)} required />
         <br />
       </div>
       <div>
         <label>Imagenes secundarias-max: 3</label>
         <br />
-        {state.additionalphotos?.map((el, index) => (
+
+
+
+
+        {state.additionalphotos?.length >= 1 ? state.additionalphotos?.map((el, index) => (
           <div key={index}>
             <img src={el} width="50" height="50" alt="no encontrada" />
 
             <button onClick={() => takeOut(index)}>Quitar</button>
             <br />
           </div>
-        ))}
+        )): 
+        PID.additionalphotos?.map((el, index) => (
+          <div key={index}>
+            <img src={el} width="50" height="50" alt="no encontrada" />
+
+            <button onClick={() => takeOut(index)}>Quitar</button>
+            <br />
+          </div>
+        ))
+        }
+
+
+
+
+       {/*  {state.additionalphotos?.map((el, index) => (
+          <div key={index}>
+            <img src={el} width="50" height="50" alt="no encontrada" />
+
+            <button onClick={() => takeOut(index)}>Quitar</button>
+            <br />
+          </div>
+        ))} */}
+
+
+
+
         {state.additionalphotos?.length < 3 ? (
           <input type="file" onChange={(ev) => addNewPicture(ev)} required />
         ) : null}
       </div>
 
       <div>
+
         <label>Color</label>
         <input
           placeholder="Midnight Blue..."

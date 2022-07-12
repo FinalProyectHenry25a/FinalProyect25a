@@ -34,7 +34,7 @@ export default function Identify() {
 
         <div className=" row y justify-content-center">
         <div className="display-flex justify-content-center row border border-sky-500 col-4 center d-grid gap-2 row shadow py-2 px-4 rounded">
-
+ 
             <h2 className="col-auto row justify-content-center py-2 px-4 rounded">{idLang[lan].rec}</h2>
             <br /><br />
             <h4>{idLang[lan].ing}</h4>

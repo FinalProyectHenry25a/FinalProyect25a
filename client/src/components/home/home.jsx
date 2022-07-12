@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import Carrousel from "../carrousel/Carrousel";
+import Footer from "../Footer/Footer";
 
 
 const Home = () => {
@@ -390,13 +391,11 @@ const Home = () => {
               allPhones={allPhones.length}
               paginado={paginado}
             />
-            <div class="display-flex align-items-center justify-content-center col-auto">
-      <Link to='/about'>
-      <button class="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
-      </Link>
-    </div>
+            
           </div>
         </div>
+
+        <Footer/>
     </IntlProvider>
   );
 };

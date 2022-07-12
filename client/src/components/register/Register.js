@@ -10,6 +10,12 @@ import Swal from 'sweetalert2';
 import swal2 from 'sweetalert'
 import {Link} from 'react-router-dom';
 import { registerLang } from './registerLang';
+import { alpha, styled } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
 
 
 
@@ -187,26 +193,116 @@ const handleChange = (e) => {
           <h1>{registerLang[lan].formularioDeRegistro}</h1>
         </div>
         <div>
-          <input placeholder={registerLang[lan].nombreDeUsuario} type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
+        <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 3, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField
+          required
+          error={error.username}
+          //id="outlined-required"
+          label={registerLang[lan].nombreDeUsuario}
+          type="text"
+          id='username'
+          name="username"
+          helperText={error.username}
+          placeholder={registerLang[lan].nombreDeUsuario}
+          onBlur={handleChange}
+          onChange={handleChange}
+        />
+        <TextField
+          required
+          error={error.firstname}
+          //id="outlined-required"
+          label={registerLang[lan].nombre}
+          type="text"
+          id='firstname' 
+          name="firstname"
+          helperText={error.firstname}
+          placeholder={registerLang[lan].nombre}
+          onBlur={handleChange}
+          onChange={handleChange}
+        />
+        <br/>
+        <TextField
+          required
+          error={error.lastname}
+          //id="outlined-required"
+          label={registerLang[lan].apellido}
+          type="text"
+          id='lastname'
+          name="lastname"
+          helperText={error.lastname}
+          placeholder={registerLang[lan].apellido}
+          onBlur={handleChange}
+          onChange={handleChange}
+        />
+        <TextField
+          required
+          error={error.address}
+          //id="outlined-required"
+          label={registerLang[lan].direccion}
+          type="text"
+          id='address'
+          name="address"
+          helperText={error.address}
+          placeholder={registerLang[lan].direccion}
+          onBlur={handleChange}
+          onChange={handleChange}
+        />
+        <br/>
+        <TextField
+          required
+          error={error.email}
+          //id="outlined-required"
+          label={registerLang[lan].correoElectronico}
+          type='email'
+          name="correo_user"
+          value={correo.correo_user}
+          helperText={error.email}
+          placeholder={registerLang[lan].correoElectronico}
+          onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }
+        />
+        <TextField
+          required
+          error={error.password}
+          //id="outlined-required"
+          label={registerLang[lan].contraseña}
+          type="password"
+          id='password'
+          name="password"
+          helperText={error.password}
+          onBlur={handleChange}
+          placeholder={registerLang[lan].contraseña}
+          onChange={handleChange} 
+        />
+        </div>
+        </Box>
+        {/*   <input placeholder={registerLang[lan].nombreDeUsuario} type="text" id='username' name="username" className={style.input} required onChange={handleChange}></input>
         {error.username && <p>{error.username}</p>}</div>
-        <div>
-          <input placeholder={registerLang[lan].nombre} type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
+        <div> */}
+          {/* <input placeholder={registerLang[lan].nombre} type="text" id='firstname' name="firstname" className={style.input} required onChange={handleChange}></input>
         {error.firstname && <p>{error.firstname}</p>}</div>
-        <div>
-          <input placeholder={registerLang[lan].apellido} type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
+        <div> */}
+          {/* <input placeholder={registerLang[lan].apellido} type="text" id='lastname' name="lastname" className={style.input} required onChange={handleChange}></input>
         {error.lastname && <p>{error.lastname}</p>}</div>
         <div>
           <input placeholder={registerLang[lan].direccion} type="text" id='address' name="address" className={style.input} required onChange={handleChange}></input>
-        {error.address && <p>{error.address}</p>}</div>
+        {error.address && <p>{error.address}</p>}</div> */}
         {/* <div>
           <input placeholder="Email..." autoFocus type="email" id='email' name="email" required onChange={handleChange}></input>
           {error.email && <p>{error.email}</p>}</div> */}
-        <div>
+        {/* <div>
         <input type='email' name="correo_user" placeholder={registerLang[lan].correoElectronico} className={style.input} value={correo.correo_user} onChange={ (e) => { {onChangeCorreo(e)} {handleChangeEmail(e)} } }/>
         </div>
         <div>
           <input placeholder={registerLang[lan].contraseña} type="password" id='password' name="password" className={style.input} required onChange={handleChange}></input>
-        {error.password && <p>{error.password}</p>}</div>
+        {error.password && <p>{error.password}</p>}</div> */}
         {/* <div>
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
         </div> */}
@@ -228,6 +324,7 @@ const handleChange = (e) => {
         </div> */}
 
       </div>
+    </div>
     </div>
   );
 }

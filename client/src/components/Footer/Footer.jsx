@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../images/smartworld.jpg";
+import logo from "../../images/logo-removebg.webp";
 import styles from "../UserNavBar/usernavbar.module.css";
 
 
@@ -10,9 +10,9 @@ export default function Footer(){
             <div className="col-5 align-items-center justify-content-center float-left mb-3">
             <img src={logo} alt="logo"  className={styles.logo}/>
             </div>
-<div class=" align-items-center justify-content-center col-5">
+<div className=" align-items-center justify-content-center col-5">
       <Link to='/about'>
-      <button class="btn btn-secondary align-items-center justify-content-center"><h4>conocenos...</h4></button>
+      <button className="btn btn-secondary align-items-center justify-content-center"><h4>conocenos...</h4></button>
       </Link>
     </div>
       <div className="col-2 float-right align-items-center justify-content-center">

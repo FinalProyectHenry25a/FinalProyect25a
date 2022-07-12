@@ -18,6 +18,7 @@ import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import Carrousel from "../carrousel/Carrousel";
 import Footer from "../Footer/Footer";
+import SearchBar from "../SearchBar/Searchbar";
 
 
 const Home = () => {
@@ -298,9 +299,13 @@ const Home = () => {
             {loggedUser ? <UserNavBar /> : <NavBar />}
             
             <Carrousel/>
-
+            
+            <div style={{marginInline: "auto"}}>
+            <br/>
+            <SearchBar/>
+            </div>
             <div id="filtros">
-
+<br/>
               <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].Todas}</option>
                 {brands?.map((brand) =>
@@ -392,11 +397,6 @@ const Home = () => {
               allPhones={allPhones.length}
               paginado={paginado}
             />
-            <div className="display-flex align-items-center justify-content-center col-auto">
-      <Link to='/about'>
-      <button className="btn btn-secondary align-items-center justify-content-center col-auto"><h4>conocenos...</h4></button>
-      </Link>
-    </div>
           </div>
         </div>
 

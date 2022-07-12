@@ -39,7 +39,7 @@ export default function Comprar({ productos, data }){
   
 }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
     return(
-        <div>
+        <div className={styles.fondo}>
 
   <form id='form1' className={styles.ul}>
 

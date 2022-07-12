@@ -232,6 +232,7 @@ export default function PhoneCreate() {
   };
 
   return (
+    <div className={style.fondo}>
     <div className=" row y justify-content-center">
       <Link to="/home">
         <button className={style.btn}>◀ Volver</button>
@@ -555,6 +556,7 @@ export default function PhoneCreate() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }

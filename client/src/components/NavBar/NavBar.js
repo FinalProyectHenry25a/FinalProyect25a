@@ -40,6 +40,7 @@ const NavBar = ({ setCurrentPage }) => {
   const change = () => {
     setOpen(!open);
   };
+  
 
   {
     /* <nav className={styles.navContainer}>
@@ -48,6 +49,11 @@ const NavBar = ({ setCurrentPage }) => {
           <img src="https://i.ibb.co/1nF48KZ/logo-removebg.webp" alt="logo" className={styles.logo} />
         </Link>
       </div>
+      
+      <select onChange={(e) =>dispatch(modoOscuro(e.target.value))} id='modoOscuro'  >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
       <div>
         <SearchBar setCurrentPage={setCurrentPage} className={styles.search}/>
       </div>

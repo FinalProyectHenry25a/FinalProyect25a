@@ -15,6 +15,7 @@ import BtnBack from "../back/BtnBack";
 import ProductToEdit from "../Admin/ProductToEdit";
 
 const Cart = () => {
+  const modo = useSelector(state => state.modo)
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const cart = useSelector(state => state.cart);
@@ -82,6 +83,8 @@ const Cart = () => {
   
   return (
     <>
+    <div className={styles.fondo}>
+      
       {user ? <UserNavBar /> : <NavBar />}
       <BtnBack/>
     <div className={styles.cart}>
@@ -105,6 +108,7 @@ const Cart = () => {
          : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
         </div> : <span>Debes ingresar algun producto en el carrito para comprar</span>}
       </div>
+    </div>
     </div>
     </>
   );

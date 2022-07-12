@@ -181,6 +181,7 @@ const handleChange = (e) => {
         
         
         return (
+          <div className={style.fondo}>
           <div className={style.login}>
       <div className={style.container}>
         <div className={style.image}>
@@ -228,6 +229,7 @@ const handleChange = (e) => {
         </div> */}
 
       </div>
+    </div>
     </div>
   );
 }

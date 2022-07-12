@@ -9,7 +9,7 @@ import SearchBar from "../SearchBar/Searchbar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocalCart, modoOscuro, language } from "../../Actions";
-import logo from "../../images/logo-removebg.webp";
+import Smartify2 from "../../images/Smartify2.png";
 import styles from "../UserNavBar/usernavbar.module.css";
 import { userNavBarLang } from "./userNavBarLang";
 import { styled, alpha } from "@mui/material/styles";
@@ -177,7 +177,7 @@ export default function UserNavBar({ setCurrentPage }) {
         user.isAdmin ? (
           auth.currentUser.email === "finalproyect25a@gmail.com" ? (
       <div className="container-fluid" style={{ margin: "10px" }}>
-        <img src={logo} className={styles.logo} />
+        <img src={Smartify2} className={styles.logo} />
         <button
           className="navbar-toggler"
           type="button"
@@ -278,7 +278,7 @@ export default function UserNavBar({ setCurrentPage }) {
       ) : (
       <>
       <div className="container-fluid" style={{ margin: "10px" }}>
-        <img src={logo} className={styles.logo} />
+        <img src={Smartify2} className={styles.logo} />
         <button
           className="navbar-toggler"
           type="button"
@@ -458,7 +458,7 @@ export default function UserNavBar({ setCurrentPage }) {
       </>
       )) : (
         <div className="container-fluid" style={{ margin: "10px" }}>
-          <img src={logo} className={styles.logo} />
+          <img src={Smartify2} className={styles.logo} />
           <button
             className="navbar-toggler"
             type="button"

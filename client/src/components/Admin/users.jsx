@@ -112,19 +112,21 @@ export default function Users() {
                       <TableCell align="center">Fecha</TableCell>
                       <TableCell align="center">Producto</TableCell>
                       <TableCell align="center">Monto</TableCell>
+                      <TableCell align="center">Cantidad</TableCell>
                       <TableCell align="center">Precio Total ($)</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {row.shopping?.map((historyRow) => (
-                      <TableRow key={historyRow.date}>
+                    {row?.shopping?.map((historyRow) => (
+                      <TableRow key={historyRow.model}>
                         <TableCell component="th" scope="row">
                           {historyRow.brand}
                         </TableCell>
-                        <TableCell>{historyRow.customerId}</TableCell>
-                        <TableCell align="right">{historyRow.amount}</TableCell>
+                        <TableCell>{`${historyRow.brand} ${historyRow.model}`}</TableCell>
+                        <TableCell align="right">{historyRow.price}</TableCell>
+                        <TableCell align="right">{historyRow.qty}</TableCell>
                         <TableCell align="right">
-                          {Math.round(historyRow.amount * row.price * 100) / 100}
+                          {Math.round(((historyRow.price * historyRow.qty )* 100) / 100)}
                         </TableCell>
                       </TableRow>
                     ))}

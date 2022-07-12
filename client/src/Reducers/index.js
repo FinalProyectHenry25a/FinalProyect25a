@@ -337,7 +337,7 @@ function rootReducer(state = initialState, action) {
                     }else{
                       localStorage.setItem('modoOscuro', JSON.stringify('dark'));
                     }
-                    console.log(action.payload)
+           
                   return {
                     ...state,
                     modo: JSON.parse(localStorage.getItem("modoOscuro"))

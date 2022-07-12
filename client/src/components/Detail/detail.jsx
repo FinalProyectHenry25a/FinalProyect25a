@@ -18,8 +18,12 @@ import BtnBack from "../back/BtnBack";
 
 import { detailLang } from "./detailLang";
 import { FormattedMessage, IntlProvider } from "react-intl";
+import Footer from "../Footer/Footer";
 
 export default function Detail() {
+  const modo = useSelector(state => state.modo)
+ 
+
   const [user, setUser] = useState(auth.currentUser);
   useEffect(() => {
     userVerificate();
@@ -148,6 +152,8 @@ export default function Detail() {
           : null}
           </div>
         <div className={styles.container1}>
+        <div className={modo}>
+          <img src={PID.images} alt="marcas" width={300} />
           <img src={PID.images} alt="marcas" width={500} />
         </div> */}
         <div className="content">
@@ -243,6 +249,13 @@ export default function Detail() {
         <div className={styles.container2}>
           <div>
             <h1>{PID.model}</h1>
+            {PID.additionalphotos?.length >= 1
+              ? PID.additionalphotos.map((el) => (
+                <div className={modo}>
+                  <img src={el} width="150" alt="No encontrada" />
+                  </div>
+                ))
+              : null}
 
             <h3>${PID.price}</h3>
             <h3>Rating</h3>
@@ -452,6 +465,7 @@ export default function Detail() {
           </FormattedMessage>
         )}
       </div>
+      <Footer/>
     </IntlProvider>
     </div>
   );

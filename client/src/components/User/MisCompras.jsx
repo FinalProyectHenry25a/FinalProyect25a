@@ -18,11 +18,12 @@ export default function MisCompras() {
   const [compras, setCompras] = useState();
   const [input, setInput] = useState("");
   const [puntaje, setPuntaje]=useState(null)
-  const allPhones = useSelector((state) => state.phones);
+  const allPhones = useSelector((state) => state.phonesForSelect);
   const dispatch = useDispatch();
   const history = useHistory()
 
   useEffect(() => {
+
     verificarQueHayaUsuarioLogueado();
     
   }, []);
@@ -59,7 +60,9 @@ export default function MisCompras() {
               arrSinRep[i].cant = arrSinRep[i].cant + 1;
           }
         }
+      
         setCompras(arrSinRep);
+        console.log(compras);
       }
     });
   };
@@ -99,7 +102,7 @@ export default function MisCompras() {
       <BtnBack/>
       {user ? (
         <div className={styles.container}>
-          {user.shopping ? (
+          {user?.shopping ? (
             <div className={styles.containerCard}>
               {" "}
               <h2>Mis Compras</h2>
@@ -120,11 +123,11 @@ export default function MisCompras() {
                       stock={e.stock}
                     />
 
-                    {allPhones.filter((el) => el.id === e.id)[0].review ===
+                    {allPhones?.filter((el) => el.id === e.id)[0].review ===
                       null ||
                     !allPhones
                       .filter((el) => el.id === e.id)[0]
-                      .review.find((elemento) =>
+                      .review?.find((elemento) =>
                         elemento.usuario.includes(user.username)
                       ) ? (
                       <div id={e.id}>

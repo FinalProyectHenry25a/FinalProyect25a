@@ -78,9 +78,9 @@ export default function Card(props) {
       <div style={{ height: 300 + "px" }}>
         {props.stock > 0 ? (
           <div className={modo}>
-            <div className='negro'>
+          
           <img src={props.images} style={{ height: 300 + "px" }} alt="..." />
-           </div>
+           
           </div>
         ) : (
           <div className={modo}>
@@ -142,7 +142,10 @@ export default function Card(props) {
       }}>{cardLang[lan].Disponibles}: {props.stock}</p>
           </div>
         ) : (
-          <p className="">{cardLang[lan].AGOTADO}</p>
+          <div>
+          <p className="btn w-100 mb-2 ">{cardLang[lan].AGOTADO}</p>
+          <p className="btn w-100 mb-0">{cardLang[lan].NoDisponible}</p>
+          </div>
         )}
 
         <br />

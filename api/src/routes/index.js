@@ -9,11 +9,20 @@ const cart = require("./cart");
 const admin = require("./admin");
 const mercadopago = require('./mercadopago');
 const order = require('./order');
-const comprarealizada = require ('./compra-realizadas')
+const comprarealizada = require ('./compra-realizadas');
 const sendEmail = require ('./sendEmail')
 const preguntas = require('./preguntas');
 const router = Router();
-const correo = require('../controllers/auth')
+const correo = require('../controllers/auth');
+const stripeCheckout = require('./stripe');
+const userChangeQty = require("./userChangeQty");
+const emptyCart = require("./emptyCart");
+
+router.use("/userChangeQty", userChangeQty);
+
+router.use("/stripe/checkout", stripeCheckout);
+
+router.use('/emptyCart', emptyCart)
 
 router.use('/home', publication)
 

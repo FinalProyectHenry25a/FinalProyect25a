@@ -126,11 +126,10 @@ export const removeFromCart = (itemID) => {
  
 
 export const clearCart = (email) => {
-  return async function (dispatch) {
-    await axios.put(`http://localhost:3001/user//emptyCart/${email}`)
+  return async function (dispatch) {;
+    await axios.put(`http://localhost:3001/emptyCart/${email}`)
     return dispatch({
       type: "CLEAR_CART_POST_BUY",
-      payload: [],
     });
   };
 };

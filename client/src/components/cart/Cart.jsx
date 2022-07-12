@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './Cart.module.css'
 import CartItem from '../cart/cartItem/CartItem'
-import {getLocalCart} from '../../Actions/index'
+import {adjustItemQty, getLocalCart, getUser} from '../../Actions/index'
 import { Link, useHistory } from "react-router-dom";
 import mercadopago from "../../images/mercadopago.png";
 import { auth } from "../../firebase/firebase-config";
@@ -12,6 +12,7 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import BtnBack from "../back/BtnBack";
+import ProductToEdit from "../Admin/ProductToEdit";
 
 const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -31,7 +32,7 @@ const Cart = () => {
   
 
   useEffect(() => {
-    verificarQueHayaUsuarioLogueado();
+    userVerificate();
   }, []);
 
   useEffect(() => {
@@ -41,17 +42,17 @@ const Cart = () => {
   }, [])
 
 
-  const verificarQueHayaUsuarioLogueado = () => {
+  const userVerificate = () => {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
-        if(user.data.banned){
+        // if(user.data.banned){
 
-          history.push("/banned")
+        //   history.push("/banned")
 
-        }
+        // }
         setTotalItems(items)
         setTotalPrice(price);
       }
@@ -60,11 +61,23 @@ const Cart = () => {
 
   useEffect(() => {
 
-
-
     setTotalItems(items);
     setTotalPrice(price);
+    
   }, [cart, totalPrice, totalItems]);
+
+  const beginPaymentInStripe = async () => {
+
+    let userInfo = await dispatch(getUser(auth.currentUser.email))
+
+    await axios.post(`http://localhost:3001/userChangeQty/${userInfo.payload.email}`, {
+      actualCartWithQty: cart,
+      emailUser: userInfo.payload.email
+    });
+
+      //window.location.reload();
+
+  }
 
   
   return (
@@ -85,11 +98,11 @@ const Cart = () => {
           <span>  $ {totalPrice}</span>
         </div>
         {totalItems ? <div>
-      {auth.currentUser?.emailVerified ? <Link to="/mercadopago">
-        <button  className={styles.summary__checkoutBtn}>
-        Confirmar Pedido <br/><img src={mercadopago} />
-        </button>
-        </Link> : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
+      {auth.currentUser?.emailVerified ? 
+      <div>
+       <Link to="/stripe"><button className='btn btn-success mt-4' onClick={beginPaymentInStripe}>Comprar</button></Link>
+        </div>
+         : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
         </div> : <span>Debes ingresar algun producto en el carrito para comprar</span>}
       </div>
     </div>

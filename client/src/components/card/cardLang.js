@@ -4,6 +4,8 @@ export const cardLang = {
     'AGOTADO':'AGOTADO',
     'Detalle':'Detalle',
     'Disponibles':'Disponibles',
+    'NoDisponible':'No Disponible',
+    
   },
 
   en: {
@@ -11,6 +13,7 @@ export const cardLang = {
     'AGOTADO':'SOLD OUT',
     'Detalle':'Details',
     'Disponibles':'Available',
+    'NoDisponible':'Not Avaible',
   },
 };
 

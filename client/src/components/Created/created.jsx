@@ -74,12 +74,12 @@ export default function PhoneCreate() {
       error.rom = "Selecciona la memoria rom del celular";
     if (input.network.length < 1)
       error.network = "Selecciona la conectividad del celular";
-    if (!input.batery) error.batery = "Ingresa la bateria del celular";
-    if (!input.frontal_cam)
-      error.frontal_cam = "Ingresa los mpx de la camara frontal del celular";
-    if (!input.main_cam)
-      error.main_cam = "Ingresa los mpx de la camara trasera del celular";
-    if (!input.inches) error.inches = "Ingresa las pulgadas del celular";
+    if (!input.batery || input.batery <= 0) error.batery = "Ingresa la bateria del celular (solo numeros positivos)";
+    if (!input.frontal_cam || input.frontal_cam <= 0)
+      error.frontal_cam = "Ingresa los mpx de la camara frontal del celular (solo numeros positivos)";
+    if (!input.main_cam || input.main_cam <= 0)
+      error.main_cam = "Ingresa los mpx de la camara trasera del celular (solo numeros positivos)";
+    if (!input.inches || input.inches <= 0) error.inches = "Ingresa las pulgadas del celular (solo numeros positivos)";
     if (!input.screen)
       error.screen = "Ingresa el modelo de pantalla del celular";
     if (input.stock <= 0)
@@ -279,7 +279,7 @@ export default function PhoneCreate() {
                     />
                   </label>
                   {error.brand && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.brand}
                     </p>
                   )}
@@ -298,7 +298,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.model && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.model}
                     </p>
                   )}
@@ -321,7 +321,7 @@ export default function PhoneCreate() {
                   />
                 </label>
                 {error.price && (
-                  <p className="col-auto row y justify-content-center">
+                  <p className="text-danger col-auto row y justify-content-center">
                     {error.price}
                   </p>
                 )}
@@ -339,7 +339,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.stock && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className=" text-danger col-auto row y justify-content-center">
                       {error.stock}
                     </p>
                   )}
@@ -367,7 +367,7 @@ export default function PhoneCreate() {
                   />
                 ) : null}
                 {error.images && (
-                  <p className="col-auto row y justify-content-center">
+                  <p className="text-danger col-auto row y justify-content-center">
                     {error.images}
                   </p>
                 )}
@@ -423,7 +423,7 @@ export default function PhoneCreate() {
                   <option value="12Gb">12Gb</option>
                 </select> */}
                   {error.ram && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.ram}
                     </p>
                   )}
@@ -452,7 +452,7 @@ export default function PhoneCreate() {
                   <option value="256Gb">256Gb</option>
                 </select> */}
                   {error.rom && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.rom}
                     </p>
                   )}
@@ -472,7 +472,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.color && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.color}
                     </p>
                   )}
@@ -492,7 +492,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.rating && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.rating}
                     </p>
                   )}
@@ -512,7 +512,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.inches && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.inches}
                     </p>
                   )}
@@ -534,7 +534,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.processor && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.processor}
                     </p>
                   )}
@@ -557,7 +557,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.resolution && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.resolution}
                     </p>
                   )}
@@ -585,7 +585,7 @@ export default function PhoneCreate() {
                   <option value="5G">5G</option>
                 </select> */}
                   {error.network && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.network}
                     </p>
                   )}
@@ -607,7 +607,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.batery && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.batery}
                     </p>
                   )}
@@ -629,7 +629,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.frontal_cam && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.frontal_cam}
                     </p>
                   )}
@@ -651,7 +651,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.main_cam && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.main_cam}
                     </p>
                   )}
@@ -671,7 +671,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.screen && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.screen}
                     </p>
                   )}
@@ -693,7 +693,7 @@ export default function PhoneCreate() {
                     onChange={(e) => handleOnChange(e)}
                   />
                   {error.releaseDate && (
-                    <p className="col-auto row y justify-content-center">
+                    <p className="text-danger col-auto row y justify-content-center">
                       {error.releaseDate}
                     </p>
                   )}

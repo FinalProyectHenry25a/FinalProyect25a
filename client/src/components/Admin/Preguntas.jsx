@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 import {getAllUsers, getQuestions, getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 
@@ -59,9 +60,9 @@ const userVerificate = async () => {
 
           answer: input
         });
-        alert("respuesta enviada")
+        swal("Respuesta enviada")
         window.location.reload()
-      }else alert("haga una pregunta antes de publicar")
+      }else swal("Haga una pregunta antes de publicar")
     
     };
 

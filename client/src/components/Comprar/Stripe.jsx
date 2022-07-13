@@ -224,7 +224,7 @@ const CheckoutForm = () => {
             ))}
         </div>
 
-        <h3 className='text-center my-2'>Monto Total: {total}</h3>
+        <h3 className='text-center my-2'>Monto Total: US$ {total}</h3>
 
         <div className="form-group">
             <CardElement className='form-control' />

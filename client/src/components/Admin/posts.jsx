@@ -6,6 +6,7 @@ import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import { getUser } from "../../Actions";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 
 export default function Posts(props) {
 
@@ -63,7 +64,7 @@ export default function Posts(props) {
     try {
       await axios.delete(`http://localhost:3001/admin/post/${id}`);
       await loadPosts();
-      alert("Publicación borrada");
+      swal("Publicación borrada");
     } catch (error) {
       console.log(error);
     }

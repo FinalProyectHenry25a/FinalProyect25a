@@ -77,7 +77,7 @@ const editar = async (e)=>{
 }
 
 const eliminar = async (e)=>{
-    let questionID = e.nativeEvent.path[1].id;
+    let questionID = e.nativeEvent.path[1].id
    
     await axios.delete(`http://localhost:3001/pregunta/${questionID}`);
       window.location.reload()

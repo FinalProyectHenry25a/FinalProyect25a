@@ -194,7 +194,7 @@ export default function UserNavBar({ setCurrentPage }) {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse border" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
           <li className="nav-item dropdown">
             <Link className="nav-link active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -457,15 +457,15 @@ export default function UserNavBar({ setCurrentPage }) {
               ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
               : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
             </li>
-            <div className={modo}>
+            {/* <div className={modo}> */}
             <li style={{margin: "8px"}}>
             {lan === "es" 
-            ? <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
-            : <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>}
+            ? <button style={{border: "none", background: "transparent", fontWeight: "bold"}} onClick={(e) => dispatch(language("en"))}>EN</button>
+            : <button style={{border: "none", background: "transparent", fontWeight: "bold"}} onClick={(e) => dispatch(language("es"))}>ES</button>}
               {/* <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
               <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button> */}
             </li>
-            </div>
+            {/* </div> */}
             <li className="nav-item dropdown">
           <Link className="nav-link dropdown-toggle active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <BsPersonCircle /> {user.username}

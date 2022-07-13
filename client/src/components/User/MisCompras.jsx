@@ -98,31 +98,37 @@ export default function MisCompras() {
 
   return (
     <>
-    <div className={styles.fondo}>
       <UserNavBar />
       <BtnBack/>
+      <h2 className=" row justify-content-center mb-3">Mis Compras</h2>
       {user ? (
         <div className={styles.container}>
           {user?.shopping ? (
             <div className={styles.containerCard}>
               {" "}
-              <h2>Mis Compras</h2>
 
               {compras?.map((e) => {
 
                 return (
-                  <div key={e.id}>
+                  <div className="ms-4 bg-light p-2 h-100" key={e.id}>
 
                     <br/>
-                    <h3>Unidades: {e.cant}</h3>
-                    <Card
+                    <h3 className="row justify-content-center">Unidades: {e.cant}</h3>
+                    <div >
+                      <div className="d-flex justify-content-center">
+                      <img  src={e.images} style={{ height: 300 + "px" }} alt="imagen de lcelular" />
+                      </div>
+                      <h4 className="row justify-content-center mt-2">{e.brand}</h4>
+                      <h5 className="row justify-content-center mb-2">{e.model}</h5>
+                    </div>
+                    {/* <Card
                       brand={e.brand}
                       model={e.model}
                       images={e.images}
                       price={e.price}
                       id={e.id}
                       stock={e.stock}
-                    />
+                    /> */}
 
                     {allPhones?.filter((el) => el.id === e.id)[0].review ===
                       null ||
@@ -140,18 +146,26 @@ export default function MisCompras() {
                           placeholder="Dejanos tu opinion..."
                           value={input.id}
                         ></input>
-                        <div>
-                        <p className={styles.prf}>Selecciona para puntuar el producto adquirido</p>
-                             <button onClick={()=>rate(1,e.id)}>⭐</button>
-                             <button onClick={()=>rate(2,e.id)}>⭐</button>
-                             <button onClick={()=>rate(3,e.id)}>⭐</button>
-                             <button onClick={()=>rate(4,e.id)}>⭐</button>
-                             <button onClick={()=>rate(5,e.id)}>⭐</button>
+                        <div >
+                        <p className="row justify-content-center mt-2">Puntua el producto adquirido</p>
+                             
+                             <div className="d-flex justify-content-center">
+                              {/* <BsStar  className={styles.stars} onClick={()=>rate(1,e.id)}/>
+                             <BsStar  className={styles.stars} onClick={()=>rate(2,e.id)}/>
+                             <BsStar className={styles.stars} onClick={()=>rate(3,e.id)}/>
+                             <BsStar className={styles.stars} onClick={()=>rate(4,e.id)}/>
+                             <BsStar className={styles.stars} onClick={()=>rate(5,e.id)}/> */}
+                             <button className="btn-$blue-500 btn m-2"  onClick={()=>rate(1,e.id)}>1</button>
+                             <button className="btn m-2 " onClick={()=>rate(2,e.id)}>2</button>
+                             <button className="btn m-2 " oClick={()=>rate(3,e.id)}>3</button>
+                             <button className="btn m-2 " onClick={()=>rate(4,e.id)}>4</button>
+                            <button className="btn m-2 " onClick={()=>rate(5,e.id)}>5</button>
+                            </div>
                         </div>
-                        <button onClick={(e) => publicar(e)} className={styles.btn}>compartir</button>
+                        <button onClick={(e) => publicar(e)} className={styles.btn}>Compartir</button>
                       </div>
                     ) : (
-                      <p></p>
+                      <p className="row justify-content-center mt-5">La reseña fue enviada</p>
                     )}
                   </div>
                 );
@@ -164,7 +178,6 @@ export default function MisCompras() {
       ) : (
         <h1>no estas logeado</h1>
       )}
-      </div>
     </>
   );
 }

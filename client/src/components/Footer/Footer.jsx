@@ -14,7 +14,7 @@ export default function Footer(){
             <div className=" row align-items-center justify-content-center">
 <div className="col-5 align-items-center justify-content-center">
       <Link to='/about' className=" align-items-center justify-content-center text-decoration-none">
-      <a className="text-decoration-none align-items-center justify-content-center"><h4 className={styles.facu}>{footerLang[lan].nosotros}</h4></a>
+      <a className="text-decoration-none align-items-center justify-content-center"><h4  style={{fontWeight: "bold", color: "whitesmoke"}} className={styles.facu}>{footerLang[lan].nosotros} </h4></a>
       </Link>
     </div>
       <div className="align-items-center justify-content-center col-2">
@@ -25,8 +25,8 @@ export default function Footer(){
 <div className="col-5 row justify-content-center align-items-center">
 
             <Link to="/contacto" className="col-6 row justify-content-center align-items-center text-decoration-none">
-      <a className="align-items-center justify-content-center text-decoration-none">
-        <h4 className={styles.facu}>
+      <a className="align-items-center justify-content-center text-decoration-none" >
+        <h4 className={styles.facu}  style={{fontWeight: "bold", color: "whitesmoke"}}>
         {footerLang[lan].contacto}
               {/* {navBarLang[lan].contacto} */}
             </h4>
@@ -36,12 +36,10 @@ export default function Footer(){
 
           </div>
           </div>
-<hr className="mt-3"/>
-<br /><br />
+<hr className="mt-5"/>
       <div className="row align-items-center justify-content-center">
       Hecho con 💛 por alumnos de Henry.
       </div>
-<br />
 <div className="row align-items-center justify-content-center">
 Smartify © 2022 | Todos los derechos reservados.
       </div>

@@ -114,12 +114,13 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
       </ul> */}
 
       <ul className="pagination justify-content-center">
-        <button className={styles.btn} onClick={() => previousPage()} disabled={page === 1 || page < 1}>
+        <button className={styles.btn} style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }} onClick={() => previousPage()} disabled={page === 1 || page < 1}>
         {paginateLang[lan].anterior}
         </button>
         <input
           id="pageInput"
           className={styles.input}
+          style={{ fontWeight: "bold" }}
           onChange={pageInput}
           name="page"
           autoComplete="off"
@@ -128,7 +129,7 @@ export default function Paginado({ phonesPerPage, allPhones, paginado }) {
         <label className={styles.input2}>
           / {Math.ceil(allPhones / phonesPerPage)}
         </label>
-        <button className={styles.btn} onClick={() => nextPage()} disabled={page === Math.ceil(allPhones / phonesPerPage) || page > Math.ceil(allPhones / phonesPerPage) }>
+        <button className={styles.btn} style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }} onClick={() => nextPage()} disabled={page === Math.ceil(allPhones / phonesPerPage) || page > Math.ceil(allPhones / phonesPerPage) }>
         {paginateLang[lan].siguiente}
         </button>
       </ul>

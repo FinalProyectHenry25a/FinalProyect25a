@@ -1,8 +1,8 @@
 export const detailLang = {
 
 'es':{
-    'no fue ranqueado':'no fue ranqueado',
-    'Agregar al carrito User':'Agregar al carrito User',
+    'no fue ranqueado':'No fue ranqueado',
+    'Agregar al carrito User':'Agregar al carrito',
     'Disponibles':'Cantidad disponibles: ',
     'Especificaciones':'Especificaciones',
     'Procesador':'Procesador:',
@@ -23,7 +23,7 @@ export const detailLang = {
 },
 
 'en':{
-    'no fue ranqueado':'was not ranked',
+    'no fue ranqueado':'Was not ranked',
     'Agregar al carrito User': 'Add to cart',
     'Disponibles': 'Available stock: ',
     'Especificaciones':'Specifications',

@@ -13,6 +13,7 @@ export const homeLang = {
     Limpiarfiltros: "Limpiar filtros",
     noseenc: "No se encontraron artículos con esas características",
     conocenos: "conocenos",
+ 
   },
 
   en: {
@@ -29,5 +30,6 @@ export const homeLang = {
     Limpiarfiltros: "Clear filter",
     noseenc: "No articles with these characteristics were found",
     conocenos: "know us",
+
   },
 };

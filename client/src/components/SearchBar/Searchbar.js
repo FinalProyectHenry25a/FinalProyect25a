@@ -27,7 +27,7 @@ const SearchBar = ({ setCurrentPage }) => {
   return (
     <div className="input-group" style={{width: "40%", marginInline: "auto"}}>
   <div className="form-outline" style={{width: "90%"}}>
-    <input placeholder="Escriba aqui el celular que desea buscar..." id="search-input" type="search" className="form-control" style={{height: "100%"}} onChange={handleSearch}/>
+    <input placeholder={searchBarLang[lan].input} id="search-input" type="search" className="form-control" style={{height: "100%"}} onChange={handleSearch}/>
   </div>
   <button id="search-button" type="button" style={{borderRadius: "10px", width: "8%", marginInlineStart: "8px", backgroundColor: "#3A497E ", color: "white" }} className="btn" onClick={handleSubmit}>
     <BsSearch/>

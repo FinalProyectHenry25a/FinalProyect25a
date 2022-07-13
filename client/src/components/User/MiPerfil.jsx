@@ -178,19 +178,15 @@ export default function MiPerfil() {
                         required
                       />
                       <br />
-                      <button className="btn btn-light">
+                      <button className="btn btn-light m-1">
                         <label htmlFor="inputarchivo" id="labelarchivo">
                           ✏️{miPerfilLang[lan].editar}
                         </label>
                       </button>
 
-                      {user.image? <button className="btn btn-light" onClick={removeImage}>
+                      {user.image? <button className="btn btn-light m-1" onClick={removeImage}>
                         🗑️{miPerfilLang[lan].quitar}
                       </button> : null}
-
-                            {user.image? <button onClick={removeImage}>
-                              🗑️ {miPerfilLang[lan].quitar}
-                            </button> : null}
 
                       <div>
                         <h5>{user.username}</h5>
@@ -221,7 +217,7 @@ export default function MiPerfil() {
                           {auth.currentUser.emailVerified ? (
                             <p className={styles.prf}>{miPerfilLang[lan].verificado}👌</p>
                           ) : (
-                            <button
+                            <button className="btn" style={{backgroundColor: "#3A497E" , fontWeight: "bold", color: "white"}}
                               onClick={verification}
                             >
                               {miPerfilLang[lan].verificar}
@@ -285,7 +281,7 @@ export default function MiPerfil() {
                             placeholder={miPerfilLang[lan].pass}
                             className={styles.input}
                           />
-                          <button onClick={() => changePassword()} className={styles.btn2}>
+                          <button onClick={() => changePassword()} className={styles.btn2} style={{ fontWeight: "bold", marginBottom: "10px" }}>
                           {miPerfilLang[lan].cambiarContraseña}
                           </button>
                         </div>

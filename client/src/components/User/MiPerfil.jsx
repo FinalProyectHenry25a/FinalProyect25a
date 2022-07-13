@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory } from "react-router-dom";
 import { miPerfilLang } from "./styles/miPerfilLang";
 import { useSelector } from "react-redux";
+import swal from "sweetalert";
 
 
 export default function MiPerfil() {
@@ -19,7 +20,7 @@ export default function MiPerfil() {
   const history = useHistory()
 
   const verification = async () => {
-    alert("Correo de verifiacion enviado");
+    swal('El mail de verificacion se envio correctamente, por favor revise su correo')
 
     var users = auth.currentUser;
 

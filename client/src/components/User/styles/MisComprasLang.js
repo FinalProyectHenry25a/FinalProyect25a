@@ -8,7 +8,8 @@ export const comLang = {
       reseña: "La reseña fue enviada",
       aun: "No ha realizado compras aún",
       log: "No estas logeado",
-      fav: "Mis favoritos"
+      fav: "Mis favoritos",
+      Detalle: "Detalle"
     },
   
     en: {
@@ -20,7 +21,8 @@ export const comLang = {
       reseña: "Review was sent",
       aun: "You haven't made any purchases yet",
       log: "You are not logged in",
-      fav: "My favourites"
+      fav: "My favourites",
+      Detalle: "Details"
     },
   };
   

@@ -10,6 +10,15 @@
     margin-top: 10px;
 
 }
+
+.containerCardHover:hover {
+    cursor: pointer;
+      transform: translateY(-5px);
+      box-shadow: 0 12px 16px rgba(50, 50, 50, 1);
+      transition: all 0.25s;
+      
+    }
+    
 .input {
 
     margin: 0;

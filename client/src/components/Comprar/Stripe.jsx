@@ -218,7 +218,7 @@ const CheckoutForm = () => {
                 <div key={productInCart.id}>
                 <span>Producto: {`${productInCart.brand} ${productInCart.model}`}</span><br />
                 <span> Cantidad: {productInCart.qty}</span><br />
-                <span> Precio de unidad: {productInCart.price}$</span><hr />
+                <span> Precio de unidad: {productInCart.price}US$</span><hr />
                 </div>
 
             ))}

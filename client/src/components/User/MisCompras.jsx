@@ -9,16 +9,17 @@ import Card from "../card/Card";
 import { async } from "@firebase/util";
 import { useDispatch, useSelector } from "react-redux";
 import { getPhones } from "../../Actions";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from './styles/MisCompras.module.css'
 import BtnBack from '../back/BtnBack';
 import { comLang } from "./styles/MisComprasLang";
+import swal from "sweetalert";
 
 export default function MisCompras() {
   const [user, setUser] = useState();
   const [compras, setCompras] = useState();
   const [input, setInput] = useState("");
-  const [puntaje, setPuntaje]=useState(null)
+  const [puntaje, setPuntaje] = useState(null)
   const allPhones = useSelector((state) => state.phonesForSelect);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,7 +28,7 @@ export default function MisCompras() {
   useEffect(() => {
 
     verificarQueHayaUsuarioLogueado();
-    
+
   }, []);
 
   const verificarQueHayaUsuarioLogueado = () => {
@@ -36,7 +37,7 @@ export default function MisCompras() {
         let user = await axios.get(
           `http://localhost:3001/user/${currentUser.email}`
         );
-        if(user.data.banned){
+        if (user.data.banned) {
 
           history.push("/banned")
 
@@ -62,7 +63,7 @@ export default function MisCompras() {
               arrSinRep[i].cant = arrSinRep[i].cant + 1;
           }
         }
-      
+
         setCompras(arrSinRep);
         console.log(compras);
       }
@@ -79,19 +80,19 @@ export default function MisCompras() {
 
   const publicar = async (e) => {
     let productID = e.nativeEvent.path[1].id;
-    if(input &&puntaje){
+    if (input && puntaje) {
 
-    await axios.put(`http://localhost:3001/home/${user.email}/${productID}`, {
-      comentario: input, rating: puntaje
-    });
-    alert("review agregada")
-    window.location.reload()
-  }else alert("seleccione una estrella y deje su comentario")
+      await axios.put(`http://localhost:3001/home/${user.email}/${productID}`, {
+        comentario: input, rating: puntaje
+      });
+      swal("Review agregada")
+      window.location.reload()
+    } else swal("Seleccione una estrella y deje su comentario")
 
-};
+  };
 
-  function rate (points, postId){
-    
+  function rate(points, postId) {
+
     setPuntaje(points)
 
   }
@@ -101,7 +102,7 @@ export default function MisCompras() {
   return (
     <>
       <UserNavBar />
-      <BtnBack/>
+      <BtnBack />
       <h2 className=" row justify-content-center mb-3">{comLang[lan].mis}</h2>
       {user ? (
         <div className={styles.container}>
@@ -111,14 +112,19 @@ export default function MisCompras() {
 
               {compras?.map((e) => {
 
-                return (
-                  <div className="ms-4 bg-light p-2 h-100" key={e.id}>
 
-                    <br/>
+
+                return (
+
+           
+                 
+                  <div className="ms-4 bg-light p-2 h-100"  key={e.id}>
+
+                    <br />
                     <h3 className="row justify-content-center">{comLang[lan].uni} {e.cant}</h3>
                     <div >
                       <div className="d-flex justify-content-center">
-                      <img  src={e.images} style={{ height: 300 + "px" }} alt="imagen de lcelular" />
+                        <img src={e.images} style={{ height: 300 + "px" }} alt="imagen de lcelular" />
                       </div>
                       <h4 className="row justify-content-center mt-2">{e.brand}</h4>
                       <h5 className="row justify-content-center mb-2">{e.model}</h5>
@@ -134,52 +140,64 @@ export default function MisCompras() {
 
                     {allPhones?.filter((el) => el.id === e.id)[0].review ===
                       null ||
-                    !allPhones
-                      .filter((el) => el.id === e.id)[0]
-                      .review?.find((elemento) =>
-                        elemento.usuario.includes(user.username)
-                      ) ? (
+                      !allPhones
+                        .filter((el) => el.id === e.id)[0]
+                        .review?.find((elemento) =>
+                          elemento.usuario.includes(user.username)
+                        ) ? (
                       <div id={e.id}>
                         <input
                           name={e.id}
-                          className={styles.input}
+                          className={styles.input} 
                           onChange={(e) => handlerChange(e)}
                           type="text"
                           placeholder={comLang[lan].opi}
                           value={input.id}
                         ></input>
                         <div >
-                        <p className="row justify-content-center mt-2">{comLang[lan].pun}</p>
-                             
-                             <div className="d-flex justify-content-center">
-                              {/* <BsStar  className={styles.stars} onClick={()=>rate(1,e.id)}/>
+                          <p className="row justify-content-center mt-2" style={{fontWeight: "bold"}}>{comLang[lan].pun}</p>
+
+                          <div className="d-flex justify-content-center">
+                            {/* <BsStar  className={styles.stars} onClick={()=>rate(1,e.id)}/>
                              <BsStar  className={styles.stars} onClick={()=>rate(2,e.id)}/>
                              <BsStar className={styles.stars} onClick={()=>rate(3,e.id)}/>
                              <BsStar className={styles.stars} onClick={()=>rate(4,e.id)}/>
                              <BsStar className={styles.stars} onClick={()=>rate(5,e.id)}/> */}
-                             <button className="btn-$blue-500 btn m-2"  onClick={()=>rate(1,e.id)}>1</button>
-                             <button className="btn m-2 " onClick={()=>rate(2,e.id)}>2</button>
-                             <button className="btn m-2 " oClick={()=>rate(3,e.id)}>3</button>
-                             <button className="btn m-2 " onClick={()=>rate(4,e.id)}>4</button>
-                            <button className="btn m-2 " onClick={()=>rate(5,e.id)}>5</button>
-                            </div>
+                            <button className="btn-$blue-500 btn mb-4" onClick={() => rate(1, e.id)}>1</button>
+                            <button className="btn mb-4 " onClick={() => rate(2, e.id)}>2</button>
+                            <button className="btn mb-4 " oClick={() => rate(3, e.id)}>3</button>
+                            <button className="btn mb-4 " onClick={() => rate(4, e.id)}>4</button>
+                            <button className="btn mb-4 " onClick={() => rate(5, e.id)}>5</button>
+                          </div>
                         </div>
-                        <button onClick={(e) => publicar(e)} className={styles.btn}>{comLang[lan].compartir}</button>
+                        <button onClick={(e) => publicar(e)} style={{ fontWeight: "bold", backgroundColor: "#3A497E" }} className={styles.btn}>{comLang[lan].compartir}</button>
                       </div>
                     ) : (
-                      <p className="row justify-content-center mt-5">{comLang[lan].reseña}</p>
+                      <div className="d-grid justify-content-center alig-items-center">
+                        <p className=" mt-5" style={{ fontWeight: "bold" }}>{comLang[lan].reseña}</p>
+                        <Link className="btn w-80 " style={{
+                          fontWeight: "bold",
+                        }} to={"/home/" + e.id}>
+                          {comLang[lan].Detalle}
+                        </Link></div>
                     )}
+                 
                   </div>
+                 
                 );
               })}
+              
             </div>
           ) : (
             <h2>{comLang[lan].aun}</h2>
           )}
+          
         </div>
       ) : (
         <h1>{comLang[lan].log}</h1>
       )}
+      
     </>
+    
   );
 }

@@ -19,6 +19,7 @@ import BtnBack from "../back/BtnBack";
 import { detailLang } from "./detailLang";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import Footer from "../Footer/Footer";
+import swal from "sweetalert";
 
 export default function Detail() {
   const modo = useSelector(state => state.modo)
@@ -91,7 +92,7 @@ export default function Detail() {
     } else
       return (
         <FormattedMessage id="no fue ranqueado">
-          {<p>{messages}</p>}
+          {<p>{messages} </p>}
         </FormattedMessage>
       );
   }
@@ -125,9 +126,9 @@ export default function Detail() {
         user_email: user.username,
         product_ID: PID.id,
       });
-      alert("pregunta enviada");
+      swal('La pregunta se realizo con exito!')
       window.location.reload();
-    } else alert("haga una pregunta antes de publicar");
+    } else swal("Haga una pregunta antes de publicar");
   };
 
   return (
@@ -256,7 +257,7 @@ export default function Detail() {
                 ))
               : null} */}
 
-            <h3>${PID.price}</h3>
+            <h3>US${PID.price}</h3>
             <h3>Rating</h3>
             <div>
               <div>
@@ -285,7 +286,7 @@ export default function Detail() {
                     <Link to="#">
                       <button
                         type="submit"
-                        className={styles.btn}
+                        className={styles.btn} style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }}
                         onClick={(e) =>
                           dispatch(addToCartUser(user.email, PID.id))
                         }
@@ -411,7 +412,7 @@ export default function Detail() {
                   className={styles.input}
                   placeholder={detailLang[lan].esc}
                 />
-                <button onClick={(e) => publicar(e)} className={styles.btn2}>
+                <button onClick={(e) => publicar(e)} className={styles.btn2} style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }}>
                   {detailLang[lan].Preguntar}
                 </button>
               </div>

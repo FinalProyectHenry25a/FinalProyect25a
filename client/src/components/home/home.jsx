@@ -240,10 +240,10 @@ const Home = () => {
       <IntlProvider locale='es' messages={messages}>
     
       <div className={style.fondo}>
-      <div className="display-flex row y justify-content-center">
+      <div className="display-flex row y justify-content-center g-0">
 
 
-            <button onClick={logout}>desloguear</button>
+            {/* <button onClick={logout}>desloguear</button> */}
 
             {loggedUser ? <UserNavBar /> : <NavBar />}
             
@@ -253,9 +253,10 @@ const Home = () => {
             <br/>
             <SearchBar/>
             </div>
-            <div id="filtros">
+
+            <div className="d-flex flex-row justify-content-center alig-items-center mt-3" id="filtros" >
 <br/>
-              <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
+              <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px", fontWeight: "bold"  }} onChange={e => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].Todas}</option>
                 {brands?.map((brand) =>
                   <option key={brand} value={brand}>{brand}</option>
@@ -264,7 +265,7 @@ const Home = () => {
 
 
               {/* por Ram--------------------------------------------------- */}
-              <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+              <select id="ram" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px", fontWeight: "bold"  }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">Ram</option>
                 {rams?.map((ram) =>
                   <option key={ram} value={ram}>{ram}</option>
@@ -272,7 +273,7 @@ const Home = () => {
               </select>
 
               {/* por network----------------------------------------------- */}
-              <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+              <select id="network" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" , fontWeight: "bold" }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].Red}</option>
                 {networks?.map((network) =>
                   <option key={network} value={network}>{network}</option>
@@ -280,7 +281,7 @@ const Home = () => {
               </select>
 
               {/* por Rom--------------------------------------------------- */}
-              <select id="rom" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+              <select id="rom" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px", fontWeight: "bold"  }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">Rom</option>
                 {roms?.map((rom) =>
                   <option key={rom} value={rom}>{rom}</option>
@@ -288,7 +289,7 @@ const Home = () => {
               </select>
 
               {/* por orden--------------------------------------------------- */}
-              <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+              <select id="order" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" , fontWeight: "bold" }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].Pordefecto}</option>
                 <option value="rating">{homeLang[lan].Porpuntuacion}</option>
                 <option value="ascendingPrice">{homeLang[lan].Ordenascendiente}</option>
@@ -296,7 +297,7 @@ const Home = () => {
               </select>
 
               {/* por precio--------------------------------------------------- */}
-              <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+              <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px", fontWeight: "bold"  }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].precio}</option>
                 <option value={[0, 500]}>de u$ 0 a u$ 500</option>
                 <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
@@ -304,18 +305,21 @@ const Home = () => {
               </select>
 
               {/* por processor--------------------------------------------------- */}
-              <select id="processor" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
+              <select id="processor" className="form-select form-select-m mb-3 text-truncate " aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px", fontWeight: "bold"  }} onChange={(e) => filtersSetters(e)}>
                 <option value="null" >{homeLang[lan].Procesador}</option>
                 {processors?.map((processors) =>
                   <option key={processors} value={processors}>{processors}</option>
                 )}
               </select>
-
-
-              <button className={style.btn} onClick={() => send()}>{homeLang[lan].Buscar}</button>
-              <button className={style.btn} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
+     
             </div>
 
+            <div className="d-flex flex-row justify-content-center alig-items-center mt-1">
+            <div className="center-block">
+              <button className="p-3 mb-2 text-white" style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }}  onClick={() => send()}>{homeLang[lan].Buscar}</button>
+              <button className="p-3 mb-2 text-white ms-2" style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px" , fontWeight: "bold"}} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
+              </div>
+              </div>
             {/* filtrado************************************ */}
             <div className={style.flex}>
               {currentPhones && allPhones.length ? (
@@ -353,7 +357,6 @@ const Home = () => {
     </div>
           </div>
         </div>
-        <br></br>
 
         <Footer/>
     </IntlProvider>

@@ -200,16 +200,16 @@ const handleChange = (e) => {
         
         return (
           <div className={style.fondo}>
-          <div className={style.login}>
+          <div className={style.reg}>
       <div className={style.container}>
         <div className={style.image}>
           <h1>{registerLang[lan].formularioDeRegistro}</h1>
         </div>
-        <div>
+        <div className={style.container2}>
         <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 3, width: '25ch' },
+        '& .MuiTextField-root': { m: 3, width: '30ch', color: "#02155A" },
       }}
       noValidate
       autoComplete="off"
@@ -319,16 +319,13 @@ const handleChange = (e) => {
         {/* <div>
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
         </div> */}
-        <div className={style.register}>
-          <button onClick={DOS} type='submit' className={style.btn}>{registerLang[lan].registrarse}</button>
-        </div>
-
-
-        
-        <Link to="/login">
-            <p className={style.ancor}>{registerLang[lan].volver}</p>
-          
+        <div className={style.register} >
+          <button style={{backgroundColor: "#02155A", fontWeight: "bold", color: "white"}} onClick={DOS} type='submit' className={style.btn}>{registerLang[lan].registrarse}</button>
+          <br/>
+          <Link to="/login">
+            <button style={{backgroundColor: "#02155A", fontWeight: "bold", color: "white", width: "30%"}} className={style.btn}>{registerLang[lan].volver}</button>
           </Link>
+        </div>
         {/* <div className={style.register}>
           <button className={style.btn}>Ingresar con Google</button>
         </div>

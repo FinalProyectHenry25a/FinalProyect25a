@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 import style from "./Admin.module.css"
+import swal from "sweetalert";
 
 export default function StockEdit() {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ export default function StockEdit() {
         (actionToDo === "remove" && stockToChange > stockInitial) ||
         stockToChange < 0
       ) {
-        alert(
+        swal(
           "No se puede realizar la operacion debido. Revise stock actual  y valores unicamente positivos"
         );
       } else {
@@ -80,8 +81,9 @@ export default function StockEdit() {
         await axios.put("http://localhost:3001/admin/modifica-stock", bod);
 
         setChange({ ...change, amount: 0 });
-        console.log(change);
+        
         document.getElementById(id).value = null;
+        swal("Se edito el stock correctamente")
       }
     } catch (error) {
       console.log(error);

@@ -128,7 +128,7 @@ return(
         <input type='text' name="asunto_user" placeholder={constactoLang[lan].asunto2} value={correo.asunto_user} onChange={onChangeCorreo} className={styles.input}/>
         <label>{constactoLang[lan].descripcion}</label>
         <textarea name="descripcion_user" placeholder={constactoLang[lan].descripcion2} value={correo.descripcion_user} onChange={onChangeCorreo} className={styles.input}/>
-        <button type='submit' className={styles.btn}>{constactoLang[lan].enviar}</button>
+        <button type='submit' className={styles.btn} style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }}>{constactoLang[lan].enviar}</button>
       </form>
     </div>
     </div>

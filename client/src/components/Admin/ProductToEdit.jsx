@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Link } from "react-router-dom";
+import swal from "sweetalert";
 import { getDetails, editPost, getUser, cleanUp } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
 import style from "./Admin.module.css"
@@ -68,7 +69,7 @@ export default function ProductToEdit() {
   const handleSubmit = async (e) => {
     console.log(state);
     dispatch(editPost(id, state));
-    alert("Cambios guardados exitosamente");
+    swal("Cambios guardados exitosamente");
     history.push("/admin/publicaciones");
   };
 

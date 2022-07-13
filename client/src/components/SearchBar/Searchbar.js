@@ -29,7 +29,7 @@ const SearchBar = ({ setCurrentPage }) => {
   <div className="form-outline" style={{width: "90%"}}>
     <input id="search-input" type="search" className="form-control" style={{height: "100%"}} onChange={handleSearch}/>
   </div>
-  <button id="search-button" type="button" style={{borderRadius: "10px", width: "8%", marginInlineStart1: "5px"}} className="btn btn-primary" onClick={handleSubmit}>
+  <button id="search-button" type="button" style={{borderRadius: "10px", width: "8%", marginInlineStart: "8px"}} className="btn btn-primary" onClick={handleSubmit}>
     <BsSearch/>
   </button>
 </div>

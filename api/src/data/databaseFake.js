@@ -45,8 +45,8 @@ module.exports = [
     stock: 100,
     additionalphotos: [
       "https://i.ibb.co/BjdgWrx/galaxy-note20-back-removebg-chico.webp",
-      "https://i.blogs.es/39af2f/galaxy-note20-ultra_back_mystic-bronze/original.jpeg",
-      "https://images.samsung.com/is/image/samsung/sa-en-galaxy-note20-5g-n981-sm-n981bzgwksa-frontmysticgreen-320813468",
+      "https://i.ibb.co/CzXDcRP/note20-removebg-1.webp",
+      "https://i.ibb.co/wKbxz0s/note20-removebg-2.webp",
     ],
   },
   {

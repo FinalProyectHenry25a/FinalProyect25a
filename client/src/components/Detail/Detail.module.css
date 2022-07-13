@@ -34,7 +34,8 @@
     width: 120px;
     height: 50px;
     margin-bottom: 30px;
-    background-color: rgb(80, 95, 214);
+    background-color: #3A497E;
+    font-weight: bold;
     border-radius: 5px;
     
 }

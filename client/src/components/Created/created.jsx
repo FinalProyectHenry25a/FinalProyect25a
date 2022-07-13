@@ -7,6 +7,7 @@ import { auth } from "../../firebase/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import Swal from 'sweetalert2';
 import style from "./../home/Home.module.css";
+import swal from "sweetalert";
 
 export default function PhoneCreate() {
   const dispatch = useDispatch();
@@ -189,7 +190,7 @@ export default function PhoneCreate() {
 
       dispatch(postPhone(input));
       dispatch(setSelects());
-      alert("La publicacion se creo exitosamente");
+      swal("La publicacion se creo exitosamente");
 
       setInput({
         brand: "",
@@ -308,7 +309,7 @@ export default function PhoneCreate() {
             <div className="row justify-content-center col-auto w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <h5 className="row justify-content-center col-auto">
                 {" "}
-                Precio en $
+                Precio en US$
               </h5>
               <div className=" w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label className="row justify-content-center col-auto block tracking-wide text-gray-700 text-xs font-bold mb-2">

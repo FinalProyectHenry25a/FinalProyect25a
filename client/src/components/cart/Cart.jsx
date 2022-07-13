@@ -105,7 +105,7 @@ const Cart = () => {
         <div className={styles.summary__price}>
           {totalItems === 1 ? <span className={styles.span}>{totalItems} {cartLang[lan].prod}</span> : <span className={styles.span}>{totalItems} {cartLang[lan].prods}</span>}
           <br/>
-          <span>  $ {totalPrice}</span>
+          <span>  US$ {totalPrice}</span>
         </div>
         {totalItems ? <div>
       {auth.currentUser?.emailVerified ? 

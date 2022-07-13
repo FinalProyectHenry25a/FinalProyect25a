@@ -5,6 +5,7 @@ import { auth } from "../../firebase/firebase-config";
 import { idLang } from "./indetifyLang";
 import { useSelector } from "react-redux";
 import styles from "./Login.module.css"
+import swal from "sweetalert";
 
 export default function Identify() {
 
@@ -20,12 +21,12 @@ export default function Identify() {
 
             setError("");
             await sendPasswordResetEmail(auth, email);
-            alert("Revisa tu correo electronico en el mail que proporcionaste");
+            swal("Revisa tu casilla de correo electronico en el mail que proporcionaste");
 
         } catch (error) {
 
             console.log(error.message);
-            alert("Fallo al recuperar tu contraseña, revise si introdujo bien su email")
+            swal("Fallo al recuperar tu contraseña, revise si introdujo bien su email")
 
         }
 
@@ -41,9 +42,9 @@ export default function Identify() {
             <h4>{idLang[lan].ing}</h4>
             <br />
             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white w-100" type="email" onChange={(e) => setEmail(e.target.value)} placeholder={idLang[lan].plc}></input>
-            <button className=' justify-content-center col-auto btn btn-primary btn-sm' onClick={resetPassword} type="submit">{idLang[lan].env}</button>
+            <button className=' justify-content-center col-auto btn btn-primary btn-sm' style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }} onClick={resetPassword} type="submit">{idLang[lan].env}</button>
             <br /><br />
-            <Link className="row justify-content-center" to="/login"><button className=' justify-content-center col-auto btn btn-secondary btn-sm' type="submit">{idLang[lan].atras}</button></Link>
+            <Link className="row justify-content-center" to="/login"><button className=' justify-content-center col-auto btn btn-secondary btn-sm' style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold", textDecoration: "none" }}  type="submit">{idLang[lan].atras}</button></Link>
             </div>
         </div>
         </div>

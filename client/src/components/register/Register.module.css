@@ -1,5 +1,6 @@
 .fondo{
-    background-color: rgb(255, 250, 250);
+    background-color: #F6F8FA;
+    height: 100vh;
   }
 .container {
     display: flex;

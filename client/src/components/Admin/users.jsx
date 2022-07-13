@@ -28,6 +28,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import BtnBack from "../back/BtnBack";
 import { Button, Grid } from "@mui/material";
 import style from "./Admin.module.css"
+import swal from "sweetalert";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ export default function Users() {
   async function deleteUsers(email) {
     try {
       await axios.delete(`http://localhost:3001/admin/users/${email}`);
-      alert("usuario eliminado");
+      swal("Usuario eliminado");
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -204,14 +205,14 @@ export default function Users() {
   return (
 
     <TableContainer component={Paper}>
-      <Link to="/home">
-        <button className={style.btn}>Volver</button>
+
+      <BtnBack className={style.btn}>Volver</BtnBack>
         <div className="d-flex justify-content-center">
         <h1 style={{'background':'#4B657C'}} className="col-6 row justify-content-center shadow py-2 px-4 rounded text-white">
             Usuarios
         </h1>
           </div> 
-      </Link>
+    
 
       <Table aria-label="collapsible table">
         <TableHead>

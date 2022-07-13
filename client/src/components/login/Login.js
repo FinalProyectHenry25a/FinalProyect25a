@@ -12,11 +12,14 @@ import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
 import axios from "axios";
 import google from '../../images/google.png'
-import logo from '../../images/smartworld.jpg'
+import logo from '../../images/SmartifyFinal.png'
 
 import { useSelector } from "react-redux";
 import { BsGoogle, BsWindowSidebar } from "react-icons/bs";
 import { loginLang } from "./loginLang";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
 
 
 const Login = () => {
@@ -126,16 +129,44 @@ const Login = () => {
   return (
     <div className={style.fondo}>
      <div className={style.login}>
-      {user ? <p>Ya estas logueado</p> : <div className={style.container}>
-        <div className={style.containerImage}>
+      {user ? <p>Ya estas logueado</p> : <div className={style.container} style={{width: "40%", marginInline: "auto", marginBlock: "1%"}}>
+        <div className={style.containerImage} style={{width: "322px", height: "200px", marginBottom: "16%"}}>
           <div>
-          <img src={logo} className={style.image} alt='logo'/>
+          <img src={logo} className={style.image} style={{maxWidth: "100%", maxHeight: "100%"}} alt='logo'/>
           </div>
-          <div>
-          <h2>{loginLang[lan].holaOtraVez}</h2>
-          </div>
+
         </div>
-        <div>
+        <Box 
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '35ch', marginBlock: "5%" },
+        }}
+        noValidate
+        autoComplete="off"
+        >
+          <div style={{marginBlockStart: "60%"}}>
+            <TextField
+              //id="outlined-password-input"
+              value={loginEmail}
+              name="loginEmail"
+              label={loginLang[lan].correoElectronico}
+              type="email"
+              id="email"
+              onChange={(e) => setLoginEmail(e.target.value)}
+            />
+            <br/>
+            <TextField
+              //id="outlined-password-input"
+              value={loginPassword}
+              name="loginPassword"
+              label={loginLang[lan].contraseña}
+              type="password"
+              id='password'
+              onChange={(e) => setLoginPassword(e.target.value)}
+            />
+          </div>
+        </Box>
+        {/* <div style={{marginTop: "15%"}}>
           <input
             autoFocus
             value={loginEmail}
@@ -145,8 +176,8 @@ const Login = () => {
             id="email"
             className={style.input}
             onChange={(e) => setLoginEmail(e.target.value)} />
-        </div>
-        <div>
+        </div> */}
+        {/* <div style={{marginTop: "15%"}}>
           <input
             value={loginPassword}
             name="loginPassword"
@@ -155,7 +186,7 @@ const Login = () => {
             id='password'
             className={style.input}
             onChange={(e) => setLoginPassword(e.target.value)} />
-        </div>
+        </div> */}
         <a href="/identify" className={style.ancor}>{loginLang[lan].olvideMiContraseña}</a>
         <div className={style.register}>
           <button onClick={login} type="submit" className={style.btn}>{loginLang[lan].ingresar}</button>
@@ -164,10 +195,10 @@ const Login = () => {
           <button onClick={loginWithGoogle} type="submit" className={style.btn}>{loginLang[lan].ingresarConGoogle}<img src={google} alt='google' className={style.google}/></button>
           </div>
           <br/><br/>
-          <Link to="register">
+          <Link to="register" style={{textDecoration: "none"}}>
             <p className={style.ancor2}>{loginLang[lan].registrarme}</p>
           </Link>
-          <Link to="home">
+          <Link to="home" style={{textDecoration: "none"}}>
             <p className={style.ancor2}>{loginLang[lan].volver}</p>
           </Link>
         </div>

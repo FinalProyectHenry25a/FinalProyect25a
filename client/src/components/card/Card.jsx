@@ -72,7 +72,7 @@ export default function Card(props) {
         {props.stock > 0 ? (
           <div className={modo}>
           
-          <img src={props.images} style={{ height: 300 + "px" }} alt="..." />
+          <img src={props.images} style={{ maxHeight: "300px"}} alt="..." />
            
           </div>
         ) : (

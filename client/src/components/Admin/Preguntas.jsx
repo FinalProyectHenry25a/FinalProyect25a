@@ -88,6 +88,7 @@ const eliminar = async (e)=>{
 
 return (
   <div className={style.fondo}>
+    <div className="vh-100">
     <Link to="/home">
       <button className={style.btn}>Volver</button>
     </Link>
@@ -130,25 +131,34 @@ return (
                 </div>
               ) : (
                 <div id={e.id}>
+                  <hr/>
                   <p>-{e.answer}</p>
                   
                     <button
-                      className="btn btn-secondary d-flex justify-content-center align-items-center"
+                      className="m-1 btn btn-secondary d-flex justify-content-center align-items-center"
                       onClick={(e) => editar(e)}
                     >
                       Borrar respuesta
                     </button>
+<<<<<<< HEAD
                  
                 </div>
               )}
               <br />
               <div></div>
+=======
+>>>>>>> 2df7bc2d6e0775a686a2fb36da335c4dbe832c9d
               <button
-                className="d-flex justify-content-center btn btn-danger"
+                className="m-1 d-flex justify-content-center btn btn-danger"
                 onClick={(e) => eliminar(e)}
               >
                 Eliminar pregunta
               </button>
+                  </div>
+                </div>
+              )}
+              <br />
+              <div></div>
             </div>
           </div>
         );
@@ -170,6 +180,7 @@ return (
     ) : (
       <p>no hay preguntas</p>
     )}
+  </div>
   </div>
 );
 }

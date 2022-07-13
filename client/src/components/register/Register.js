@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './../register/Register.module.css'
 import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -16,14 +16,26 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-
-
+import { async } from '@firebase/util';
 
 
 const Register = () => {
 
-  const cart = useSelector(state => state.cart)
+  const cart = useSelector((state) => state.cart);
   const lan = useSelector((state) => state.language);
+
+  const [mails, setEmails] = useState();
+
+  const getEmails = async () => {
+    let allM = (await axios.get("http://localhost:3001/user")).data;
+    allM = allM.map((elem) => elem.email);
+    setEmails(allM);
+  };
+  
+    useEffect(()=>{
+      getEmails()
+    },[])
+
   
   const history = useHistory();
   
@@ -132,6 +144,7 @@ const Register = () => {
   function validation (input){
     let error = {}
     if (!input.email) error.email = "Ingresa el email del usuario"
+    if (mails.includes (input.email)) error.email = "Mail ya existente"
     if (!input.password) error.password = "Ingresa la contraseña del usuario"
     if (!input.username) error.username = "Ingresa el nombre de usuario"
     if (!input.firstname) error.firstname = "Ingresa el nombre del usuario"
@@ -170,7 +183,7 @@ const handleChange = (e) => {
       
     }
   
-  console.log(input)
+  
     const onChangeCorreo = (e) => {
       const { name, value } = e.target;
       SetCorreo({

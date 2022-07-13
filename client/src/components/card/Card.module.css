@@ -4,7 +4,7 @@
     margin-block-end: 50px;
     margin-right: 1px;
     width: 280px;
-    background-color: #fff;
+    background-color: rgba(243, 243, 243, 0.8);
     backdrop-filter: blur(6px);
     border-radius: 6px;
     overflow: hidden;

@@ -12,21 +12,21 @@ export default function Footer(){
         <footer className="d-flex align-items-center justify-content-center ">
            <div className=" row mt-5 col-12 ">
             <div className=" row align-items-center justify-content-center">
-<div className="col-5 align-items-center justify-content-center">
+<div className="col-5 align-items-center justify-content-center" style={{width: "auto", marginInlineStart: "auto"}}>
       <Link to='/about' className=" align-items-center justify-content-center text-decoration-none">
-      <a className="text-decoration-none align-items-center justify-content-center"><h4 className={styles.facu}>{footerLang[lan].nosotros}</h4></a>
+      <a className="text-decoration-none align-items-center justify-content-center"><h4  style={{fontWeight: "bold", color: "whitesmoke"}} className={styles.facu}>{footerLang[lan].nosotros} </h4></a>
       </Link>
     </div>
-      <div className="align-items-center justify-content-center col-2">
+      <div className="align-items-center justify-content-center col-2" style={{marginInline: "auto", width: "auto"}}>
       <a href="https://github.com/FinalProyectHenry25a/FinalProyect25a">
       <img className="mx-auto d-block" src={github} alt="" width="50" height="50"/>
       </a>
       </div>
-<div className="col-5 row justify-content-center align-items-center">
+<div className="col-5 row justify-content-center align-items-center" style={{marginInlineEnd: "auto", width: "auto"}}>
 
             <Link to="/contacto" className="col-6 row justify-content-center align-items-center text-decoration-none">
-      <a className="align-items-center justify-content-center text-decoration-none">
-        <h4 className={styles.facu}>
+      <a className="align-items-center justify-content-center text-decoration-none" >
+        <h4 className={styles.facu}  style={{fontWeight: "bold", color: "whitesmoke"}}>
         {footerLang[lan].contacto}
               {/* {navBarLang[lan].contacto} */}
             </h4>
@@ -36,12 +36,10 @@ export default function Footer(){
 
           </div>
           </div>
-<hr className="mt-3"/>
-<br /><br />
+<hr className="mt-5"/>
       <div className="row align-items-center justify-content-center">
       Hecho con 💛 por alumnos de Henry.
       </div>
-<br />
 <div className="row align-items-center justify-content-center">
 Smartify © 2022 | Todos los derechos reservados.
       </div>

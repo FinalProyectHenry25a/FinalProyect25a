@@ -1,39 +1,50 @@
 .container {
     display: flex;
-    place-content: center;
+   place-content: center;
+ 
+    
 
 }
+.prf {
 
-.input{
+    margin-top: 10px;
+
+}
+.input {
+
     margin: 0;
-    width: 322px;
+    width: 18rem;
     height: 40px;
     position: relative;
     border-radius: 5px;
     background-color: white;
     padding-left: 5px;
-    
+    margin-top: 1rem;
+
 }
-.fondo{
-    background-color: rgb(207, 204, 204);
-    height: 100%;
-  }
 
 .containerCard {
+
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex-direction:row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 50px;
+
 }
+
 .btn {
+
     color: white;
     border: none;
     cursor: pointer;
-    width: 320px;
-    height: 40px;
-    
+    width: 18rem;
+    height: 10rem;
     background-color: rgb(80, 95, 214);
     border-radius: 5px;
+
 }
-.containerCard h2{
+
+.containerCard h2 {
     margin-bottom: 30px;
 }

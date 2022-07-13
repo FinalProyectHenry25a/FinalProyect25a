@@ -93,7 +93,7 @@ export default function Card(props) {
         <h2 style={{
         textAlign: 'center',
         justifyContent: "center",
-      }}>${props.price}</h2>
+      }}>US$ {props.price}</h2>
         <div className="card-text">
         {props.stock > 0 ? (
           <div>
@@ -103,7 +103,7 @@ export default function Card(props) {
                   className="btn btn-outline-dark, w-100"
                   type="submit"
                   style={{
-                    border: '1px solid black',
+                    fontWeight: "bold",
                     justifyContent: "center",
                     marginBottom: '10px'
                   }}
@@ -118,7 +118,7 @@ export default function Card(props) {
                   className="btn btn-outline-dark, w-80"
                   type="submit"
                   style={{
-                    border: '1px solid black',
+                    fontWeight: "bold",
                     justifyContent: "center",
                     
                     marginBottom: '10px'
@@ -141,24 +141,26 @@ export default function Card(props) {
           </div>
         )}
 
+        <div className="d-flex flex-row justify-content-center alig-items-center">
+    {user ? favslocal?.includes(props.id) ? (
+            <button className="mb-2" style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
+              <FaHeart />
+            </button>
+          ) : (
+            <button className="mb-2" style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
+              <FiHeart />
+            </button>
+          ) : null}
         
-        <Link className="btn btn-outline-dark, w-80 mb-4" style={{
-                    
+        <Link className="btn btn-outline-dark, w-80 mb-2 ms-5" style={{
+                          fontWeight: "bold",
                     justifyContent: "center",
                     
                   }} to={"/home/" + props.id}>
           {cardLang[lan].Detalle}
         </Link>
-        {user ? favslocal?.includes(props.id) ? (
-            <button style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
-              <FaHeart />
-            </button>
-          ) : (
-            <button style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
-              <FiHeart />
-            </button>
-          ) : null}
-          <br />
+        </div>
+        
           </div>
           
     </div>

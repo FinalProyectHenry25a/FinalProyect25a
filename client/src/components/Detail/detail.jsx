@@ -161,6 +161,7 @@ export default function Detail() {
             id="carouselExampleIndicators"
             className="carousel carousel-dark slide"
             data-bs-ride="true"
+            style={{border: "solid", width: "700px", height: "660px"}}
           >
             <div className="carousel-indicators">
               <button
@@ -190,31 +191,28 @@ export default function Detail() {
                 aria-label="Slide 4"
               ></button>
             </div>
-            <div className="carousel-inner">
+            <div className="carousel-inner" style={{width: "700px", maxHeight: "max-content"}}>
               <div className="carousel-item active">
-                <img src={PID.images} width={500} height="100%" alt="..." />
+                <img src={PID.images} style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}} alt="..." />
               </div>
               <div className="carousel-item">
                 <img
                   src={PID.additionalphotos?.[0]}
-                  width={500}
-                  height="100%"
+                  style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}}
                   alt=""
                 />
               </div>
               <div className="carousel-item">
                 <img
                   src={PID.additionalphotos?.[1]}
-                  width={500}
-                  height="100%"
+                  style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}}
                   alt=""
                 />
               </div>
               <div className="carousel-item">
                 <img
                   src={PID.additionalphotos?.[2]}
-                  width={500}
-                  height="100%"
+                  style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}}
                   alt=""
                 />
               </div>
@@ -243,19 +241,20 @@ export default function Detail() {
               ></span>
               <span className="visually-hidden">Next</span>
             </button>
-          </div>
         </div>
+          </div>
+          
         <hr />
         <div className={styles.container2}>
           <div>
             <h1>{PID.model}</h1>
-            {PID.additionalphotos?.length >= 1
+            {/* {PID.additionalphotos?.length >= 1
               ? PID.additionalphotos.map((el) => (
                 <div className={modo}>
                   <img src={el} width="150" alt="No encontrada" />
                   </div>
                 ))
-              : null}
+              : null} */}
 
             <h3>${PID.price}</h3>
             <h3>Rating</h3>

@@ -199,7 +199,7 @@ module.exports = [
     ],
   },
   {
-    brand: "Iphone",
+    brand: "Apple",
     releaseDate: "2/24/2022",
     model: "Iphone 13 Pro",
     price: 999,
@@ -449,7 +449,7 @@ module.exports = [
     ],
   },
   {
-    brand: "Realme",
+    brand: "Xiaomi",
     releaseDate: "5/30/2022",
     model: "Realme 7",
     price: 300,
@@ -474,7 +474,7 @@ module.exports = [
     ],
   },
   {
-    brand: "Realme",
+    brand: "Xiaomi",
     releaseDate: "1/5/2022",
     model: "Realme 9 Pro+ ",
     price: 170,

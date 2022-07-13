@@ -189,7 +189,7 @@ export default function MiPerfil() {
                       </button> : null}
 
                             {user.image? <button onClick={removeImage}>
-                              🗑️ quitar
+                              🗑️ {miPerfilLang[lan].quitar}
                             </button> : null}
 
                       <div>
@@ -242,7 +242,7 @@ export default function MiPerfil() {
                             <input
                               type="text"
                               id="userName"
-                              placeholder="Nuevo nombre"
+                              placeholder={miPerfilLang[lan].name}
                               className={styles.input}
                             />
                             <button onClick={changeUserName} className={styles.btn}>
@@ -263,7 +263,7 @@ export default function MiPerfil() {
                             <input
                               type="text"
                               id="address"
-                              placeholder="Nueva dirección"
+                              placeholder={miPerfilLang[lan].direc}
                               className={styles.input}
                             />
                             <button onClick={changeUserAdress} className={styles.btn}>
@@ -282,7 +282,7 @@ export default function MiPerfil() {
                           <input
                             id="pw"
                             type="password"
-                            placeholder="Nueva contraseña"
+                            placeholder={miPerfilLang[lan].pass}
                             className={styles.input}
                           />
                           <button onClick={() => changePassword()} className={styles.btn2}>

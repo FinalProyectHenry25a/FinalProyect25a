@@ -143,22 +143,30 @@ export default function Card(props) {
 
         <div className="d-flex flex-row justify-content-center alig-items-center">
     {user ? favslocal?.includes(props.id) ? (
-            <button className="mb-2" style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
+            <button className="mb-3" style={{border: "none", background: "transparent"}} onClick={deleteFavourites}>
               <FaHeart />
             </button>
           ) : (
-            <button className="mb-2" style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
+            <button className="mb-3" style={{border: "none", background: "transparent"}} onClick={addToFavourites}>
               <FiHeart />
             </button>
           ) : null}
         
-        <Link className="btn btn-outline-dark, w-80 mb-2 ms-5" style={{
+        {user ? <Link className="btn btn-outline-dark, w-80 mb-3 ms-5" style={{
                           fontWeight: "bold",
                     justifyContent: "center",
+                  
                     
                   }} to={"/home/" + props.id}>
           {cardLang[lan].Detalle}
-        </Link>
+        </Link> : <Link className="btn btn-outline-dark, w-80 mb-3" style={{
+                          fontWeight: "bold",
+                    justifyContent: "center",
+                  
+                    
+                  }} to={"/home/" + props.id}>
+          {cardLang[lan].Detalle}
+        </Link>}
         </div>
         
           </div>

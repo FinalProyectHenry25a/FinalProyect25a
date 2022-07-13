@@ -101,7 +101,9 @@ const NavBar = ({ setCurrentPage }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid" style={{ margin: "10px" }}>
+        <Link to="/home">
         <img src={SmartifyFinal} className={styles.logo} />
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -121,14 +123,14 @@ const NavBar = ({ setCurrentPage }) => {
             ? <BsFillSunFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("light"))} id='modoOscuro'/> 
             : <BsFillMoonFill style={{cursor: "pointer"}} onClick={(e) =>dispatch(modoOscuro("dark"))} id='modoOscuro'/>}
           </li>
-          <div className={modo}>
+        
           <li style={{margin: "9px"}}>
             {lan === "es" 
-            ? <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
-            : <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>}
+            ? <button style={{border: "none", background: "transparent", fontWeight: "bold"}} onClick={(e) => dispatch(language("en"))}>EN</button>
+            : <button style={{border: "none", background: "transparent", fontWeight: "bold"}} onClick={(e) => dispatch(language("es"))}>ES</button>}
             {/* <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button> */}
           </li>
-          </div>
+       
           <li className="nav-item">
           <Link to="/login" className="nav-link active">
             {navBarLang[lan].ingresa}

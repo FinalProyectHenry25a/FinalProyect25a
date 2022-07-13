@@ -1,12 +1,28 @@
-.btn {
+.btn1 {
   color: white;
   border: none;
   cursor: pointer;
-  width: 80px;
+  width: 90px;
   height: 40px;
   background-color: rgb(80, 95, 214);
   border-radius: 5px;
   margin-right: 10px;
+  text-align: center;
+}
+
+.btn2 {
+
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 90px;
+  height: 40px;
+  background-color: rgb(80, 95, 214);
+  border-radius: 5px;
+  margin-right: 10px;
+  text-align: center;
+
+
 }
 
 .input{

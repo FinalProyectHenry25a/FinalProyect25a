@@ -178,19 +178,15 @@ export default function MiPerfil() {
                         required
                       />
                       <br />
-                      <button className="btn btn-light">
+                      <button className="btn btn-light m-1">
                         <label htmlFor="inputarchivo" id="labelarchivo">
                           ✏️{miPerfilLang[lan].editar}
                         </label>
                       </button>
 
-                      {user.image? <button className="btn btn-light" onClick={removeImage}>
+                      {user.image? <button className="btn btn-light m-1" onClick={removeImage}>
                         🗑️{miPerfilLang[lan].quitar}
                       </button> : null}
-
-                            {user.image? <button onClick={removeImage}>
-                              🗑️ {miPerfilLang[lan].quitar}
-                            </button> : null}
 
                       <div>
                         <h5>{user.username}</h5>

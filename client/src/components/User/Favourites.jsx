@@ -9,11 +9,13 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import BtnBack from "../back/BtnBack";
 import styles from './styles/Favourites.module.css'
+import { comLang } from "./styles/MisComprasLang";
 
 export default function Favourites() {
   const [user, setUser] = useState();
   const history = useHistory()
   const favs = useSelector(state => state.favs)
+  const lan = useSelector((state) => state.language);
 
   let emailUser = "";
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function Favourites() {
       {user ? (
         <div>
           <BtnBack/>
-          <h2 style={{textAlign: "center", marginBottom: "30px"}}>Mis favoritos</h2>
+          <h2 style={{textAlign: "center", marginBottom: "30px"}}>{comLang[lan].fav}</h2>
           <div className={styles.containerCard}>
           {user?.favourites?.map((e) => {
             return (

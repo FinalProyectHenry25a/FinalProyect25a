@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPhones } from "../../Actions";
 import { useHistory } from "react-router-dom";
 import styles from './styles/MisCompras.module.css'
-import BtnBack from '../back/BtnBack'
+import BtnBack from '../back/BtnBack';
+import { comLang } from "./styles/MisComprasLang";
 
 export default function MisCompras() {
   const [user, setUser] = useState();
@@ -20,7 +21,8 @@ export default function MisCompras() {
   const [puntaje, setPuntaje]=useState(null)
   const allPhones = useSelector((state) => state.phonesForSelect);
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
+  const lan = useSelector((state) => state.language);
 
   useEffect(() => {
 
@@ -100,7 +102,7 @@ export default function MisCompras() {
     <>
       <UserNavBar />
       <BtnBack/>
-      <h2 className=" row justify-content-center mb-3">Mis Compras</h2>
+      <h2 className=" row justify-content-center mb-3">{comLang[lan].mis}</h2>
       {user ? (
         <div className={styles.container}>
           {user?.shopping ? (
@@ -113,7 +115,7 @@ export default function MisCompras() {
                   <div className="ms-4 bg-light p-2 h-100" key={e.id}>
 
                     <br/>
-                    <h3 className="row justify-content-center">Unidades: {e.cant}</h3>
+                    <h3 className="row justify-content-center">{comLang[lan].uni} {e.cant}</h3>
                     <div >
                       <div className="d-flex justify-content-center">
                       <img  src={e.images} style={{ height: 300 + "px" }} alt="imagen de lcelular" />
@@ -143,11 +145,11 @@ export default function MisCompras() {
                           className={styles.input}
                           onChange={(e) => handlerChange(e)}
                           type="text"
-                          placeholder="Dejanos tu opinion..."
+                          placeholder={comLang[lan].opi}
                           value={input.id}
                         ></input>
                         <div >
-                        <p className="row justify-content-center mt-2">Puntua el producto adquirido</p>
+                        <p className="row justify-content-center mt-2">{comLang[lan].pun}</p>
                              
                              <div className="d-flex justify-content-center">
                               {/* <BsStar  className={styles.stars} onClick={()=>rate(1,e.id)}/>
@@ -162,21 +164,21 @@ export default function MisCompras() {
                             <button className="btn m-2 " onClick={()=>rate(5,e.id)}>5</button>
                             </div>
                         </div>
-                        <button onClick={(e) => publicar(e)} className={styles.btn}>Compartir</button>
+                        <button onClick={(e) => publicar(e)} className={styles.btn}>{comLang[lan].compartir}</button>
                       </div>
                     ) : (
-                      <p className="row justify-content-center mt-5">La reseña fue enviada</p>
+                      <p className="row justify-content-center mt-5">{comLang[lan].reseña}</p>
                     )}
                   </div>
                 );
               })}
             </div>
           ) : (
-            <h2>no ha realizado compras aun</h2>
+            <h2>{comLang[lan].aun}</h2>
           )}
         </div>
       ) : (
-        <h1>no estas logeado</h1>
+        <h1>{comLang[lan].log}</h1>
       )}
     </>
   );

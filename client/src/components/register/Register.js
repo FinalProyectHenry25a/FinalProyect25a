@@ -312,7 +312,7 @@ const handleChange = (e) => {
 
 
         
-        <Link to="home">
+        <Link to="/login">
             <p className={style.ancor}>{registerLang[lan].volver}</p>
           
           </Link>

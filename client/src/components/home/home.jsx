@@ -240,7 +240,7 @@ const Home = () => {
       <IntlProvider locale='es' messages={messages}>
     
       <div className={style.fondo}>
-      <div className="display-flex row y justify-content-center">
+      <div className="display-flex row y justify-content-center g-0">
 
 
             <button onClick={logout}>desloguear</button>

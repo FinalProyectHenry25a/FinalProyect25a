@@ -27,7 +27,7 @@ const SearchBar = ({ setCurrentPage }) => {
   return (
     <div className="input-group" style={{width: "40%", marginInline: "auto"}}>
   <div className="form-outline" style={{width: "90%"}}>
-    <input id="search-input" type="search" className="form-control" style={{height: "100%"}} onChange={handleSearch}/>
+    <input id="search-input" type="search" className="form-control" style={{height: "100%"}} onChange={handleSearch} placeholder="Busca tu proximo celular..."/>
   </div>
   <button id="search-button" type="button" style={{borderRadius: "10px", width: "8%", marginInlineStart: "8px"}} className="btn btn-primary" onClick={handleSubmit}>
     <BsSearch/>

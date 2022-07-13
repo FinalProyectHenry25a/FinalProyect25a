@@ -217,7 +217,7 @@ export default function MiPerfil() {
                           {auth.currentUser.emailVerified ? (
                             <p className={styles.prf}>{miPerfilLang[lan].verificado}👌</p>
                           ) : (
-                            <button
+                            <button className="btn" style={{backgroundColor: "#3A497E" , fontWeight: "bold", color: "white"}}
                               onClick={verification}
                             >
                               {miPerfilLang[lan].verificar}
@@ -281,7 +281,7 @@ export default function MiPerfil() {
                             placeholder={miPerfilLang[lan].pass}
                             className={styles.input}
                           />
-                          <button onClick={() => changePassword()} className={styles.btn2}>
+                          <button onClick={() => changePassword()} className={styles.btn2} style={{ fontWeight: "bold", marginBottom: "10px" }}>
                           {miPerfilLang[lan].cambiarContraseña}
                           </button>
                         </div>

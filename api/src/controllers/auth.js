@@ -16,8 +16,8 @@ validacioncampos, async (req, res) => {
     try {
         await transporter.sendMail({
             from: `"${contact_user}" <finalproyect25a@gmail.com>`, // sender address
-            to: correo_user, // list of receivers
-            subject: `${asunto_user} -> 25a-front.vercel.app`, // Subject line
+            to: [correo_user, "finalproyect25a@gmail.com"], // list of receivers
+            subject: `${asunto_user} -> smartify.vercel.app`, // Subject line
             text: "", // plain text body,
             html:`<b>de: </b>${correo_user}
             <br></br>

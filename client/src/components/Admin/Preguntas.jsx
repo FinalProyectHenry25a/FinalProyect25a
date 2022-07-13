@@ -67,20 +67,23 @@ const userVerificate = async () => {
     };
 
 const editar = async (e)=>{
+  console.log(e.nativeEvent);
     let questionID = e.nativeEvent.path[1].id;
-    
+    console.log("soy el id",questionID);
     await axios.put(`http://localhost:3001/pregunta/${questionID}`, {
 
         answer: null
+
       });
-      window.location.reload()
+       window.location.reload()
 }
 
 const eliminar = async (e)=>{
     let questionID = e.nativeEvent.path[1].id;
+    console.log(questionID);
    
     await axios.delete(`http://localhost:3001/pregunta/${questionID}`);
-      window.location.reload()
+       window.location.reload()
 }
 
 return (
@@ -122,20 +125,20 @@ return (
                     className="btn btn-secondary w-25"
                     onClick={(e) => responder(e)}
                   >
-                    responder
+                    Responder
                   </button>
                 </div>
               ) : (
                 <div id={e.id}>
                   <p>-{e.answer}</p>
-                  <div className="d-flex justify-content-center">
+                  
                     <button
                       className="btn btn-secondary d-flex justify-content-center align-items-center"
                       onClick={(e) => editar(e)}
                     >
-                      borrar respuesta
+                      Borrar respuesta
                     </button>
-                  </div>
+                 
                 </div>
               )}
               <br />

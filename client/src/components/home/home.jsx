@@ -316,8 +316,8 @@ const Home = () => {
 
             <div className="d-flex flex-row justify-content-center alig-items-center mt-1">
             <div className="center-block">
-              <button className="p-3 mb-2 text-white" style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }}  onClick={() => send()}>{homeLang[lan].Buscar}</button>
-              <button className="p-3 mb-2 text-white ms-2" style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px" , fontWeight: "bold"}} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
+              <button className="p-3 mb-2 text-white " style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px" , fontWeight: "bold"}} onClick={() => clearFilter()}>{homeLang[lan].Limpiarfiltros}</button>
+              <button className="p-3 mb-2 text-white ms-2" style={{ backgroundColor: "#3A497E", border: "none", borderRadius: "10px", fontWeight: "bold" }}  onClick={() => send()}>{homeLang[lan].Buscar}</button>
               </div>
               </div>
             {/* filtrado************************************ */}

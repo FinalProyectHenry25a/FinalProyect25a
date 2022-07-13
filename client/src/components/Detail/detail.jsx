@@ -365,14 +365,14 @@ export default function Detail() {
                   </li>
                   <li>
                     <FormattedMessage id="Camara frontal">
-                      {<span>{messages}</span>}
+                      {<span>{messages}Mpx</span>}
                     </FormattedMessage>
                     {PID.frontal_cam}
                   </li>
 
                   <li>
                     <FormattedMessage id="Camara principal">
-                      {<span>{messages}</span>}
+                      {<span>{messages}Mpx</span>}
                     </FormattedMessage>
                     <span>{PID.main_cam}</span>
                   </li>

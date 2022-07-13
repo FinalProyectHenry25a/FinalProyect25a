@@ -12,6 +12,7 @@ import UserNavBar from "../UserNavBar/UserNavBar";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import BtnBack from "../back/BtnBack";
+import ButtonLogin from "../back/ButtonLogin";
 import ProductToEdit from "../Admin/ProductToEdit";
 
 const Cart = () => {
@@ -84,8 +85,9 @@ const Cart = () => {
   return (
     <>
     <div className={styles.fondo}>
-      {user ? <UserNavBar /> : <NavBar />}
-      <BtnBack className/>
+      {/* {user ? <UserNavBar /> : <NavBar />} */}
+      <BtnBack />
+      {!auth.currentUser ? <Link to="/login"><ButtonLogin /></Link> : null}
     <div className="col-auto justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0 border border-sky-500 center d-grid">
     <div className={styles.cart}>
       <div className={styles.cartItems}>

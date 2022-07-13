@@ -14,6 +14,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import BtnBack from "../back/BtnBack";
 import ButtonLogin from "../back/ButtonLogin";
 import ProductToEdit from "../Admin/ProductToEdit";
+import { cartLang } from "./CartLang";
 
 const Cart = () => {
   const modo = useSelector(state => state.modo)
@@ -23,6 +24,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [ user, setUser ] = useState();
+  const lan = useSelector((state) => state.language)
   let items = 0;
   let price = 0;
 
@@ -99,19 +101,19 @@ const Cart = () => {
           <br /><br />
       <div className="col-auto justify-content-center w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <div className={styles.cartSummary}>
-        <h4 className={styles.summary__title}>Total:</h4>
+        <h4 className={styles.summary__title}>{cartLang[lan].total}</h4>
         <div className={styles.summary__price}>
-          {totalItems === 1 ? <span className={styles.span}>{totalItems} producto añadido</span> : <span className={styles.span}>{totalItems} productos añadidos</span>}
+          {totalItems === 1 ? <span className={styles.span}>{totalItems} {cartLang[lan].prod}</span> : <span className={styles.span}>{totalItems} {cartLang[lan].prods}</span>}
           <br/>
           <span>  $ {totalPrice}</span>
         </div>
         {totalItems ? <div>
       {auth.currentUser?.emailVerified ? 
       <div>
-       <Link to="/stripe"><button className='btn btn-success mt-4' onClick={beginPaymentInStripe}>Comprar</button></Link>
+       <Link to="/stripe"><button className='btn btn-success mt-4' onClick={beginPaymentInStripe}>{cartLang[lan].comp}</button></Link>
         </div>
-         : <span>Debes tener una cuenta y un mail verificado para comprar</span>}
-        </div> : <span>Debes ingresar algun producto en el carrito para comprar</span>}
+         : <span>{cartLang[lan].cue}</span>}
+        </div> : <span>{cartLang[lan].car}</span>}
       </div>
       </div>
       <br /><br />

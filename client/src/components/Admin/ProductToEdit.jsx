@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { getDetails, editPost, getUser, cleanUp } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
-import style from "./../home/Home.module.css";
+import style from "./Admin.module.css"
 
 export default function ProductToEdit() {
   const dispatch = useDispatch();

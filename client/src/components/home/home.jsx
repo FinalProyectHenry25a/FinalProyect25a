@@ -243,7 +243,7 @@ const Home = () => {
       <div className="display-flex row y justify-content-center g-0">
 
 
-            {/* <button onClick={logout}>desloguear</button> */}
+            <button onClick={logout}>desloguear</button>
 
             {loggedUser ? <UserNavBar /> : <NavBar />}
             

@@ -1,5 +1,17 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
 .fondo{
     background-color: rgb(255, 250, 250);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
   }
 .container {
     display: grid;
@@ -23,14 +35,23 @@
 
 .ancor {
     color: black;
-    margin-top: 10px;
+    margin-top: 110px;
     margin-left: 160px
 }
 
 .ancor2 {
     color: black;
     font-size: 17px;
-
+    width: 35%;
+    margin-inline: auto;
+}
+.ancor2:hover{
+    border: solid 1px black;
+    border-radius: 20px;
+}
+.ancor2:active{
+    background-color: black;
+    color: white;
 }
 .btn {
     color: white;
@@ -39,7 +60,7 @@
     width: 320px;
     height: 40px;
     margin-top: 30px;
-    background-color: rgb(80, 95, 214);
+    background-color: #02155A;
     border-radius: 5px;
     
 }

@@ -123,8 +123,10 @@ const NavBar = ({ setCurrentPage }) => {
           </li>
           <div className={modo}>
           <li style={{margin: "9px"}}>
-            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
-            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
+            {lan === "es" 
+            ? <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
+            : <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>}
+            {/* <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button> */}
           </li>
           </div>
           <li className="nav-item">

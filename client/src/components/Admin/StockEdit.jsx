@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../Actions";
 import { auth } from "../../firebase/firebase-config";
-import style from "./../home/Home.module.css";
+import style from "./Admin.module.css"
 
 export default function StockEdit() {
   const dispatch = useDispatch();

@@ -88,7 +88,7 @@ const CartItem = (props) => {
         <p className={styles.detailsTitle}>{item.model}</p>
         <p className={styles.detailsDesc}>{item.resolution}</p>
         <p className={styles.detailsDesc}>{item.rom}</p>
-        <p className={styles.detailsPrice}>$ {item.price}</p>
+        <p className={styles.detailsPrice}>US$ {item.price}</p>
       </div>
       <div className={styles.cartItemActions}>
         <div className={styles.cartItemQty}>

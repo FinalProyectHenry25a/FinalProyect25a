@@ -319,14 +319,14 @@ const handleChange = (e) => {
         {/* <div>
           <input placeholder="Repetir Contraseña" type="password" name="password" className={style.input} required></input>
         </div> */}
-        <div className={style.register}>
-          <button onClick={DOS} type='submit' className={style.btn}>{registerLang[lan].registrarse}</button>
+        <div className={style.register} >
+          <button style={{backgroundColor: "#3A497E", fontWeight: "bold", color: "white"}} onClick={DOS} type='submit' className={style.btn}>{registerLang[lan].registrarse}</button>
         </div>
 
 
         
         <Link to="/login">
-            <p className={style.ancor}>{registerLang[lan].volver}</p>
+            <button style={{backgroundColor: "#3A497E", fontWeight: "bold", color: "white"}} className={style.btn}>{registerLang[lan].volver}</button>
           
           </Link>
         {/* <div className={style.register}>

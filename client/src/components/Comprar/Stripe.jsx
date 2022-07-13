@@ -218,13 +218,13 @@ const CheckoutForm = () => {
                 <div key={productInCart.id}>
                 <span>Producto: {`${productInCart.brand} ${productInCart.model}`}</span><br />
                 <span> Cantidad: {productInCart.qty}</span><br />
-                <span> Precio de unidad: {productInCart.price}$</span><hr />
+                <span> Precio de unidad: {productInCart.price}US$</span><hr />
                 </div>
 
             ))}
         </div>
 
-        <h3 className='text-center my-2'>Monto Total: {total}</h3>
+        <h3 className='text-center my-2'>Monto Total: US$ {total}</h3>
 
         <div className="form-group">
             <CardElement className='form-control' />

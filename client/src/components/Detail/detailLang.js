@@ -1,15 +1,15 @@
 export const detailLang = {
 
 'es':{
-    'no fue ranqueado':'No fue ranqueado',
+    'no fue ranqueado':'No fue ranqueado    ',
     'Agregar al carrito User':'Agregar al carrito',
     'Disponibles':'Cantidad disponibles: ',
     'Especificaciones':'Especificaciones',
     'Procesador':'Procesador:',
     'Conectividad':'Conectividad:',
     'Batería':'Batería:',
-    'Camara frontal':'Camara frontal:',
-    'Camara principal':'Camara principal:',
+    'Camara frontal':'Camara frontal: ',
+    'Camara principal':'Camara principal: ',
     'Pantalla':'Pantalla:',
     'Resolucion':'Resolucion:',
     'Preguntas y Respuestas':'Preguntas y Respuestas',
@@ -19,11 +19,12 @@ export const detailLang = {
     "Memoria ROM":"Memoria ROM:",
     'Preguntar':'Preguntar',
     'Usuario':'Usuario',
-    'esc':'Escribinos tu pregunta'
+    'esc':'Escribinos tu pregunta',
+    "alertQuestion": 'La pregunta se realizo con exito!'
 },
 
 'en':{
-    'no fue ranqueado':'Was not ranked',
+    'no fue ranqueado':'Was not ranked    ',
     'Agregar al carrito User': 'Add to cart',
     'Disponibles': 'Available stock: ',
     'Especificaciones':'Specifications',
@@ -41,7 +42,8 @@ export const detailLang = {
     "Memoria ROM":"ROM memory:",
     'Preguntar':'Ask',
     'Usuario':'User',
-    'esc':'Write us your question'
+    'esc':'Write us your question',
+    "alertQuestion": 'The question was done successfully!'
 }
 
 

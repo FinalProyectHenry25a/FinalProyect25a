@@ -1,5 +1,6 @@
 import { async } from "@firebase/util";
 import axios from "axios";
+import swal from "sweetalert";
 
 export function getPhones() {
   return async function (dispatch) {
@@ -233,6 +234,7 @@ export function getAllUsers() {
 }
 
 export function becomeAdmin(email) {
+  swal("Se convirtio en Admin satisfactoriamente")
   return async function () {
     const json = await axios.put(`http://localhost:3001/admin/${email}`);
     window.location.reload();
@@ -241,6 +243,7 @@ export function becomeAdmin(email) {
 }
 
 export function removeAdmin(email) {
+  swal("Se removio el privilegio de Admin satisfactoriamente")
   return async function () {
     const json = await axios.put(`http://localhost:3001/admin/removeAdmin/${email}`);
     window.location.reload();

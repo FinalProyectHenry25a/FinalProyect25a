@@ -209,7 +209,7 @@ const handleChange = (e) => {
         <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 3, width: '30ch', color: "#02155A" },
+        '& .MuiTextField-root': { m: 3, width: '30ch'},
       }}
       noValidate
       autoComplete="off"

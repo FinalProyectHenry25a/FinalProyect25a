@@ -175,6 +175,7 @@ export default function Detail() {
                 aria-label="Slide 1"
                 style={{
                     border: "1px solid blue",
+                    borderRadius: "5px",
                     paddingBlock: "1%",
                     paddingInline: "3%",
                     backgroundColor: "transparent",
@@ -189,6 +190,7 @@ export default function Detail() {
                 aria-label="Slide 2"
                 style={{
                   border: "1px solid blue",
+                  borderRadius: "5px",
                   paddingBlock: "1%",
                   paddingInline: "3%",
                   backgroundColor: "transparent",
@@ -203,6 +205,7 @@ export default function Detail() {
                 aria-label="Slide 3"
                 style={{
                   border: "1px solid blue",
+                  borderRadius: "5px",
                   paddingBlock: "1%",
                   paddingInline: "3%",
                   backgroundColor: "transparent",
@@ -217,6 +220,7 @@ export default function Detail() {
                 aria-label="Slide 4"
                 style={{
                   border: "1px solid blue",
+                  borderRadius: "5px",
                   paddingBlock: "1%",
                   paddingInline: "3%",
                   backgroundColor: "transparent",
@@ -224,7 +228,7 @@ export default function Detail() {
               />
             </div>
             <div className="carousel-inner" style={{width: "700px", maxHeight: "max-content", display: "inline-flex", justifyContent: "center"}}>
-              <div className="carousel-item active"  style={{marginRight: "0", width: "max-content"}}>
+              <div className="carousel-item active"  style={{marginRight: "0", width: "max-content", transition: "transform 0.5s ease-in-out"}}>
                 <img src={PID.images} style={{maxWidth: "100%", maxHeight: "100%"}} alt="..." />
               </div>
               <div className="carousel-item" style={{marginRight: "0", width: "max-content"}}>

@@ -110,7 +110,7 @@ const Cart = () => {
         {totalItems ? <div>
       {auth.currentUser?.emailVerified ? 
       <div>
-       <Link to="/stripe"><button className='btn btn-success mt-4' onClick={beginPaymentInStripe}>{cartLang[lan].comp}</button></Link>
+       <Link to="/stripe"><button className='btn mt-4' style={{backgroundColor: "#3A497E", fontWeight: "bold", color: "white"}} onClick={beginPaymentInStripe}>{cartLang[lan].comp}</button></Link>
         </div>
          : <span>{cartLang[lan].cue}</span>}
         </div> : <span>{cartLang[lan].car}</span>}

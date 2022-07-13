@@ -2,7 +2,7 @@ export const detailLang = {
 
 'es':{
     'no fue ranqueado':'No fue ranqueado',
-    'Agregar al carrito User':'Agregar al carrito User',
+    'Agregar al carrito User':'Agregar al carrito',
     'Disponibles':'Cantidad disponibles: ',
     'Especificaciones':'Especificaciones',
     'Procesador':'Procesador:',

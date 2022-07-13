@@ -194,7 +194,7 @@ export default function UserNavBar({ setCurrentPage }) {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse border" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto" style={{marginLeft: "auto"}}>
           <li className="nav-item dropdown">
             <Link className="nav-link active text-truncate" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

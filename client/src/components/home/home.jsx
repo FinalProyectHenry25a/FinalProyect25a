@@ -18,6 +18,7 @@ import { homeLang } from "./homeLang";
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import Carrousel from "../carrousel/Carrousel";
 import Footer from "../Footer/Footer";
+import SearchBar from "../SearchBar/Searchbar";
 
 const Home = () => {
 
@@ -247,9 +248,13 @@ const Home = () => {
             {loggedUser ? <UserNavBar /> : <NavBar />}
             
             <Carrousel/>
-
+            
+            <div style={{marginInline: "auto"}}>
+            <br/>
+            <SearchBar/>
+            </div>
             <div id="filtros">
-
+<br/>
               <select id='brand' className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={e => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].Todas}</option>
                 {brands?.map((brand) =>
@@ -293,9 +298,9 @@ const Home = () => {
               {/* por precio--------------------------------------------------- */}
               <select id="price" className="form-select form-select-m mb-3 text-truncate" aria-label=".form-select-m example" style={{ width: 12 + "%", display: "inline-block", margin: 3 + "px" }} onChange={(e) => filtersSetters(e)}>
                 <option value="null">{homeLang[lan].precio}</option>
-                <option value={[0, 115000]}>de u$ 0 a u$ 500</option>
-                <option value={[115000, 230000]}>de u$ 500 a u$ 1000</option>
-                <option value={[230000, 345000]}>de u$ 1000 a u$ 1500</option>
+                <option value={[0, 500]}>de u$ 0 a u$ 500</option>
+                <option value={[500, 1000]}>de u$ 500 a u$ 1000</option>
+                <option value={[1000, 1500]}>de u$ 1000 a u$ 1500</option>
               </select>
 
               {/* por processor--------------------------------------------------- */}

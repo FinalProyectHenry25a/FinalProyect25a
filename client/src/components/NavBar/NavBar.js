@@ -115,9 +115,6 @@ const NavBar = ({ setCurrentPage }) => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav col-6" style={{marginInlineStart: "auto"}}>
-            <SearchBar/>
-          </ul>
           <ul className="navbar-nav ml-auto" style={{marginLeft: "auto", marginInlineEnd: "40px"}}>
           <li className="nav-item" style={{margin: "8px"}}>
             {modo === 'dark' 
@@ -126,8 +123,10 @@ const NavBar = ({ setCurrentPage }) => {
           </li>
           <div className={modo}>
           <li style={{margin: "9px"}}>
-            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>
-            <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
+            {lan === "es" 
+            ? <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button>
+            : <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("es"))}>🇪🇸</button>}
+            {/* <button style={{border: "none", background: "transparent"}} onClick={(e) => dispatch(language("en"))}>🇬🇧</button> */}
           </li>
           </div>
           <li className="nav-item">

@@ -130,7 +130,8 @@ const Login = () => {
     <div className={style.fondo}>
      <div className={style.login}>
       {user ? <p>Ya estas logueado</p> : <div className={style.container} style={{width: "40%", marginInline: "auto", marginBlock: "1%"}}>
-        <div className={style.containerImage} style={{width: "322px", height: "200px", marginBottom: "16%"}}>
+          <div className={style.containerImage} style={{width: "322px", height: "200px", marginBottom: "16%"}}>
+          
           <div>
           <img src={logo} className={style.image} style={{maxWidth: "100%", maxHeight: "100%"}} alt='logo'/>
           </div>
@@ -191,9 +192,9 @@ const Login = () => {
         <div className={style.register}>
           <button onClick={login} type="submit" className={style.btn}>{loginLang[lan].ingresar}</button>
           <br/><br/>
-          <div className={modo}>
+          <div className={modo}> 
           <button onClick={loginWithGoogle} type="submit" className={style.btn}>{loginLang[lan].ingresarConGoogle}<img src={google} alt='google' className={style.google}/></button>
-          </div>
+          
           <br/><br/>
           <Link to="register" style={{textDecoration: "none"}}>
             <p className={style.ancor2}>{loginLang[lan].registrarme}</p>
@@ -201,6 +202,7 @@ const Login = () => {
           <Link to="home" style={{textDecoration: "none"}}>
             <p className={style.ancor2}>{loginLang[lan].volver}</p>
           </Link>
+          </div>
         </div>
       </div>}
     </div>

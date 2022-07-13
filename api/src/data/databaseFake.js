@@ -55,7 +55,7 @@ module.exports = [
     model: "Galaxy A51",
     price: 500,
     rating: 3.5,
-    images:"https://i.ibb.co/D7RWdK3/galaxy-a51-chico.webp",
+    images:"https://i.ibb.co/3kztkXy/galaxy-a51-chico.webp",
     color: "black",
     processor: "Exynos 9611",
     ram: "6Gb",
@@ -69,9 +69,9 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/bPMSS36/galaxy-a51-back-chico.webp",
-      "https://i.ibb.co/tbHwFtx/galaxy-a51-back2-chico.webp",
-      "https://i.ibb.co/zR9BYH0/galaxy-a51-back3-chico.webp"
+      "https://i.ibb.co/N3LYXCh/galaxy-a51-back-chico.webp",
+      "https://i.ibb.co/4Z8c6jY/galaxy-a51-back2-chico.webp",
+      "https://i.ibb.co/x3prtps/galaxy-a51-back3-chico.webp"
     ],
   },
   {
@@ -80,7 +80,7 @@ module.exports = [
     model: "Galaxy M53 5G",
     price: 600,
     rating: 3,
-    images:"https://i.ibb.co/ZTr5xYn/galaxy-m53-5g-front-chico.webp",
+    images:"https://i.ibb.co/LrK1mfq/galaxy-m53-5g-front-chico.webp",
     color: "Goldenrod",
     processor: "Mediatek Dimensity 900",
     ram: "6Gb",
@@ -94,9 +94,9 @@ module.exports = [
     resolution: "1080 x 2408",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/92jSY18/galaxy-m53-5g-front2-chico.webp",
-      "https://i.ibb.co/DMQJHjb/galaxy-m53-5g-front-back-chico.webp",
-      "https://i.ibb.co/2F5kfM9/galaxy-m53-5g-back-chico.webp",
+      "https://i.ibb.co/72SpcrW/galaxy-m53-5g-front2-chico.webp",
+      "https://i.ibb.co/crVvL3L/galaxy-m53-5g-front-back-chico.webp",
+      "https://i.ibb.co/VwM6Q7X/galaxy-m53-5g-back-chico.webp",
     ],
   },
   {
@@ -105,7 +105,7 @@ module.exports = [
     model: "Moto G52 ",
     price: 250,
     rating: 2,
-    images: "https://i.ibb.co/wNLnSg6/moto-G52-front-chico.webp",
+    images: "https://i.ibb.co/WGv9rLF/moto-G52-front-chico.webp",
     color: "Puce",
     processor: "Snapdragon 680",
     ram: "6Gb",
@@ -119,9 +119,9 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/rmqXr83/moto-G52-front2-chico.webp",
-      "https://i.ibb.co/02HkG42/moto-G52-chico.webp",
-      "https://i.ibb.co/h85zvQk/moto-G52-back-chico.webp",
+      "https://i.ibb.co/mNKqTzF/moto-G52-front2-chico.webp",
+      "https://i.ibb.co/nB7Z0kV/moto-G52-chico.webp",
+      "https://i.ibb.co/L8hj619/moto-G52-back-chico.webp",
     ],
   },
   {
@@ -130,7 +130,7 @@ module.exports = [
     model: "Moto G41",
     price: 300,
     rating: 3,
-    images: "https://i.ibb.co/THGWDxD/moto-G41-front-chico.webp",
+    images: "https://i.ibb.co/pLYxSPY/moto-G41-front-chico.webp",
     color: "Maroon",
     processor: "Snapdragon 680",
     ram: "4Gb",
@@ -144,9 +144,9 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/p2fwcWT/moto-G41-front2-chico.webp",
-      "https://i.ibb.co/Q80DYpn/moto-G41-chico.webp",
-      "https://i.ibb.co/xJg3QLp/moto-G41-back-chico.webp",
+      "https://i.ibb.co/2hJXbRb/moto-G41-front2-chico.webp",
+      "https://i.ibb.co/dDCnpHS/moto-G41-chico.webp",
+      "https://i.ibb.co/XzyZh9z/moto-G41-back-chico.webp",
     ],
   },
   {
@@ -196,7 +196,7 @@ module.exports = [
     additionalphotos: [
       "https://i.ibb.co/X2sn5Dz/iphone-11-pro-front2-chico.webp",
       "https://i.ibb.co/RgLLNVq/iphone-11-pro-cam-chico.webp",
-      "https://i.ibb.co/HdmTFKQ/iphone-11-pro-max-varios-chico.webp",
+      "https://i.ibb.co/sHpCw3N/iphone-11-pro-max-varios-chico.webp",
     ],
   },
   {
@@ -221,7 +221,7 @@ module.exports = [
     additionalphotos: [
       "https://i.ibb.co/nk2ZYXm/iphone-13-pro-max-camera-chico.webp",
       "https://i.ibb.co/FHCmnHX/e-13-pro-max-liying-removebg-chico.webp",
-      "https://i.ibb.co/0QSjM9w/Apple-i-Phone13-Pro-varios-chico.webp",
+      "https://i.ibb.co/fYZ9HJN/Apple-i-Phone13-Pro-varios-chico.webp",
     ],
   },
   {
@@ -246,7 +246,7 @@ module.exports = [
     additionalphotos: [
       "https://i.ibb.co/nk2ZYXm/iphone-13-pro-max-camera-chico.webp",
       "https://i.ibb.co/FHCmnHX/e-13-pro-max-liying-removebg-chico.webp",
-      "https://i.ibb.co/0QSjM9w/Apple-i-Phone13-Pro-varios-chico.webp",
+      "https://i.ibb.co/fYZ9HJN/Apple-i-Phone13-Pro-varios-chico.webp",
     ],
   },
   {
@@ -255,7 +255,7 @@ module.exports = [
     model: "Poco F3",
     price: 500,
     rating: 4.8,
-    images: "https://i.ibb.co/VTtWDrD/poco-F3-chico.webp",
+    images: "https://i.ibb.co/9rfdkVz/poco-F3-chico.webp",
     color: "Mauv",
     processor: "Snapdragon 865",
     ram: "8Gb",
@@ -269,7 +269,7 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/zVdrgB6/poco-f3-pro-chico.webp",
+      "https://i.ibb.co/q7cPDXT/poco-f3-pro-chico-1.webp",
       "https://i.ibb.co/tpn7wmr/poco-f3-8gb-side-chico.webp",
       "https://i.ibb.co/HtcWs6X/poco-f3-back-chico.webp",
     ],
@@ -294,7 +294,7 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/8r9Qfmz/poco-X3-Pro-chico.webp",
+      "https://i.ibb.co/Bg6MPGC/poco-X3-Pro-chico.webp",
       "https://i.ibb.co/fkzN75v/poco-X3-Pro-back-chico.webp",
       "https://i.ibb.co/pbXfyZk/poco-X3-Pro-back2-chico.webp",
     ],
@@ -355,7 +355,7 @@ module.exports = [
     model: "Edge 30",
     price: 450,
     rating: 4,
-    images:"https://i.ibb.co/7KGsShF/moto-Edge30-front-chico.webp",
+    images:"https://i.ibb.co/41zrzYz/moto-Edge30-front-chico-1.webp",
     color: "Aquamarine",
     processor: "Snapdragon 778G+",
     ram: "8Gb",
@@ -369,9 +369,9 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/QjnJGf6/moto-Edge30-chico.webp",
-      "https://i.ibb.co/jkqtV6f/moto-Edge30-back2-chico.webp",
-      "https://i.ibb.co/8P54s7F/moto-Edge30-back-chico.webp",
+      "https://i.ibb.co/9HdyKzn/moto-Edge30-chico-1.webp",
+      "https://i.ibb.co/Zzx4qDZ/moto-Edge30-back2-chico-1.webp",
+      "https://i.ibb.co/DfPFX5t/moto-Edge30-back-chico-1.webp",
     ],
   },
   {
@@ -380,7 +380,7 @@ module.exports = [
     model: "Moto G71 5G",
     price: 250,
     rating: 3,
-    images: "https://i.ibb.co/JHFmc5t/moto-G71-5-G-front-chico.webp",
+    images: "https://i.ibb.co/RPpWnz7/moto-G71-5-G-front-chico.webp",
     color: "Violet",
     processor: "Snapdragon 695",
     ram: "8Gb",
@@ -394,9 +394,9 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/Gk2jjTj/moto-G71-5-G-front2-chico.webp",
-      "https://i.ibb.co/J35tVFL/moto-G71-5-G-chico.webp",
-      "https://i.ibb.co/d4HX2nw/moto-G71-5-G-back-chico.webp",
+      "https://i.ibb.co/tJZgdDH/moto-G71-5-G-front2-chico.webp",
+      "https://i.ibb.co/HCb72Dm/moto-G71-5-G-chico.webp",
+      "https://i.ibb.co/HNJ4SJz/moto-G71-5-G-back-chico.webp",
     ],
   },
   {
@@ -445,7 +445,7 @@ module.exports = [
     stock: 100,
     additionalphotos: [
       "https://i.ibb.co/PzNTRGs/huawei-nova-9-front2-chico.webp",
-      "https://i.ibb.co/0c2gbp5/nova9-se-chico.webp",
+      "https://i.ibb.co/pfQqbm2/nova9-se-chico.webp",
       "https://i.ibb.co/KW48dYX/huawei-nova-9-back-chico.webp",
     ],
   },
@@ -480,7 +480,7 @@ module.exports = [
     model: "Realme 9 Pro+ ",
     price: 170,
     rating: 5,
-    images: "https://i.ibb.co/dG0WdMZ/realme-9-pro-chico.webp",
+    images: "https://i.ibb.co/dGgNF1y/realme-9-pro-chico-1.webp",
     color: "Turquoise",
     processor: "Mediatek Helio G95",
     ram: "8Gb",
@@ -494,9 +494,9 @@ module.exports = [
     resolution: "1080 x 2400",
     stock: 100,
     additionalphotos: [
-      "https://i.ibb.co/chCGsh0/ealme-9-pro-front2-chico.webp",
+      "https://i.ibb.co/NNLQyTf/ealme-9-pro-front2-chico-1.webp",
       "https://i.ibb.co/GQypCg4/realme-9-pro-backside-chico.webp",
-      "https://i.ibb.co/xzfP4kg/realme-9-pro-back-chico.webp",
+      "https://i.ibb.co/yYnvc2X/realme-9-pro-back-chico-1.webp",
     ],
   },
 ];

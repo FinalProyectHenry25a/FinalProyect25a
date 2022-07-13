@@ -38,10 +38,10 @@ export default function Footer(){
           </div>
 <hr className="mt-5"/>
       <div className="row align-items-center justify-content-center">
-      Hecho con 💛 por alumnos de Henry.
+      {footerLang[lan].henry}
       </div>
 <div className="row align-items-center justify-content-center">
-Smartify © 2022 | Todos los derechos reservados.
+{footerLang[lan].derecho}
       </div>
       </div>
 {/*         

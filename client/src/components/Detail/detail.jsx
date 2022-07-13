@@ -410,7 +410,7 @@ export default function Detail() {
                   onChange={(e) => handlerChange(e)}
                   type="text"
                   className={styles.input}
-                  placeholder="Escribinos tu pregunta"
+                  placeholder={detailLang[lan].esc}
                 />
                 <button onClick={(e) => publicar(e)} className={styles.btn2}>
                   {detailLang[lan].Preguntar}

@@ -12,6 +12,9 @@ export const miPerfilLang = {
     'contraseña':'Contraseña',
     'cambiarContraseña':'Cambiar contraseña',
     'noEstasLogueado':'No estas logueado',
+    'name':'nuevo nombre de usuario',
+    'direc': 'nueva Dirección',
+    'pass': 'nueva Contraseña',
   },
 
   en: {
@@ -27,5 +30,8 @@ export const miPerfilLang = {
     'contraseña':'Password',
     'cambiarContraseña':'Change password',
     'noEstasLogueado':'You are not logged in',
+    'name':'new UserName',
+    'direc': 'new Direction',
+    'pass': 'new Password',
   },
 };

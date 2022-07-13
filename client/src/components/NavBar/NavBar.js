@@ -141,11 +141,11 @@ const NavBar = ({ setCurrentPage }) => {
             {navBarLang[lan].creaTuCuenta}
             </Link>
           </li> */}
-          <li className="nav-item">
+          {/* <li className="nav-item">
           <Link to="/contacto" className="nav-link active">
             {navBarLang[lan].contacto}
           </Link>
-          </li>
+          </li> */}
             <li className="nav-item">
               <Link className="nav-link active" to="/cart">
                 <BsFillCartFill /> {cartCount}

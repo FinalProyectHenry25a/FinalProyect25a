@@ -233,6 +233,7 @@ function rootReducer(state = initialState, action) {
     : [...state.cart, { ...itemUser, qty: 1 }]
 
   localStorage.setItem("cart", JSON.stringify(newCartUser))
+  swal('Agregaste correctamente el producto al carrito')
 
   return {
     ...state,

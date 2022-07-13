@@ -18,6 +18,23 @@ export function getLocalCart() {
     });
   };
 }
+
+export function loadingPage() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "LOADING",
+    });
+  };
+}
+
+export function cancelLoadingPage() {
+  return async function (dispatch) {
+    return dispatch({
+      type: "CANCEL_LOADING",
+    });
+  };
+}
+
 export function getPhonesByModel(model) {
   return async function (dispatch) {
     var json = await axios.get(`http://localhost:3001/home?model=${model}`);

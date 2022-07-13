@@ -230,7 +230,7 @@ const CheckoutForm = () => {
             <CardElement className='form-control' />
         </div>
 
-        <button className='btn btn-success mt-4' disabled={!stripe}>
+        <button className='btn mt-4'  style={{backgroundColor: "#3A497E", fontWeight: "bold", color: "white"}} disabled={!stripe}>
             { loading ? (
                 <div className="spinner-border text-light" role="status">
                     <span className='sr-only'></span>

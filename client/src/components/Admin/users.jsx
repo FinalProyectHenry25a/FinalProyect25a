@@ -27,6 +27,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import style from "./../Admin/Admin.module.css";
 import BtnBack from "../back/BtnBack";
+import { Button, Grid } from "@mui/material";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -75,11 +76,11 @@ export default function Users() {
   }
 
   function Row(props) {
-    
+
     const { row } = props;
-  console.log(row)
+
     const [open, setOpen] = React.useState(false);
-  
+
     return (
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -98,6 +99,12 @@ export default function Users() {
           <TableCell align="center" width="12%">{row.firstname}</TableCell>
           <TableCell align="center" width="12%">{row.lastname}</TableCell>
           <TableCell align="center" width="12%">{row.address}</TableCell>
+          <TableCell align="center" width="12%">
+          <Button variant="contained" color="secondary" onClick={() => deleteUsers(row.email)}>Eliminar</Button>
+          </TableCell>
+          <TableCell align="center" width="12%">
+            {row.banned ? <Button variant="contained" color="primary" onClick={() => dispatch(unbanUser(row.email))}>Desbanear</Button> : <Button  variant="contained" color="secondary" onClick={() => dispatch(banUser(row.email))}>Banear</Button>}
+            </TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -106,14 +113,15 @@ export default function Users() {
                 <Typography variant="h6" gutterBottom component="div">
                   Historial
                 </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
+                <Table size="large" aria-label="purchases">
+                  <TableHead >
                     <TableRow>
-                      <TableCell align="center">Marca</TableCell>
-                      <TableCell align="center">Modelo</TableCell>
-                      <TableCell align="center">Monto</TableCell>
-                      <TableCell align="center">Cantidad</TableCell>
-                      <TableCell align="center">Precio Total ($)</TableCell>
+                      <TableCell align="center" width="12%">Marca</TableCell>
+                      <TableCell align="center" width="12%">Modelo</TableCell>
+                      <TableCell align="center" width="12%">Color </TableCell>
+                      <TableCell align="center" width="12%">Monto</TableCell>
+                      <TableCell align="center" width="12%">Cantidad</TableCell>
+                      <TableCell align="center" width="12%">Precio Total (US$)</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -122,20 +130,24 @@ export default function Users() {
                         <TableCell align="center">
                           {historyRow.brand}
                         </TableCell>
-                        <TableCell align="center">{`${historyRow.model}`}</TableCell>
-                        <TableCell align="center">${historyRow.price}</TableCell>
-                        <TableCell align="center">{historyRow.qty}</TableCell>
-                        <TableCell align="center">
-                          ${Math.round(((historyRow.price * historyRow.qty )* 100) / 100)}
+                        <TableCell align="center" width="12%">{`${historyRow.model}`}</TableCell>
+                        <TableCell align="center" width="12%">{historyRow.color}</TableCell>
+                        <TableCell align="center" width="12%">US${historyRow.price}</TableCell>
+                        <TableCell align="center" width="12%">{historyRow.qty}</TableCell>
+                        <TableCell align="center" width="12%">
+                          US${Math.round(((historyRow.price * historyRow.qty) * 100) / 100)}
                         </TableCell>
                       </TableRow>
+                   
                     ))}
                   </TableBody>
+                  
                 </Table>
               </Box>
             </Collapse>
           </TableCell>
         </TableRow>
+
       </React.Fragment>
     );
   }
@@ -146,17 +158,21 @@ export default function Users() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell width="1%"/>
+            <TableCell width="1%" />
             <TableCell align="center" width="12%">Email</TableCell>
             <TableCell align="center" width="12%">Username</TableCell>
             <TableCell align="center" width="12%">Firstname</TableCell>
             <TableCell align="center" width="12%">Lastname</TableCell>
             <TableCell align="center" width="12%">Address</TableCell>
+            <TableCell align="center" width="12%"> </TableCell>
+            <TableCell align="center" width="12%"> </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {users.map((row) => (
+
             <Row key={row.email} row={row} />
+
           ))}
         </TableBody>
       </Table>
@@ -164,6 +180,11 @@ export default function Users() {
     </TableContainer>
 
   );
+
+  {/* <div className=" d-flex justify-content-center align-items-center mt-3 mb-2">
+     / <button className="btn btn-danger me-2" onClick={() => deleteUsers(row.email)}>Eliminar</button>
+            {row.banned ? <button className="btn btn-secondary" onClick={() => dispatch(unbanUser(row.email))}>Desbanear</button> : <button  className="btn btn-danger" onClick={() => dispatch(banUser(row.email))}>Banear</button>}
+          </div> */}
 }
 {
   /* <Link to="/home">

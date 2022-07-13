@@ -161,58 +161,90 @@ export default function Detail() {
             id="carouselExampleIndicators"
             className="carousel carousel-dark slide"
             data-bs-ride="true"
-            style={{border: "solid", width: "700px", height: "660px"}}
+            style={{width: "700px", height: "500px"}}
           >
-            <div className="carousel-indicators">
-              <button
+            <div className="carousel-indicators" style={{marginBottom: "-3rem", height: "50px"}}>
+              <img
+                src={PID.images}
+                alt
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide-to="0"
                 className="active"
                 aria-current="true"
                 aria-label="Slide 1"
-              ></button>
-              <button
+                style={{
+                    border: "1px solid blue",
+                    paddingBlock: "1%",
+                    paddingInline: "3%",
+                    backgroundColor: "transparent",
+                    height: "100%"}}
+              />
+              <img
+                src={PID.additionalphotos?.[0]}
+                alt
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide-to="1"
                 aria-label="Slide 2"
-              ></button>
-              <button
+                style={{
+                  border: "1px solid blue",
+                  paddingBlock: "1%",
+                  paddingInline: "3%",
+                  backgroundColor: "transparent",
+                  height: "100%"}}
+              />
+              <img
+                src={PID.additionalphotos?.[1]}
+                alt
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide-to="2"
                 aria-label="Slide 3"
-              ></button>
-              <button
+                style={{
+                  border: "1px solid blue",
+                  paddingBlock: "1%",
+                  paddingInline: "3%",
+                  backgroundColor: "transparent",
+                  height: "100%"}}
+              />
+              <img
+                src={PID.additionalphotos?.[2]}
+                alt
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide-to="3"
                 aria-label="Slide 4"
-              ></button>
+                style={{
+                  border: "1px solid blue",
+                  paddingBlock: "1%",
+                  paddingInline: "3%",
+                  backgroundColor: "transparent",
+                  height: "100%"}}
+              />
             </div>
-            <div className="carousel-inner" style={{width: "700px", maxHeight: "max-content"}}>
-              <div className="carousel-item active">
-                <img src={PID.images} style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}} alt="..." />
+            <div className="carousel-inner" style={{width: "700px", maxHeight: "max-content", display: "inline-flex", justifyContent: "center"}}>
+              <div className="carousel-item active"  style={{marginRight: "0", width: "max-content"}}>
+                <img src={PID.images} style={{maxWidth: "100%", maxHeight: "100%"}} alt="..." />
               </div>
-              <div className="carousel-item">
+              <div className="carousel-item" style={{marginRight: "0", width: "max-content"}}>
                 <img
                   src={PID.additionalphotos?.[0]}
-                  style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}}
+                  style={{maxWidth: "100%", maxHeight: "100%"}}
                   alt=""
                 />
               </div>
-              <div className="carousel-item">
+              <div className="carousel-item" style={{marginRight: "0", width: "max-content"}}>
                 <img
                   src={PID.additionalphotos?.[1]}
-                  style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}}
+                  style={{maxWidth: "100%", maxHeight: "100%"}}
                   alt=""
                 />
               </div>
-              <div className="carousel-item">
+              <div className="carousel-item" style={{marginRight: "0", width: "max-content"}}>
                 <img
                   src={PID.additionalphotos?.[2]}
-                  style={{maxWidth: "100%", maxHeight: "100%", marginInline: "auto"}}
+                  style={{maxWidth: "100%", maxHeight: "100%"}}
                   alt=""
                 />
               </div>

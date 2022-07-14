@@ -73,6 +73,7 @@ const editar = async (e)=>{
 
         answer: null
       });
+      swal("Respuesta Eliminada")
       window.location.reload()
 }
 
@@ -80,6 +81,7 @@ const eliminar = async (e)=>{
     let questionID = e.nativeEvent.path[1].id
    
     await axios.delete(`http://localhost:3001/pregunta/${questionID}`);
+    swal("Pregunta Eliminada")
       window.location.reload()
 }
 
@@ -123,19 +125,19 @@ return (
                     className="btn btn-secondary w-25"
                     onClick={(e) => responder(e)}
                   >
-                    responder
+                    Responder
                   </button>
                 </div>
               ) : (
                 <div id={e.id}>
                   <hr/>
                   <p>-{e.answer}</p>
-                  <div className="d-flex justify-content-center">
+                  {/* <div className="d-flex justify-content-center"> */}
                     <button
                       className="m-1 btn btn-secondary d-flex justify-content-center align-items-center"
                       onClick={(e) => editar(e)}
                     >
-                      borrar respuesta
+                      Borrar respuesta
                     </button>
               <button
                 className="m-1 d-flex justify-content-center btn btn-danger"
@@ -143,7 +145,7 @@ return (
               >
                 Eliminar pregunta
               </button>
-                  </div>
+                  {/* </div> */}
                 </div>
               )}
               <br />
@@ -167,7 +169,7 @@ return (
         //      })
       })
     ) : (
-      <p>no hay preguntas</p>
+      <p>No hay preguntas</p>
     )}
   </div>
   </div>

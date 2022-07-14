@@ -27,6 +27,7 @@ router.put("/:id",async(req,res)=>{
 const {answer} = req.body
 const {id} = req.params
 
+
 try{
   let pregunta = await Questions.findOne({
     where: {

@@ -8,7 +8,7 @@ import axios from "axios";
 import SearchBar from "../SearchBar/Searchbar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getLocalCart, modoOscuro, language } from "../../Actions";
+import { getLocalCart, modoOscuro, language, loadingPage, cancelLoadingPage } from "../../Actions";
 import SmartifyFinal from "../../images/SmartifyFinal.png";
 import styles from "../UserNavBar/usernavbar.module.css";
 import { userNavBarLang } from "./userNavBarLang";
@@ -26,6 +26,7 @@ import { FiLogOut } from "react-icons/fi";
 import { BsFillMoonFill } from "react-icons/bs";
 import { BsFillSunFill } from "react-icons/bs";
 import { BsGearWideConnected } from "react-icons/bs";
+import { loadBundle } from "firebase/firestore";
 
 
 const StyledMenu = styled((props) => (
@@ -74,6 +75,8 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function UserNavBar({ setCurrentPage }) {
+
+  const loading = useSelector((state) => state.loading)
   const modo = useSelector((state) => state.modo);
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.cart);
@@ -85,6 +88,7 @@ export default function UserNavBar({ setCurrentPage }) {
 
   useEffect(() => {
     verificarQueHayaUsuarioLogueado();
+
   }, []);
 
   useEffect(() => {
@@ -117,7 +121,10 @@ export default function UserNavBar({ setCurrentPage }) {
   const logout = async () => {
     await signOut(auth);
     setUser(false);
-    window.location.reload()
+   
+     window.location.reload()
+
+    // window.location.reload()
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -550,8 +557,7 @@ export default function UserNavBar({ setCurrentPage }) {
               </ul>
             </div> */}
         </div>
-          )) : (
-          <NavBar/>)}
+          )) :  <NavBar/>}
     </nav>
     );
 }

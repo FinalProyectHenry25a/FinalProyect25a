@@ -490,7 +490,6 @@ export default function Detail() {
             return (
               <div>
                 <p>{e.usuario}</p>
-                <p>{e.rating}</p>
                 <p>{e.comentario}</p>
               </div>
             );

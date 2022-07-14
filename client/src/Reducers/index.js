@@ -27,6 +27,7 @@ const initialState = {
   user: {},
   count: 1,
   questions: [],
+  loading: true,
   language: JSON.parse(localStorage.getItem("l")) ? JSON.parse(localStorage.getItem("l")) : 'es'
 }
 
@@ -36,8 +37,22 @@ function rootReducer(state = initialState, action) {
 
       return {
         ...state,
-        phonesForSelect: action.payload
+        phonesForSelect: action.payload,
+        loading: false
       }
+      case 'LOADING':
+
+        return {
+          ...state,
+          loading: true
+        }
+
+        case 'CANCEL_LOADING':
+
+          return {
+            ...state,
+            loading: false
+          }
 
     case "SET_SELECTS":
   

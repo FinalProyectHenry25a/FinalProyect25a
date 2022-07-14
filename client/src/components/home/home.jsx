@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import Carrousel from "../carrousel/Carrousel";
 import style from "./../home/Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { filters, getLocalCart, getLocalFavs, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
+import { filters, getLocalCart, getLocalFavs, loadingPage, getLocalFilter, getPhones, getUser, language, pageOne, setPage, setSelects, modoOscuro} from "../../Actions/index";
 import Paginado from "../Paginate/paginate";
 import UserNavBar from "../UserNavBar/UserNavBar";
 import { onAuthStateChanged, reload, signOut } from "firebase/auth";
@@ -27,6 +27,7 @@ const Home = () => {
   //////////////////////////////////////// CONSTANTES /////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading);
   const allPhones = useSelector((state) => state.phones);
   const allPhonesForSelect = useSelector((state) => state.phonesForSelect)
   const filtrados = useSelector((state) => state.filtered);
@@ -69,7 +70,7 @@ const Home = () => {
   //////////// USEEFFECTS //////////////////////////////////////////////////////////////////////////////////
 
   useEffect(async () => {
-    
+    dispatch(loadingPage())
     await dispatch(getPhones());
      
     userVerificate();
@@ -237,7 +238,10 @@ const Home = () => {
   /////////////////////////// RENDERIZADO /////////////////////////////////////////////////////////
 
   return (
-      <IntlProvider locale='es' messages={messages}>
+
+    <div>
+
+      {!loading ? <IntlProvider locale='es' messages={messages}>
     
       <div className={style.fondo}>
       <div className="display-flex row y justify-content-center g-0">
@@ -360,6 +364,12 @@ const Home = () => {
 
         <Footer/>
     </IntlProvider>
+: <div class="d-flex justify-content-center align-items-center" style={{marginBlock: "25%"}}>
+<div style={{width: "10rem", height: "10rem"}} class="spinner-grow" role="status">
+ 
+</div>
+</div>}
+</div>
   );
 };
 

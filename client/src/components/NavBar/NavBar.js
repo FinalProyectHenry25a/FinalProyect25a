@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
-import { getLocalCart, modoOscuro, language } from "../../Actions/index";
+import { getLocalCart, modoOscuro, language, loadingPage } from "../../Actions/index";
 import styles from "./../NavBar/NavBar.module.css";
 import SmartifyFinal from "../../images/SmartifyFinal.png";
 import { navBarLang } from "./navBarLang";

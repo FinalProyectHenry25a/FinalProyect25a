@@ -8,7 +8,8 @@ const {
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/e_commerce`, {
   logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more ostgspeed
+  native: false// set to true to
+  // lets Sequelize know we can use pg-native for ~30% more ostgspeed
 });
 
 const basename = path.basename(__filename);
@@ -36,6 +37,7 @@ const { User, Publication } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+
 
 Publication.belongsToMany(User, { through: "Publication_User" });
 User.belongsToMany(Publication, { through: "Publication_User" });
